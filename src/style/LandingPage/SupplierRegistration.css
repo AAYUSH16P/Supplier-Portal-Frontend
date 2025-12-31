@@ -1,0 +1,376 @@
+/* ======================================================
+   🔥 HARD RESET – ISOLATE FROM SHARED LAYOUT
+====================================================== */
+.supplier-registration-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+.supplier-registration-page {
+    all: unset;
+    display: block;
+    background: #f8fafc;
+    padding: 28px 0 48px;
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  /* Restore base styles */
+  .supplier-registration-page * {
+    box-sizing: border-box;
+    font-family: Inter, system-ui, -apple-system, sans-serif;
+  }
+  
+  /* ======================================================
+     PAGE CONTAINER
+  ====================================================== */
+  .registration-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  
+  /* ======================================================
+     HERO
+  ====================================================== */
+  .reg-hero {
+    background: linear-gradient(180deg, #0a4dbf, #083a94);
+    border-radius: 14px;
+    padding: 26px 30px;
+    color: #ffffff;
+    margin-bottom: 18px;
+  }
+  
+  .reg-hero h1 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  
+  .reg-hero p {
+    font-size: 13px;
+    opacity: 0.95;
+  }
+  
+  /* ======================================================
+     TOP STRIP
+  ====================================================== */
+  .reg-top-strip {
+    background: linear-gradient(90deg, #00c389, #06b6d4);
+    color: #ffffff;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  
+  /* ======================================================
+     INFO CARD
+  ====================================================== */
+  .reg-info-card {
+    background: #f1f6ff;
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 22px;
+  }
+  
+  .reg-info-card h4 {
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+  
+  .reg-info-card p {
+    font-size: 13px;
+    color: #334155;
+    margin-bottom: 6px;
+  }
+  
+  /* ======================================================
+     FORM CARD
+  ====================================================== */
+  .reg-form-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 22px 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  }
+  
+  .reg-form-card h3 {
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+  
+  .section-subtitle {
+    margin: 22px 0 10px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  
+  /* ======================================================
+     FORM GRID
+  ====================================================== */
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 18px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group.full {
+    grid-column: 1 / -1;
+  }
+  
+  .form-group label {
+    font-size: 12px;
+    margin-bottom: 4px;
+    color: #475569;
+  }
+
+  /* Make asterisks red in labels */
+  .form-group label .required-asterisk {
+    color: #ef4444;
+    margin-left: 2px;
+  }
+  
+  .form-group input,
+  .form-group select {
+    height: 36px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    padding: 0 10px;
+    font-size: 13px;
+    background: #f9fafb;
+  }
+  
+  .form-group input:focus,
+  .form-group select:focus {
+    outline: none;
+    border-color: #2563eb;
+    background: #ffffff;
+  }
+
+  /* Error states */
+  .form-group input.error,
+  .form-group select.error,
+  .form-group textarea.error {
+    border-color: #ef4444;
+    background: #fef2f2;
+  }
+
+  .form-group input.error:focus,
+  .form-group select.error:focus,
+  .form-group textarea.error:focus {
+    border-color: #ef4444;
+    background: #ffffff;
+  }
+
+  .error-message {
+    display: block;
+    color: #ef4444;
+    font-size: 12px;
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  .char-count {
+    display: block;
+    color: #64748b;
+    font-size: 11.5px;
+    margin-top: 4px;
+  }
+  
+  /* ======================================================
+     RESPONSIVE
+  ====================================================== */
+  @media (max-width: 900px) {
+    .registration-page {
+      padding: 0 14px;
+    }
+  
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+
+  /* =========================
+   SECTION TITLES
+========================= */
+.form-section-title {
+    margin: 26px 0 14px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #0f172a;
+  }
+  
+  /* =========================
+     TEXTAREA
+  ========================= */
+  .textarea {
+    min-height: 90px;
+    resize: vertical;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    background: #f9fafb;
+    font-family: inherit;
+    font-size: 13px;
+  }
+
+  .textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    background: #ffffff;
+  }
+   
+  
+  /* =========================
+     CERTIFICATION ROW
+  ========================= */
+  .cert-row {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+  }
+  
+  .cert-input {
+    flex: 1;
+  }
+  
+  .add-btn {
+    height: 36px;
+    padding: 0 14px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  
+  /* =========================
+     ACTION BUTTONS
+  ========================= */
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  
+  .btn-outline {
+    height: 36px;
+    padding: 0 16px;
+    border-radius: 8px;
+    border: 1px solid #cbd5f5;
+    background: #ffffff;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  
+  .btn-primary {
+    height: 36px;
+    padding: 0 18px;
+    border-radius: 8px;
+    border: none;
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: #1d4ed8;
+  }
+
+  .btn-primary:disabled {
+    background: #cbd5e1;
+    color: #94a3b8;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .btn-outline:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+
+  /* =========================
+   CERTIFICATIONS (FIGMA EXACT)
+========================= */
+
+.certification-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .certification-row:last-child {
+    margin-bottom: 0;
+  }
+  
+  .certification-row input {
+    flex: 1;
+    height: 36px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    padding: 0 12px;
+    font-size: 13px;
+    background: #f9fafb;
+  }
+  
+  .certification-row input:focus {
+    outline: none;
+    border-color: #2563eb;
+    background: #ffffff;
+  }
+  
+  .cert-add-btn {
+    height: 36px;
+    padding: 0 16px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    font-size: 13px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  
+  .cert-add-btn:hover {
+    background: #f8fafc;
+  }
+
+  .cert-remove-btn {
+    height: 36px;
+    width: 36px;
+    padding: 0;
+    border-radius: 8px;
+    border: 1px solid #fca5a5;
+    background: #ffffff;
+    color: #ef4444;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+
+  .cert-remove-btn:hover {
+    background: #fee2e2;
+    border-color: #ef4444;
+  }
+  

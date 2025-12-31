@@ -1,0 +1,69 @@
+.notifications-page {
+    padding: 32px;
+    background: #f7f9fc;
+    min-height: 100%;
+
+    /* Standardised content width */
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  
+  /* ===== HERO ===== */
+  .notifications-hero {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 28px 32px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #1e40af, #3b5cff);
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(30, 64, 175, 0.25);
+  }
+  
+  .hero-icon {
+    width: 56px;
+    height: 56px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+  }
+  
+  .hero-text h1 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 600;
+  }
+  
+  .hero-text p {
+    margin-top: 6px;
+    font-size: 15px;
+    opacity: 0.9;
+  }
+  
+  /* ===== EMPTY CARD ===== */
+  .notifications-card {
+    margin-top: 32px;
+    background: #fff;
+    border-radius: 14px;
+    padding: 60px 20px;
+    text-align: center;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e6e9f0;
+  }
+  
+  .empty-icon {
+    font-size: 48px;
+    color: #d1d5db;
+    margin-bottom: 14px;
+  }
+  
+  .notifications-card p {
+    font-size: 16px;
+    color: #8a94a6;
+  }
+  

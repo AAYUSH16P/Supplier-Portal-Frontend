@@ -1,0 +1,470 @@
+import { useEffect, useState } from "react";
+import AppHeader from "../../Components/RegisteredUser/AppHeader";
+import AppSidebar from "../../Components/RegisteredUser/AppSidebar";
+import "../../style/RegisteredUser/ReviewCandidates.css";
+import GlobalLoader from "../../Components/common/GlobalLoader";
+
+/* ================= HELPERS ================= */
+
+const getCompanyIdFromToken = () => {
+  const token = localStorage.getItem("token");
+  if (!token) return null;
+
+  try {
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    return payload.companyId;
+  } catch {
+    return null;
+  }
+};
+
+
+
+
+export default function ReviewCandidates() {
+  const [candidates, setCandidates] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [showEditModal, setShowEditModal] = useState(false);
+const [editForm, setEditForm] = useState(null);
+
+
+  const [showModal, setShowModal] = useState(false);
+  const [showRejectModal, setShowRejectModal] = useState(false);
+
+  const [selectedCandidate, setSelectedCandidate] = useState(null);
+  const [rejectRemark, setRejectRemark] = useState("");
+
+
+  const handleEditSubmit = async () => {
+    try {
+      const payload = {
+        ...editForm,
+        certifications: editForm.certifications
+          ? editForm.certifications.split(",").map((c) => c.trim())
+          : [],
+      };
+  
+      await fetch(
+        `http://localhost:5035/api/Supplier/manual-upload/${editForm.id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
+  
+      // Update UI list
+      setCandidates((prev) =>
+        prev.map((c) => (c.id === editForm.id ? editForm : c))
+      );
+  
+      setShowEditModal(false);
+    } catch {
+      alert("Failed to update candidate");
+    }
+  };
+  
+
+  const handleEditOpen = (candidate) => {
+    let certs = [];
+  
+    if (Array.isArray(candidate.certifications)) {
+      certs = candidate.certifications.filter(Boolean);
+    } else if (typeof candidate.certifications === "string") {
+      certs = [candidate.certifications];
+    }
+  
+    setEditForm({
+      ...candidate,
+      certifications: certs.join(", "),
+    });
+  
+    setShowEditModal(true);
+  };
+  
+  
+  const handleEditChange = (field, value) => {
+    setEditForm((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
+  useEffect(() => {
+    const companyId = getCompanyIdFromToken();
+    if (!companyId) {
+      setLoading(false);
+      return;
+    }
+
+    fetch(
+      `http://localhost:5035/api/hr/capacities?companyId=${companyId}&filter=all`
+    )
+      .then((res) => res.json())
+      .then((data) => setCandidates(data || []))
+      .catch(() => setCandidates([]))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const pendingCandidates = candidates.filter((c) => c.status === 0);
+  const hasPending = pendingCandidates.length > 0;
+
+  /* ================= ACTION HANDLERS ================= */
+
+  const handleApprove = async (candidate) => {
+    try {
+      await fetch(
+        `http://localhost:5035/api/hr/capacities/${candidate.id}/approve`,
+        { method: "POST" }
+      );
+
+      setCandidates((prev) => prev.filter((c) => c.id !== candidate.id));
+      setShowModal(false);
+    } catch {
+      alert("Failed to approve candidate");
+    }
+  };
+
+  const handleReject = async () => {
+    if (!rejectRemark.trim()) {
+      alert("Please enter rejection remark");
+      return;
+    }
+
+    try {
+      await fetch(
+        `http://localhost:5035/api/hr/capacities/${selectedCandidate.id}/reject`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(rejectRemark),
+        }
+      );
+
+      setCandidates((prev) =>
+        prev.filter((c) => c.id !== selectedCandidate.id)
+      );
+
+      setRejectRemark("");
+      setShowRejectModal(false);
+      setShowModal(false);
+    } catch {
+      alert("Failed to reject candidate");
+    }
+  };
+
+  if (loading) {
+    return <GlobalLoader />;
+  }
+
+  return (
+    <>
+      <AppHeader />
+
+      <div className="app-shell">
+        <AppSidebar unlocked active="Review Your Candidates" />
+
+        <main className="app-content review-page">
+          {/* HERO */}
+          <section className="review-hero">
+            👥 Review & Validate Employee Submissions
+          </section>
+
+          {/* TITLE + DESC (RESTORED) */}
+          <h2 className="page-title">Review Your Candidates</h2>
+
+          <p className="page-desc">
+            Review and validate candidate information submitted through the
+            Employee Capacity Confirmation link (Option 3).
+          </p>
+
+          <div className="info-box">
+            ℹ️ Candidates listed below have self-submitted their capacity details.
+            Your review and approval are required.
+          </div>
+
+          {/* ================= FIRST TIME USER ================= */}
+          {!hasPending && (
+            <div className="empty-state">
+              <div className="empty-icon">⬆️</div>
+              <h3>Welcome, First Time User!</h3>
+              <p>
+                Upload candidate information using <strong>Option 3</strong>.
+              </p>
+            </div>
+          )}
+
+          {/* ================= TABLE ================= */}
+          {hasPending && (
+            <div className="table-card">
+              <h3 className="table-title">
+                Pending Review ({pendingCandidates.length})
+              </h3>
+
+              <table>
+                <thead>
+                  <tr>
+                    <th>Candidate Reference</th>
+                    <th>Primary Role</th>
+                    <th>Experience</th>
+                    <th>Location</th>
+                    <th>Working Since</th>
+                    <th>Submitted By</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {pendingCandidates.map((c) => (
+                    <tr key={c.id}>
+                      <td>
+                        <div className="candidate-ref">
+                          <strong>{c.role || "-"}</strong>
+                          <span>{c.companyEmployeeId}</span>
+                        </div>
+                      </td>
+
+                      <td>{c.role || "-"}</td>
+                      <td>{c.totalExperience ?? "-"} yrs</td>
+                      <td>{c.location || "-"}</td>
+                      <td>{c.workingSince || "-"}</td>
+
+                      <td>
+                        <span className="pill">Employee</span>
+                      </td>
+
+                      <td className="actions">
+                        <button
+                          className="approve"
+                          onClick={() => handleApprove(c)}
+                        >
+                          ✔ Approve
+                        </button>
+
+                        <button
+                          className="reject"
+                          onClick={() => {
+                            setSelectedCandidate(c);
+                            setShowRejectModal(true);
+                          }}
+                        >
+                          ✖ Reject
+                        </button>
+
+                        <button
+                        className="edit"
+                        onClick={() => handleEditOpen(c)}
+                      >
+                        ✎ Edit
+                      </button>
+
+                        <button
+                          className="view"
+                          onClick={() => {
+                            setSelectedCandidate(c);
+                            setShowModal(true);
+                          }}
+                        >
+                          👁 View
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </main>
+      </div>
+
+      {/* ================= VIEW MODAL ================= */}
+      {showModal && selectedCandidate && (
+        <div className="cv-modal-backdrop">
+          <div className="cv-modal">
+            <div className="cv-header">
+              <div>
+                <h3>View Complete Candidate Details</h3>
+                <p>Review all submitted information for this candidate.</p>
+              </div>
+              <button className="cv-close" onClick={() => setShowModal(false)}>
+                ✕
+              </button>
+            </div>
+
+            <div className="cv-hero">
+              <h2>{selectedCandidate.companyEmployeeId}</h2>
+              <div className="cv-hero-meta">
+                <span>ID: {selectedCandidate.id.slice(0, 6).toUpperCase()}</span>
+                <span>Company Employee ID: {selectedCandidate.companyEmployeeId}</span>
+                <span>Status: Pending Review</span>
+              </div>
+            </div>
+
+            <Section title="Professional Information">
+              <InfoGrid
+                items={[
+                  { label: "Role", value: selectedCandidate.role || "-" },
+                  {
+                    label: "Experience",
+                    value: `${selectedCandidate.totalExperience ?? "-"} yrs`,
+                  },
+                  { label: "Location", value: selectedCandidate.location || "-" },
+                  { label: "Working Since", value: selectedCandidate.workingSince || "-" },
+                ]}
+              />
+            </Section>
+
+            <div className="cv-footer">
+              <button
+                className="approve"
+                onClick={() => handleApprove(selectedCandidate)}
+              >
+                ✔ Approve
+              </button>
+
+              <button
+                className="reject"
+                onClick={() => {
+                  setShowModal(false);
+                  setShowRejectModal(true);
+                }}
+              >
+                ✖ Reject
+              </button>
+
+
+
+              <button className="cv-close-btn" onClick={() => setShowModal(false)}>
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ================= REJECT MODAL ================= */}
+      {showRejectModal && selectedCandidate && (
+        <div className="cv-modal-backdrop">
+          <div className="cv-modal">
+            <h3>Reject Candidate</h3>
+
+            <textarea
+              rows={4}
+              placeholder="Enter rejection remark"
+              value={rejectRemark}
+              onChange={(e) => setRejectRemark(e.target.value)}
+              style={{ width: "100%", marginTop: 12 }}
+            />
+
+            <div className="cv-footer">
+              <button className="reject" onClick={handleReject}>
+                Confirm Reject
+              </button>
+
+              <button
+                onClick={() => {
+                  setRejectRemark("");
+                  setShowRejectModal(false);
+                }}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+
+      {/* ================= EDIT MODAL ================= */}
+{showEditModal && editForm && (
+  <div className="cv-modal-backdrop">
+    <div className="cv-modal">
+      <div className="cv-header">
+        <h3>Edit Candidate Details</h3>
+        <button className="cv-close" onClick={() => setShowEditModal(false)}>
+          ✕
+        </button>
+      </div>
+
+      <div className="cv-grid">
+        <EditField label="Company Employee ID" value={editForm.companyEmployeeId} onChange={(v) => handleEditChange("companyEmployeeId", v)} />
+        <EditField label="Job Title" value={editForm.jobTitle} onChange={(v) => handleEditChange("jobTitle", v)} />
+        <EditField label="Role" value={editForm.role} onChange={(v) => handleEditChange("role", v)} />
+        <EditField label="Gender" value={editForm.gender || ""} onChange={(v) => handleEditChange("gender", v)} />
+        <EditField label="Location" value={editForm.location || ""} onChange={(v) => handleEditChange("location", v)} />
+        <EditField label="Total Experience" type="number" value={editForm.totalExperience} onChange={(v) => handleEditChange("totalExperience", v)} />
+        <EditField label="CTC" type="number" value={editForm.ctc} onChange={(v) => handleEditChange("ctc", v)} />
+        <EditField label="Technical Skills" value={editForm.technicalSkills || ""} onChange={(v) => handleEditChange("technicalSkills", v)} />
+        <EditField label="Tools" value={editForm.tools || ""} onChange={(v) => handleEditChange("tools", v)} />
+        <EditField label="Number of Projects" type="number" value={editForm.numberOfProjects} onChange={(v) => handleEditChange("numberOfProjects", v)} />
+        <EditField
+          label="Certifications (comma separated)"
+          value={editForm.certifications}
+          onChange={(v) => handleEditChange("certifications", v)}
+        />
+        <EditField
+  label="Working Since"
+  type="date"
+  value={editForm.workingSince?.substring(0, 10) || ""}
+  onChange={(v) => handleEditChange("workingSince", v)}
+/>
+
+      </div>
+
+      <div className="cv-footer">
+        <button className="approve" onClick={handleEditSubmit}>
+          💾 Save Changes
+        </button>
+        <button onClick={() => setShowEditModal(false)}>Cancel</button>
+      </div>
+    </div>
+  </div>
+)}
+
+    </>
+  );
+}
+
+/* ================= SUB COMPONENTS ================= */
+
+function Section({ title, children }) {
+  return (
+    <div className="cv-section">
+      <div className="cv-section-title">
+        <span className="cv-line" />
+        {title}
+      </div>
+      {children}
+    </div>
+  );
+}
+
+function InfoGrid({ items }) {
+  return (
+    <div className="cv-grid">
+      {items.map((item, idx) => (
+        <div key={idx} className="cv-grid-item">
+          <span className="cv-label">{item.label}</span>
+          <span className="cv-value">{item.value}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function EditField({ label, value, onChange, type = "text" }) {
+  return (
+    <div className="cv-grid-item">
+      <span className="cv-label">{label}</span>
+      <input
+        className="cv-input"
+        type={type}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+      />
+    </div>
+  );
+}
+
+
+

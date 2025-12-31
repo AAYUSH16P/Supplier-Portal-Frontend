@@ -1,0 +1,57 @@
+.app-sidebar {
+  width: 240px;
+  background: #ffffff;
+  padding: 16px;
+  border-right: 1px solid #e5e7eb;
+}
+
+.nav-warning {
+  background: #fff7ed;
+  border: 1px solid #f59e0b;
+  color: #92400e;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 12.5px;
+  margin-bottom: 16px;
+}
+
+.nav-warning span {
+  display: block;
+  font-size: 11.5px;
+  margin-top: 4px;
+  opacity: 0.85;
+}
+
+.app-sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.app-sidebar button {
+  background: transparent;
+  border: none;
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  color: #000000;
+  cursor: not-allowed;
+}
+
+.app-sidebar button:disabled {
+  opacity: 0.8;
+  color: #000000;
+}
+
+.app-sidebar button.active {
+  background: #2563eb;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.app-sidebar button:not(:disabled):hover {
+  background: #eff6ff;
+  color: #1d4ed8;
+  cursor: pointer;
+}

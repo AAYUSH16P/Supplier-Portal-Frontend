@@ -1,0 +1,278 @@
+* {
+  box-sizing: border-box;
+}
+
+.invite-page {
+    background: #f5f7fb;
+    min-height: 100vh;
+    padding-bottom: 40px;
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont;
+  }
+  
+  /* HEADER */
+  .invite-header {
+    display: flex;
+    gap: 24px;
+    padding: 22px 28px;
+    background: linear-gradient(180deg, #1d4ed8, #1e40af);
+    border-radius: 14px;
+    margin: 24px auto;
+    max-width: 1100px;
+  }
+  
+  .header-card {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 12px;
+    padding: 16px 18px;
+    color: #ffffff;
+  }
+  
+  .header-card .label {
+    display: block;
+    font-size: 13px;
+    opacity: 0.85;
+    margin-bottom: 4px;
+  }
+  
+  .header-card strong {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  /* CONTENT */
+  .invite-content {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  
+  /* CARD */
+  .info-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 26px 28px;
+    margin-top: 24px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  }
+  
+  .info-card.bordered {
+    border: 2px solid #dbe7ff;
+    background: #f8fbff;
+  }
+  
+  .greeting {
+    font-size: 18px;
+    margin-bottom: 14px;
+    color: #0f172a;
+  }
+  
+  .info-card p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #334155;
+    margin-bottom: 14px;
+  }
+  
+  /* HIGHLIGHT */
+  .highlight-box {
+    margin-top: 16px;
+    padding: 14px 16px;
+    background: #eef4ff;
+    border-radius: 10px;
+    border: 1px solid #c7dbff;
+    font-size: 14px;
+    color: #1e3a8a;
+  }
+  
+  /* IMPORTANT TITLE */
+  .info-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  
+  .info-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #e0ebff;
+    color: #1d4ed8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+  }
+  
+  .info-title h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #0f172a;
+  }
+  
+
+  
+
+  /* CONFIRMATION CARD */
+.confirm-card {
+    background: #fff9e6;
+    border: 2px solid #fde68a;
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-top: 24px;
+  }
+  
+  .confirm-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  
+  .shield-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #fef3c7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .confirm-title h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #0f172a;
+  }
+  
+  /* CHECKBOX */
+  .confirm-checkbox {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 15px;
+    color: #334155;
+    cursor: pointer;
+  }
+  
+  .confirm-checkbox input {
+    margin-top: 4px;
+    width: 16px;
+    height: 16px;
+  }
+  
+  /* PROCEED BUTTON */
+  .proceed-btn {
+    margin-top: 28px;
+    width: 100%;
+    padding: 14px;
+    border-radius: 14px;
+    border: none;
+    background: #94a3d8;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: not-allowed;
+  }
+  
+
+
+  .info-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  
+  
+  .info-line {
+    width: 90px;
+    height: 4px;
+    background: #2563eb;
+    border-radius: 4px;
+    margin-bottom: 6px;
+  }
+  
+  
+  .info-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #e0ebff;
+    color: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+  }
+  
+  .proceed-btn {
+    margin-top: 36px; /* was 28px */
+  }
+  
+  
+  .info-header h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #0f172a;
+  }
+  
+  /* NOTE BOX */
+  .note-box {
+    margin: 18px 0;
+    padding: 18px 20px;
+    border-radius: 12px;
+    border: 1px solid #c7dbff;
+    background: #ffffff;
+  }
+  
+  .note-box ul {
+    margin: 10px 0 0 18px;
+  }
+  
+  .note-box li {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #334155;
+  }
+  
+
+
+  /* FIX: Force Important Information card to stack vertically */
+.info-card.bordered {
+  display: block;
+}
+
+/* Prevent column splitting */
+.info-card.bordered p,
+.info-card.bordered ul,
+.info-card.bordered li {
+  max-width: 100%;
+  white-space: normal;
+}
+.info-card.bordered > * {
+  display: block;
+}
+
+.info-card.bordered p {
+  margin-bottom: 16px;
+}
+
+
+/* FIX INTRO CARD LAYOUT */
+.info-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.highlight-box {
+  width: 100%;
+  margin-top: 12px;
+}
+.info-card p {
+  display: block;
+  width: 100%;
+}

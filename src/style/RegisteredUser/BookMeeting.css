@@ -1,0 +1,237 @@
+/* LAYOUT */
+.meeting-layout {
+    display: flex;
+    min-height: calc(100vh - 64px);
+    background: #f8fafc;
+  }
+  
+  .meeting-page {
+    flex: 1;
+    padding: 28px;
+
+    /* Standardised content width */
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  
+  /* TOP STRIP */
+  .meeting-strip {
+    background: linear-gradient(90deg, #4ade80, #38bdf8);
+    color: #fff;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  
+  /* MAIN CARD */
+  .meeting-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 22px;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 22px;
+  }
+  
+  .meeting-title {
+    display: flex;
+    gap: 14px;
+  }
+  
+  .meeting-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: #eff6ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* GRID */
+  .meeting-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 22px;
+  }
+  
+  /* CALENDAR BOX */
+  .calendar-box {
+    background: #fff;
+    border-radius: 16px;
+    padding: 22px;
+    border: 1px solid #e5e7eb;
+  }
+  
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  
+  .timezone {
+    font-size: 13px;
+    color: #6b7280;
+  }
+  
+/* CALENDAR */
+.calendar-month {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.month-nav-btn {
+  background: #f1f5f9;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #1d4ed8;
+  transition: all 0.2s;
+}
+
+.month-nav-btn:hover:not(:disabled) {
+  background: #e0e7ff;
+  border-color: #1d4ed8;
+}
+
+.month-nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  color: #9ca3af;
+}
+  
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+  }
+  
+  .day-label {
+    font-size: 12px;
+    color: #64748b;
+    text-align: center;
+  }
+  
+.date {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #f1f5f9;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.date.empty {
+  background: transparent;
+  cursor: default;
+  visibility: hidden;
+}
+
+.date:disabled,
+.date.disabled {
+  background: #f9fafb;
+  color: #d1d5db;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.date:not(:disabled):not(.disabled):hover {
+  background: #e0e7ff;
+  border: 1px solid #1d4ed8;
+}
+
+.date.active {
+  background: #1d4ed8;
+  color: #fff;
+  font-weight: 600;
+}
+  
+  /* SLOTS */
+  .slots {
+    margin-top: 18px;
+  }
+  
+  .slot-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  
+  .slot {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #2563eb;
+    background: #fff;
+    cursor: pointer;
+  }
+  
+  .slot.selected {
+    background: #1d4ed8;
+    color: #fff;
+  }
+  
+  /* DEV NOTE */
+  .dev-note {
+    margin-top: 16px;
+    background: #f8fafc;
+    padding: 12px;
+    font-size: 12px;
+    border-radius: 10px;
+  }
+  
+  /* INFO BOX */
+  .info-box {
+    background: #fff;
+    border-radius: 16px;
+    padding: 22px;
+    border: 1px solid #e5e7eb;
+  }
+  
+  .divider {
+    height: 1px;
+    background: #e5e7eb;
+    margin: 16px 0;
+  }
+  
+  .bullet-list {
+    padding-left: 18px;
+  }
+  
+  /* CONFIRM */
+  .confirm-box {
+    margin-top: 24px;
+    background: #fff;
+    border-radius: 16px;
+    padding: 22px;
+    text-align: center;
+    border: 1px solid #e5e7eb;
+  }
+  
+  .confirm-btn {
+    background: #1d4ed8;
+    color: #fff;
+    padding: 12px 26px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .confirm-box p {
+    margin-top: 10px;
+    color: #16a34a;
+  }
+  
+  /* RESPONSIVE */
+  @media (max-width: 1000px) {
+    .meeting-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
