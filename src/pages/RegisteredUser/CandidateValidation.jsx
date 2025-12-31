@@ -20,7 +20,7 @@ export default function CandidateValidation() {
     const fetchCandidates = async () => {
         try {
             const res = await fetch(
-                `http://localhost:5035/api/supplier/capacities?companyId=${COMPANY_ID}&filter=pending`
+                `https://sp-portal-backend-production.up.railway.app/api/supplier/capacities?companyId=${COMPANY_ID}&filter=pending`
             );
             const data = await res.json();
             setCandidates(data);
@@ -39,7 +39,7 @@ export default function CandidateValidation() {
     const handleApprove = async (capacityId) => {
         try {
             await fetch(
-                `http://localhost:5035/api/supplier/capacities/${capacityId}/approve`,
+                `https://sp-portal-backend-production.up.railway.app/api/supplier/capacities/${capacityId}/approve`,
                 { method: "POST" }
             );
             fetchCandidates();
@@ -54,7 +54,7 @@ export default function CandidateValidation() {
 
         try {
             await fetch(
-                `http://localhost:5035/api/supplier/capacities/${capacityId}/reject`,
+                `https://sp-portal-backend-production.up.railway.app/api/supplier/capacities/${capacityId}/reject`,
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },

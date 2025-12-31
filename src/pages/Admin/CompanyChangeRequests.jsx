@@ -14,7 +14,7 @@ export default function CompanyChangeRequests() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5035/admin/company-change-requests")
+    fetch("https://sp-portal-backend-production.up.railway.app/admin/company-change-requests")
       .then(res => res.json())
       .then(data => {
         setRequests(data);
@@ -28,7 +28,7 @@ export default function CompanyChangeRequests() {
 
   const approveRequest = async (id) => {
     await fetch(
-      `http://localhost:5035/admin/company-change-requests/${id}/approve`,
+      `https://sp-portal-backend-production.up.railway.app/admin/company-change-requests/${id}/approve`,
       { method: "POST" }
     );
 
@@ -43,7 +43,7 @@ export default function CompanyChangeRequests() {
     if (!remark) return;
 
     await fetch(
-      `http://localhost:5035/admin/company-change-requests/${id}/reject`,
+      `https://sp-portal-backend-production.up.railway.app/admin/company-change-requests/${id}/reject`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

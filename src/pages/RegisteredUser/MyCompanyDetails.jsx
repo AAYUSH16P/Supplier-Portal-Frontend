@@ -77,7 +77,7 @@ export default function MyCompanyDetails() {
       return;
     }
 
-    fetch(`http://localhost:5035/api/company/details?companyId=${companyId}`)
+    fetch(`https://sp-portal-backend-production.up.railway.app/api/company/details?companyId=${companyId}`)
       .then((res) => res.json())
       .then((res) => {
         setData(res);
@@ -231,7 +231,7 @@ export default function MyCompanyDetails() {
                   disabled={!isFormValid}
                   onClick={async () => {
                     await fetch(
-                      "http://localhost:5035/company/change-request",
+                      "https://sp-portal-backend-production.up.railway.app/company/change-request",
                       {
                         method: "POST",
                         headers: {
@@ -486,7 +486,7 @@ export default function MyCompanyDetails() {
 
                       try {
                         const res = await fetch(
-                          `http://localhost:5035/api/Supplier/${supplierId}/set-password`,
+                          `https://sp-portal-backend-production.up.railway.app/api/Supplier/${supplierId}/set-password`,
                           {
                             method: "POST",
                             headers: {

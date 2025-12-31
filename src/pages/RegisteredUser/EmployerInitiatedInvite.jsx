@@ -30,7 +30,7 @@ export default function EmployerInitiatedInvite() {
       // IMPORTANT: encode company name for URL safety
       const encodedCompanyName = encodeURIComponent(companyName);
   
-      const link = `http://localhost:3000/employeeInviteInfo?inviteId=${companyId}&companyName=${encodedCompanyName}`;
+      const link = `https://supplier-portal-frontend-production.up.railway.app/employeeInviteInfo?inviteId=${companyId}&companyName=${encodedCompanyName}`;
   
       setGeneratedLink(link);
   

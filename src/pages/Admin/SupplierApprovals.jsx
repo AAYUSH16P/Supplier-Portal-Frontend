@@ -17,7 +17,7 @@ export default function SupplierApprovals() {
      API CALL – ALL SUPPLIERS
   ========================== */
   useEffect(() => {
-    fetch("http://localhost:5035/api/company/admin/pending-companies")
+    fetch("https://sp-portal-backend-production.up.railway.app/api/company/admin/pending-companies")
       .then((res) => res.json())
       .then((data) => setSuppliers(data))
       .catch((err) => console.error(err));
@@ -25,7 +25,7 @@ export default function SupplierApprovals() {
 
 
   const refreshSuppliers = () => {
-    fetch("http://localhost:5035/api/company/admin/pending-companies")
+    fetch("https://sp-portal-backend-production.up.railway.app/api/company/admin/pending-companies")
       .then((res) => res.json())
       .then((data) => setSuppliers(data))
       .catch((err) => console.error(err));
@@ -34,7 +34,7 @@ export default function SupplierApprovals() {
   const handleApprove = async (companyId) => {
     try {
       debugger;
-      await fetch("http://localhost:5035/api/company/approve", {
+      await fetch("https://sp-portal-backend-production.up.railway.app/api/company/approve", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +53,7 @@ export default function SupplierApprovals() {
     if (!remark) return;
 
     try {
-      await fetch("http://localhost:5035/api/company/reject", {
+      await fetch("https://sp-portal-backend-production.up.railway.app/api/company/reject", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -70,7 +70,7 @@ export default function SupplierApprovals() {
   const handleSignSla = async (companyId) => {
     try {
       await fetch(
-        `http://localhost:5035/api/Supplier/${companyId}/sign-sla`,
+        `https://sp-portal-backend-production.up.railway.app/api/Supplier/${companyId}/sign-sla`,
         {
           method: "POST",
         }

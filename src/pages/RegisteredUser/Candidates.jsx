@@ -20,7 +20,7 @@ export default function Candidates() {
   const handleApprove = async (candidate) => {
     try {
       await fetch(
-        `http://localhost:5035/api/supplier/capacities/${candidate.id}/approve`,
+        `https://sp-portal-backend-production.up.railway.app/api/supplier/capacities/${candidate.id}/approve`,
         { method: "POST" }
       );
   
@@ -42,7 +42,7 @@ export default function Candidates() {
   
     try {
       await fetch(
-        `http://localhost:5035/api/supplier/capacities/${selectedCandidate.id}/reject`,
+        `https://sp-portal-backend-production.up.railway.app/api/supplier/capacities/${selectedCandidate.id}/reject`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

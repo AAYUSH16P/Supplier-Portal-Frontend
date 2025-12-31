@@ -45,7 +45,7 @@ const [editForm, setEditForm] = useState(null);
       };
   
       await fetch(
-        `http://localhost:5035/api/Supplier/manual-upload/${editForm.id}`,
+        `https://sp-portal-backend-production.up.railway.app/api/Supplier/manual-upload/${editForm.id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -98,7 +98,7 @@ const [editForm, setEditForm] = useState(null);
     }
 
     fetch(
-      `http://localhost:5035/api/hr/capacities?companyId=${companyId}&filter=all`
+      `https://sp-portal-backend-production.up.railway.app/api/hr/capacities?companyId=${companyId}&filter=all`
     )
       .then((res) => res.json())
       .then((data) => setCandidates(data || []))
@@ -114,7 +114,7 @@ const [editForm, setEditForm] = useState(null);
   const handleApprove = async (candidate) => {
     try {
       await fetch(
-        `http://localhost:5035/api/hr/capacities/${candidate.id}/approve`,
+        `https://sp-portal-backend-production.up.railway.app/api/hr/capacities/${candidate.id}/approve`,
         { method: "POST" }
       );
 
@@ -133,7 +133,7 @@ const [editForm, setEditForm] = useState(null);
 
     try {
       await fetch(
-        `http://localhost:5035/api/hr/capacities/${selectedCandidate.id}/reject`,
+        `https://sp-portal-backend-production.up.railway.app/api/hr/capacities/${selectedCandidate.id}/reject`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

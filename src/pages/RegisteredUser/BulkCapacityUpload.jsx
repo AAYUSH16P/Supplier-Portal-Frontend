@@ -63,7 +63,7 @@ const handleFileUpload = async (event) => {
 
   try {
     const response = await fetch(
-      `http://localhost:5035/api/Supplier/${companyId}/bulk-upload`,
+      `https://sp-portal-backend-production.up.railway.app/api/Supplier/${companyId}/bulk-upload`,
       {
         method: "POST",
         body: formData,
