@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AppHeader from "../../Components/RegisteredUser/AppHeader";
@@ -31,15 +31,7 @@ export default function BookMeeting() {
   }, [today]);
 
   // Generate next 30 days from today
-  const next30Days = useMemo(() => {
-    const days = [];
-    for (let i = 0; i < 30; i++) {
-      const date = new Date(today);
-      date.setDate(today.getDate() + i);
-      days.push(date);
-    }
-    return days;
-  }, [today]);
+ 
 
   // Check if a date is within the 30-day window
   const isDateAvailable = (date) => {

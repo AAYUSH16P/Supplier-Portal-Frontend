@@ -230,15 +230,14 @@ export default function SupplierLogin() {
 
             <p className="register">
               Don't have an account?{" "}
-              <a
-                href="#"
+              <button
                 onClick={(e) => {
                   e.preventDefault();
                   navigate("/registration");
                 }}
               >
                 Register as a new supplier
-              </a>
+              </button>
             </p>
           </div>
         </form>

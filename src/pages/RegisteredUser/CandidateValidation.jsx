@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AppHeader from "../../Components/RegisteredUser/AppHeader";
-import AppSidebar from "../../Components/RegisteredUser/AppSidebar";
 import "../../style/RegisteredUser/CandidateValidation.css";
 
 export default function CandidateValidation() {

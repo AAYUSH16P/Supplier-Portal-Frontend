@@ -1,7 +1,7 @@
 import "../../style/RegisteredUser/AddCapacityManually.css";
 import AppHeader from "../../Components/RegisteredUser/AppHeader";
 import AppSidebar from "../../Components/RegisteredUser/AppSidebar";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { X } from "lucide-react";
 import { toast, ToastContainer } from "react-toastify";
