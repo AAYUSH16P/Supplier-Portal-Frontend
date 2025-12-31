@@ -1,64 +1,57 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Sidebar({ active }) {
-  const navigate = useNavigate();
-
-  const handleNavigation = (path) => {
-    navigate(path);
-  };
-
   return (
     <aside className="sidebar">
       <nav>
-        <a 
-          className={active === "landingPage" ? "active" : ""} 
-          onClick={() => handleNavigation("/landingPage")}
-          style={{ cursor: "pointer" }}
+        <Link
+          to="/landingPage"
+          className={active === "landingPage" ? "active" : ""}
         >
           🏠 Home
-        </a>
-        <a 
-          className={active === "about" ? "active" : ""} 
-          onClick={() => handleNavigation("/about")}
-          style={{ cursor: "pointer" }}
+        </Link>
+
+        <Link
+          to="/about"
+          className={active === "about" ? "active" : ""}
         >
           ℹ️ AboutTS.com
-        </a>
-        <a 
-          className={active === "operating" ? "active"  : ""} 
-          onClick={() => handleNavigation("/operating")}
-          style={{ cursor: "pointer" }}
+        </Link>
+
+        <Link
+          to="/operating"
+          className={active === "operating" ? "active" : ""}
         >
           ⚙️ Operating Model
-        </a>
-        <a 
-          className={active === "how-it-works" ? "active"  : ""} 
-          onClick={() => handleNavigation("/how-it-work")}
-          style={{ cursor: "pointer" }}
+        </Link>
+
+        <Link
+          to="/how-it-work"
+          className={active === "how-it-works" ? "active" : ""}
         >
           📘 How It Works
-        </a>
-        <a 
-          className={active === "registration" ? "active"  : ""} 
-          onClick={() => handleNavigation("/registration")}
-          style={{ cursor: "pointer" }}
+        </Link>
+
+        <Link
+          to="/registration"
+          className={active === "registration" ? "active" : ""}
         >
           📝 Registration
-        </a>
-        <a 
-          className={active === "faq" ? "active"  : ""} 
-          onClick={() => handleNavigation("/faq")}
-          style={{ cursor: "pointer" }}
+        </Link>
+
+        <Link
+          to="/faq"
+          className={active === "faq" ? "active" : ""}
         >
           ❓ FAQ
-        </a>
-        <a 
-          className={active === "contact" ? "active"  : ""} 
-          onClick={() => handleNavigation("/contact")}
-          style={{ cursor: "pointer" }}
+        </Link>
+
+        <Link
+          to="/contact"
+          className={active === "contact" ? "active" : ""}
         >
           ✉️ Contact
-        </a>
+        </Link>
       </nav>
 
       <div className="sidebar-footer">

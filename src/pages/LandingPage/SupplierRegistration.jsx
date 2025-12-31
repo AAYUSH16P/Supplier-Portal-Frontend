@@ -128,13 +128,14 @@ export default function SupplierRegistration() {
         }
         break;
 
-      case "primaryContactNumber":
-        if (!value.trim()) {
-          error = "Primary Contact Number is required";
-        } else if (!/^[\d\s\+\-\(\)]+$/.test(value)) {
-          error = "Please enter a valid phone number";
-        }
-        break;
+        case "primaryContactNumber":
+          if (!value.trim()) {
+            error = "Primary Contact Number is required";
+          } else if (/^[\d\s+()-]+$/.test(value)) {
+            error = "Please enter a valid phone number";
+          }
+          break;
+        
 
       case "companyOverview":
         if (!value.trim()) {
@@ -244,9 +245,10 @@ export default function SupplierRegistration() {
 
     if (!formData.primaryContactNumber.trim()) {
       newErrors.primaryContactNumber = "Primary Contact Number is required";
-    } else if (!/^[\d\s\+\-\(\)]+$/.test(formData.primaryContactNumber)) {
+    }  else if (!/^[\d\s+()-]+$/.test(formData.primaryContactNumber)) {
       newErrors.primaryContactNumber = "Please enter a valid phone number";
     }
+    
 
     if (!formData.companyOverview.trim()) {
       newErrors.companyOverview = "Company Overview is required";
@@ -283,7 +285,7 @@ export default function SupplierRegistration() {
       /^https?:\/\/.+/.test(formData.companyWebsite) &&
       /^\d{4}$/.test(formData.yearEstablished) &&
       /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.primaryContactEmail) &&
-      /^[\d\s\+\-\(\)]+$/.test(formData.primaryContactNumber)
+/^[\d\s+()-]+$/.test(formData.primaryContactNumber)
     );
   };
 

@@ -214,9 +214,10 @@ export default function SupplierLogin() {
                 />{" "}
                 Remember me
               </label>
-              <a href="#" className="forgot">
-                Forgot password?
-              </a>
+              <button className="link-button">
+  Forgot Password?
+</button>
+
             </div>
 
             <button
