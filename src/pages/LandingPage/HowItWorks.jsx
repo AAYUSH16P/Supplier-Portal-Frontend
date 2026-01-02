@@ -1,10 +1,32 @@
+import { useEffect } from "react";
 import Header from "../../Components/Header02";
 import Sidebar from "../../Components/Sidebar";
 import LandingFooter from "../../Components/LandingFooter";
 import "../../index.css";
+import { useNavigate } from "react-router-dom";
+
+
+
+
+
 
 export default function HowItWorks() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant", // or "smooth"
+    });
+  }, []);
+
+
   return (
+
+   
+
+    
     <>
       <Header />
 
@@ -120,7 +142,7 @@ export default function HowItWorks() {
     </div>
 
     {/* CTA */}
-    <button className="step-cta">
+    <button className="step-cta"   onClick={() => navigate("/registration")}    >
       Start Your Registration →
     </button>
   </div>
@@ -396,7 +418,8 @@ export default function HowItWorks() {
     </p>
   </div>
 
-  <button className="cta-button">
+  <button className="cta-button"   onClick={() => navigate("/registration")}
+  >
     Proceed to Registration →
   </button>
 </section>

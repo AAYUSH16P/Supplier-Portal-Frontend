@@ -398,3 +398,71 @@
   background: #fff;
   cursor: pointer;
 }
+
+
+
+.form-error {
+  color: #dc2626;
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+.reject01{
+  background: linear-gradient(90deg, #dc2626, #b91c1c);
+  color: #ffffff;
+  margin-top: 14px;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 14px rgba(220, 38, 38, 0.35);
+}
+
+.reject01:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(220, 38, 38, 0.45);
+}
+
+.reject01:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(220, 38, 38, 0.35);
+}
+
+/* =====================
+   CANCEL BUTTON (NEUTRAL)
+===================== */
+.cancel {
+  background: #ffffff;
+  color: #374151;
+  border: 1.5px solid #d1d5db;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.cancel:hover {
+  background: #c99e1c;
+  border-color: #9ca3af;
+}
+
+.cancel:active {
+  background: #f3f4f6;
+}
+
+.reject01,
+.cancel {
+  min-width: 160px;
+  height: 42px;
+  box-sizing: border-box;
+}
+
+
+.text-area{
+  border-radius: 10px;
+}

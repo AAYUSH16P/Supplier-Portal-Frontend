@@ -23,6 +23,20 @@ export default function BookMeeting() {
     return date;
   }, []);
 
+
+  const getUtcRangeForDate = (date) => {
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const day = date.getDate();
+
+    const startUtc = new Date(Date.UTC(year, month, day, 0, 0, 0)).toISOString();
+    const endUtc = new Date(Date.UTC(year, month, day, 23, 59, 59)).toISOString();
+
+    return { startUtc, endUtc };
+  };
+
+
+
   // Get the last available date (30 days from today)
   const lastAvailableDate = useMemo(() => {
     const date = new Date(today);
@@ -31,7 +45,7 @@ export default function BookMeeting() {
   }, [today]);
 
   // Generate next 30 days from today
- 
+
 
   // Check if a date is within the 30-day window
   const isDateAvailable = (date) => {
@@ -50,12 +64,12 @@ export default function BookMeeting() {
   };
 
   // Format date to YYYY-MM-DD for API
-  const formatDateForAPI = (date) => {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
-  };
+  // const formatDateForAPI = (date) => {
+  //   const year = date.getFullYear();
+  //   const month = String(date.getMonth() + 1).padStart(2, "0");
+  //   const day = String(date.getDate()).padStart(2, "0");
+  //   return `${year}-${month}-${day}`;
+  // };
 
   // Format date for display
   const formatDateForDisplay = (date) => {
@@ -68,34 +82,17 @@ export default function BookMeeting() {
   };
 
   // Convert time to IST format for display
-  const formatTimeInIST = (timeString) => {
-    if (!timeString) return "";
-    
-    // Handle ISO datetime format like "2025-12-29T10:00:00"
-    if (typeof timeString === "string" && timeString.includes("T")) {
-      const date = new Date(timeString);
-      if (!isNaN(date.getTime())) {
-        return date.toLocaleTimeString("en-IN", {
-          hour: "numeric",
-          minute: "2-digit",
-          hour12: true,
-        });
-      }
-    }
-    
-    // Handle formats like "09:00:00" or "9:00 AM"
-    if (typeof timeString === "string") {
-      const timeMatch = timeString.match(/(\d{1,2}):(\d{2})/);
-      if (timeMatch) {
-        let hours = parseInt(timeMatch[1]);
-        const minutes = timeMatch[2];
-        const ampm = hours >= 12 ? "PM" : "AM";
-        hours = hours % 12 || 12;
-        return `${hours}:${minutes} ${ampm}`;
-      }
-    }
-    return timeString;
+  const formatTimeInIST = (date) => {
+    if (!date) return "";
+
+    return date.toLocaleTimeString("en-IN", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+      timeZone: "Asia/Kolkata",
+    });
   };
+
 
   // Extract time from slot object
   const getTimeFromSlot = (slot) => {
@@ -122,19 +119,19 @@ export default function BookMeeting() {
     setAvailableSlots([]);
 
     try {
-      const dateStr = formatDateForAPI(date);
-      const response = await getAvailableSlotsForDate(adminEmail, dateStr);
-      
-      // Handle response - assuming the API returns an array of time slots
-      if (response.data) {
-        // If response.data is an array, use it directly
-        // If it's an object with a slots property, use that
-        const slots = Array.isArray(response.data) 
-          ? response.data 
-          : response.data.slots || response.data.availableSlots || [];
-        
-        setAvailableSlots(slots);
-      }
+      const { startUtc, endUtc } = getUtcRangeForDate(date);
+
+      const response = await getAvailableSlotsForDate(
+        adminEmail,
+        startUtc,
+        endUtc
+      );
+
+      const busyEvents = Array.isArray(response.data) ? response.data : [];
+
+      const available = generateAvailableSlotsFromEvents(date, busyEvents);
+
+      setAvailableSlots(available);
     } catch (error) {
       console.error("Error fetching available slots:", error);
       setAvailableSlots([]);
@@ -142,6 +139,103 @@ export default function BookMeeting() {
       setLoading(false);
     }
   };
+
+  const generateAvailableSlotsFromEvents = (date, busyEvents) => {
+    const slots = [];
+
+    console.group("📅 Slot generation for date:", date.toDateString());
+
+    // Log busy events in IST
+    console.group("⛔ Busy events (converted to IST)");
+    busyEvents.forEach((event, i) => {
+      const busyStartUtc = new Date(event.startUtc + "Z");
+      const busyEndUtc = new Date(event.endUtc + "Z");
+
+      const busyStartIst = new Date(busyStartUtc.getTime() + 5.5 * 60 * 60 * 1000);
+      const busyEndIst = new Date(busyEndUtc.getTime() + 5.5 * 60 * 60 * 1000);
+
+      console.log(
+        `#${i + 1}`,
+        event.subject,
+        "| IST:",
+        busyStartIst.toLocaleTimeString("en-IN"),
+        "-",
+        busyEndIst.toLocaleTimeString("en-IN")
+      );
+    });
+    console.groupEnd();
+
+    const startIstHour = 9;
+    const endIstHour = 15; // 3 PM
+
+    console.group("🧮 Slot evaluation (30-min IST)");
+
+    for (let hour = startIstHour; hour < endIstHour; hour++) {
+      for (let minute of [0, 30]) {
+        const istDate = new Date(
+          date.getFullYear(),
+          date.getMonth(),
+          date.getDate(),
+          hour,
+          minute,
+          0
+        );
+
+        const utcDate = new Date(istDate.getTime() - 5.5 * 60 * 60 * 1000);
+
+        const slotStart = utcDate.toISOString();
+        const slotEnd = new Date(utcDate.getTime() + 30 * 60000).toISOString();
+
+        const slotLabel = `${istDate.toLocaleTimeString("en-IN", {
+          hour: "numeric",
+          minute: "2-digit",
+          hour12: true,
+        })} - ${new Date(
+          istDate.getTime() + 30 * 60000
+        ).toLocaleTimeString("en-IN", {
+          hour: "numeric",
+          minute: "2-digit",
+          hour12: true,
+        })}`;
+
+        let blockedBy = null;
+
+        const isBusy = busyEvents.some(event => {
+          const busyStart = new Date(event.startUtc);
+          const busyEnd = new Date(event.endUtc);
+
+
+          const overlap =
+            new Date(slotStart) < busyEnd &&
+            new Date(slotEnd) > busyStart;
+
+          if (overlap) {
+            blockedBy = event.subject;
+          }
+
+          return overlap;
+        });
+
+        if (isBusy) {
+          console.warn("❌ BLOCKED:", slotLabel, "| Reason:", blockedBy);
+        } else {
+          console.log("✅ AVAILABLE:", slotLabel);
+          slots.push({
+            startIst: istDate,
+          });
+        }
+      }
+    }
+
+    console.groupEnd();
+    console.groupEnd();
+
+    return slots;
+  };
+
+
+
+
 
   // Handle time slot click
   const handleTimeClick = (time) => {
@@ -153,11 +247,11 @@ export default function BookMeeting() {
     try {
       const token = localStorage.getItem("token");
       if (!token) return null;
-      
+
       // JWT tokens have 3 parts separated by dots: header.payload.signature
       const parts = token.split(".");
       if (parts.length !== 3) return null;
-      
+
       // Decode the payload (second part)
       const payload = JSON.parse(atob(parts[1]));
       return payload.email || null;
@@ -168,100 +262,109 @@ export default function BookMeeting() {
   };
 
   // Convert IST datetime to UTC
-  const convertIstToUtc = (istDateTimeString) => {
-    // Parse the IST datetime string (format: "2025-12-29T10:00:00")
-    // IST is UTC+5:30, so we need to subtract 5 hours and 30 minutes to get UTC
-    const [datePart, timePart] = istDateTimeString.split("T");
-    const [year, month, day] = datePart.split("-").map(Number);
-    const [hours, minutes, seconds = 0] = timePart.split(":").map(Number);
-    
-    // Create a date object treating the input as IST
-    // We'll manually calculate UTC by subtracting 5:30
-    const istDate = new Date(Date.UTC(year, month - 1, day, hours, minutes, seconds));
-    
-    // Subtract IST offset (5 hours 30 minutes = 5.5 hours = 19800000 milliseconds)
-    const utcDate = new Date(istDate.getTime() - (5.5 * 60 * 60 * 1000));
-    
-    return utcDate.toISOString();
-  };
+  // const convertIstToUtc = (istDateTimeString) => {
+  //   // Parse the IST datetime string (format: "2025-12-29T10:00:00")
+  //   // IST is UTC+5:30, so we need to subtract 5 hours and 30 minutes to get UTC
+  //   const [datePart, timePart] = istDateTimeString.split("T");
+  //   const [year, month, day] = datePart.split("-").map(Number);
+  //   const [hours, minutes, seconds = 0] = timePart.split(":").map(Number);
+
+  //   // Create a date object treating the input as IST
+  //   // We'll manually calculate UTC by subtracting 5:30
+  //   const istDate = new Date(Date.UTC(year, month - 1, day, hours, minutes, seconds));
+
+  //   // Subtract IST offset (5 hours 30 minutes = 5.5 hours = 19800000 milliseconds)
+  //   const utcDate = new Date(istDate.getTime() - (5.5 * 60 * 60 * 1000));
+
+  //   return utcDate.toISOString();
+  // };
 
   // Handle booking confirmation
+  
+
   const handleConfirmBooking = async () => {
     if (!selectedDate || !selectedTime) {
-      toast.error("Please select a date and time slot", {
-        position: "top-right",
-        autoClose: 3000,
-      });
+      toast.error("Please select a date and time slot");
       return;
     }
 
     const attendeeEmail = getEmailFromToken();
     if (!attendeeEmail) {
-      toast.error("Unable to get your email. Please login again.", {
-        position: "top-right",
-        autoClose: 3000,
-      });
+      toast.error("Unable to get your email. Please login again.");
       return;
     }
 
     setBookingLoading(true);
 
     try {
-      // Get startIst from selectedTime
-      const startIst = typeof selectedTime === "object" 
-        ? selectedTime.startIst 
-        : selectedTime;
-      
-      if (!startIst) {
-        throw new Error("Invalid time slot selected");
+      console.group("📅 BOOK MEETING DEBUG");
+
+      console.log("📆 Selected Date:", selectedDate);
+      console.log("🕘 Selected Time (raw):", selectedTime);
+
+      // ✅ Same Date object used during slot generation
+      const istDate =
+        typeof selectedTime === "object"
+          ? selectedTime.startIst
+          : selectedTime;
+
+      if (!(istDate instanceof Date)) {
+        throw new Error("Invalid time slot");
       }
 
-      // Convert startIst to UTC
-      const startUtc = convertIstToUtc(startIst);
-      
-      // Calculate endUtc (1 hour after startUtc)
-      const startDate = new Date(startUtc);
-      const endDate = new Date(startDate.getTime() + (60 * 60 * 1000)); // Add 1 hour
-      const endUtc = endDate.toISOString();
+      console.log(
+        "🇮🇳 IST Time:",
+        istDate.toLocaleString("en-IN"),
+        "| ISO:",
+        istDate.toISOString()
+      );
 
-      // Prepare payload
+      // 🔁 IST → UTC (RULE APPLIED HERE)
+      const startUtc = istDate.toISOString();
+
+
+      
+      // ⏱ 30-minute meeting
+      const endUtc = new Date(
+        istDate.getTime() + 30 * 60 * 1000
+      ).toISOString();
+      
+
+      
+
       const payload = {
         subject: "onboarding call",
-        startUtc: startUtc,
-        endUtc: endUtc,
+        startUtc,
+        endUtc,
         attendeeEmails: [attendeeEmail],
       };
 
-      // Call the API
+      console.log("📦 Final Payload:", payload);
+      console.groupEnd();
+
       const response = await scheduleMeeting(adminEmail, payload);
 
       if (response.status === 200 || response.status === 201) {
-        toast.success("Meeting booked successfully!", {
-          position: "top-right",
-          autoClose: 3000,
-        });
-        
-        // Reset selections after successful booking
+        toast.success("Meeting booked successfully!");
         setSelectedDate(null);
         setSelectedTime(null);
         setAvailableSlots([]);
       }
     } catch (error) {
-      console.error("Booking error:", error);
-      const errorMessage =
-        error.response?.data?.message ||
-        error.response?.data?.error ||
-        error.message ||
-        "Failed to book meeting. Please try again.";
-      
-      toast.error(errorMessage, {
-        position: "top-right",
-        autoClose: 4000,
-      });
+      console.groupEnd();
+      toast.error(
+        error?.response?.data?.message ||
+        error?.message ||
+        "Failed to book meeting"
+      );
     } finally {
       setBookingLoading(false);
     }
   };
+
+
+
+
 
   // Get month and year for display
   const getMonthYear = () => {
@@ -296,12 +399,12 @@ export default function BookMeeting() {
     const nextMonth = new Date(currentMonth);
     nextMonth.setMonth(currentMonth.getMonth() + 1);
     const nextMonthStart = new Date(nextMonth.getFullYear(), nextMonth.getMonth(), 1);
-    
+
     // Reset time to start of day for accurate comparison
     nextMonthStart.setHours(0, 0, 0, 0);
     const lastAvailable = new Date(lastAvailableDate);
     lastAvailable.setHours(0, 0, 0, 0);
-    
+
     // Enable if the first day of next month is within the 30-day window
     return nextMonthStart <= lastAvailable;
   };
@@ -317,34 +420,34 @@ export default function BookMeeting() {
   const getCalendarWeeks = () => {
     const year = currentMonth.getFullYear();
     const month = currentMonth.getMonth();
-    
+
     // First day of the month
     const firstDay = new Date(year, month, 1);
     const firstDayOfWeek = firstDay.getDay();
-    
+
     // Last day of the month
     const lastDay = new Date(year, month + 1, 0);
     const daysInMonth = lastDay.getDate();
-    
+
     const weeks = [];
     let currentWeek = [];
-    
+
     // Add empty cells for days before the first day of the month
     for (let i = 0; i < firstDayOfWeek; i++) {
       currentWeek.push(null);
     }
-    
+
     // Add all days of the month
     for (let day = 1; day <= daysInMonth; day++) {
       const date = new Date(year, month, day);
       currentWeek.push(date);
-      
+
       if (currentWeek.length === 7) {
         weeks.push([...currentWeek]);
         currentWeek = [];
       }
     }
-    
+
     // Add remaining empty cells to complete the last week
     if (currentWeek.length > 0) {
       while (currentWeek.length < 7) {
@@ -352,7 +455,7 @@ export default function BookMeeting() {
       }
       weeks.push(currentWeek);
     }
-    
+
     return weeks;
   };
 
@@ -389,6 +492,10 @@ export default function BookMeeting() {
           {/* CONTENT GRID */}
           <section className="meeting-grid">
             {/* LEFT */}
+
+
+
+
             <div className="calendar-box">
               <div className="calendar-header">
                 <div>
@@ -401,7 +508,7 @@ export default function BookMeeting() {
               {/* CALENDAR */}
               <div className="calendar">
                 <div className="calendar-month">
-                  <button 
+                  <button
                     className="month-nav-btn"
                     onClick={handlePrevMonth}
                     disabled={!canGoPrev()}
@@ -410,7 +517,7 @@ export default function BookMeeting() {
                     ←
                   </button>
                   <strong>{getMonthYear()}</strong>
-                  <button 
+                  <button
                     className="month-nav-btn"
                     onClick={handleNextMonth}
                     disabled={!canGoNext()}
@@ -421,7 +528,7 @@ export default function BookMeeting() {
                 </div>
 
                 <div className="calendar-grid">
-                  {["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map(d => (
+                  {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(d => (
                     <div key={d} className="day-label">{d}</div>
                   ))}
 
@@ -429,29 +536,25 @@ export default function BookMeeting() {
                     week.map((date, dayIndex) => {
                       const isAvailable = isDateAvailable(date);
                       const isPast = isPastDate(date);
-                      const isSelected = date && selectedDate && 
+                      const isSelected = date && selectedDate &&
                         date.toDateString() === selectedDate.toDateString();
-                      
+
                       return (
                         <button
                           key={`${weekIndex}-${dayIndex}`}
-                          className={`date ${
-                            !date ? "empty" : ""
-                          } ${
-                            isPast ? "disabled" : ""
-                          } ${
-                            !isAvailable && !isPast ? "disabled" : ""
-                          } ${
-                            isSelected ? "active" : ""
-                          }`}
+                          className={`date ${!date ? "empty" : ""
+                            } ${isPast ? "disabled" : ""
+                            } ${!isAvailable && !isPast ? "disabled" : ""
+                            } ${isSelected ? "active" : ""
+                            }`}
                           onClick={() => date && isAvailable && handleDateClick(date)}
                           disabled={!date || !isAvailable}
                           title={
-                            isPast 
-                              ? "Past dates are not available" 
-                              : !isAvailable 
-                              ? "Date is beyond 30 days window" 
-                              : ""
+                            isPast
+                              ? "Past dates are not available"
+                              : !isAvailable
+                                ? "Date is beyond 30 days window"
+                                : ""
                           }
                         >
                           {date ? date.getDate() : ""}
@@ -474,14 +577,14 @@ export default function BookMeeting() {
                     {availableSlots.map((slot, index) => {
                       const timeStr = getTimeFromSlot(slot);
                       if (!timeStr) return null;
-                      
+
                       const formattedTime = formatTimeInIST(timeStr);
                       // Compare using the slot object or startIst value
                       const isSelected = selectedTime && (
                         (typeof selectedTime === "object" && selectedTime.startIst === slot.startIst) ||
                         (typeof selectedTime === "string" && selectedTime === timeStr)
                       );
-                      
+
                       return (
                         <button
                           key={index}
@@ -505,6 +608,16 @@ export default function BookMeeting() {
               </div>
 
             </div>
+
+
+
+
+
+
+
+
+
+
 
             {/* RIGHT */}
             <div className="info-box">
@@ -535,7 +648,7 @@ export default function BookMeeting() {
 
           {/* FOOTER ACTION */}
           <section className="confirm-box">
-            <button 
+            <button
               className="confirm-btn"
               onClick={handleConfirmBooking}
               disabled={!selectedDate || !selectedTime || bookingLoading}
@@ -546,8 +659,8 @@ export default function BookMeeting() {
               <p>
                 Selected: {formatDateForDisplay(selectedDate)} at{" "}
                 {formatTimeInIST(
-                  typeof selectedTime === "object" 
-                    ? selectedTime.startIst 
+                  typeof selectedTime === "object"
+                    ? selectedTime.startIst
                     : selectedTime
                 )}
               </p>

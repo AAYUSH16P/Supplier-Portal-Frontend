@@ -1,53 +1,61 @@
 import "../../style/RegisteredUser/EmployerInitiatedInvite.css";
 import AppHeader from "../../Components/RegisteredUser/AppHeader";
 import AppSidebar from "../../Components/RegisteredUser/AppSidebar";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
+
 
 export default function EmployerInitiatedInvite() {
+    const navigate = useNavigate();
     const [generatedLink, setGeneratedLink] = useState("");
-  const [referenceCode, setReferenceCode] = useState("");
+    const [referenceCode, setReferenceCode] = useState("");
 
-  const handleGenerateLink = () => {
-    const token = localStorage.getItem("token");
-  
-    if (!token) {
-      alert("Token not found. Please login again.");
-      return;
-    }
-  
-    try {
-      const decoded = jwtDecode(token);
-  
-      const companyId = decoded.companyId;
-      const companyName = decoded.companyName; // 👈 from JWT
-  
-      if (!companyId || !companyName) {
-        alert("Company information missing in token");
-        return;
-      }
-  
-      // IMPORTANT: encode company name for URL safety
-      const encodedCompanyName = encodeURIComponent(companyName);
-  
-      const link = `https://supplier-portal-frontend-production.up.railway.app/employeeInviteInfo?inviteId=${companyId}&companyName=${encodedCompanyName}`;
-  
-      setGeneratedLink(link);
-  
-      // Optional unique reference
-      setReferenceCode(companyId);
-  
-    } catch (err) {
-      console.error(err);
-      alert("Invalid token");
-    }
-  };
-  
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, []);
+      
 
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(generatedLink);
-    alert("Link copied!");
-  };
+    const handleGenerateLink = () => {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            alert("Token not found. Please login again.");
+            return;
+        }
+
+        try {
+            const decoded = jwtDecode(token);
+
+            const companyId = decoded.companyId;
+            const companyName = decoded.companyName; // 👈 from JWT
+
+            if (!companyId || !companyName) {
+                alert("Company information missing in token");
+                return;
+            }
+
+            // IMPORTANT: encode company name for URL safety
+            const encodedCompanyName = encodeURIComponent(companyName);
+
+            const link = `https://supplier-portal-frontend-production.up.railway.app/employeeInviteInfo?inviteId=${companyId}&companyName=${encodedCompanyName}`;
+
+            setGeneratedLink(link);
+
+            // Optional unique reference
+            setReferenceCode(companyId);
+
+        } catch (err) {
+            console.error(err);
+            alert("Invalid token");
+        }
+    };
+
+
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText(generatedLink);
+        alert("Link copied!");
+    };
 
 
     return (
@@ -64,9 +72,14 @@ export default function EmployerInitiatedInvite() {
                     </div>
 
                     {/* BACK */}
-                    <div className="back-link">
+                    <div
+                        className="back-link"
+                        onClick={() => navigate("/candidate")}
+                        style={{ cursor: "pointer" }}
+                    >
                         ← Back to Candidates
                     </div>
+
 
                     {/* TITLE CARD */}
                     <section className="title-card purple">
@@ -256,51 +269,51 @@ export default function EmployerInitiatedInvite() {
                             <div className="action-header">⬇ Action:</div>
 
                             {!generatedLink ? (
-              <div className="action-card">
-                <div className="action-left">
-                  <div className="action-icon">🔗</div>
-                  <div>
-                    <h4>Generate Invitation Link</h4>
-                    <p>Create a unique, secure link to share with your employees</p>
-                  </div>
-                </div>
+                                <div className="action-card">
+                                    <div className="action-left">
+                                        <div className="action-icon">🔗</div>
+                                        <div>
+                                            <h4>Generate Invitation Link</h4>
+                                            <p>Create a unique, secure link to share with your employees</p>
+                                        </div>
+                                    </div>
 
-                <button className="action-btn" onClick={handleGenerateLink}>
-                  Generate Link
-                </button>
-              </div>
-            ) : (
-              <>
-                {/* SUCCESS BOX */}
-                <div className="success-box">
-                  <div className="success-title">
-                    ✅ Link Generated Successfully!
-                  </div>
+                                    <button className="action-btn" onClick={handleGenerateLink}>
+                                        Generate Link
+                                    </button>
+                                </div>
+                            ) : (
+                                <>
+                                    {/* SUCCESS BOX */}
+                                    <div className="success-box">
+                                        <div className="success-title">
+                                            ✅ Link Generated Successfully!
+                                        </div>
 
-                  <p className="success-desc">
-                    Share this link with your employees via email, HR portal, or
-                    any internal communication tool:
-                  </p>
+                                        <p className="success-desc">
+                                            Share this link with your employees via email, HR portal, or
+                                            any internal communication tool:
+                                        </p>
 
-                  <div className="link-box">
-                    {generatedLink}
-                  </div>
+                                        <div className="link-box">
+                                            {generatedLink}
+                                        </div>
 
-                  <button className="copy-btn" onClick={copyToClipboard}>
-                    Copy Link
-                  </button>
-                </div>
+                                        <button className="copy-btn" onClick={copyToClipboard}>
+                                            Copy Link
+                                        </button>
+                                    </div>
 
-                {/* NOTE */}
-                <div className="note-box">
-                  <strong>Note:</strong> This link contains a unique reference:{" "}
-                  <span className="note-ref">{referenceCode}</span>
-                  <br />
-                  All submissions through this link will be associated with your
-                  organization for review and validation.
-                </div>
-              </>
-            )}
+                                    {/* NOTE */}
+                                    <div className="note-box">
+                                        <strong>Note:</strong> This link contains a unique reference:{" "}
+                                        <span className="note-ref">{referenceCode}</span>
+                                        <br />
+                                        All submissions through this link will be associated with your
+                                        organization for review and validation.
+                                    </div>
+                                </>
+                            )}
                         </div>
 
                     </section>

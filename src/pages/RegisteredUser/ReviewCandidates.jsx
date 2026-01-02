@@ -25,7 +25,20 @@ export default function ReviewCandidates() {
   const [candidates, setCandidates] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showEditModal, setShowEditModal] = useState(false);
-const [editForm, setEditForm] = useState(null);
+  const [editForm, setEditForm] = useState(null);
+  const [editErrors, setEditErrors] = useState({});
+
+
+  const isFutureDate = (dateStr) => {
+    if (!dateStr) return false;
+    const selected = new Date(dateStr);
+    const today = new Date();
+
+    // Remove time part for accurate comparison
+    today.setHours(0, 0, 0, 0);
+
+    return selected > today;
+  };
 
 
   const [showModal, setShowModal] = useState(false);
@@ -43,7 +56,7 @@ const [editForm, setEditForm] = useState(null);
           ? editForm.certifications.split(",").map((c) => c.trim())
           : [],
       };
-  
+
       await fetch(
         `https://sp-portal-backend-production.up.railway.app/api/Supplier/manual-upload/${editForm.id}`,
         {
@@ -52,37 +65,37 @@ const [editForm, setEditForm] = useState(null);
           body: JSON.stringify(payload),
         }
       );
-  
+
       // Update UI list
       setCandidates((prev) =>
         prev.map((c) => (c.id === editForm.id ? editForm : c))
       );
-  
+
       setShowEditModal(false);
     } catch {
       alert("Failed to update candidate");
     }
   };
-  
+
 
   const handleEditOpen = (candidate) => {
     let certs = [];
-  
+
     if (Array.isArray(candidate.certifications)) {
       certs = candidate.certifications.filter(Boolean);
     } else if (typeof candidate.certifications === "string") {
       certs = [candidate.certifications];
     }
-  
+
     setEditForm({
       ...candidate,
       certifications: certs.join(", "),
     });
-  
+
     setShowEditModal(true);
   };
-  
-  
+
+
   const handleEditChange = (field, value) => {
     setEditForm((prev) => ({
       ...prev,
@@ -252,11 +265,11 @@ const [editForm, setEditForm] = useState(null);
                         </button>
 
                         <button
-                        className="edit"
-                        onClick={() => handleEditOpen(c)}
-                      >
-                        ✎ Edit
-                      </button>
+                          className="edit"
+                          onClick={() => handleEditOpen(c)}
+                        >
+                          ✎ Edit
+                        </button>
 
                         <button
                           className="view"
@@ -291,46 +304,92 @@ const [editForm, setEditForm] = useState(null);
               </button>
             </div>
 
-            <div className="cv-hero">
-              <h2>{selectedCandidate.companyEmployeeId}</h2>
-              <div className="cv-hero-meta">
-                <span>ID: {selectedCandidate.id.slice(0, 6).toUpperCase()}</span>
-                <span>Company Employee ID: {selectedCandidate.companyEmployeeId}</span>
-                <span>Status: Pending Review</span>
-              </div>
-            </div>
-
+            {/* PROFESSIONAL INFORMATION */}
             <Section title="Professional Information">
               <InfoGrid
                 items={[
+                  { label: "Job Title", value: selectedCandidate.jobTitle || "-" },
                   { label: "Role", value: selectedCandidate.role || "-" },
                   {
-                    label: "Experience",
+                    label: "Total Experience",
                     value: `${selectedCandidate.totalExperience ?? "-"} yrs`,
                   },
+                  { label: "Gender", value: selectedCandidate.gender || "-" },
                   { label: "Location", value: selectedCandidate.location || "-" },
                   { label: "Working Since", value: selectedCandidate.workingSince || "-" },
                 ]}
               />
             </Section>
 
-            <div className="cv-footer">
-              <button
-                className="approve"
-                onClick={() => handleApprove(selectedCandidate)}
-              >
-                ✔ Approve
-              </button>
+            {/* EMPLOYMENT DETAILS */}
+            <Section title="Employment Details">
+              <InfoGrid
+                items={[
+                  {
+                    label: "CTC",
+                    value:
+                      selectedCandidate.ctc !== undefined
+                        ? `₹ ${selectedCandidate.ctc} LPA`
+                        : "-",
+                  },
+                  {
+                    label: "Number of Projects",
+                    value: selectedCandidate.numberOfProjects ?? "-",
+                  },
+                  {
+                    label: "Referred",
+                    value: selectedCandidate.isRefered ? "Yes" : "No",
+                  },
+                  {
+                    label: "Company Name",
+                    value: selectedCandidate.companyName || "-",
+                  },
+                ]}
+              />
+            </Section>
 
-              <button
-                className="reject"
-                onClick={() => {
-                  setShowModal(false);
-                  setShowRejectModal(true);
-                }}
-              >
-                ✖ Reject
-              </button>
+            {/* SKILLS */}
+            <Section title="Skills & Tools">
+              <InfoGrid
+                items={[
+                  {
+                    label: "Technical Skills",
+                    value: selectedCandidate.technicalSkills || "-",
+                  },
+                  { label: "Tools", value: selectedCandidate.tools || "-" },
+                ]}
+              />
+            </Section>
+
+            {/* CERTIFICATIONS */}
+            <Section title="Certifications">
+              {Array.isArray(selectedCandidate.certifications) &&
+                selectedCandidate.certifications.length > 0 ? (
+                <ul className="cv-list">
+                  {selectedCandidate.certifications.map((cert, index) => (
+                    <li key={index}>{cert}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="cv-empty">No certifications provided</p>
+              )}
+            </Section>
+
+
+            {/* EMPLOYER NOTE */}
+            <Section title="Employer Note">
+              <p className="cv-note">
+                {selectedCandidate.employerNote?.trim() || "No additional notes provided."}
+              </p>
+            </Section>
+
+
+
+
+
+
+            <div className="cv-footer">
+
 
 
 
@@ -349,6 +408,7 @@ const [editForm, setEditForm] = useState(null);
             <h3>Reject Candidate</h3>
 
             <textarea
+            className="text-area"
               rows={4}
               placeholder="Enter rejection remark"
               value={rejectRemark}
@@ -357,11 +417,11 @@ const [editForm, setEditForm] = useState(null);
             />
 
             <div className="cv-footer">
-              <button className="reject" onClick={handleReject}>
+              <button className="reject01" onClick={handleReject}>
                 Confirm Reject
               </button>
 
-              <button
+              <button className="cancel"
                 onClick={() => {
                   setRejectRemark("");
                   setShowRejectModal(false);
@@ -376,50 +436,68 @@ const [editForm, setEditForm] = useState(null);
 
 
       {/* ================= EDIT MODAL ================= */}
-{showEditModal && editForm && (
-  <div className="cv-modal-backdrop">
-    <div className="cv-modal">
-      <div className="cv-header">
-        <h3>Edit Candidate Details</h3>
-        <button className="cv-close" onClick={() => setShowEditModal(false)}>
-          ✕
-        </button>
-      </div>
+      {showEditModal && editForm && (
+        <div className="cv-modal-backdrop">
+          <div className="cv-modal">
+            <div className="cv-header">
+              <h3>Edit Candidate Details</h3>
+              <button className="cv-close" onClick={() => setShowEditModal(false)}>
+                ✕
+              </button>
+            </div>
 
-      <div className="cv-grid">
-        <EditField label="Company Employee ID" value={editForm.companyEmployeeId} onChange={(v) => handleEditChange("companyEmployeeId", v)} />
-        <EditField label="Job Title" value={editForm.jobTitle} onChange={(v) => handleEditChange("jobTitle", v)} />
-        <EditField label="Role" value={editForm.role} onChange={(v) => handleEditChange("role", v)} />
-        <EditField label="Gender" value={editForm.gender || ""} onChange={(v) => handleEditChange("gender", v)} />
-        <EditField label="Location" value={editForm.location || ""} onChange={(v) => handleEditChange("location", v)} />
-        <EditField label="Total Experience" type="number" value={editForm.totalExperience} onChange={(v) => handleEditChange("totalExperience", v)} />
-        <EditField label="CTC" type="number" value={editForm.ctc} onChange={(v) => handleEditChange("ctc", v)} />
-        <EditField label="Technical Skills" value={editForm.technicalSkills || ""} onChange={(v) => handleEditChange("technicalSkills", v)} />
-        <EditField label="Tools" value={editForm.tools || ""} onChange={(v) => handleEditChange("tools", v)} />
-        <EditField label="Number of Projects" type="number" value={editForm.numberOfProjects} onChange={(v) => handleEditChange("numberOfProjects", v)} />
-        <EditField
-          label="Certifications (comma separated)"
-          value={editForm.certifications}
-          onChange={(v) => handleEditChange("certifications", v)}
-        />
-        <EditField
-  label="Working Since"
-  type="date"
-  value={editForm.workingSince?.substring(0, 10) || ""}
-  onChange={(v) => handleEditChange("workingSince", v)}
-/>
+            <div className="cv-grid">
+              <EditField label="Company Employee ID" value={editForm.companyEmployeeId} onChange={(v) => handleEditChange("companyEmployeeId", v)} />
+              <EditField label="Job Title" value={editForm.jobTitle} onChange={(v) => handleEditChange("jobTitle", v)} />
+              <EditField label="Role" value={editForm.role} onChange={(v) => handleEditChange("role", v)} />
+              <EditField label="Gender" value={editForm.gender || ""} onChange={(v) => handleEditChange("gender", v)} />
+              <EditField label="Location" value={editForm.location || ""} onChange={(v) => handleEditChange("location", v)} />
+              <EditField label="Total Experience" type="number" value={editForm.totalExperience} onChange={(v) => handleEditChange("totalExperience", v)} />
+              <EditField label="CTC" type="number" value={editForm.ctc} onChange={(v) => handleEditChange("ctc", v)} />
+              <EditField label="Technical Skills" value={editForm.technicalSkills || ""} onChange={(v) => handleEditChange("technicalSkills", v)} />
+              <EditField label="Tools" value={editForm.tools || ""} onChange={(v) => handleEditChange("tools", v)} />
+              <EditField label="Number of Projects" type="number" value={editForm.numberOfProjects} onChange={(v) => handleEditChange("numberOfProjects", v)} />
+              <EditField
+                label="Certifications (comma separated)"
+                value={editForm.certifications}
+                onChange={(v) => handleEditChange("certifications", v)}
+              />
+              <EditField
+                label="Working Since"
+                type="date"
+                value={editForm.workingSince?.substring(0, 10) || ""}
+                onChange={(v) => {
+                  if (isFutureDate(v)) {
+                    setEditErrors((prev) => ({
+                      ...prev,
+                      workingSince: "Working Since date cannot be in the future",
+                    }));
+                  } else {
+                    setEditErrors((prev) => ({
+                      ...prev,
+                      workingSince: "",
+                    }));
+                  }
 
-      </div>
-
-      <div className="cv-footer">
-        <button className="approve" onClick={handleEditSubmit}>
-          💾 Save Changes
-        </button>
-        <button onClick={() => setShowEditModal(false)}>Cancel</button>
-      </div>
-    </div>
-  </div>
+                  handleEditChange("workingSince", v);
+                }}
+              />
+{editErrors.workingSince && (
+  <p className="form-error">{editErrors.workingSince}</p>
 )}
+
+
+            </div>
+
+            <div className="cv-footer">
+              <button className="approve" onClick={handleEditSubmit}>
+                💾 Save Changes
+              </button>
+              <button onClick={() => setShowEditModal(false)}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
 
     </>
   );

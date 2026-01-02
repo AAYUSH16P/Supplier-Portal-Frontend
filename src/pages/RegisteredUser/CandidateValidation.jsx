@@ -8,7 +8,6 @@ export default function CandidateValidation() {
     const [selectedCandidate, setSelectedCandidate] = useState(null);
 
 
-    const COMPANY_ID = "edb52127-ac68-4e05-bce8-70044e74cdb0";
 
     const [candidates, setCandidates] = useState([]);
     const [searchText, setSearchText] = useState("");
@@ -20,7 +19,7 @@ export default function CandidateValidation() {
     const fetchCandidates = async () => {
         try {
             const res = await fetch(
-                `https://sp-portal-backend-production.up.railway.app/api/supplier/capacities?companyId=${COMPANY_ID}&filter=pending`
+                `https://sp-portal-backend-production.up.railway.app/api/supplier/capacities/getAllPendingCandidates`
             );
             const data = await res.json();
             setCandidates(data);

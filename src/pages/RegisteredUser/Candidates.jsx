@@ -6,6 +6,25 @@ import "../../style/RegisteredUser/Candidates.css";
 import { getSupplierCapacities } from "../../services/supplier";
 import GlobalLoader from "../../Components/common/GlobalLoader";
 
+const getRejectedSupplierCapacities = async (companyId) => {
+  const res = await fetch(
+    `https://sp-portal-backend-production.up.railway.app/api/company/rejected/supplier/${companyId}`,
+    {
+      method: "GET",
+      headers: {
+        Accept: "*/*",
+      },
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch rejected suppliers");
+  }
+
+  return res.json();
+};
+
+
 
 export default function Candidates() {
   const [capacities, setCapacities] = useState([]);
@@ -15,7 +34,9 @@ export default function Candidates() {
   const [showRejectModal, setShowRejectModal] = useState(false);
   const [rejectRemark, setRejectRemark] = useState("");
   const [selectedCandidate, setSelectedCandidate] = useState(null);
-  
+  const [rejectedApiList, setRejectedApiList] = useState([]); // rejected from API
+
+
 
   const handleApprove = async (candidate) => {
     try {
@@ -23,7 +44,7 @@ export default function Candidates() {
         `https://sp-portal-backend-production.up.railway.app/api/supplier/capacities/${candidate.id}/approve`,
         { method: "POST" }
       );
-  
+
       setCapacities((prev) =>
         prev.map((c) =>
           c.id === candidate.id ? { ...c, status: 1 } : c
@@ -33,13 +54,13 @@ export default function Candidates() {
       alert("Failed to approve candidate");
     }
   };
-  
+
   const handleRejectConfirm = async () => {
     if (!rejectRemark.trim()) {
       alert("Please enter rejection remark");
       return;
     }
-  
+
     try {
       await fetch(
         `https://sp-portal-backend-production.up.railway.app/api/supplier/capacities/${selectedCandidate.id}/reject`,
@@ -49,13 +70,13 @@ export default function Candidates() {
           body: JSON.stringify(rejectRemark),
         }
       );
-  
+
       setCapacities((prev) =>
         prev.map((c) =>
           c.id === selectedCandidate.id ? { ...c, status: 2 } : c
         )
       );
-  
+
       setRejectRemark("");
       setShowRejectModal(false);
       setSelectedCandidate(null);
@@ -63,7 +84,7 @@ export default function Candidates() {
       alert("Failed to reject candidate");
     }
   };
-  
+
 
   useEffect(() => {
     const companyId = getCompanyIdFromToken();
@@ -72,11 +93,21 @@ export default function Candidates() {
       return;
     }
 
-    getSupplierCapacities(companyId)
-      .then((res) => setCapacities(res.data || []))
-      .catch(() => setCapacities([]))
+    Promise.all([
+      getSupplierCapacities(companyId),
+      getRejectedSupplierCapacities(companyId)
+    ])
+      .then(([allRes, rejectedRes]) => {
+        setCapacities(allRes.data || []);
+        setRejectedApiList(rejectedRes || []);
+      })
+      .catch(() => {
+        setCapacities([]);
+        setRejectedApiList([]);
+      })
       .finally(() => setLoading(false));
   }, []);
+
 
   const hasCandidates = capacities.length > 0;
 
@@ -92,10 +123,10 @@ export default function Candidates() {
     [capacities]
   );
 
-  const rejectedList = useMemo(
-    () => capacities.filter((c) => c.status === 2), // future-ready
-    [capacities]
-  );
+  // const rejectedList = useMemo(
+  //   () => capacities.filter((c) => c.status === 2), // future-ready
+  //   [capacities]
+  // );
 
   const filteredCapacities = useMemo(() => {
     switch (activeFilter) {
@@ -104,11 +135,12 @@ export default function Candidates() {
       case "pending":
         return pendingList;
       case "rejected":
-        return rejectedList;
+        return rejectedApiList;
       default:
         return capacities;
     }
-  }, [activeFilter, capacities, approvedList, pendingList, rejectedList]);
+  }, [activeFilter, capacities, approvedList, pendingList, rejectedApiList]);
+
 
   if (loading) {
     return <GlobalLoader />;
@@ -147,36 +179,34 @@ export default function Candidates() {
                 </button>
 
                 <button
-                  className={`filter ${
-                    activeFilter === "approved" ? "active" : ""
-                  }`}
+                  className={`filter ${activeFilter === "approved" ? "active" : ""
+                    }`}
                   onClick={() => setActiveFilter("approved")}
                 >
                   Approved <span>{approvedList.length}</span>
                 </button>
 
                 <button
-                  className={`filter ${
-                    activeFilter === "pending" ? "active" : ""
-                  }`}
+                  className={`filter ${activeFilter === "pending" ? "active" : ""
+                    }`}
                   onClick={() => setActiveFilter("pending")}
                 >
                   Pending for Approval <span>{pendingList.length}</span>
                 </button>
 
                 <button
-                  className={`filter ${
-                    activeFilter === "rejected" ? "active" : ""
-                  }`}
+                  className={`filter ${activeFilter === "rejected" ? "active" : ""}`}
                   onClick={() => setActiveFilter("rejected")}
                 >
-                  Rejected <span>{rejectedList.length}</span>
+                  Rejected <span>{rejectedApiList.length}</span>
                 </button>
+
+
               </div>
             )}
           </div>
 
-          
+
 
           {/* SLA WARNING */}
           <div className="sla-warning">
@@ -233,7 +263,7 @@ export default function Candidates() {
                   {activeFilter === "all"
                     ? "All Candidates"
                     : activeFilter.charAt(0).toUpperCase() +
-                      activeFilter.slice(1)}{" "}
+                    activeFilter.slice(1)}{" "}
                   ({filteredCapacities.length})
                 </h3>
 
@@ -258,26 +288,35 @@ export default function Candidates() {
                         <span className="badge rejected">✖ Rejected</span>
                       )}
 
-{c.status === 0 && (
-        <div className="pending-actions">
-          <button
-            className="approve-btn"
-            onClick={() => handleApprove(c)}
-          >
-            ✔ Approve
-          </button>
+                      {c.status === 1 && (
+                        <span
+                          className={`badge ${c.isRefered ? "employee" : "company"}`}
+                        >
+                          {c.isRefered ? "👤 Added by Employee" : "🏢 Added by Company"}
+                        </span>
+                      )}
 
-          <button
-            className="reject-btn"
-            onClick={() => {
-              setSelectedCandidate(c);
-              setShowRejectModal(true);
-            }}
-          >
-            ✖ Reject
-          </button>
-        </div>
-      )}
+
+                      {c.status === 0 && (
+                        <div className="pending-actions">
+                          <button
+                            className="approve-btn"
+                            onClick={() => handleApprove(c)}
+                          >
+                            ✔ Approve
+                          </button>
+
+                          <button
+                            className="reject-btn"
+                            onClick={() => {
+                              setSelectedCandidate(c);
+                              setShowRejectModal(true);
+                            }}
+                          >
+                            ✖ Reject
+                          </button>
+                        </div>
+                      )}
 
                       {c.employerNote && (
                         <div className="system-note">
@@ -303,42 +342,43 @@ export default function Candidates() {
 
 
 
-{showRejectModal && selectedCandidate && (
-  <div className="modal-backdrop">
-    <div className="modal">
-      <h3>Reject Candidate</h3>
+          {showRejectModal && selectedCandidate && (
+            <div className="modal-backdrop">
+              <div className="modal">
+                <h3>Reject Candidate</h3>
 
-      <p>
-        Please provide a reason for rejecting{" "}
-        <strong>{selectedCandidate.companyEmployeeId}</strong>
-      </p>
+                <p>
+                  Please provide a reason for rejecting{" "}
+                  <strong>{selectedCandidate.companyEmployeeId}</strong>
+                </p>
 
-      <textarea
-        rows={4}
-        placeholder="Enter rejection remark"
-        value={rejectRemark}
-        onChange={(e) => setRejectRemark(e.target.value)}
-        style={{ width: "100%", marginTop: 12 }}
-      />
+                <textarea
+                  className="text-area"
+                  rows={4}
+                  placeholder="Enter rejection remark"
+                  value={rejectRemark}
+                  onChange={(e) => setRejectRemark(e.target.value)}
+                  style={{ width: "100%", marginTop: 12 }}
+                />
 
-      <div className="modal-actions">
-        <button className="reject-btn" onClick={handleRejectConfirm}>
-          Confirm Reject
-        </button>
+                <div className="modal-actions">
+                  <button className="reject-btn" onClick={handleRejectConfirm}>
+                    Confirm Reject
+                  </button>
 
-        <button
-          onClick={() => {
-            setRejectRemark("");
-            setShowRejectModal(false);
-            setSelectedCandidate(null);
-          }}
-        >
-          Cancel
-        </button>
-      </div>
-    </div>
-  </div>
-)}
+                  <button className="cancel"
+                    onClick={() => {
+                      setRejectRemark("");
+                      setShowRejectModal(false);
+                      setSelectedCandidate(null);
+                    }}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
 
         </main>
       </div>

@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { companyLogin } from "../../services/auth";
 import { getAdminAvailability } from "../../services/calendar";
 import "../../style/RegisteredUser/SupplierLogin.css";
+import "../../style/RegisteredUser/sidebar.css"
 
 export default function SupplierLogin() {
   const navigate = useNavigate();
@@ -152,7 +153,7 @@ export default function SupplierLogin() {
       <ToastContainer />
       <header className="login-header">
         <button className="back-btn" onClick={() => navigate("/")}>
-          ← Back
+          Supplier Login
         </button>
 
         <div className="brand-center">
@@ -205,18 +206,7 @@ export default function SupplierLogin() {
             )}
 
             <div className="login-options">
-              <label className="remember">
-                <input
-                  type="checkbox"
-                  name="rememberMe"
-                  checked={formData.rememberMe}
-                  onChange={handleChange}
-                />{" "}
-                Remember me
-              </label>
-              <button className="link-button">
-  Forgot Password?
-</button>
+             
 
             </div>
 
@@ -230,7 +220,7 @@ export default function SupplierLogin() {
 
             <p className="register">
               Don't have an account?{" "}
-              <button
+              <button className="rgstr"
                 onClick={(e) => {
                   e.preventDefault();
                   navigate("/registration");

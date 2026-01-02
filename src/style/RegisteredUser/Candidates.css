@@ -200,7 +200,7 @@
   }
   
   .primary-btn:hover {
-    background: #1e40af;
+    background: #ddecd5;
   }
   
   .tip-box {
@@ -350,3 +350,67 @@
     }
   }
   
+
+
+  .badge.company {
+    background: #eef2ff;
+    color: #3730a3;
+    border: 1px solid #c7d2fe;
+  }
+  
+  .badge.employee {
+    background: #fdf2f8;
+    color: #9d174d;
+    border: 1px solid #fbcfe8;
+  }
+
+  
+
+  .approve-btn {
+    background: #22c55e;
+    color: #ffffff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    margin-right: 8px;
+    margin-top: 15px;
+  }
+  
+  .approve-btn:hover {
+    background: #16a34a;
+  }
+  
+  .reject-btn {
+    background: #ef4444;
+    color: #ffffff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    margin-top: 15px;
+  }
+  
+  .reject-btn:hover {
+    background: #dc2626;
+  }
+  
+
+  .cancel{
+    background: #e8bb08;
+    color: #ffffff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    margin-top: 15px;
+    margin-left: 10px;
+  }
+
+
+  .text-area{
+    border-radius: 5px;
+  }

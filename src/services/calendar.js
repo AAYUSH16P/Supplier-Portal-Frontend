@@ -5,10 +5,15 @@ export const getAvailableSlots = (adminEmail, date) =>
     params: { adminEmail, dateIst: date },
   });
 
-export const getAvailableSlotsForDate = (adminEmail, dateIst) =>
-  apiClient.get("/calendar/available-slots", {
-    params: { adminEmail, dateIst },
-  });
+  export const getAvailableSlotsForDate = (hostEmail, startUtc, endUtc) =>
+    apiClient.get("/calendar/events", {
+      params: {
+        hostEmail,
+        startUtc,
+        endUtc,
+      },
+    });
+  
 
 export const scheduleMeeting = (hostEmail, payload) =>
   apiClient.post("/calendar/schedule", payload, {

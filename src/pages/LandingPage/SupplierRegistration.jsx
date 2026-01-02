@@ -129,12 +129,13 @@ export default function SupplierRegistration() {
         break;
 
         case "primaryContactNumber":
-          if (!value.trim()) {
-            error = "Primary Contact Number is required";
-          } else if (/^[\d\s+()-]+$/.test(value)) {
-            error = "Please enter a valid phone number";
-          }
-          break;
+  if (!value.trim()) {
+    error = "Primary Contact Number is required";
+  } else if (!/^[\d\s+()-]{7,15}$/.test(value)) {
+    error = "Please enter a valid phone number";
+  }
+  break;
+
         
 
       case "companyOverview":
@@ -285,7 +286,7 @@ export default function SupplierRegistration() {
       /^https?:\/\/.+/.test(formData.companyWebsite) &&
       /^\d{4}$/.test(formData.yearEstablished) &&
       /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.primaryContactEmail) &&
-/^[\d\s+()-]+$/.test(formData.primaryContactNumber)
+/^[\d\s+()-]{7,15}$/.test(formData.primaryContactNumber)
     );
   };
 

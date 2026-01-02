@@ -1,8 +1,12 @@
+import { useState } from "react";
 import AppHeader from "../../Components/RegisteredUser/AppHeader";
 import AppSidebar from "../../Components/RegisteredUser/AppSidebar";
 import "../../style/RegisteredUser/HowItWorks.css";
 
 export default function SupplierHowItWorks() {
+  // Step 2 open by default
+  const [openStep, setOpenStep] = useState(2);
+
   return (
     <>
       <AppHeader />
@@ -22,7 +26,6 @@ export default function SupplierHowItWorks() {
 
           {/* MAIN GRID */}
           <section className="how-grid">
-            {/* LEFT CARD */}
             <div className="how-card blue">
               <div className="how-card-header">
                 🛡️ <span>Your Current Engagement Stage</span>
@@ -32,29 +35,21 @@ export default function SupplierHowItWorks() {
                 <p>
                   You are currently in the{" "}
                   <strong>Readiness & Alignment Phase</strong> of a controlled,
-                  invite-only supplier engagement model. This phase is accessible
-                  only to approved and registered suppliers.
+                  invite-only supplier engagement model.
                 </p>
 
                 <div className="check-box">
                   <p>At this stage, your organisation is now able to:</p>
                   <ul>
                     <li>✔ Complete formal onboarding and alignment activities</li>
-                    <li>
-                      ✔ Prepare and maintain indicative capacity information
-                    </li>
-                    <li>
-                      ✔ Engage directly with the onboarding team for clarification
-                    </li>
-                    <li>
-                      ✔ Position for future demand-led opportunities
-                    </li>
+                    <li>✔ Prepare and maintain indicative capacity information</li>
+                    <li>✔ Engage directly with the onboarding team</li>
+                    <li>✔ Position for future demand-led opportunities</li>
                   </ul>
                 </div>
               </div>
             </div>
 
-            {/* RIGHT CARD */}
             <div className="how-card purple">
               <div className="how-card-header">
                 🎯 <span>What This Phase Focuses On</span>
@@ -64,24 +59,17 @@ export default function SupplierHowItWorks() {
                 <div className="focus-item purple">
                   Your organisation is fully onboarded and verified
                 </div>
-
                 <div className="focus-item blue">
-                  Capacity prepared responsibly, accurately, and with continuity
-                  in mind
+                  Capacity prepared responsibly and accurately
                 </div>
-
                 <div className="focus-item green">
-                  Alignment is achieved before any client demand is introduced
+                  Alignment achieved before demand
                 </div>
-
                 <div className="focus-item yellow">
-                  Engagement remains structured, transparent, and governed
+                  Structured and governed engagement
                 </div>
-
                 <div className="focus-note">
-                  Completion of this phase enables the platform to consider
-                  introducing relevant, demand-led opportunities in later stages,
-                  where applicable.
+                  Completion enables demand-led opportunities later.
                 </div>
               </div>
             </div>
@@ -92,126 +80,181 @@ export default function SupplierHowItWorks() {
             <div className="context-header">
               ⚠️ <span>Important Context</span>
             </div>
-
             <div className="context-content">
               <p>
-                Access to this phase reflects readiness status, not a guarantee of
-                engagement.
+                Access to this phase reflects readiness, not a guarantee of engagement.
               </p>
-
               <ul>
                 <li>Driven by real client demand</li>
                 <li>Introduced progressively</li>
-                <li>
-                  Aligned based on preparedness, suitability, and governance
-                  criteria
-                </li>
+                <li>Aligned to governance criteria</li>
               </ul>
             </div>
           </section>
 
-
-
-
+          {/* JOURNEY */}
           <section className="journey-wrapper">
-      {/* HEADER */}
-      <div className="journey-header">
-        <h2>→ Your Onboarding Journey</h2>
-        <p>
-          The onboarding journey below outlines the typical progression for
-          registered suppliers, subject to governance and alignment at each
-          stage.
-        </p>
-      </div>
-
-      {/* SLA SELECT */}
-      <div className="sla-box">
-        <h4>Select Your Current SLA Status:</h4>
-        <label>
-          <input type="radio" name="sla" /> SLA Signed
-        </label>
-        <label className="active">
-          <input type="radio" name="sla" defaultChecked /> SLA Not Signed
-        </label>
-      </div>
-
-      {/* STEPS */}
-      <div className="journey-steps">
-        <Step label="Step 1" title="Registration" status="done" />
-        <Step label="Step 2 - Current" title="SLA Review" status="current" />
-        <Step label="Step 3" title="Capacity Prep" />
-        <Step label="Step 4" title="Review" />
-        <Step label="Step 5" title="Opportunities" />
-      </div>
-
-      {/* ACCORDIONS */}
-      <div className="journey-accordion">
-        <Accordion step={1} title="Registration & Approval" />
-        <Accordion
-          step={2}
-          title="SLA Not Signed"
-          current
-          content={
-            <>
+            <div className="journey-header">
+              <h2>→ Your Onboarding Journey</h2>
               <p>
-                Your SLA has not been signed yet. Please sign the SLA to make
-                your capacity and approved candidates ready for opportunity
-                alignment.
+                Typical progression for registered suppliers, subject to governance and
+                alignment at each stage.
               </p>
+            </div>
 
-              <div className="warning-box">
-                <strong>Important:</strong> Until the SLA is signed and agreed
-                upon, your registered capacity will remain in preliminary
-                status and will not be considered for any opportunities.
+            {/* PROGRESS */}
+            <div className="journey-progress">
+              <div className="progress-line" />
+
+              {JOURNEY_STEPS.map(step => (
+                <JourneyStep
+                  key={step.value}
+                  step={step.stepLabel}
+                  title={step.title}
+                  color={step.color}
+                  icon={step.icon}
+                  current={step.current}
+                />
+              ))}
+            </div>
+
+            {/* ACCORDIONS */}
+            <div className="journey-accordion">
+              {JOURNEY_STEPS.map(step => (
+                <JourneyAccordion
+                  key={step.value}
+                  step={step.value}
+                  title={step.accordionTitle}
+                  color={step.color}
+                  current={step.current}
+                  isOpen={openStep === step.value}
+                  onToggle={() =>
+                    setOpenStep(openStep === step.value ? null : step.value)
+                  }
+                >
+                  <p>{step.description}</p>
+
+                  {step.warning && (
+                    <div className="warning-box">
+                      <strong>Important:</strong> {step.warning}
+                    </div>
+                  )}
+                </JourneyAccordion>
+              ))}
+            </div>
+
+            {/* CTA */}
+            <div className="journey-cta">
+              <div>
+                <h3>Ready to Continue Your Journey?</h3>
+                <p>Start preparing your capacity information</p>
               </div>
-            </>
-          }
-        />
-        <Accordion step={3} title="Capacity Preparation" />
-        <Accordion step={4} title="Readiness Review" />
-        <Accordion step={5} title="Opportunity Alignment (When Applicable)" />
-      </div>
 
-      {/* CTA */}
-      <div className="journey-cta">
-        <div>
-          <h3>Ready to Continue Your Journey?</h3>
-          <p>Start preparing your capacity information</p>
-        </div>
-
-        <button className="cta-btn">Go to Candidates →</button>
-      </div>
-    </section>
-
-
+              <button className="cta-btn">
+                Go to Candidates <span>→</span>
+              </button>
+            </div>
+          </section>
         </main>
       </div>
     </>
   );
 }
 
+/* ================= COMPONENTS ================= */
 
-
-function Step({ label, title, status }) {
+function JourneyStep({ step, title, color, icon, current }) {
   return (
-    <div className={`step ${status || ""}`}>
-      <div className="step-icon" />
-      <span>{label}</span>
+    <div className={`journey-step ${current ? "current" : ""}`}>
+      <div className={`step-circle ${color} ${current ? "current" : ""}`}>
+        <span className="step-icon-inner">{icon}</span>
+      </div>
+      <span className="step-label">{step}</span>
       <strong>{title}</strong>
     </div>
   );
 }
 
-function Accordion({ step, title, content, current }) {
+function JourneyAccordion({
+  step,
+  title,
+  color,
+  current,
+  isOpen,
+  onToggle,
+  children
+}) {
   return (
-    <div className={`accordion ${current ? "current" : ""}`}>
-      <div className="accordion-header">
-        <span className={`step-badge step-${step}`}>{step}</span>
+    <div className={`accordion-row ${current ? "current" : ""}`}>
+      <div className="accordion-header" onClick={onToggle}>
+        <span className={`step-badge ${color}`}>{step}</span>
         <strong>{title}</strong>
-        {current && <span className="current-badge">CURRENT</span>}
+        {current && <span className="current-pill">CURRENT</span>}
+        <span className={`chevron ${isOpen ? "open" : ""}`}>⌄</span>
       </div>
 
-      {content && <div className="accordion-body">{content}</div>}
+      {isOpen && <div className="accordion-body">{children}</div>}
     </div>
   );
 }
+
+/* ================= DATA ================= */
+
+
+
+
+const JOURNEY_STEPS = [
+  {
+    value: 1,
+    stepLabel: "Step 1",
+    title: "Registration",
+    accordionTitle: "Registration & Approval",
+    color: "green",
+    icon: "✔",
+    description:
+      "Your organisation has completed initial registration and approval to access the portal."
+  },
+  {
+    value: 2,
+    stepLabel: "Step 2 - Current",
+    title: "SLA Review",
+    accordionTitle: "SLA Not Signed",
+    color: "blue",
+    icon: "📄",
+    current: true,
+    description:
+      "Your SLA has not been signed yet. Please sign the SLA to make your capacity and approved candidates ready for opportunity alignment.",
+    warning:
+      "Until the SLA is signed and agreed upon, your registered capacity will remain in preliminary status and will not be considered for any opportunities."
+  },
+  {
+    value: 3,
+    stepLabel: "Step 3",
+    title: "Capacity Prep",
+    accordionTitle: "Capacity Preparation",
+    color: "gray",
+    icon: "👥",
+    description:
+      "You may prepare and submit indicative capacity information for readiness purposes only."
+  },
+  {
+    value: 4,
+    stepLabel: "Step 4",
+    title: "Review",
+    accordionTitle: "Readiness Review",
+    color: "gray",
+    icon: "🔍",
+    description:
+      "Capacity and onboarding status are reviewed to confirm preparedness and continuity."
+  },
+  {
+    value: 5,
+    stepLabel: "Step 5",
+    title: "Opportunities",
+    accordionTitle: "Opportunity Alignment (When Applicable)",
+    color: "purple",
+    icon: "✨",
+    description:
+      "Opportunities are introduced only when real client demand exists, and only where readiness and suitability criteria are met."
+  }
+];

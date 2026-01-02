@@ -117,65 +117,86 @@ export default function LandingPage() {
       </section>
 
       <section className="how-started">
-        <h2>
-          🚀 How to Get Started
-          <span>Follow these simple steps to complete your onboarding journey</span>
-        </h2>
+  <h2 className="how-title">
+    🚀 How to Get Started
+    <span>Follow these simple steps to complete your onboarding journey</span>
+  </h2>
 
-        {/* STEP 1 */}
-        <div className="step-card active">
-          <div className="step-number">1</div>
-          <div className="step-content">
-            <h4>How the Onboarding Process Works</h4>
-            <p>
-              Understand the stages, expectations, and operating principles of
-              the onboarding and readiness model.
-            </p>
-            <button className="primary-btn" onClick={() => navigate("/how-it-work")}>
-              View How It Works →
-            </button>
-          </div>
-        </div>
+  {/* STEP 1 */}
+  <div className="how-step active">
+    <div className="how-step-left">
+      <span className="how-step-number active">1</span>
+    </div>
 
-        {/* STEP 2 */}
-        <div className="step-card active">
-          <div className="step-number">2</div>
-          <div className="step-content">
-            <h4>Supplier Registration</h4>
-            <p>
-              Submit organisational details required for onboarding,
-              verification, and readiness assessment.
-            </p>
-            <button className="primary-btn" onClick={() => navigate("/registration")}>
-              Start Registration →
-            </button>
-          </div>
-        </div>
+    <div className="how-step-content">
+      <h4>How the Onboarding Process Works</h4>
+      <p>
+        Understand the stages, expectations, and operating principles of the
+        onboarding and readiness model.
+      </p>
 
-        {/* STEP 3 */}
-        <div className="step-card disabled">
-          <div className="step-number muted">3</div>
-          <div className="step-content">
-            <h4>Build Capacity</h4>
-            <p>
-              Upload candidate profiles and build your resource pool to showcase
-              your technical talent capacity.
-            </p>
-          </div>
-        </div>
+      <button
+        className="how-btn"
+        onClick={() => navigate("/how-it-work")}
+      >
+        View How It Works →
+      </button>
+    </div>
+  </div>
 
-        {/* STEP 4 */}
-        <div className="step-card disabled">
-          <div className="step-number muted">4</div>
-          <div className="step-content">
-            <h4>Business Opportunities</h4>
-            <p>
-              Access demand-led UK IT opportunities as they arise, matched to
-              your verified capacity and supplier readiness.
-            </p>
-          </div>
-        </div>
-      </section>
+  {/* STEP 2 */}
+  <div className="how-step active">
+    <div className="how-step-left">
+      <span className="how-step-number active">2</span>
+    </div>
+
+    <div className="how-step-content">
+      <h4>Supplier Registration</h4>
+      <p>
+        Submit organisational details required for onboarding, verification,
+        and readiness assessment.
+      </p>
+
+      <button
+        className="how-btn"
+        onClick={() => navigate("/registration")}
+      >
+        Start Registration →
+      </button>
+    </div>
+  </div>
+
+  {/* STEP 3 */}
+  <div className="how-step disabled">
+    <div className="how-step-left">
+      <span className="how-step-number muted">3</span>
+    </div>
+
+    <div className="how-step-content">
+      <h4>Build Capacity</h4>
+      <p>
+        Upload candidate profiles and build your resource pool to showcase
+        your technical talent capacity.
+      </p>
+    </div>
+  </div>
+
+  {/* STEP 4 */}
+  <div className="how-step disabled">
+    <div className="how-step-left">
+      <span className="how-step-number muted">4</span>
+    </div>
+
+    <div className="how-step-content">
+      <h4>Business Opportunities</h4>
+      <p>
+        Access demand-led UK IT opportunities as they arise, matched to
+        your verified capacity and supplier readiness.
+      </p>
+    </div>
+  </div>
+</section>
+
 
       {/* FOOTER */}
       <LandingFooter />

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../Components/Header02";
 import Sidebar from "../../Components/Sidebar";
@@ -8,6 +8,14 @@ import "../../style/LandingPage/Registration.css";
 export default function Registration() {
     const [isAcknowledged, setIsAcknowledged] = useState(false);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "instant", // or "smooth"
+        });
+      }, []);
 
     return (
         <>

@@ -99,7 +99,15 @@ export default function Contact() {
                   <div>
                     <h4>Email Support</h4>
                     <p>Send us an email for detailed queries</p>
-                    <button className="btn-yellow">Send Email</button>
+                    <button
+                      className="btn-yellow"
+                      onClick={() => {
+                        window.location.href =
+                          "mailto:ayush@westgateithub.com";
+                      }}
+                    >
+                      Send Email
+                    </button>
                   </div>
                 </div>
 

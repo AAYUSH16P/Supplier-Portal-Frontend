@@ -1,7 +1,7 @@
 import "../../style/RegisteredUser/AddCapacityManually.css";
 import AppHeader from "../../Components/RegisteredUser/AppHeader";
 import AppSidebar from "../../Components/RegisteredUser/AppSidebar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { X } from "lucide-react";
 import { toast, ToastContainer } from "react-toastify";
@@ -14,6 +14,8 @@ export default function AddCapacityManually() {
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
     const inviteId = searchParams.get("inviteId");
+    const companyName = searchParams.get("companyName");
+
     const isInvited = !!inviteId;
 
     const [certifications, setCertifications] = useState([""]);
@@ -34,6 +36,16 @@ export default function AddCapacityManually() {
     });
 
     const [errors, setErrors] = useState({});
+
+
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "instant" // or "smooth" if you prefer animation
+        });
+    }, []);
+
 
     // Extract companyId from token
     const getCompanyIdFromToken = () => {
@@ -164,7 +176,7 @@ export default function AddCapacityManually() {
         const allFilled = requiredFields.every(key => {
             const value = form[key];
             if (!value || !value.trim()) return false;
-            
+
             // Additional validation for numeric fields
             if (key === "ctc" || key === "experience") {
                 const num = parseFloat(value);
@@ -177,8 +189,8 @@ export default function AddCapacityManually() {
             if (key === "workingSince") {
                 return value.length === 10; // yyyy-mm-dd
             }
-            
-            
+
+
             return true;
         });
 
@@ -267,7 +279,7 @@ export default function AddCapacityManually() {
                 error.response?.data?.error ||
                 error.message ||
                 "Failed to submit capacity record. Please try again.";
-            
+
             toast.error(errorMessage, {
                 position: "top-right",
                 autoClose: 4000,
@@ -293,7 +305,9 @@ export default function AddCapacityManually() {
                     </div>
 
                     {/* BACK LINK */}
-                    <div className="back-link">
+                    <div className="back-link" onClick={() => navigate(
+                        `/employeeInviteInfo?inviteId=${inviteId}&companyName=${companyName}`
+                    )}>
                         ← Back to Candidates
                     </div>
 
@@ -371,47 +385,47 @@ export default function AddCapacityManually() {
                             <div className="form-grid">
                                 <div className="form-field">
                                     <label>Company Employee ID <span>*</span></label>
-                                    <input 
-                                        name="employeeId" 
+                                    <input
+                                        name="employeeId"
                                         value={form.employeeId}
-                                        placeholder="EMP001" 
-                                        onChange={handleChange} 
+                                        placeholder="EMP001"
+                                        onChange={handleChange}
                                     />
                                     {errors.employeeId && <small>{errors.employeeId}</small>}
                                 </div>
 
                                 <div className="form-field">
                                     <label>Working Since <span>*</span></label>
-                                    <input 
-                                        name="workingSince" 
-                                        type="date" 
+                                    <input
+                                        name="workingSince"
+                                        type="date"
                                         value={form.workingSince}
-                                        onChange={handleChange} 
+                                        onChange={handleChange}
                                     />
                                     {errors.workingSince && <small>{errors.workingSince}</small>}
                                 </div>
 
                                 <div className="form-field">
                                     <label>CTC (₹) <span>*</span></label>
-                                    <input 
-                                        name="ctc" 
+                                    <input
+                                        name="ctc"
                                         type="number"
                                         min="0"
                                         step="0.01"
                                         value={form.ctc}
-                                        placeholder="800000" 
-                                        onChange={handleChange} 
+                                        placeholder="800000"
+                                        onChange={handleChange}
                                     />
                                     {errors.ctc && <small>{errors.ctc}</small>}
                                 </div>
 
                                 <div className="form-field">
                                     <label>Job Title <span>*</span></label>
-                                    <input 
-                                        name="jobTitle" 
+                                    <input
+                                        name="jobTitle"
                                         value={form.jobTitle}
-                                        placeholder="Senior Software Engineer" 
-                                        onChange={handleChange} 
+                                        placeholder="Senior Software Engineer"
+                                        onChange={handleChange}
                                     />
                                     {errors.jobTitle && <small>{errors.jobTitle}</small>}
                                 </div>
@@ -428,11 +442,11 @@ export default function AddCapacityManually() {
                             <div className="form-grid">
                                 <div className="form-field">
                                     <label>I Can Be <span>*</span></label>
-                                    <input 
-                                        name="role" 
+                                    <input
+                                        name="role"
                                         value={form.role}
-                                        placeholder="Full Stack Developer" 
-                                        onChange={handleChange} 
+                                        placeholder="Full Stack Developer"
+                                        onChange={handleChange}
                                     />
                                     {errors.role && <small>{errors.role}</small>}
                                 </div>
@@ -449,36 +463,36 @@ export default function AddCapacityManually() {
 
                                 <div className="form-field">
                                     <label>Location <span>*</span></label>
-                                    <input 
-                                        name="location" 
+                                    <input
+                                        name="location"
                                         value={form.location}
-                                        placeholder="Bangalore, India" 
-                                        onChange={handleChange} 
+                                        placeholder="Bangalore, India"
+                                        onChange={handleChange}
                                     />
                                     {errors.location && <small>{errors.location}</small>}
                                 </div>
 
                                 <div className="form-field">
                                     <label>Total Years of Experience <span>*</span></label>
-                                    <input 
-                                        name="experience" 
+                                    <input
+                                        name="experience"
                                         type="number"
                                         min="0"
                                         step="0.1"
                                         value={form.experience}
-                                        placeholder="5.5" 
-                                        onChange={handleChange} 
+                                        placeholder="5.5"
+                                        onChange={handleChange}
                                     />
                                     {errors.experience && <small>{errors.experience}</small>}
                                 </div>
 
                                 <div className="form-field full">
                                     <label>Technical Skills <span>*</span></label>
-                                    <input 
-                                        name="skills" 
+                                    <input
+                                        name="skills"
                                         value={form.skills}
-                                        placeholder="React, Node.js, TypeScript, MongoDB, AWS" 
-                                        onChange={handleChange} 
+                                        placeholder="React, Node.js, TypeScript, MongoDB, AWS"
+                                        onChange={handleChange}
                                     />
                                     {errors.skills && <small>{errors.skills}</small>}
                                 </div>
@@ -486,25 +500,25 @@ export default function AddCapacityManually() {
 
                                 <div className="form-field">
                                     <label>Tools <span>*</span></label>
-                                    <input 
-                                        name="tools" 
+                                    <input
+                                        name="tools"
                                         value={form.tools}
-                                        placeholder="VS Code, Git, Docker, Jira" 
-                                        onChange={handleChange} 
+                                        placeholder="VS Code, Git, Docker, Jira"
+                                        onChange={handleChange}
                                     />
                                     {errors.tools && <small>{errors.tools}</small>}
                                 </div>
 
                                 <div className="form-field">
                                     <label>Number of Projects <span>*</span></label>
-                                    <input 
-                                        name="projects" 
+                                    <input
+                                        name="projects"
                                         type="number"
                                         min="0"
                                         step="1"
                                         value={form.projects}
-                                        placeholder="12" 
-                                        onChange={handleChange} 
+                                        placeholder="12"
+                                        onChange={handleChange}
                                     />
                                     {errors.projects && <small>{errors.projects}</small>}
                                 </div>
@@ -584,8 +598,8 @@ export default function AddCapacityManually() {
                     {/* ACTION BAR */}
                     <div className="form-actions">
                         <button className="btn-secondary" onClick={() => navigate(-1)}>Cancel</button>
-                        <button 
-                            className="btn-primary" 
+                        <button
+                            className="btn-primary"
                             disabled={!isFormValid() || isSubmitting}
                             onClick={handleSubmit}
                         >

@@ -1,10 +1,19 @@
 import "../../style/RegisteredUser/AppHeader.css";
 
 export default function AppHeader() {
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.href = "/login"; // or your login route
+  };
+
   return (
     <header className="app-header">
-      <button className="header-back">← Back</button>
+      {/* LEFT: ADMIN LABEL */}
+      <div className="header-admin">
+        Supplier Portal
+      </div>
 
+      {/* CENTER */}
       <div className="header-center">
         <div className="header-logo">🏢</div>
         <div>
@@ -13,7 +22,10 @@ export default function AppHeader() {
         </div>
       </div>
 
-      <button className="header-link">Go back to card page</button>
+      {/* RIGHT: LOGOUT */}
+      <button className="header-logout" onClick={handleLogout}>
+        Logout
+      </button>
     </header>
   );
 }

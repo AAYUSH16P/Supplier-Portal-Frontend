@@ -236,6 +236,25 @@ code {
   margin-bottom: 14px;
 }
 
+.register-btn {
+  cursor: pointer;                 /* 👈 hand cursor */
+  transition: all 0.25s ease;       /* smooth animation */
+}
+
+/* Hover effect */
+.register-btn:hover {
+  transform: translateY(-2px);      /* subtle lift */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  opacity: 0.95;
+}
+
+/* Click (active) effect */
+.register-btn:active {
+  transform: translateY(0);         /* press-down feel */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+
 .privacy-box {
   margin-top: 20px;
   background: #f1f5f9;
@@ -2718,6 +2737,106 @@ code {
 }
 
 
+/* =====================
+   HOW TO GET STARTED (FINAL)
+===================== */
 
+.how-started {
+  margin-top: 40px;
+  padding: 32px;
+  border-radius: 18px;
+  background: #f4f6ff;
+  border: 2px solid #c7d2fe;
+}
 
+.how-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 26px;
+}
 
+.how-title span {
+  display: block;
+  font-size: 14px;
+  font-weight: 400;
+  color: #475569;
+  margin-top: 6px;
+}
+
+/* STEP CARD */
+.how-step {
+  display: flex;
+  gap: 18px;
+  padding: 22px;
+  border-radius: 16px;
+  background: #ffffff;
+  margin-bottom: 16px;
+}
+
+.how-step.active {
+  border: 2px solid #2563eb;
+}
+
+.how-step.disabled {
+  border: 1.5px solid #e5e7eb;
+  background: #f8fafc;
+}
+
+/* LEFT NUMBER */
+.how-step-left {
+  display: flex;
+  align-items: flex-start;
+}
+
+.how-step-number {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.how-step-number.active {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.how-step-number.muted {
+  background: #94a3b8;
+  color: #ffffff;
+}
+
+/* CONTENT */
+.how-step-content h4 {
+  margin: 0 0 6px;
+  font-size: 17px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.how-step-content p {
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+/* BUTTON */
+.how-btn {
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.how-btn:hover {
+  background: #1e40af;
+}
