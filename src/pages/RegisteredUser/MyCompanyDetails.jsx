@@ -4,6 +4,9 @@ import AppHeader from "../../Components/RegisteredUser/AppHeader";
 import AppSidebar from "../../Components/RegisteredUser/AppSidebar";
 import "../../style/RegisteredUser/MyCompanyDetails.css";
 import GlobalLoader from "../../Components/common/GlobalLoader";
+import AppFooter from "../../Components/common/AppFooter"; 
+import ChangePasswordModal from "./changePassword";
+import { toast } from "react-toastify";
 
 
 const FieldKeyMap = {
@@ -17,17 +20,7 @@ const FieldKeyMap = {
   totalProjectsExecuted: "TotalProjectsExecuted",
 };
 
-const getSupplierIdFromToken = () => {
-  const token = localStorage.getItem("token");
-  if (!token) return null;
 
-  try {
-    const decoded = jwtDecode(token);
-    return decoded.companyId ;
-  } catch {
-    return null;
-  }
-};
 
 
 
@@ -40,20 +33,12 @@ export default function MyCompanyDetails() {
   const [selectedField, setSelectedField] = useState("");
   const [newValue, setNewValue] = useState("");
   const [reason, setReason] = useState("");
-
   const [showChangePassword, setShowChangePassword] = useState(false);
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-
-
-
+ 
   const isFormValid =
     selectedField &&
     newValue.trim().length > 0 &&
     reason.trim().length > 0;
-
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -251,7 +236,7 @@ export default function MyCompanyDetails() {
                     setSelectedField("");
                     setNewValue("");
                     setReason("");
-                    alert("Change request submitted");
+                    toast.success("Change request submitted");
                   }}
                 >
                   Submit Request
@@ -403,130 +388,15 @@ export default function MyCompanyDetails() {
           </section>
 
 
-          {showChangePassword && (
-            <div className="modal-backdrop">
-              <div className="modal-card password-modal">
-                <div className="modal-header">
-                  <h3>Change Password</h3>
-                  <button onClick={() => setShowChangePassword(false)}>✕</button>
-                </div>
+          <ChangePasswordModal
+        open={showChangePassword}
+        onClose={() => setShowChangePassword(false)}
+      />
 
-                <div className="modal-body">
-
-
-                  <div className="form-group">
-                    <label>Current Password</label>
-                    <input
-                      type="password"
-                      value={currentPassword}
-                      onChange={(e) => setCurrentPassword(e.target.value)}
-                      placeholder="Enter current password"
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label>New Password</label>
-                    <input
-                      type="password"
-                      value={newPassword}
-                      onChange={(e) => setNewPassword(e.target.value)}
-                      placeholder="Enter new password"
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label>Re-type New Password</label>
-                    <input
-                      type="password"
-                      value={confirmPassword}
-                      onChange={(e) => setConfirmPassword(e.target.value)}
-                      placeholder="Re-type new password"
-                    />
-                  </div>
-                </div>
-                
-                {passwordError && (
-                    <p
-                      className="error-text"
-                      style={{ textAlign: "center" }}
-                    >
-                      {passwordError}
-                    </p>
-                  )}
-                <div className="modal-footer">
-
-                 
-                  <button
-                    className="btn-outline"
-                    onClick={() => setShowChangePassword(false)}
-                  >
-                    Cancel
-                  </button>
-
-                  <button
-                    className="btn-primary"
-                    onClick={async () => {
-                      if (!currentPassword || !newPassword || !confirmPassword) {
-                        setPasswordError("All fields are required");
-                        return;
-                      }
-
-                      if (newPassword !== confirmPassword) {
-                        setPasswordError("New passwords do not match");
-                        return;
-                      }
-
-                      setPasswordError("");
-
-                      const supplierId = getSupplierIdFromToken();
-                      if (!supplierId) {
-                        setPasswordError("Session expired. Please login again.");
-                        return;
-                      }
-
-                      try {
-                        const res = await fetch(
-                          `https://sp-portal-backend-production.up.railway.app/api/Supplier/${supplierId}/set-password`,
-                          {
-                            method: "POST",
-                            headers: {
-                              "Content-Type": "application/json",
-                              accept: "*/*",
-                            },
-                            body: JSON.stringify({
-                              currentPassword,
-                              password: newPassword,
-                            }),
-                          }
-                        );
-
-                        if (!res.ok) {
-                          throw new Error("Current password is incorrect");
-                        }
-
-                        alert("Password changed successfully");
-
-                        setShowChangePassword(false);
-                        setCurrentPassword("");
-                        setNewPassword("");
-                        setConfirmPassword("");
-                        setPasswordError("");
-
-                      } catch (err) {
-                        setPasswordError(err.message);
-                      }
-                    }}
-                  >
-                    Update Password
-                  </button>
-
-                </div>
-              </div>
-            </div>
-          )}
 
         </main>
       </div>
+      <AppFooter/>
     </>
   );
 }

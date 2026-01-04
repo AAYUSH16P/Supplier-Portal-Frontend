@@ -5,6 +5,11 @@ import Sidebar from "../../Components/Sidebar";
 import { registerCompany } from "../../services/company";
 import { mapCompanyPayload } from "../../utils/companyMapper";
 import "../../style/LandingPage/SupplierRegistration.css";
+import LandingFooter from "../../Components/LandingFooter";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
 
 export default function SupplierRegistration() {
   const navigate = useNavigate();
@@ -128,15 +133,15 @@ export default function SupplierRegistration() {
         }
         break;
 
-        case "primaryContactNumber":
-  if (!value.trim()) {
-    error = "Primary Contact Number is required";
-  } else if (!/^[\d\s+()-]{7,15}$/.test(value)) {
-    error = "Please enter a valid phone number";
-  }
-  break;
+      case "primaryContactNumber":
+        if (!value.trim()) {
+          error = "Primary Contact Number is required";
+        } else if (!/^[\d\s+()-]{7,15}$/.test(value)) {
+          error = "Please enter a valid phone number";
+        }
+        break;
 
-        
+
 
       case "companyOverview":
         if (!value.trim()) {
@@ -246,10 +251,10 @@ export default function SupplierRegistration() {
 
     if (!formData.primaryContactNumber.trim()) {
       newErrors.primaryContactNumber = "Primary Contact Number is required";
-    }  else if (!/^[\d\s+()-]+$/.test(formData.primaryContactNumber)) {
+    } else if (!/^[\d\s+()-]+$/.test(formData.primaryContactNumber)) {
       newErrors.primaryContactNumber = "Please enter a valid phone number";
     }
-    
+
 
     if (!formData.companyOverview.trim()) {
       newErrors.companyOverview = "Company Overview is required";
@@ -286,7 +291,7 @@ export default function SupplierRegistration() {
       /^https?:\/\/.+/.test(formData.companyWebsite) &&
       /^\d{4}$/.test(formData.yearEstablished) &&
       /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.primaryContactEmail) &&
-/^[\d\s+()-]{7,15}$/.test(formData.primaryContactNumber)
+      /^[\d\s+()-]{7,15}$/.test(formData.primaryContactNumber)
     );
   };
 
@@ -344,15 +349,25 @@ export default function SupplierRegistration() {
 
       // Handle success
       if (response.data) {
-        alert("Registration submitted successfully! We will review your application.");
+        toast.success(
+          "Registration submitted successfully! We will review your application.",
+          {
+            position: "top-right",
+            autoClose: 4000,
+          }
+        );
         navigate("/landingPage");
       }
     } catch (error) {
-      console.error("Registration error:", error);
-      alert(
+      toast.error(
         error.response?.data?.message ||
-        "Failed to submit registration. Please try again."
+        "Failed to submit registration. Please try again.",
+        {
+          position: "top-right",
+          autoClose: 5000,
+        }
       );
+      
     } finally {
       setIsSubmitting(false);
     }
@@ -709,29 +724,29 @@ export default function SupplierRegistration() {
                   </div>
 
                   <div className="form-group">
-                  <label>Domain Expertise</label>
-                  <input
-                    name="domainExpertise"
-                    value={formData.domainExpertise}
-                    onChange={handleChange}
-                    placeholder="e.g. Cloud, AI, FinTech, Healthcare"
-                  />
+                    <label>Domain Expertise</label>
+                    <input
+                      name="domainExpertise"
+                      value={formData.domainExpertise}
+                      onChange={handleChange}
+                      placeholder="e.g. Cloud, AI, FinTech, Healthcare"
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label>Total Projects Executed</label>
+                    <input
+                      name="totalProjectsExecuted"
+                      type="number"
+                      min="0"
+                      value={formData.totalProjectsExecuted}
+                      onChange={handleChange}
+                      placeholder="e.g. 25"
+                    />
+                  </div>
                 </div>
 
-                <div className="form-group">
-                  <label>Total Projects Executed</label>
-                  <input
-                    name="totalProjectsExecuted"
-                    type="number"
-                    min="0"
-                    value={formData.totalProjectsExecuted}
-                    onChange={handleChange}
-                    placeholder="e.g. 25"
-                  />
-                </div>
-                </div>
 
-              
 
 
                 <h4 className="form-section-title">🧾 Additional Information</h4>
@@ -817,6 +832,8 @@ export default function SupplierRegistration() {
           </div>
         </main>
       </div>
+      <LandingFooter />
+
     </>
   );
 }

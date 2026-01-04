@@ -50,9 +50,10 @@ export default function FAQ() {
             </p>
           </section>
 
-          {!isAuth && <LandingFooter />}
         </main>
       </div>
+      {!isAuth && <LandingFooter />}
+
     </>
   );
 }

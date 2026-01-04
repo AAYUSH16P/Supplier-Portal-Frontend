@@ -124,14 +124,59 @@
      SLA WARNING
   ======================= */
   
-  .sla-warning {
-    background: #fff7ed;
-    border: 1px solid #fb923c;
-    border-left: 6px solid #f97316;
-    padding: 16px;
-    border-radius: 12px;
-    margin-bottom: 22px;
-  }
+ 
+  /* =======================
+   SLA NOT SIGNED (EXACT UI)
+======================= */
+
+.sla-warning-box {
+  background: #fff7ed;
+  border: 1.5px solid #fb923c;
+  border-left: 6px solid #f97316;
+  border-radius: 16px;
+  padding: 18px 20px;
+  margin-bottom: 24px;
+}
+
+.sla-warning-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.sla-warning-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #fb923c;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.sla-warning-box h4 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #9a3412;
+}
+
+.sla-warning-box p {
+  font-size: 13.5px;
+  color: #7c2d12;
+  margin: 6px 0;
+  line-height: 1.6;
+}
+
+.sla-warning-action {
+  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
   
   .sla-warning h4 {
     margin: 0 0 6px;
@@ -414,3 +459,6 @@
   .text-area{
     border-radius: 5px;
   }
+
+
+  

@@ -3,6 +3,8 @@ import AppHeader from "../../Components/RegisteredUser/AppHeader";
 import AppSidebar from "../../Components/RegisteredUser/AppSidebar";
 import { useRef } from "react";
 import { toast } from "react-toastify";
+import AppFooter from "../../Components/common/AppFooter"; 
+
 
 /* ================= HELPERS ================= */
 
@@ -79,7 +81,6 @@ const handleFileUpload = async (event) => {
     }
 
     toast.success("Upload successful. Processing started.");
-    console.log("Upload response:", data);
   } catch (error) {
     console.error(error);
     toast.error("Something went wrong during upload");
@@ -196,6 +197,7 @@ export default function BulkCapacityUpload() {
           </section>
         </main>
       </div>
+      <AppFooter/>
     </>
   );
 }

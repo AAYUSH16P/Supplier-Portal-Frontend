@@ -5,6 +5,8 @@ import AppHeader from "../../Components/RegisteredUser/AppHeader";
 import AppSidebar from "../../Components/RegisteredUser/AppSidebar";
 import { getAvailableSlotsForDate, scheduleMeeting } from "../../services/calendar";
 import "../../style/RegisteredUser/BookMeeting.css";
+import AppFooter from "../../Components/common/AppFooter";
+
 
 export default function BookMeeting() {
   const [selectedDate, setSelectedDate] = useState(null);
@@ -142,26 +144,8 @@ export default function BookMeeting() {
 
   const generateAvailableSlotsFromEvents = (date, busyEvents) => {
     const slots = [];
-
-    console.group("📅 Slot generation for date:", date.toDateString());
-
-    // Log busy events in IST
-    console.group("⛔ Busy events (converted to IST)");
     busyEvents.forEach((event, i) => {
-      const busyStartUtc = new Date(event.startUtc + "Z");
-      const busyEndUtc = new Date(event.endUtc + "Z");
-
-      const busyStartIst = new Date(busyStartUtc.getTime() + 5.5 * 60 * 60 * 1000);
-      const busyEndIst = new Date(busyEndUtc.getTime() + 5.5 * 60 * 60 * 1000);
-
-      console.log(
-        `#${i + 1}`,
-        event.subject,
-        "| IST:",
-        busyStartIst.toLocaleTimeString("en-IN"),
-        "-",
-        busyEndIst.toLocaleTimeString("en-IN")
-      );
+   
     });
     console.groupEnd();
 
@@ -219,7 +203,6 @@ export default function BookMeeting() {
         if (isBusy) {
           console.warn("❌ BLOCKED:", slotLabel, "| Reason:", blockedBy);
         } else {
-          console.log("✅ AVAILABLE:", slotLabel);
           slots.push({
             startIst: istDate,
           });
@@ -280,7 +263,7 @@ export default function BookMeeting() {
   // };
 
   // Handle booking confirmation
-  
+
 
   const handleConfirmBooking = async () => {
     if (!selectedDate || !selectedTime) {
@@ -299,8 +282,6 @@ export default function BookMeeting() {
     try {
       console.group("📅 BOOK MEETING DEBUG");
 
-      console.log("📆 Selected Date:", selectedDate);
-      console.log("🕘 Selected Time (raw):", selectedTime);
 
       // ✅ Same Date object used during slot generation
       const istDate =
@@ -312,25 +293,20 @@ export default function BookMeeting() {
         throw new Error("Invalid time slot");
       }
 
-      console.log(
-        "🇮🇳 IST Time:",
-        istDate.toLocaleString("en-IN"),
-        "| ISO:",
-        istDate.toISOString()
-      );
+      
 
       // 🔁 IST → UTC (RULE APPLIED HERE)
       const startUtc = istDate.toISOString();
 
 
-      
+
       // ⏱ 30-minute meeting
       const endUtc = new Date(
         istDate.getTime() + 30 * 60 * 1000
       ).toISOString();
-      
 
-      
+
+
 
       const payload = {
         subject: "onboarding call",
@@ -339,17 +315,24 @@ export default function BookMeeting() {
         attendeeEmails: [attendeeEmail],
       };
 
-      console.log("📦 Final Payload:", payload);
       console.groupEnd();
 
       const response = await scheduleMeeting(adminEmail, payload);
 
       if (response.status === 200 || response.status === 201) {
-        toast.success("Meeting booked successfully!");
+        toast.success("Meeting booked successfully!", {
+          autoClose: 5000,
+        });
+
+
         setSelectedDate(null);
         setSelectedTime(null);
         setAvailableSlots([]);
+
+        setTimeout(() => {
+        }, 5000);
       }
+
     } catch (error) {
       console.groupEnd();
       toast.error(
@@ -620,30 +603,39 @@ export default function BookMeeting() {
 
 
             {/* RIGHT */}
-            <div className="info-box">
+            <div className="info-box refined">
               <h4>Before You Book</h4>
 
-              <ul>
-                <li>
-                  ✅ <strong>Pre-filled details:</strong> Your name, email and
-                  company will be auto-filled if logged in.
-                </li>
-                <li>
-                  ⏱ <strong>Meeting Overview:</strong> This is a 30-minute
-                  onboarding introduction call.
-                </li>
-              </ul>
+              <div className="info-row">
+                <span className="info-icon success">✔</span>
+                <div>
+                  <strong>Pre-filled details:</strong>
+                  <p>Your name, email and company will be auto-filled if you are logged in.</p>
+                </div>
+              </div>
 
-              <div className="divider" />
+              <div className="info-divider" />
+
+              <div className="info-row">
+                <span className="info-icon clock">⏱</span>
+                <div>
+                  <strong>Meeting Overview:</strong>
+                  <p>This is a 30-minute onboarding introduction call.</p>
+                </div>
+              </div>
+
+              <div className="info-divider" />
 
               <h5>What We Will Cover:</h5>
-              <ul className="bullet-list">
+
+              <ul className="dot-list">
                 <li>Supplier onboarding steps</li>
                 <li>How opportunities are shared</li>
                 <li>Candidate submission expectations</li>
                 <li>Any questions you may have</li>
               </ul>
             </div>
+
           </section>
 
           {/* FOOTER ACTION */}
@@ -678,6 +670,7 @@ export default function BookMeeting() {
           </section>
         </main>
       </div>
+      <AppFooter />
     </>
   );
 }

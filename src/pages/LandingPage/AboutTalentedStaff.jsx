@@ -91,198 +91,200 @@ export default function AboutTalentedStaff() {
               </ul>
             </div>
           </section>
-        {/* ================= ECOSYSTEM ================= */}
-<section className="content-card ecosystem-card">
-  <div className="card-title">
-    <span className="icon light-blue">🧩</span>
-    <h3>How the Ecosystem Works</h3>
-  </div>
+          {/* ================= ECOSYSTEM ================= */}
+          <section className="content-card ecosystem-card">
+            <div className="card-title">
+              <span className="icon light-blue">🧩</span>
+              <h3>How the Ecosystem Works</h3>
+            </div>
 
-  <p className="ecosystem-subtitle">
-    Three coordinated layers working together
-  </p>
+            <p className="ecosystem-subtitle">
+              Three coordinated layers working together
+            </p>
 
-  <div className="ecosystem-grid">
-    {/* LEFT */}
-    <div className="ecosystem-col active">
-      <h4>Supply Readiness Layer</h4>
-      <p className="ecosystem-desc">
-        Controlled onboarding focusing on:
-      </p>
-      <ul>
-        <li>Organisational readiness</li>
-        <li>Capacity planning</li>
-        <li>Continuity considerations</li>
-      </ul>
-      <small>Preparation, not immediate engagement</small>
-    </div>
+            <div className="ecosystem-grid">
+              {/* LEFT */}
+              <div className="ecosystem-col active">
+                <h4>Supply Readiness Layer</h4>
+                <p className="ecosystem-desc">
+                  Controlled onboarding focusing on:
+                </p>
+                <ul>
+                  <li>Organisational readiness</li>
+                  <li>Capacity planning</li>
+                  <li>Continuity considerations</li>
+                </ul>
+                <small>Preparation, not immediate engagement</small>
+              </div>
 
-    {/* CENTER */}
-    <div className="ecosystem-col">
-      <h4>Governance & Engagement Layer</h4>
-      <p className="ecosystem-desc">
-        Demand-driven engagement through:
-      </p>
-      <ul>
-        <li>Defined operating principles</li>
-        <li>Clear accountability</li>
-        <li>Structured alignment</li>
-      </ul>
-      <small>Demand-led, relevant, governed</small>
-    </div>
+              {/* CENTER */}
+              <div className="ecosystem-col">
+                <h4>Governance & Engagement Layer</h4>
+                <p className="ecosystem-desc">
+                  Demand-driven engagement through:
+                </p>
+                <ul>
+                  <li>Defined operating principles</li>
+                  <li>Clear accountability</li>
+                  <li>Structured alignment</li>
+                </ul>
+                <small>Demand-led, relevant, governed</small>
+              </div>
 
-    {/* RIGHT */}
-    <div className="ecosystem-col">
-      <h4>Platform Enablement Layer</h4>
-      <p className="ecosystem-desc">
-        Ecosystem framework supporting:
-      </p>
-      <ul>
-        <li>Controlled participation</li>
-        <li>Reporting & insights (later phases)</li>
-        <li>Structured workflows</li>
-      </ul>
-      <small>Introduced progressively</small>
-    </div>
-  </div>
-</section>
-
-
-{/* ================= WHO THIS IS FOR + PARTNERS ================= */}
-<section className="two-col-grid who-partner-section">
-  {/* LEFT CARD */}
-  <div className="content-card who-card">
-    <div className="card-title">
-      <span className="icon light-blue">👥</span>
-      <h4>Who This Is For</h4>
-    </div>
-
-    <p className="who-subtitle">
-      Designed for organisations valuing preparedness over speculation:
-    </p>
-
-    <ul className="check-list">
-      <li>Technology service providers and delivery partners</li>
-      <li>Employers and agencies with ongoing demand</li>
-      <li>Suppliers seeking structured access</li>
-    </ul>
-
-    <div className="not-intended-box">
-      <strong>Not intended for:</strong>
-      <ul>
-        <li>Job seekers</li>
-        <li>Open CV marketplaces</li>
-        <li>Ad-hoc or speculative recruitment</li>
-      </ul>
-    </div>
-  </div>
-
-  {/* RIGHT CARD */}
-  <div className="content-card partner-card">
-    <div className="card-title">
-      <span className="icon light-blue">🛡️</span>
-      <h4>How Westgate India and Spectrum IT Hub Fit In</h4>
-    </div>
-
-    <ul className="bullet-list">
-      <li>
-        <strong>Spectrum IT Hub Ltd (UK)</strong> provides the UK-side governance
-        and commercial framework for the ecosystem.
-      </li>
-      <li>
-        <strong>Westgate India</strong> acts as an authorised delivery partner,
-        supporting supplier onboarding, readiness coordination, and operational
-        alignment.
-      </li>
-    </ul>
-
-    <div className="partner-highlight">
-      <strong>This ensures:</strong>
-      <ul className="check-list">
-        <li>Clear accountability</li>
-        <li>Local operational support</li>
-        <li>Consistent governance across regions</li>
-      </ul>
-    </div>
-
-    <p className="partner-footnote">
-      Detailed arrangements are defined through formal agreements and SLAs.
-    </p>
-  </div>
-</section>
+              {/* RIGHT */}
+              <div className="ecosystem-col">
+                <h4>Platform Enablement Layer</h4>
+                <p className="ecosystem-desc">
+                  Ecosystem framework supporting:
+                </p>
+                <ul>
+                  <li>Controlled participation</li>
+                  <li>Reporting & insights (later phases)</li>
+                  <li>Structured workflows</li>
+                </ul>
+                <small>Introduced progressively</small>
+              </div>
+            </div>
+          </section>
 
 
-{/* ================= PHASED ACCESS ================= */}
-<section className="content-card phased-card">
-  <div className="card-title">
-    <span className="icon light-blue">📈</span>
-    <h3>Phased Access & Platform Evolution</h3>
-  </div>
+          {/* ================= WHO THIS IS FOR + PARTNERS ================= */}
+          <section className="two-col-grid who-partner-section">
+            {/* LEFT CARD */}
+            <div className="content-card who-card">
+              <div className="card-title">
+                <span className="icon light-blue">👥</span>
+                <h4>Who This Is For</h4>
+              </div>
 
-  <div className="phased-intro">
-    <p>TalentedStaff.com is intentionally launched in phases.</p>
-    <p className="muted">Advanced features introduced progressively.</p>
-  </div>
+              <p className="who-subtitle">
+                Designed for organisations valuing preparedness over speculation:
+              </p>
 
-  <div className="two-col-grid phased-grid">
-    {/* LEFT */}
-    <div className="boxed phased-active">
-      <h4>Early phases focus on:</h4>
-      <ul className="check-list">
-        <li>Supplier onboarding</li>
-        <li>Readiness and alignment</li>
-        <li>Controlled participation</li>
-      </ul>
-    </div>
+              <ul className="check-list">
+                <li>Technology service providers and delivery partners</li>
+                <li>Employers and agencies with ongoing demand</li>
+                <li>Suppliers seeking structured access</li>
+              </ul>
 
-    {/* RIGHT */}
-    <div className="boxed phased-muted">
-      <h4>Later phases (V0.3, planned 2026+):</h4>
-      <ul className="dot-list">
-        <li>Enhanced reporting</li>
-        <li>Industry-level insights</li>
-        <li>Trend-based intelligence</li>
-      </ul>
-    </div>
-  </div>
+              <div className="not-intended-box">
+                <strong>Not intended for:</strong>
+                <ul>
+                  <li>Job seekers</li>
+                  <li>Open CV marketplaces</li>
+                  <li>Ad-hoc or speculative recruitment</li>
+                </ul>
+              </div>
+            </div>
 
-  <p className="phased-note">
-    This phased approach avoids premature scale and ensures the ecosystem
-    develops responsibly.
-  </p>
-</section>
+            {/* RIGHT CARD */}
+            <div className="content-card partner-card">
+              <div className="card-title">
+                <span className="icon light-blue">🛡️</span>
+                <h4>How Westgate India and Spectrum IT Hub Fit In</h4>
+              </div>
 
-{/* ================= IMPORTANT CLARIFICATION ================= */}
-<section className=" clarification-box">
-  <div className="clarification-header">
+              <ul className="bullet-list">
+                <li>
+                  <strong>Spectrum IT Hub Ltd (UK)</strong> provides the UK-side governance
+                  and commercial framework for the ecosystem.
+                </li>
+                <li>
+                  <strong>Westgate India</strong> acts as an authorised delivery partner,
+                  supporting supplier onboarding, readiness coordination, and operational
+                  alignment.
+                </li>
+              </ul>
 
-    <h4>Important Clarification</h4>
-  </div>
+              <div className="partner-highlight">
+                <strong>This ensures:</strong>
+                <ul className="check-list">
+                  <li>Clear accountability</li>
+                  <li>Local operational support</li>
+                  <li>Consistent governance across regions</li>
+                </ul>
+              </div>
 
-  <p className="clarification-text">
-    This explainer page is provided for context and understanding only.
-  </p>
-
-  <ul className="clarification-list">
-    <li>Does not guarantee work or volume</li>
-    <li>Not an offer of engagement</li>
-    <li>Does not replace formal agreements</li>
-  </ul>
-
-  <p className="clarification-footnote">
-    Participation, obligations, and commercial terms are defined separately
-    and formally, when relevant.
-  </p>
-</section>
-
-
-{/* ================= FOOTER DISCLAIMER ================= */}
-<LandingFooter />
+              <p className="partner-footnote">
+                Detailed arrangements are defined through formal agreements and SLAs.
+              </p>
+            </div>
+          </section>
 
 
-       
+          {/* ================= PHASED ACCESS ================= */}
+          <section className="content-card phased-card">
+            <div className="card-title">
+              <span className="icon light-blue">📈</span>
+              <h3>Phased Access & Platform Evolution</h3>
+            </div>
+
+            <div className="phased-intro">
+              <p>TalentedStaff.com is intentionally launched in phases.</p>
+              <p className="muted">Advanced features introduced progressively.</p>
+            </div>
+
+            <div className="two-col-grid phased-grid">
+              {/* LEFT */}
+              <div className="boxed phased-active">
+                <h4>Early phases focus on:</h4>
+                <ul className="check-list">
+                  <li>Supplier onboarding</li>
+                  <li>Readiness and alignment</li>
+                  <li>Controlled participation</li>
+                </ul>
+              </div>
+
+              {/* RIGHT */}
+              <div className="boxed phased-muted">
+                <h4>Later phases (V0.3, planned 2026+):</h4>
+                <ul className="dot-list">
+                  <li>Enhanced reporting</li>
+                  <li>Industry-level insights</li>
+                  <li>Trend-based intelligence</li>
+                </ul>
+              </div>
+            </div>
+
+            <p className="phased-note">
+              This phased approach avoids premature scale and ensures the ecosystem
+              develops responsibly.
+            </p>
+          </section>
+
+          {/* ================= IMPORTANT CLARIFICATION ================= */}
+          <section className=" clarification-box">
+            <div className="clarification-header">
+
+              <h4>Important Clarification</h4>
+            </div>
+
+            <p className="clarification-text">
+              This explainer page is provided for context and understanding only.
+            </p>
+
+            <ul className="clarification-list">
+              <li>Does not guarantee work or volume</li>
+              <li>Not an offer of engagement</li>
+              <li>Does not replace formal agreements</li>
+            </ul>
+
+            <p className="clarification-footnote">
+              Participation, obligations, and commercial terms are defined separately
+              and formally, when relevant.
+            </p>
+          </section>
+
+
+          {/* ================= FOOTER DISCLAIMER ================= */}
+
+
+
         </main>
+        
       </div>
+      <LandingFooter />
+
     </>
   );
 }

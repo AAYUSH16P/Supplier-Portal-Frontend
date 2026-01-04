@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AppHeader from "../../Components/RegisteredUser/AppHeader";
 import "../../style/RegisteredUser/CandidateValidation.css";
+import AppFooter from "../../Components/common/AppFooter";
+
 
 export default function CandidateValidation() {
     const navigate = useNavigate();
@@ -217,118 +219,119 @@ export default function CandidateValidation() {
                                 )}
 
 
-{selectedCandidate && (
-  <div className="modal-overlay" onClick={() => setSelectedCandidate(null)}>
-    <div
-      className="modal-card"
-      onClick={(e) => e.stopPropagation()}
-    >
-      {/* HEADER */}
-      <div className="modal-header">
-        <h3>Candidate Details</h3>
-        <button
-          className="modal-close"
-          onClick={() => setSelectedCandidate(null)}
-        >
-          ✖
-        </button>
-      </div>
+                                {selectedCandidate && (
+                                    <div className="modal-overlay" onClick={() => setSelectedCandidate(null)}>
+                                        <div
+                                            className="modal-card"
+                                            onClick={(e) => e.stopPropagation()}
+                                        >
+                                            {/* HEADER */}
+                                            <div className="modal-header">
+                                                <h3>Candidate Details</h3>
+                                                <button
+                                                    className="modal-close"
+                                                    onClick={() => setSelectedCandidate(null)}
+                                                >
+                                                    ✖
+                                                </button>
+                                            </div>
 
-      {/* BODY */}
-      <div className="modal-body">
-        <div className="detail-grid">
-          <div>
-            <label>Supplier Name</label>
-            <p>{selectedCandidate.companyName}</p>
-          </div>
+                                            {/* BODY */}
+                                            <div className="modal-body">
+                                                <div className="detail-grid">
+                                                    <div>
+                                                        <label>Supplier Name</label>
+                                                        <p>{selectedCandidate.companyName}</p>
+                                                    </div>
 
-          <div>
-            <label>System ID</label>
-            <p>{selectedCandidate.id}</p>
-          </div>
+                                                    <div>
+                                                        <label>System ID</label>
+                                                        <p>{selectedCandidate.id}</p>
+                                                    </div>
 
-          <div>
-            <label>Company Employee ID</label>
-            <p>{selectedCandidate.companyEmployeeId}</p>
-          </div>
+                                                    <div>
+                                                        <label>Company Employee ID</label>
+                                                        <p>{selectedCandidate.companyEmployeeId}</p>
+                                                    </div>
 
-          <div>
-            <label>Role</label>
-            <p>{selectedCandidate.role}</p>
-          </div>
+                                                    <div>
+                                                        <label>Role</label>
+                                                        <p>{selectedCandidate.role}</p>
+                                                    </div>
 
-          <div>
-            <label>Job Title</label>
-            <p>{selectedCandidate.jobTitle}</p>
-          </div>
+                                                    <div>
+                                                        <label>Job Title</label>
+                                                        <p>{selectedCandidate.jobTitle}</p>
+                                                    </div>
 
-          <div>
-            <label>Location</label>
-            <p>{selectedCandidate.location}</p>
-          </div>
+                                                    <div>
+                                                        <label>Location</label>
+                                                        <p>{selectedCandidate.location}</p>
+                                                    </div>
 
-          <div>
-            <label>Working Since</label>
-            <p>{selectedCandidate.workingSince}</p>
-          </div>
+                                                    <div>
+                                                        <label>Working Since</label>
+                                                        <p>{selectedCandidate.workingSince}</p>
+                                                    </div>
 
-          <div>
-            <label>Total Experience</label>
-            <p>{selectedCandidate.totalExperience} yrs</p>
-          </div>
+                                                    <div>
+                                                        <label>Total Experience</label>
+                                                        <p>{selectedCandidate.totalExperience} yrs</p>
+                                                    </div>
 
-          <div>
-            <label>Status</label>
-            <p className="status pending">Pending Approval</p>
-          </div>
-        </div>
+                                                    <div>
+                                                        <label>Status</label>
+                                                        <p className="status pending">Pending Approval</p>
+                                                    </div>
+                                                </div>
 
-        {/* CERTIFICATIONS */}
-        <div className="cert-section">
-          <label>Certifications</label>
-          {selectedCandidate.certifications?.length ? (
-            <ul>
-              {selectedCandidate.certifications.map((c, i) => (
-                <li key={i}>{c}</li>
-              ))}
-            </ul>
-          ) : (
-            <p>-</p>
-          )}
-        </div>
-      </div>
+                                                {/* CERTIFICATIONS */}
+                                                <div className="cert-section">
+                                                    <label>Certifications</label>
+                                                    {selectedCandidate.certifications?.length ? (
+                                                        <ul>
+                                                            {selectedCandidate.certifications.map((c, i) => (
+                                                                <li key={i}>{c}</li>
+                                                            ))}
+                                                        </ul>
+                                                    ) : (
+                                                        <p>-</p>
+                                                    )}
+                                                </div>
+                                            </div>
 
-      {/* FOOTER */}
-      <div className="modal-footer">
-        <button
-          className="approve"
-          onClick={() => {
-            handleApprove(selectedCandidate.id);
-            setSelectedCandidate(null);
-          }}
-        >
-          ✔ Approve
-        </button>
+                                            {/* FOOTER */}
+                                            <div className="modal-footer">
+                                                <button
+                                                    className="approve"
+                                                    onClick={() => {
+                                                        handleApprove(selectedCandidate.id);
+                                                        setSelectedCandidate(null);
+                                                    }}
+                                                >
+                                                    ✔ Approve
+                                                </button>
 
-        <button
-          className="reject"
-          onClick={() => {
-            handleReject(selectedCandidate.id);
-            setSelectedCandidate(null);
-          }}
-        >
-          ✖ Reject
-        </button>
-      </div>
-    </div>
-  </div>
-)}
+                                                <button
+                                                    className="reject"
+                                                    onClick={() => {
+                                                        handleReject(selectedCandidate.id);
+                                                        setSelectedCandidate(null);
+                                                    }}
+                                                >
+                                                    ✖ Reject
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
 
                             </tbody>
                         </table>
                     </div>
                 </main>
             </div>
+            <AppFooter/>
         </>
     );
 }

@@ -2,6 +2,8 @@ import AppHeader from "../../Components/RegisteredUser/AppHeader";
 import AppSidebar from "../../Components/RegisteredUser/AppSidebar";
 import "../../style/RegisteredUser/SupplierAcknowledgement.css";
 import { useState } from "react";
+import AppFooter from "../../Components/common/AppFooter";
+
 import { useNavigate } from "react-router-dom";
 
 
@@ -24,7 +26,7 @@ export default function SupplierAcknowledgement() {
       <AppHeader />
 
       <div className="ack-layout">
-      <AppSidebar unlocked={allChecked} />
+        <AppSidebar unlocked={allChecked} />
 
         <main className="ack-page">
           <section className="ack-welcome">
@@ -133,37 +135,10 @@ export default function SupplierAcknowledgement() {
           </section>
 
 
-          <footer className="app-footer">
-      <div className="footer-inner">
-        <p>
-          This portal is operated by <strong>Westgate India</strong>, a business
-          registered in India, acting as an authorised and licensed delivery
-          partner for <strong>Spectrum IT Hub Ltd (UK)</strong> in relation to the
-          TalentedStaff.com ecosystem, which is owned and governed by{" "}
-          <strong>ITRF (Global) Ltd (UK)</strong>.
-        </p>
-
-        <p className="footer-highlight">
-          Access to this portal is limited to onboarding, readiness, and
-          alignment activities only. No capacity is active or approved until the
-          Supplier SLA is discussed and agreed.
-        </p>
-
-        <p>
-          This portal does not advertise roles, guarantee opportunities, or
-          constitute a commercial agreement. All commercial terms, governance
-          arrangements, roles, responsibilities, and legal obligations are
-          defined separately through formal agreements and SLAs, where
-          applicable.
-        </p>
-
-        <span className="footer-copy">
-          © 2025 WestGate IT Hub. All rights reserved.
-        </span>
-      </div>
-    </footer>
+         
         </main>
       </div>
+      <AppFooter />
     </>
   );
 }

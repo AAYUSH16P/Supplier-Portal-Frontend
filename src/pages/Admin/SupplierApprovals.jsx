@@ -33,7 +33,6 @@ export default function SupplierApprovals() {
 
   const handleApprove = async (companyId) => {
     try {
-      debugger;
       await fetch("https://sp-portal-backend-production.up.railway.app/api/company/approve", {
         method: "POST",
         headers: {

@@ -295,3 +295,312 @@
     margin: 26px auto 60px;
   }
   
+
+
+  /* HELP BOX VARIANTS */
+.help-box.blue {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+}
+
+.help-box.blue:hover {
+  background: #e0edff;
+}
+
+.help-icon.blue {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.help-icon.yellow {
+  background: #ffedd5;
+  color: #ea580c;
+}
+
+.help-icon.purple {
+  background: #ede9fe;
+  color: #7c3aed;
+}
+
+.help-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+/* CLICKABLE CARD */
+.help-box.clickable {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.help-box.clickable:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+}
+
+/* GREEN HEADER ICON */
+.card-icon.green {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+
+
+.westgate-card {
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+
+.westgate-header {
+  background: #eef4ff;
+  padding: 20px 22px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.westgate-header-inner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+
+.westgate-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+
+
+.westgate-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+
+
+.westgate-body {
+  padding: 22px;
+}
+
+
+.westgate-desc {
+  font-size: 14px;
+  color: #475569;
+  margin-bottom: 18px;
+}
+
+
+.westgate-info-row {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  background: #f8fafc;
+  padding: 14px 16px;
+  border-radius: 14px;
+  margin-bottom: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+
+.info-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.info-icon.email {
+  background: #e0edff;
+  color: #2563eb;
+}
+
+.info-icon.phone {
+  background: #e0f2fe;
+  color: #0284c7;
+}
+
+.info-icon.time {
+  background: #ede9fe;
+  color: #7c3aed;
+}
+
+
+
+.westgate-info-row small {
+  display: block;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.westgate-info-row strong {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+
+.needhelp-card {
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+
+.needhelp-header {
+  background: #eafff3;
+  padding: 20px 22px;
+  border-bottom: 1px solid #d1fae5;
+}
+
+.needhelp-header-inner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+
+.needhelp-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+
+.needhelp-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+
+.needhelp-body {
+  padding: 22px;
+}
+
+
+.needhelp-desc {
+  font-size: 14px;
+  color: #475569;
+  margin-bottom: 18px;
+}
+
+
+.needhelp-option {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 18px;
+  border-radius: 16px;
+  margin-bottom: 16px;
+}
+
+
+.needhelp-option.blue {
+  background: #f3f8ff;
+  border: 1px solid #c7d8ff;
+}
+
+.needhelp-option.yellow {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+}
+
+.needhelp-option.purple {
+  background: #f7f5ff;
+  border: 1px solid #ddd6fe;
+}
+
+
+.option-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.option-icon.blue {
+  background: #1e40af;
+  color: white;
+}
+
+.option-icon.yellow {
+  background: #f59e0b;
+  color: white;
+}
+
+.option-icon.purple {
+  background: #8b5cf6;
+  color: white;
+}
+
+
+.needhelp-option h4 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.needhelp-option p {
+  margin: 4px 0 0;
+  font-size: 13.5px;
+  color: #475569;
+}
+
+
+
+.email-btn {
+  margin-top: 10px;
+  background: #ea580c;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+
+.needhelp-option.clickable {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.needhelp-option.clickable:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+

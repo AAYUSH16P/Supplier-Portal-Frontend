@@ -4,6 +4,9 @@ import AppSidebar from "../../Components/RegisteredUser/AppSidebar";
 import { useState,useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import AppFooter from "../../Components/common/AppFooter"; 
+import { toast } from "react-toastify";
+
 
 
 export default function EmployerInitiatedInvite() {
@@ -20,7 +23,7 @@ export default function EmployerInitiatedInvite() {
         const token = localStorage.getItem("token");
 
         if (!token) {
-            alert("Token not found. Please login again.");
+            toast.error("Token not found. Please login again.");
             return;
         }
 
@@ -31,7 +34,7 @@ export default function EmployerInitiatedInvite() {
             const companyName = decoded.companyName; // 👈 from JWT
 
             if (!companyId || !companyName) {
-                alert("Company information missing in token");
+                toast.error("Company information missing in token");
                 return;
             }
 
@@ -46,15 +49,14 @@ export default function EmployerInitiatedInvite() {
             setReferenceCode(companyId);
 
         } catch (err) {
-            console.error(err);
-            alert("Invalid token");
+            toast.error("Invalid token");
         }
     };
 
 
     const copyToClipboard = () => {
         navigator.clipboard.writeText(generatedLink);
-        alert("Link copied!");
+        toast.success("Link copied!");
     };
 
 
@@ -320,6 +322,7 @@ export default function EmployerInitiatedInvite() {
 
                 </main>
             </div>
+            <AppFooter/>
         </>
     );
 }

@@ -3,6 +3,9 @@ import AppHeader from "../../Components/RegisteredUser/AppHeader";
 import AppSidebar from "../../Components/RegisteredUser/AppSidebar";
 import "../../style/RegisteredUser/ReviewCandidates.css";
 import GlobalLoader from "../../Components/common/GlobalLoader";
+import AppFooter from "../../Components/common/AppFooter";
+import { toast } from "react-toastify";
+
 
 /* ================= HELPERS ================= */
 
@@ -73,7 +76,7 @@ export default function ReviewCandidates() {
 
       setShowEditModal(false);
     } catch {
-      alert("Failed to update candidate");
+      toast.error("Failed to update candidate");
     }
   };
 
@@ -134,13 +137,13 @@ export default function ReviewCandidates() {
       setCandidates((prev) => prev.filter((c) => c.id !== candidate.id));
       setShowModal(false);
     } catch {
-      alert("Failed to approve candidate");
+      toast.error("Failed to approve candidate");
     }
   };
 
   const handleReject = async () => {
     if (!rejectRemark.trim()) {
-      alert("Please enter rejection remark");
+      toast.warning("Please enter rejection remark");
       return;
     }
 
@@ -162,7 +165,7 @@ export default function ReviewCandidates() {
       setShowRejectModal(false);
       setShowModal(false);
     } catch {
-      alert("Failed to reject candidate");
+      toast.error("Failed to reject candidate");
     }
   };
 
@@ -408,7 +411,7 @@ export default function ReviewCandidates() {
             <h3>Reject Candidate</h3>
 
             <textarea
-            className="text-area"
+              className="text-area"
               rows={4}
               placeholder="Enter rejection remark"
               value={rejectRemark}
@@ -482,9 +485,9 @@ export default function ReviewCandidates() {
                   handleEditChange("workingSince", v);
                 }}
               />
-{editErrors.workingSince && (
-  <p className="form-error">{editErrors.workingSince}</p>
-)}
+              {editErrors.workingSince && (
+                <p className="form-error">{editErrors.workingSince}</p>
+              )}
 
 
             </div>
@@ -498,7 +501,7 @@ export default function ReviewCandidates() {
           </div>
         </div>
       )}
-
+      <AppFooter />
     </>
   );
 }

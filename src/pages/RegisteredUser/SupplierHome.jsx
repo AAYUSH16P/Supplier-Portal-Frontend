@@ -1,8 +1,28 @@
 import AppHeader from "../../Components/RegisteredUser/AppHeader";
 import AppSidebar from "../../Components/RegisteredUser/AppSidebar";
 import "../../style/RegisteredUser/SupplierHome.css";
+import { useMemo } from "react";
+import { useNavigate } from "react-router-dom";
+import AppFooter from "../../Components/common/AppFooter"; 
+
 
 export default function SupplierHome() {
+  const navigate = useNavigate();
+
+  const isSlaSigned = useMemo(() => {
+    
+    const token = localStorage.getItem("token");
+    if (!token) return false;
+
+    try {
+      const payload = JSON.parse(atob(token.split(".")[1]));
+      return payload.isSlaSigned === "True";
+    } catch {
+      return false;
+    }
+  }, []);
+
+
   return (
     <>
       <AppHeader />
@@ -18,32 +38,32 @@ export default function SupplierHome() {
 
           {/* HERO */}
           <section className="hero-exact">
-  <span className="hero-pill">
-    ✨ Version 0.1A – Readiness Phase
-  </span>
+            <span className="hero-pill">
+              ✨ Version 0.1A – Readiness Phase
+            </span>
 
-  <div className="hero-content">
-    <div className="hero-icon-wrap">
-      <span className="hero-icon">🏠</span>
-    </div>
+            <div className="hero-content">
+              <div className="hero-icon-wrap">
+                <span className="hero-icon">🏠</span>
+              </div>
 
-    <div className="hero-text">
-      <h1>Welcome to Your Supplier Portal</h1>
+              <div className="hero-text">
+                <h1>Welcome to Your Supplier Portal</h1>
 
-      <p>
-        Your organisation is now registered and approved as part of the controlled
-        supplier onboarding and readiness programme. You have completed the initial
-        access and acknowledgement steps and can now proceed with guided onboarding
-        and readiness activities.
-      </p>
+                <p>
+                  Your organisation is now registered and approved as part of the controlled
+                  supplier onboarding and readiness programme. You have completed the initial
+                  access and acknowledgement steps and can now proceed with guided onboarding
+                  and readiness activities.
+                </p>
 
-      <p className="hero-muted">
-        At this stage, the focus remains on preparation, alignment, and governance,
-        ahead of any wider platform access or client demand.
-      </p>
-    </div>
-  </div>
-</section>
+                <p className="hero-muted">
+                  At this stage, the focus remains on preparation, alignment, and governance,
+                  ahead of any wider platform access or client demand.
+                </p>
+              </div>
+            </div>
+          </section>
 
 
           {/* STATUS CARDS */}
@@ -66,14 +86,17 @@ export default function SupplierHome() {
               </div>
             </div>
 
-            <div className="status-card orange">
-              <div className="status-icon">⏳</div>
+            <div className={`status-card ${isSlaSigned ? "green" : "orange"}`}>
+              <div className="status-icon">
+                {isSlaSigned ? "✔" : "⏳"}
+              </div>
               <div>
                 <small>SLA Status</small>
-                <h3>Pending</h3>
-                <div className="status-bar orange" />
+                <h3>{isSlaSigned ? "Signed" : "Pending"}</h3>
+                <div className={`status-bar ${isSlaSigned ? "green" : "orange"}`} />
               </div>
             </div>
+
           </section>
 
           <section className="current-status-card">
@@ -91,27 +114,28 @@ export default function SupplierHome() {
             {/* Status Options */}
             <div className="status-options">
               {/* Onboarding */}
-              
+
             </div>
 
             {/* What This Means */}
             <div className="status-info">
               <h4>• What This Means</h4>
 
-              <div className="status-warning">
-                <h5>⚠ SLA Not Signed</h5>
+              <div className="status-success">
+                <div className="success-header">
+                  <span className="success-icon">✔</span>
+                  <h5>✅ SLA Signed</h5>
+                </div>
+
                 <p>
-                  We haven’t received your signed SLA (Service Level Agreement).
-                  Approved candidates from your list will only be ready for the UK
-                  Market once you send back the signed SLA to{" "}
-                  <strong>onboarding@westgateithub.in</strong>.
-                </p>
-                <p className="warning-action">
-                  📄 Please review, sign, and return the SLA document as soon as
-                  possible to activate your approved candidates.
+                  We have received your signed SLA (Service Level Agreement).
+                  Candidates approved from your list are now ready for the UK Market
+                  and can be considered for demand-led opportunities.
                 </p>
               </div>
             </div>
+
+
           </section>
 
 
@@ -142,7 +166,7 @@ export default function SupplierHome() {
                     ensure onboarding records remain accurate and up to date.
                   </p>
 
-                  <button className="card-btn blue">
+                  <button className="card-btn blue" onClick={() => navigate("/detail")}>
                     Go to My Details <span>→</span>
                   </button>
                 </div>
@@ -163,11 +187,11 @@ export default function SupplierHome() {
                     purposes. Not activated until SLA agreement and relevant demand arise.
                   </p>
 
-                  <button className="card-btn green">
+                  <button className="card-btn green" onClick={() => navigate("/candidate")}>
                     Go to Candidates <span>→</span>
                   </button>
                 </div>
-              </div>
+              </div>  
             </div>
           </section>
 
@@ -206,14 +230,14 @@ export default function SupplierHome() {
             <p>If you have questions or require support:</p>
 
             <div className="help-actions">
-              <button className="help-btn primary">📅 Book a Meeting</button>
-              <button className="help-btn outline">Contact Onboarding Team</button>
+              <button className="help-btn primary" onClick={() => navigate("/meeting")}>📅 Book a Meeting</button>
+              <button className="help-btn outline"   onClick={() => navigate("/contact")} >Contact Onboarding Team</button>
             </div>
           </section>
 
 
           {/* FOOTER */}
-          <footer className="portal-footer">
+          {/* <footer className="portal-footer">
             <div className="page-container">
               <p>
                 This portal is operated by <strong>Westgate India</strong>, a business
@@ -240,11 +264,14 @@ export default function SupplierHome() {
                 © 2025 WestGate IT Hub. All rights reserved.
               </span>
             </div>
-          </footer>
+          </footer> */}
+        
 
 
         </main>
       </div>
+      <AppFooter/>
+
     </>
   );
 }

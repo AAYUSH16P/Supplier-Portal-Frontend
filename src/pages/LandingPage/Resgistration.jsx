@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../Components/Header02";
 import Sidebar from "../../Components/Sidebar";
@@ -11,11 +11,11 @@ export default function Registration() {
 
     useEffect(() => {
         window.scrollTo({
-          top: 0,
-          left: 0,
-          behavior: "instant", // or "smooth"
+            top: 0,
+            left: 0,
+            behavior: "instant", // or "smooth"
         });
-      }, []);
+    }, []);
 
     return (
         <>
@@ -58,8 +58,8 @@ export default function Registration() {
                             <h4>Confirmation</h4>
 
                             <label className="ob-checkbox">
-                                <input 
-                                    type="checkbox" 
+                                <input
+                                    type="checkbox"
                                     checked={isAcknowledged}
                                     onChange={(e) => setIsAcknowledged(e.target.checked)}
                                 />
@@ -68,8 +68,8 @@ export default function Registration() {
                                 </span>
                             </label>
 
-                            <button 
-                                className={`ob-btn ${isAcknowledged ? "enabled" : ""}`} 
+                            <button
+                                className={`ob-btn ${isAcknowledged ? "enabled" : ""}`}
                                 disabled={!isAcknowledged}
                                 onClick={() => navigate("/supplier-registration")}
                             >
@@ -124,12 +124,12 @@ export default function Registration() {
                         </section>
 
                         {/* LEGAL FOOTER */}
-                        <LandingFooter />
 
 
                     </div>
                 </main>
             </div>
+            <LandingFooter />
         </>
     );
 }

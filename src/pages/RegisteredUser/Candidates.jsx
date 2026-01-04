@@ -1,10 +1,36 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import AppHeader from "../../Components/RegisteredUser/AppHeader";
 import AppSidebar from "../../Components/RegisteredUser/AppSidebar";
 import "../../style/RegisteredUser/Candidates.css";
 import { getSupplierCapacities } from "../../services/supplier";
 import GlobalLoader from "../../Components/common/GlobalLoader";
+import AppFooter from "../../Components/common/AppFooter";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
+
+
+const normalizeCertifications = (certifications, technicalSkills) => {
+  if (Array.isArray(certifications) && certifications.length > 0) {
+    return certifications
+      .map(c => (typeof c === "string" ? c : c?.name || c?.title || ""))
+      .filter(Boolean);
+  }
+
+  // 🔁 fallback (matches earlier UI expectation)
+  if (typeof technicalSkills === "string" && technicalSkills.trim()) {
+    return technicalSkills
+      .split(",")
+      .map(s => s.trim())
+      .filter(Boolean);
+  }
+
+  return [];
+};
+
+
 
 const getRejectedSupplierCapacities = async (companyId) => {
   const res = await fetch(
@@ -26,6 +52,9 @@ const getRejectedSupplierCapacities = async (companyId) => {
 
 
 
+
+
+
 export default function Candidates() {
   const [capacities, setCapacities] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -36,6 +65,17 @@ export default function Candidates() {
   const [selectedCandidate, setSelectedCandidate] = useState(null);
   const [rejectedApiList, setRejectedApiList] = useState([]); // rejected from API
 
+  const isSlaSigned = useMemo(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return false;
+
+    try {
+      const payload = JSON.parse(atob(token.split(".")[1]));
+      return payload.isSlaSigned === "True";
+    } catch {
+      return false;
+    }
+  }, []);
 
 
   const handleApprove = async (candidate) => {
@@ -51,13 +91,13 @@ export default function Candidates() {
         )
       );
     } catch {
-      alert("Failed to approve candidate");
+      toast.error("Failed to approve candidate");
     }
   };
 
   const handleRejectConfirm = async () => {
     if (!rejectRemark.trim()) {
-      alert("Please enter rejection remark");
+      toast.warning("Please enter a rejection remark");
       return;
     }
 
@@ -81,7 +121,7 @@ export default function Candidates() {
       setShowRejectModal(false);
       setSelectedCandidate(null);
     } catch {
-      alert("Failed to reject candidate");
+      toast.error("Failed to reject candidate");
     }
   };
 
@@ -99,7 +139,16 @@ export default function Candidates() {
     ])
       .then(([allRes, rejectedRes]) => {
         setCapacities(allRes.data || []);
-        setRejectedApiList(rejectedRes || []);
+
+        const normalizedRejected = (rejectedRes || []).map(c => ({
+          ...c,
+          certifications: normalizeCertifications(
+            c.certifications,
+            c.technicalSkills
+          ),
+        }));
+
+        setRejectedApiList(normalizedRejected);
       })
       .catch(() => {
         setCapacities([]);
@@ -149,6 +198,14 @@ export default function Candidates() {
   return (
     <>
       <AppHeader />
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        closeOnClick
+        pauseOnHover
+        draggable
+      />
 
       <div className="app-shell">
         <AppSidebar unlocked active="Candidates" />
@@ -209,14 +266,27 @@ export default function Candidates() {
 
 
           {/* SLA WARNING */}
-          <div className="sla-warning">
-            <h4>⚠ SLA Not Signed</h4>
-            <p>
-              Approved candidates will be eligible for the UK Market only after
-              the signed SLA is returned to{" "}
-              <strong>onboarding@westgateithub.in</strong>.
-            </p>
-          </div>
+          {!isSlaSigned && (
+            <div className="sla-warning-box">
+              <div className="sla-warning-header">
+                <span className="sla-warning-icon">⚠</span>
+                <h4>SLA Not Signed</h4>
+              </div>
+
+              <p>
+                We haven’t received your signed SLA (Service Level Agreement).
+                Approved candidates from your list will only be ready for the UK
+                Market once you send back the signed SLA to{" "}
+                <strong>onboarding@westgateithub.in</strong>.
+              </p>
+
+              <p className="sla-warning-action">
+                📄 Please review, sign, and return the SLA document as soon as possible
+                to activate your approved candidates.
+              </p>
+            </div>
+          )}
+
 
           {/* ================= FIRST TIME USER ================= */}
           {!hasCandidates && (
@@ -331,8 +401,9 @@ export default function Candidates() {
                       </p>
                       <p>
                         <strong>Certifications:</strong>{" "}
-                        {c.certifications?.filter(Boolean).join(", ") || "—"}
+                        {c.certifications.length > 0 ? c.certifications.join(", ") : "—"}
                       </p>
+
                     </div>
                   </div>
                 ))}
@@ -382,6 +453,7 @@ export default function Candidates() {
 
         </main>
       </div>
+      <AppFooter />
     </>
   );
 }

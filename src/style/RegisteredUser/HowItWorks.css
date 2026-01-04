@@ -130,12 +130,13 @@
 }
 
 .check-box ul {
+  list-style: none; 
   margin: 0;
   padding-left: 18px;
 }
 
 .check-box li {
-  margin-bottom: 8px;
+  margin-bottom: 18px;
   font-size: 13px;
 }
 
@@ -188,20 +189,92 @@
 ========================= */
 
 .context-box {
-  background: #fff7ed;
-  border: 1px solid #fed7aa;
-  border-radius: 16px;
-  padding: 18px;
-  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.04);
+  background: #fffdf0;
+  border: 2px solid #facc15;
+  border-radius: 20px;
+  padding: 22px 26px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.1);
 }
+
 
 .context-header {
   display: flex;
-  gap: 10px;
   align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.context-icon {
+  width: 40px;
+  height: 40px;
+  background: #fde68a;
+  color: #92400e;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.context-header h4 {
+  margin: 0;
+  font-size: 18px;
   font-weight: 600;
+  color: #0f172a;
+}
+
+.context-body {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 22px;
+  align-items: start; /* 🔑 THIS is missing */
+}
+
+
+.context-text p {
+  font-size: 14px;
+  color: #334155;
+  margin-bottom: 8px;
+}
+
+
+.context-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.context-list li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 14px;
+  color: #334155;
   margin-bottom: 10px;
 }
+
+/* ORANGE DOT */
+.context-list li::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  margin-top: 7px;
+  border-radius: 50%;
+  background: #f59e0b; /* amber */
+  flex-shrink: 0;
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .context-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
 
 .context-content p {
   font-size: 13.5px;
@@ -246,7 +319,7 @@
 
 /* HEADER */
 .journey-header {
-  background: linear-gradient(180deg, #0f172a, #020617);
+  background: linear-gradient(180deg, #000000, #000000);
   color: #ffffff;
   padding: 22px 28px;
 }
@@ -691,4 +764,52 @@ label.active .radio-dot {
 /* CURRENT STEP EMPHASIS */
 .step-circle.current {
   transform: scale(1.05);
+}
+
+
+
+/* SLA SIGNED SUCCESS BOX (STEP 2) */
+.sla-success-box {
+  margin-top: 14px;
+  background: #f0fdf4;
+  border-left: 4px solid #22c55e;
+  padding: 14px 16px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  color: #166534;
+  line-height: 1.6;
+}
+
+
+.focus-item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 13.5px;
+  margin-bottom: 10px;
+}
+
+
+.focus-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* Colors */
+.focus-dot.purple { background: #7c3aed; }
+.focus-dot.blue   { background: #2563eb; }
+.focus-dot.green  { background: #22c55e; }
+.focus-dot.yellow { background: #f59e0b; }
+
+
+
+.check{
+  color: green;
+}
+
+.blue-ab{
+  color:blue
 }

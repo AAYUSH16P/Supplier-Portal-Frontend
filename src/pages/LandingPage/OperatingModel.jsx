@@ -57,71 +57,71 @@ export default function OperatingModel() {
             <section className="primary-outline-box">
               <p>
                 Through this role, <strong>Westgate India</strong> acts as the{" "}
-                <strong>single operational hub</strong> and{" "}
-                <strong>primary point of contact</strong> for invite-only supplier
-                onboarding and early readiness activities.
+                <strong className="blue">single operational hub</strong> and{" "}
+                <strong className="blue">primary point of contact</strong> for invite-only supplier
+                onboarding and early readiness activities.We work with selected technology employers to ensure suppliers are prepared and aligned before wider platform access is introduced, focusing on quality, continuity, and preparedness rather than open or speculative onboarding.
               </p>
             </section>
 
             {/* ================= WHAT WE DO ================= */}
-<section className="content-card">
+            <section className="content-card">
 
-<div className="section-heading teal">
-  <span className="section-bar teal" />
-  <h3>What We Do</h3>
-</div>
+              <div className="section-heading teal">
+                <span className="section-bar teal" />
+                <h3>What We Do</h3>
+              </div>
 
-<p className="section-intro">
-  At this stage, <strong>Westgate India</strong> acts as the{" "}
-  <strong>primary and single operational point of contact</strong> for
-  suppliers participating in the onboarding and readiness phase.
-</p>
+              <p className="section-intro">
+                At this stage, <strong>Westgate India</strong> acts as the{" "}
+                <strong className="blue">primary and single operational point of contact</strong> for
+                suppliers participating in the onboarding and readiness phase.
+              </p>
 
-<div className="mint-highlight">
-  <strong>This means:</strong>
-  <ul>
-    <li>
-      <strong>Westgate India</strong> coordinates all onboarding interactions
-    </li>
-    <li>
-      <strong>Westgate India</strong> acts as the day-to-day engagement hub for
-      readiness activities, queries, and operational alignment
-    </li>
-    <li>
-      Suppliers are not required to engage with multiple entities during
-      onboarding
-    </li>
-  </ul>
-</div>
+              <div className="mint-highlight">
+                <strong>This means:</strong>
+                <ul>
+                  <li>
+                    <strong>Westgate India</strong> coordinates all onboarding interactions
+                  </li>
+                  <li>
+                    <strong>Westgate India</strong> acts as the day-to-day engagement hub for
+                    readiness activities, queries, and operational alignment
+                  </li>
+                  <li>
+                    Suppliers are not required to engage with multiple entities during
+                    onboarding
+                  </li>
+                </ul>
+              </div>
 
-<p className="section-footer">
-  <strong>Westgate India</strong> supports suppliers by managing supplier
-  registration, readiness preparation, and operational alignment, and by
-  helping suppliers understand how the engagement model works before any
-  client demand is introduced.
-</p>
+              <p className="section-footer">
+                <strong>Westgate India</strong> supports suppliers by managing supplier
+                registration, readiness preparation, and operational alignment, and by
+                helping suppliers understand how the engagement model works before any
+                client demand is introduced.
+              </p>
 
-</section>
+            </section>
 
 
-{/* ================= IMPORTANT INFORMATION ================= */}
-<section className="important-info-card">
-  <div className="important-info-header">
-    <span className="info-icon">ⓘ</span>
-    <h4>Important Information</h4>
-  </div>
+            {/* ================= IMPORTANT INFORMATION ================= */}
+            <section className="important-info-card">
+              <div className="important-info-header">
+                <span className="info-icon">ⓘ</span>
+                <h4>Important Information</h4>
+              </div>
 
-  <p>
-    All commercial terms, governance arrangements, roles, responsibilities, and
-    legal details are formally defined through the{" "}
-    <strong>Supplier SLA</strong>, which is shared and discussed after
-    registration. This ensures clarity, consistency, and accountability as the
-    engagement progresses.
-  </p>
-</section>
+              <p>
+                All commercial terms, governance arrangements, roles, responsibilities, and
+                legal details are formally defined through the{" "}
+                <strong>Supplier SLA</strong>, which is shared and discussed after
+                registration. This ensures clarity, consistency, and accountability as the
+                engagement progresses.
+              </p>
+            </section>
 
-{/* ================= LEGAL FOOTER ================= */}
-<LandingFooter />
+            {/* ================= LEGAL FOOTER ================= */}
+      
 
 
 
@@ -129,6 +129,7 @@ export default function OperatingModel() {
           </div>
         </main>
       </div>
+      <LandingFooter />
     </>
   );
 }

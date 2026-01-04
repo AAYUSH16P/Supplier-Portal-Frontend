@@ -1,6 +1,8 @@
 import AppHeader from "../../Components/RegisteredUser/AppHeader";
 import AppSidebar from "../../Components/RegisteredUser/AppSidebar";
 import "../../style/RegisteredUser/OperatingModel.css";
+import AppFooter from "../../Components/common/AppFooter";
+
 
 export default function SupplierOperatingModel() {
   return (
@@ -98,23 +100,24 @@ export default function SupplierOperatingModel() {
 
 
           <section className="important-notice">
-  <div className="notice-icon">
-    🧳
-  </div>
+            <div className="notice-icon">
+              🧳
+            </div>
 
-  <div className="notice-content">
-    <h4>Important Notice</h4>
-    <p>
-      All commercial terms, governance arrangements, roles, responsibilities,
-      and legal details are formally defined through the{" "}
-      <strong className="notice-link">Supplier SLA</strong>, which is discussed
-      and agreed separately before any capacity is approved or activated.
-    </p>
-  </div>
-</section>
+            <div className="notice-content">
+              <h4>Important Notice</h4>
+              <p>
+                All commercial terms, governance arrangements, roles, responsibilities,
+                and legal details are formally defined through the{" "}
+                <strong className="notice-link">Supplier SLA</strong>, which is discussed
+                and agreed separately before any capacity is approved or activated.
+              </p>
+            </div>
+          </section>
 
         </main>
       </div>
+      <AppFooter/>
     </>
   );
 }

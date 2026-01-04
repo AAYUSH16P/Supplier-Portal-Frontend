@@ -8,6 +8,8 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { jwtDecode } from "jwt-decode";
 import { submitManualCapacity } from "../../services/supplier";
+import AppFooter from "../../Components/common/AppFooter"; 
+
 
 
 export default function AddCapacityManually() {
@@ -610,6 +612,7 @@ export default function AddCapacityManually() {
                 </main>
 
             </div>
+            <AppFooter/>
         </>
     );
 }

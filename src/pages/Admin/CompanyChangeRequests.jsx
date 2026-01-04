@@ -3,6 +3,9 @@ import "../../style/RegisteredUser/CompanyChangeRequests.css";
 import { useNavigate } from "react-router-dom";
 import AppHeader from "../../Components/RegisteredUser/AppHeader";
 import GlobalLoader from "../../Components/common/GlobalLoader";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 
 export default function CompanyChangeRequests() {
@@ -32,7 +35,7 @@ export default function CompanyChangeRequests() {
       { method: "POST" }
     );
 
-    alert("Request approved");
+    toast.success("Request approved successfully");
     setRequests(prev =>
       prev.map(r => r.id === id ? { ...r, status: "APPROVED" } : r)
     );
@@ -51,7 +54,7 @@ export default function CompanyChangeRequests() {
       }
     );
 
-    alert("Request rejected");
+    toast.error("Request rejected");
     setRequests(prev =>
       prev.map(r => r.id === id ? { ...r, status: "REJECTED" } : r)
     );

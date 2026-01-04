@@ -3,54 +3,53 @@ import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { companyLogin } from "../../services/auth";
-import { getAdminAvailability } from "../../services/calendar";
 import "../../style/RegisteredUser/SupplierLogin.css";
-import "../../style/RegisteredUser/sidebar.css"
+import "../../style/RegisteredUser/sidebar.css";
+import { jwtDecode } from "jwt-decode";
+
+import ChangePasswordModal from "./changePassword";
 
 export default function SupplierLogin() {
   const navigate = useNavigate();
+
+  const [showChangePassword, setShowChangePassword] = useState(false);
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     rememberMe: false,
   });
+
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  /* ================= VALIDATION ================= */
+
   const validateEmail = (email) => {
-    if (!email.trim()) {
-      return "Email Address is required";
-    }
+    if (!email.trim()) return "Email Address is required";
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return "Please enter a valid email address";
-    }
+    if (!emailRegex.test(email)) return "Please enter a valid email address";
     return "";
   };
 
   const validatePassword = (password) => {
-    if (!password.trim()) {
-      return "Password is required";
-    }
-    if (password.length < 6) {
-      return "Password must be at least 6 characters";
-    }
+    if (!password.trim()) return "Password is required";
+    if (password.length < 6) return "Password must be at least 6 characters";
     return "";
   };
 
+  /* ================= HANDLERS ================= */
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+
     setFormData((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
     }));
 
-    // Clear error when user starts typing
     if (errors[name]) {
-      setErrors((prev) => ({
-        ...prev,
-        [name]: "",
-      }));
+      setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
 
@@ -58,99 +57,97 @@ export default function SupplierLogin() {
     const { name, value } = e.target;
     let error = "";
 
-    if (name === "email") {
-      error = validateEmail(value);
-    } else if (name === "password") {
-      error = validatePassword(value);
-    }
+    if (name === "email") error = validateEmail(value);
+    if (name === "password") error = validatePassword(value);
 
-    setErrors((prev) => ({
-      ...prev,
-      [name]: error,
-    }));
+    setErrors((prev) => ({ ...prev, [name]: error }));
   };
+
+  /* ================= SUBMIT ================= */
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate all fields
     const emailError = validateEmail(formData.email);
     const passwordError = validatePassword(formData.password);
 
     if (emailError || passwordError) {
-      setErrors({
-        email: emailError,
-        password: passwordError,
-      });
+      setErrors({ email: emailError, password: passwordError });
       return;
     }
 
     setIsSubmitting(true);
-    setErrors({}); // Clear previous errors
+    setErrors({});
 
     try {
-      const response = await companyLogin(formData.email, formData.password);
+      const response = await companyLogin(
+        formData.email,
+        formData.password
+      );
 
-      // Handle successful login (status 200)
-      if (response.status === 200 && response.data) {
-        // Store token if provided
-        if (response.data.token) {
-          localStorage.setItem("token", response.data.token);
-        }
+      if (response.status === 200 && response.data?.token) {
+        const token = response.data.token;
+        localStorage.setItem("token", token);
 
-        // Store remember me preference
         if (formData.rememberMe) {
           localStorage.setItem("rememberMe", "true");
         }
 
-        // Call admin availability API after successful login
+        // Decode token
+        let decoded;
         try {
-          await getAdminAvailability("ayush@westgateithub.com");
-        } catch (availabilityError) {
-          // Log error but don't block login flow
-          console.error("Failed to fetch admin availability:", availabilityError);
+          decoded = jwtDecode(token);
+        } catch {
+          throw new Error("Invalid token received");
         }
 
-        // Show success toast
-        toast.success("Login successful! Redirecting...", {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+        // Optional API call
+        // try {
+        //   await getAdminAvailability("ayush@westgateithub.com");
+        // } catch (err) {
+        //   console.error("Admin availability failed", err);
+        // }
 
-        // Navigate to acknowledgement page after a short delay
+        toast.success("Login successful!", { autoClose: 1500 });
+
+        // 🔑 PASSWORD CHANGE CHECK
+        if (decoded?.isPasswordChanged === "False") {
+          setShowChangePassword(true);
+          return; // ⛔ stop navigation
+        }
+
+        // Normal flow
         setTimeout(() => {
           navigate("/acknowledge");
-        }, 1000);
+        }, 800);
       }
     } catch (error) {
-      console.error("Login error:", error);
-      const errorMessage =
+      const msg =
         error.response?.data?.message ||
-        error.response?.data?.error ||
         error.message ||
-        "Login failed. Please check your credentials and try again.";
-      
-      // Show error toast
-      toast.error(errorMessage, {
-        position: "top-right",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-      });
+        "Login failed. Please try again.";
+
+      toast.error(msg);
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  /* ================= UI ================= */
+
   return (
     <div className="login-page">
       <ToastContainer />
+
+      {/* 🔐 CHANGE PASSWORD MODAL */}
+      <ChangePasswordModal
+        open={showChangePassword}
+        onClose={() => {
+          setShowChangePassword(false);
+          navigate("/acknowledge"); // allow cancel + continue
+        }}
+      />
+
       <header className="login-header">
         <button className="back-btn" onClick={() => navigate("/")}>
           Supplier Login
@@ -161,7 +158,6 @@ export default function SupplierLogin() {
           <span>WestGate</span>
         </div>
 
-        {/* Spacer to keep center alignment */}
         <div className="header-spacer" />
       </header>
 
@@ -185,9 +181,7 @@ export default function SupplierLogin() {
                 placeholder="arif@talentedstaff.com"
               />
             </div>
-            {errors.email && (
-              <span className="error-message">{errors.email}</span>
-            )}
+            {errors.email && <span className="error-message">{errors.email}</span>}
 
             <label>Password</label>
             <div className={`input-box ${errors.password ? "error" : ""}`}>
@@ -205,11 +199,6 @@ export default function SupplierLogin() {
               <span className="error-message">{errors.password}</span>
             )}
 
-            <div className="login-options">
-             
-
-            </div>
-
             <button
               type="submit"
               className="login-btn"
@@ -219,8 +208,9 @@ export default function SupplierLogin() {
             </button>
 
             <p className="register">
-              Don't have an account?{" "}
-              <button className="rgstr"
+              Don’t have an account?{" "}
+              <button
+                className="rgstr"
                 onClick={(e) => {
                   e.preventDefault();
                   navigate("/registration");
@@ -231,12 +221,6 @@ export default function SupplierLogin() {
             </p>
           </div>
         </form>
-
-        <div className="demo-box">
-          <strong>Demo Login:</strong> Use any valid email format
-          <br />
-          <small>Example: demo@company.com with any password</small>
-        </div>
       </main>
     </div>
   );

@@ -4,12 +4,15 @@ import AppHeader from "../../Components/RegisteredUser/AppHeader";
 import AppSidebar from "../../Components/RegisteredUser/AppSidebar";
 import LandingFooter from "../../Components/LandingFooter";
 import "../../style/LandingPage/Contact.css";
+import { useNavigate } from "react-router-dom";
+
 
 const isAuthenticated = () => {
   return !!localStorage.getItem("token");
 };
 
 export default function Contact() {
+  const navigate = useNavigate();
   const isAuth = isAuthenticated();
 
   return (
@@ -48,77 +51,109 @@ export default function Contact() {
             <div className="contact-grid">
 
               {/* WESTGATE CARD */}
-              <section className="contact-card blue-card">
-                <div className="card-header">
-                  <div className="card-icon">🏢</div>
-                  <h3>Westgate India</h3>
-                </div>
+              <section className="contact-card westgate-card">
+  {/* HEADER STRIP */}
+  <div className="westgate-header">
+    <div className="westgate-header-inner">
+      <div className="westgate-icon">🏢</div>
+      <h3>Westgate India</h3>
+    </div>
+  </div>
 
-                <p className="card-desc">
-                  Your primary point of contact for all onboarding and readiness queries
-                </p>
+  {/* BODY */}
+  <div className="westgate-body">
+    <p className="westgate-desc">
+      Your primary point of contact for all onboarding and readiness queries
+    </p>
 
-                <div className="info-row">
-                  <span>📧</span>
-                  <div>
-                    <small>Email</small>
-                    <strong>onboarding@westgateithub.in</strong>
-                  </div>
-                </div>
+    <div className="westgate-info">
+      <div className="westgate-info-row">
+        <div className="info-icon email">📧</div>
+        <div>
+          <small>Email</small>
+          <strong>onboarding@westgateithub.in</strong>
+        </div>
+      </div>
 
-                <div className="info-row">
-                  <span>📞</span>
-                  <div>
-                    <small>Phone</small>
-                    <strong>+91 6366202178</strong>
-                  </div>
-                </div>
+      <div className="westgate-info-row">
+        <div className="info-icon phone">📞</div>
+        <div>
+          <small>Phone</small>
+          <strong>+91 6366202178</strong>
+        </div>
+      </div>
 
-                <div className="info-row">
-                  <span>⏰</span>
-                  <div>
-                    <small>Operating Hours</small>
-                    <strong>Monday – Friday, 10:00 AM to 5:00 PM IST</strong>
-                  </div>
-                </div>
-              </section>
+      <div className="westgate-info-row">
+        <div className="info-icon time">⏰</div>
+        <div>
+          <small>Operating Hours</small>
+          <strong>Monday – Friday, 10:00 AM to 5:00 PM IST</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
               {/* HELP CARD */}
-              <section className="contact-card green-card">
-                <div className="card-header">
-                  <div className="card-icon">💬</div>
-                  <h3>Need Help?</h3>
-                </div>
+              <section className="contact-card needhelp-card">
+  {/* HEADER */}
+  <div className="needhelp-header">
+    <div className="needhelp-header-inner">
+      <div className="needhelp-icon">💬</div>
+      <h3>Need Help?</h3>
+    </div>
+  </div>
 
-                <p className="card-desc">
-                  Choose the option that best suits your needs
-                </p>
+  {/* BODY */}
+  <div className="needhelp-body">
+    <p className="needhelp-desc">
+      Choose the option that best suits your needs
+    </p>
 
-                <div className="help-box yellow">
-                  <div className="help-icon">📨</div>
-                  <div>
-                    <h4>Email Support</h4>
-                    <p>Send us an email for detailed queries</p>
-                    <button
-                      className="btn-yellow"
-                      onClick={() => {
-                        window.location.href =
-                          "mailto:ayush@westgateithub.com";
-                      }}
-                    >
-                      Send Email
-                    </button>
-                  </div>
-                </div>
+    {/* BOOK MEETING */}
+    <div
+      className="needhelp-option blue clickable"
+    >
+      <div className="option-icon blue">📍</div>
+      <div>
+        <h4>Book a Meeting</h4>
+        <p>Schedule a call with our onboarding team</p>
+      </div>
+    </div>
 
-                <div className="help-box purple">
-                  <div className="help-icon">❓</div>
-                  <div>
-                    <h4>Check FAQ</h4>
-                    <p>Find answers to common questions</p>
-                  </div>
-                </div>
-              </section>
+    {/* EMAIL SUPPORT */}
+    <div className="needhelp-option yellow">
+      <div className="option-icon yellow">✉️</div>
+      <div>
+        <h4>Email Support</h4>
+        <p>Send us an email for detailed queries</p>
+        <button
+          className="email-btn"
+          onClick={() =>
+            (window.location.href =
+              "mailto:onboarding@westgateithub.in")
+          }
+        >
+          Send Email
+        </button>
+      </div>
+    </div>
+
+    {/* FAQ */}
+    <div
+      className="needhelp-option purple clickable"
+      onClick={() => navigate("/faq")}
+    >
+      <div className="option-icon purple">❓</div>
+      <div>
+        <h4>Check FAQ</h4>
+        <p>Find answers to common questions</p>
+      </div>
+    </div>
+  </div>
+</section>
+
             </div>
 
             {/* FULL WIDTH SECTION */}
@@ -159,11 +194,12 @@ export default function Contact() {
             </div>
 
             {/* FOOTER ONLY FOR PUBLIC */}
-            {!isAuth && <LandingFooter />}
+            
 
           </div>
         </main>
       </div>
+      {!isAuth && <LandingFooter />}
     </>
   );
 }

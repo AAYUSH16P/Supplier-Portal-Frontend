@@ -1,6 +1,8 @@
 import "../../style/RegisteredUser/Notifications.css";
 import AppHeader from "../../Components/RegisteredUser/AppHeader";
 import AppSidebar from "../../Components/RegisteredUser/AppSidebar";
+import AppFooter from "../../Components/common/AppFooter"; 
+
 
 export default function Notifications() {
   return (
@@ -33,6 +35,7 @@ export default function Notifications() {
     </div>
 
     </div>
+    <AppFooter/>
     </>
   );
 }

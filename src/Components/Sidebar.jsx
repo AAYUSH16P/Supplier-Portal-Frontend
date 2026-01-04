@@ -55,10 +55,7 @@ export default function Sidebar({ active }) {
         </Link>
       </nav>
 
-      <div className="sidebar-footer">
-        © 2025 TalentedStaff Platform
-        <span>Powered by Westgate IT Hub</span>
-      </div>
+     
     </aside>
   );
 }
