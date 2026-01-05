@@ -9,11 +9,53 @@ export default function CandidateValidation() {
     const navigate = useNavigate();
     const [selectedCandidate, setSelectedCandidate] = useState(null);
 
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
+    const [confirmAction, setConfirmAction] = useState(null); // APPROVE | REJECT
+    const [confirmCandidateId, setConfirmCandidateId] = useState(null);
+    const [confirmMessage, setConfirmMessage] = useState("");
 
 
     const [candidates, setCandidates] = useState([]);
     const [searchText, setSearchText] = useState("");
     const [supplierFilter, setSupplierFilter] = useState("All Suppliers");
+
+
+    const handleConfirmAction = async () => {
+        try {
+            if (confirmAction === "APPROVE") {
+                await fetch(
+                    `https://sp-portal-backend-production.up.railway.app/api/supplier/capacities/${confirmCandidateId}/approve`,
+                    { method: "POST" }
+                );
+            }
+
+            if (confirmAction === "REJECT") {
+                const remark = prompt("Enter rejection remark:");
+                if (!remark) return;
+
+                await fetch(
+                    `https://sp-portal-backend-production.up.railway.app/api/supplier/capacities/${confirmCandidateId}/reject`,
+                    {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(remark),
+                    }
+                );
+            }
+
+            // cleanup
+            setShowConfirmModal(false);
+            setConfirmAction(null);
+            setConfirmCandidateId(null);
+            setSelectedCandidate(null);
+
+            fetchCandidates();
+        } catch (err) {
+            console.error("Action failed", err);
+            alert("Operation failed");
+        }
+    };
+
 
     /* =========================
        FETCH PENDING CANDIDATES
@@ -203,16 +245,28 @@ export default function CandidateValidation() {
                                                 </button>
                                                 <button
                                                     className="approve"
-                                                    onClick={() => handleApprove(c.id)}
+                                                    onClick={() => {
+                                                        setConfirmAction("APPROVE");
+                                                        setConfirmCandidateId(c.id);
+                                                        setConfirmMessage("Are you sure you want to approve this candidate?");
+                                                        setShowConfirmModal(true);
+                                                    }}
                                                 >
                                                     ✔ Approve
                                                 </button>
+
                                                 <button
                                                     className="reject"
-                                                    onClick={() => handleReject(c.id)}
+                                                    onClick={() => {
+                                                        setConfirmAction("REJECT");
+                                                        setConfirmCandidateId(c.id);
+                                                        setConfirmMessage("Are you sure you want to reject this candidate?");
+                                                        setShowConfirmModal(true);
+                                                    }}
                                                 >
                                                     ✖ Reject
                                                 </button>
+
                                             </td>
                                         </tr>
                                     ))
@@ -261,12 +315,17 @@ export default function CandidateValidation() {
 
                                                     <div>
                                                         <label>Job Title</label>
-                                                        <p>{selectedCandidate.jobTitle}</p>
+                                                        <p>{selectedCandidate.jobTitle || "-"}</p>
+                                                    </div>
+
+                                                    <div>
+                                                        <label>Gender</label>
+                                                        <p>{selectedCandidate.gender || "-"}</p>
                                                     </div>
 
                                                     <div>
                                                         <label>Location</label>
-                                                        <p>{selectedCandidate.location}</p>
+                                                        <p>{selectedCandidate.location || "-"}</p>
                                                     </div>
 
                                                     <div>
@@ -277,6 +336,45 @@ export default function CandidateValidation() {
                                                     <div>
                                                         <label>Total Experience</label>
                                                         <p>{selectedCandidate.totalExperience} yrs</p>
+                                                    </div>
+
+                                                    <div>
+                                                        <label>CTC</label>
+                                                        <p>
+                                                            {selectedCandidate.ctc
+                                                                ? `₹ ${selectedCandidate.ctc.toLocaleString()}`
+                                                                : "-"}
+                                                        </p>
+                                                    </div>
+
+                                                    <div>
+                                                        <label>Technical Skills</label>
+                                                        <p>{selectedCandidate.technicalSkills || "-"}</p>
+                                                    </div>
+
+                                                    <div>
+                                                        <label>Tools</label>
+                                                        <p>{selectedCandidate.tools || "-"}</p>
+                                                    </div>
+
+                                                    <div>
+                                                        <label>Number of Projects</label>
+                                                        <p>{selectedCandidate.numberOfProjects ?? "-"}</p>
+                                                    </div>
+
+                                                    <div>
+                                                        <label>Referred</label>
+                                                        <p>{selectedCandidate.isRefered ? "Yes" : "No"}</p>
+                                                    </div>
+
+                                                    <div>
+                                                        <label>Approval Stage</label>
+                                                        <p>{selectedCandidate.approvalStage}</p>
+                                                    </div>
+
+                                                    <div className="full-width">
+                                                        <label>Employer Note</label>
+                                                        <p>{selectedCandidate.employerNote || "-"}</p>
                                                     </div>
 
                                                     <div>
@@ -299,6 +397,7 @@ export default function CandidateValidation() {
                                                     )}
                                                 </div>
                                             </div>
+
 
                                             {/* FOOTER */}
                                             <div className="modal-footer">
@@ -329,9 +428,65 @@ export default function CandidateValidation() {
                             </tbody>
                         </table>
                     </div>
+                    {showConfirmModal && (
+                        <div
+                            className="admin-modal-overlay"
+                            onClick={() => setShowConfirmModal(false)}
+                        >
+                            <div
+                                className="admin-modal confirm-sla-modal"
+                                onClick={(e) => e.stopPropagation()}
+                            >
+                                {/* HEADER */}
+                                <div className="confirm-header">
+                                    <h2>Confirm Action</h2>
+                                    <button
+                                        className="close-icon"
+                                        onClick={() => setShowConfirmModal(false)}
+                                    >
+                                        ✕
+                                    </button>
+                                </div>
+
+                                {/* BODY */}
+                                <div className="confirm-body">
+                                    <div className="confirm-icon">
+                                        {confirmAction === "REJECT" ? "⚠️" : "✅"}
+                                    </div>
+
+                                    <p className="confirm-text">
+                                        {confirmMessage}
+                                    </p>
+
+                                    <p className="confirm-subtext">
+                                        This action requires administrator confirmation.
+                                    </p>
+                                </div>
+
+                                {/* FOOTER */}
+                                <div className="confirm-footer">
+                                    <button
+                                        className="btn cancel"
+                                        onClick={() => setShowConfirmModal(false)}
+                                    >
+                                        Cancel
+                                    </button>
+
+                                    <button
+                                        className="btn confirm" id="abc"
+                                        onClick={handleConfirmAction}
+                                    >
+                                        ✔ Confirm
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+
                 </main>
             </div>
-            <AppFooter/>
+            <AppFooter />
         </>
     );
 }

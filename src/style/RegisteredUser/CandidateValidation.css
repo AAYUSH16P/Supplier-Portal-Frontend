@@ -2,6 +2,249 @@
     padding: 28px;
     background: #f7f9fc;
   }
+
+  .confirm-sla-modal {
+    width: 520px;
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+    overflow: hidden;
+    animation: modalPop 0.25s ease;
+  }
+  
+  /* Header */
+  .confirm-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 26px;
+    border-bottom: 1px solid #e9ebf0;
+  }
+  
+  .confirm-header h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+    color: #111827;
+  }
+  
+  /* Body */
+  .confirm-body {
+    padding: 32px 26px 20px;
+    text-align: center;
+  }
+  
+  .confirm-icon {
+    font-size: 42px;
+    margin-bottom: 14px;
+  }
+  
+  .confirm-text {
+    font-size: 16px;
+    font-weight: 500;
+    color: #1f2937;
+    margin-bottom: 6px;
+  }
+  
+  .confirm-subtext {
+    font-size: 14px;
+    color: #6b7280;
+  }
+  
+  /* Footer */
+  .confirm-footer {
+    display: flex;
+    gap: 14px;
+    padding: 20px 26px 26px;
+  }
+  
+  .confirm-footer .btn {
+    flex: 1;
+    height: 46px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+  }
+  
+  /* Cancel */
+  .confirm-footer .btn.cancel {
+    background: #f1f3f6;
+    color: #374151;
+  }
+  
+  .confirm-footer .btn.cancel:hover {
+    background: #e5e7eb;
+  }
+  
+  /* Confirm */
+  .confirm-footer .btn.confirm {
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    color: #ffffff;
+    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.35);
+  }
+  
+
+
+  .detail-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 👈 allow more fields */
+    gap: 16px 24px;
+    align-items: start;
+  }
+  
+
+  /* ===== CANDIDATE DETAIL MODAL ===== */
+
+.candidate-detail-modal {
+  width: 720px;
+  max-height: 90vh;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.candidate-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 26px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.candidate-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.candidate-body {
+  padding: 22px 26px;
+  max-height: 65vh;
+  overflow-y: auto;
+  background: #f9fafb;
+}
+
+/* Cards */
+.info-card {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  background: #fff;
+  padding: 16px 18px;
+  border-radius: 14px;
+  margin-bottom: 14px;
+}
+
+.info-card label,
+.note-card label,
+.cert-card label {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.info-card p,
+.note-card p {
+  margin: 4px 0 0;
+  font-weight: 600;
+  color: #111827;
+}
+
+.mono {
+  font-family: monospace;
+  font-size: 12px;
+  word-break: break-all;
+}
+
+/* Notes */
+.note-card,
+.cert-card {
+  background: #fff;
+  padding: 16px 18px;
+  border-radius: 14px;
+  margin-bottom: 14px;
+}
+
+/* Status */
+.status-row {
+  margin: 10px 0 16px;
+}
+
+.status-badge.pending {
+  background: #fef3c7;
+  color: #92400e;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Footer */
+.candidate-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  padding: 18px 26px;
+  border-top: 1px solid #e5e7eb;
+  background: #fff;
+}
+
+.candidate-footer .btn {
+  min-width: 130px;
+  height: 44px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.candidate-footer .approve {
+  background: #22c55e;
+  color: #fff;
+}
+
+.candidate-footer .reject {
+  background: #ef4444;
+  color: #fff;
+}
+
+
+
+  .detail-grid > div {
+    min-width: 0;
+  }
+  
+  .detail-grid .full-width {
+    grid-column: span 3;
+  }
+  
+  /* ensure modal scrolls instead of cutting content */
+  .modal-body {
+    max-height: 65vh;
+    overflow-y: auto;
+  }
+  
+  
+  .confirm-footer .btn.confirm:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 26px rgba(79, 70, 229, 0.45);
+  }
+
+  #abc{
+    margin-top: "15px";
+  }
+  
+  /* Animation */
+  @keyframes modalPop {
+    from {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
   
   /* HEADER */
   .page-header {
@@ -230,4 +473,55 @@
   display: flex;
   justify-content: flex-end;
   gap: 12px;
+}
+
+
+
+
+/* ===== INFO CARD GRID FIX ===== */
+
+.info-card {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)); /* ✅ 2 columns */
+  gap: 16px 24px;
+  background: #ffffff;
+  padding: 18px 20px;
+  border-radius: 14px;
+  margin-bottom: 16px;
+}
+
+/* Each field */
+.info-card > div {
+  min-width: 0;
+}
+
+/* Label */
+.info-card label {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* Value */
+.info-card p {
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  word-break: break-word;
+}
+
+/* Long IDs */
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  word-break: break-all;
+}
+
+/* Scroll safety */
+.candidate-body {
+  max-height: 65vh;
+  overflow-y: auto;
+  background: #f9fafb;
+  padding: 22px 26px;
 }

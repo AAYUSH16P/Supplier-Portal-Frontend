@@ -13,8 +13,53 @@ export default function CompanyChangeRequests() {
   const [loading, setLoading] = useState(true);
   const [searchText, setSearchText] = useState("");
   const [selectedRequest, setSelectedRequest] = useState(null);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+const [confirmAction, setConfirmAction] = useState(null); // APPROVE | REJECT
+const [confirmRequestId, setConfirmRequestId] = useState(null);
+const [confirmMessage, setConfirmMessage] = useState("");
+
 
   const navigate = useNavigate();
+
+
+  const handleConfirmAction = async () => {
+    try {
+      if (confirmAction === "APPROVE") {
+        await approveRequest(confirmRequestId);
+      }
+  
+      if (confirmAction === "REJECT") {
+        const remark = prompt("Enter rejection reason");
+        if (!remark) return;
+  
+        await fetch(
+          `https://sp-portal-backend-production.up.railway.app/admin/company-change-requests/${confirmRequestId}/reject`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(remark),
+          }
+        );
+  
+        toast.error("Request rejected");
+  
+        setRequests(prev =>
+          prev.map(r =>
+            r.id === confirmRequestId ? { ...r, status: "REJECTED" } : r
+          )
+        );
+      }
+  
+      // cleanup
+      setShowConfirmModal(false);
+      setConfirmAction(null);
+      setConfirmRequestId(null);
+    } catch (err) {
+      console.error("Action failed", err);
+      toast.error("Operation failed");
+    }
+  };
+  
 
   useEffect(() => {
     fetch("https://sp-portal-backend-production.up.railway.app/admin/company-change-requests")
@@ -141,36 +186,46 @@ export default function CompanyChangeRequests() {
         </td>
 
         <td>
-          <div className="actions">
-            <button
-              className="btn-view"
-              onClick={() => setSelectedRequest(req)}
-            >
-              View
-            </button>
+  <div className="actions">
+    <button
+      className="view"
+      onClick={() => setSelectedRequest(req)}
+    >
+      👁 View
+    </button>
 
-            {req.status === "PENDING" && (
-              <>
-                <button
-                  className="btn-approve"
-                  id="abc"
-                  onClick={() => approveRequest(req.id)}
-                  
-                >
-                  Approve
-                </button>
+    {req.status === "PENDING" && (
+      <>
+       <button
+  className="approve"
+  onClick={() => {
+    setConfirmAction("APPROVE");
+    setConfirmRequestId(req.id);
+    setConfirmMessage("Are you sure you want to approve this change request?");
+    setShowConfirmModal(true);
+  }}
+>
+  ✔ Approve
+</button>
 
-                <button
-                  className="btn-reject"
-                  id="abc"
-                  onClick={() => rejectRequest(req.id)}
-                >
-                  Reject
-                </button>
-              </>
-            )}
-          </div>
-        </td>
+
+<button
+  className="reject"
+  onClick={() => {
+    setConfirmAction("REJECT");
+    setConfirmRequestId(req.id);
+    setConfirmMessage("Are you sure you want to reject this change request?");
+    setShowConfirmModal(true);
+  }}
+>
+  ✖ Reject
+</button>
+
+      </>
+    )}
+  </div>
+</td>
+
       </tr>
     ))
   )}
@@ -224,6 +279,60 @@ export default function CompanyChangeRequests() {
             </div>
           </div>
         )}
+        {showConfirmModal && (
+  <div
+    className="admin-modal-overlay"
+    onClick={() => setShowConfirmModal(false)}
+  >
+    <div
+      className="admin-modal confirm-sla-modal"
+      onClick={(e) => e.stopPropagation()}
+    >
+      {/* HEADER */}
+      <div className="confirm-header">
+        <h2>Confirm Action</h2>
+        <button
+          className="close-icon"
+          onClick={() => setShowConfirmModal(false)}
+        >
+          ✕
+        </button>
+      </div>
+
+      {/* BODY */}
+      <div className="confirm-body">
+        <div className="confirm-icon">
+          {confirmAction === "REJECT" ? "⚠️" : "✅"}
+        </div>
+
+        <p className="confirm-text">{confirmMessage}</p>
+
+        <p className="confirm-subtext">
+          This action requires administrator confirmation.
+        </p>
+      </div>
+
+      {/* FOOTER */}
+      <div className="confirm-footer">
+        <button
+          className="btn cancel"
+          onClick={() => setShowConfirmModal(false)}
+        >
+          Cancel
+        </button>
+
+        <button
+          className="btn confirm"
+          id="abc"
+          onClick={handleConfirmAction}
+        >
+          ✔ Confirm
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
       </div>
     </>
   );

@@ -12,7 +12,7 @@ export default function Header() {
         <span className="logo-icon">🏢</span>
         <span className="brand-text">
           TalentedStaff
-          <small>Supplier Registration Portal</small>
+          <small className="abc">Supplier Registration Portal</small>
         </span>
       </div>
 
