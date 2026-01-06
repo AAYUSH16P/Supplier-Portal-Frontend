@@ -86,24 +86,26 @@ const [confirmMessage, setConfirmMessage] = useState("");
     );
   };
 
-  const rejectRequest = async (id) => {
-    const remark = prompt("Enter rejection reason");
-    if (!remark) return;
+  // const rejectRequest = async (id) => {
+  //   const remark = prompt("Enter rejection reason");
+  //   if (!remark) return;
 
-    await fetch(
-      `https://sp-portal-backend-production.up.railway.app/admin/company-change-requests/${id}/reject`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(remark),
-      }
-    );
+  //   await fetch(
+  //     `https://sp-portal-backend-production.up.railway.app/admin/company-change-requests/${id}/reject`,
+  //     {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify(remark),
+  //     }
+  //   );
 
-    toast.error("Request rejected");
-    setRequests(prev =>
-      prev.map(r => r.id === id ? { ...r, status: "REJECTED" } : r)
-    );
-  };
+  //   toast.error("Request rejected");
+  //   setRequests(prev =>
+  //     prev.map(r => r.id === id ? { ...r, status: "REJECTED" } : r)
+  //   );
+  // };
+
+
   if (loading) {
     return <GlobalLoader />;
   }

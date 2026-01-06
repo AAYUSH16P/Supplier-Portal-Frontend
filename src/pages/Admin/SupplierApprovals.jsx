@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AppHeader from "../../Components/RegisteredUser/AppHeader";
 import "../../style/RegisteredUser/SupplierApprovals.css";
-import SupplierViewModal from "../../Components/common/SupplierViewModal";
 
 
 export default function SupplierApprovals() {
@@ -16,7 +15,6 @@ export default function SupplierApprovals() {
   const [isEditMode, setIsEditMode] = useState(false);
   const [editForm, setEditForm] = useState(null);
   const [showSlaConfirm, setShowSlaConfirm] = useState(false);
-  const [slaCompanyId, setSlaCompanyId] = useState(null);
   const [confirmAction, setConfirmAction] = useState(null);
   // possible values: "APPROVE" | "REJECT" | "SIGN_SLA"
   const [confirmCompanyId, setConfirmCompanyId] = useState(null);
@@ -259,7 +257,7 @@ export default function SupplierApprovals() {
 
   const cancelSignSla = () => {
     setShowSlaConfirm(false);
-    setSlaCompanyId(null);
+    
   };
 
 
