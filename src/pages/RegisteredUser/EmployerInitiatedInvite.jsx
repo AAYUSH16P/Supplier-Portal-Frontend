@@ -7,46 +7,25 @@ import { useNavigate } from "react-router-dom";
 import AppFooter from "../../Components/common/AppFooter";
 import { toast } from "react-toastify";
 
-const copyToClipboard = async () => {
-    if (!generatedLink) {
-        toast.error("No link to copy");
-        return;
-    }
+import { ToastContainer } from "react-toastify";
 
-    try {
-        // Modern clipboard API
-        if (navigator.clipboard && window.isSecureContext) {
-            await navigator.clipboard.writeText(generatedLink);
-        } else {
-            // Fallback for Safari / non-HTTPS
-            const textArea = document.createElement("textarea");
-            textArea.value = generatedLink;
-            textArea.style.position = "fixed"; // avoid scrolling
-            textArea.style.left = "-9999px";
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-            document.execCommand("copy");
-            document.body.removeChild(textArea);
-        }
 
-        toast.success("Link copied to clipboard!");
-    } catch (error) {
-        console.error("Copy failed:", error);
-        toast.error("Failed to copy link. Please copy manually.");
-    }
-};
 
 
 export default function EmployerInitiatedInvite() {
     const navigate = useNavigate();
     const [generatedLink, setGeneratedLink] = useState("");
     const [referenceCode, setReferenceCode] = useState("");
+    
+
+    
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     }, []);
 
+
+    
 
     const handleGenerateLink = () => {
         const token = localStorage.getItem("token");
@@ -83,16 +62,56 @@ export default function EmployerInitiatedInvite() {
     };
 
 
-    const copyToClipboard = () => {
-        navigator.clipboard.writeText(generatedLink);
-        toast.success("Link copied!");
+
+    const copyToClipboard = async () => {
+        if (!generatedLink) {
+            toast.error("No link to copy");
+            return;
+        }
+    
+        try {
+            // Modern browsers (Chrome, Edge, Firefox)
+            if (navigator.clipboard && window.isSecureContext) {
+                await navigator.clipboard.writeText(generatedLink);
+            } else {
+                // Fallback for Safari / older browsers
+                const textArea = document.createElement("textarea");
+                textArea.value = generatedLink;
+                textArea.style.position = "fixed";
+                textArea.style.left = "-9999px";
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                document.execCommand("copy");
+                document.body.removeChild(textArea);
+            }
+    
+            toast.success("Link copied to clipboard!", {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: true,
+                pauseOnHover: false,
+            });
+        } catch (error) {
+            toast.error("Failed to copy link. Please copy manually.");
+        }
     };
+    
 
 
     return (
+
+        
         <>
             <AppHeader />
-
+            <ToastContainer
+      position="top-right"
+      autoClose={2000}
+      hideProgressBar
+      newestOnTop
+      closeOnClick
+      pauseOnHover={false}
+    />
             <div className="company-layout">
                 <AppSidebar unlocked active="Candidates" />
 
