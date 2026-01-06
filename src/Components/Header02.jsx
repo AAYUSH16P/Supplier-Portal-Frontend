@@ -9,12 +9,13 @@ export default function Header() {
       <button className="back-btn"> Supplier Portal</button>
 
       <div className="header-center">
-        <span className="logo-icon">🏢</span>
-        <span className="brand-text">
-          TalentedStaff
-          <small className="abc">Supplier Registration Portal</small>
-        </span>
-      </div>
+  <img
+    src="/TSlogoFinal.jpg"
+    alt="TalentedStaff"
+    className="header-logo-img"
+  />
+</div>
+
 
       <button className="register-btn"   onClick={() => navigate("/registration")}
       >Register Now</button>

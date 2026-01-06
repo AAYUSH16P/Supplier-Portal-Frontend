@@ -8,6 +8,14 @@ import "../../style/RegisteredUser/BookMeeting.css";
 import AppFooter from "../../Components/common/AppFooter";
 
 
+const isWeekend = (date) => {
+  if (!date) return false;
+  const day = date.getDay(); // 0 = Sunday, 6 = Saturday
+  return day === 0 || day === 6;
+};
+
+
+
 export default function BookMeeting() {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
@@ -149,8 +157,8 @@ export default function BookMeeting() {
     });
     console.groupEnd();
 
-    const startIstHour = 9;
-    const endIstHour = 15; // 3 PM
+    const startIstHour = 10;
+    const endIstHour = 17; // 3 PM
 
     console.group("🧮 Slot evaluation (30-min IST)");
 
@@ -466,7 +474,7 @@ export default function BookMeeting() {
                 <h2>Book a Meeting</h2>
                 <p>
                   Schedule a 30-minute onboarding call with our team. We are
-                  available Monday–Friday, 9:00 AM to 3:00 PM (IST).
+                  available Monday–Friday, 10:00 AM to 5:00 PM (IST).
                 </p>
               </div>
             </div>
@@ -527,11 +535,14 @@ export default function BookMeeting() {
                           key={`${weekIndex}-${dayIndex}`}
                           className={`date ${!date ? "empty" : ""
                             } ${isPast ? "disabled" : ""
-                            } ${!isAvailable && !isPast ? "disabled" : ""
+                            } ${(!isAvailable || isWeekend(date)) && !isPast ? "disabled" : ""
                             } ${isSelected ? "active" : ""
                             }`}
-                          onClick={() => date && isAvailable && handleDateClick(date)}
-                          disabled={!date || !isAvailable}
+                            onClick={() =>
+                              date && isAvailable && !isWeekend(date) && handleDateClick(date)
+                            }
+                            disabled={!date || !isAvailable || isWeekend(date)}
+                            
                           title={
                             isPast
                               ? "Past dates are not available"

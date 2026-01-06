@@ -8,6 +8,7 @@ import AppFooter from "../../Components/common/AppFooter";
 export default function CandidateValidation() {
     const navigate = useNavigate();
     const [selectedCandidate, setSelectedCandidate] = useState(null);
+    const [viewMode, setViewMode] = useState("PENDING");
 
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [confirmAction, setConfirmAction] = useState(null); // APPROVE | REJECT
@@ -72,6 +73,19 @@ export default function CandidateValidation() {
         }
     };
 
+    const fetchAutoApprovedCandidates = async () => {
+        try {
+            const res = await fetch(
+                "https://sp-portal-backend-production.up.railway.app/api/supplier/capacities/eligible"
+            );
+            const data = await res.json();
+            setCandidates(data);
+        } catch (err) {
+            console.error("Failed to fetch auto approved candidates", err);
+        }
+    };
+
+
     useEffect(() => {
         fetchCandidates();
     }, []);
@@ -79,36 +93,36 @@ export default function CandidateValidation() {
     /* =========================
        APPROVE / REJECT
     ========================== */
-    const handleApprove = async (capacityId) => {
-        try {
-            await fetch(
-                `https://sp-portal-backend-production.up.railway.app/api/supplier/capacities/${capacityId}/approve`,
-                { method: "POST" }
-            );
-            fetchCandidates();
-        } catch (err) {
-            console.error("Approve failed", err);
-        }
-    };
+    // const handleApprove = async (capacityId) => {
+    //     try {
+    //         await fetch(
+    //             `https://sp-portal-backend-production.up.railway.app/api/supplier/capacities/${capacityId}/approve`,
+    //             { method: "POST" }
+    //         );
+    //         fetchCandidates();
+    //     } catch (err) {
+    //         console.error("Approve failed", err);
+    //     }
+    // };
 
-    const handleReject = async (capacityId) => {
-        const remark = prompt("Enter rejection remark:");
-        if (!remark) return;
+    // const handleReject = async (capacityId) => {
+    //     const remark = prompt("Enter rejection remark:");
+    //     if (!remark) return;
 
-        try {
-            await fetch(
-                `https://sp-portal-backend-production.up.railway.app/api/supplier/capacities/${capacityId}/reject`,
-                {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(remark),
-                }
-            );
-            fetchCandidates();
-        } catch (err) {
-            console.error("Reject failed", err);
-        }
-    };
+    //     try {
+    //         await fetch(
+    //             `https://sp-portal-backend-production.up.railway.app/api/supplier/capacities/${capacityId}/reject`,
+    //             {
+    //                 method: "POST",
+    //                 headers: { "Content-Type": "application/json" },
+    //                 body: JSON.stringify(remark),
+    //             }
+    //         );
+    //         fetchCandidates();
+    //     } catch (err) {
+    //         console.error("Reject failed", err);
+    //     }
+    // };
 
     /* =========================
        SEARCH & FILTER
@@ -119,12 +133,28 @@ export default function CandidateValidation() {
     }, [candidates]);
 
     const filteredCandidates = useMemo(() => {
-        return candidates.filter((c) => {
-            const searchMatch =
-                c.companyEmployeeId?.toLowerCase().includes(searchText.toLowerCase()) ||
-                c.role?.toLowerCase().includes(searchText.toLowerCase()) ||
-                c.companyName?.toLowerCase().includes(searchText.toLowerCase());
+        const query = searchText.trim().toLowerCase();
 
+        return candidates.filter((c) => {
+            // 🔍 SEARCH (added on top)
+            const searchMatch =
+                !query ||
+                [
+                    c.companyName,
+                    c.companyEmployeeId,
+                    c.role,
+                    c.jobTitle,
+                    c.location,
+                    c.technicalSkills,
+                    c.tools,
+                    c.employerNote,
+                ]
+                    .filter(Boolean)
+                    .some((field) =>
+                        field.toString().toLowerCase().includes(query)
+                    );
+
+            // 🏷️ EXISTING FILTER (unchanged)
             const supplierMatch =
                 supplierFilter === "All Suppliers" ||
                 c.companyName === supplierFilter;
@@ -132,6 +162,7 @@ export default function CandidateValidation() {
             return searchMatch && supplierMatch;
         });
     }, [candidates, searchText, supplierFilter]);
+
 
     return (
         <>
@@ -153,11 +184,27 @@ export default function CandidateValidation() {
 
                     {/* TABS */}
                     <div className="validation-tabs">
-                        <button className="tab active">
+                        <button
+                            className={`tab ${viewMode === "PENDING" ? "active" : ""}`}
+                            onClick={() => {
+                                setViewMode("PENDING");
+                                fetchCandidates();
+                            }}
+                        >
                             ⏳ Pending Approval (Less than 1 Year)
                         </button>
 
+                        <button
+                            className={`tab ${viewMode === "AUTO" ? "active" : ""}`}
+                            onClick={() => {
+                                setViewMode("AUTO");
+                                fetchAutoApprovedCandidates();
+                            }}
+                        >
+                            ⚡ Auto Approved
+                        </button>
                     </div>
+
 
                     {/* SEARCH BAR */}
                     <div className="filter-bar">
@@ -206,7 +253,7 @@ export default function CandidateValidation() {
                                     <th>Role</th>
                                     <th>Working Since</th>
                                     <th>Working Years</th>
-                                    <th>Status</th>
+                                    {viewMode === "PENDING" && <th>Status</th>}
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -231,11 +278,14 @@ export default function CandidateValidation() {
                                                     {c.totalExperience} yrs
                                                 </span>
                                             </td>
-                                            <td>
-                                                <span className="status pending">
-                                                    Pending Approval
-                                                </span>
-                                            </td>
+                                            {viewMode === "PENDING" && (
+                                                <td>
+                                                    <span className="status pending">
+                                                        Pending Approval
+                                                    </span>
+                                                </td>
+                                            )}
+
                                             <td className="actions">
                                                 <button
                                                     className="view"
@@ -243,31 +293,36 @@ export default function CandidateValidation() {
                                                 >
                                                     👁 View
                                                 </button>
-                                                <button
-                                                    className="approve"
-                                                    onClick={() => {
-                                                        setConfirmAction("APPROVE");
-                                                        setConfirmCandidateId(c.id);
-                                                        setConfirmMessage("Are you sure you want to approve this candidate?");
-                                                        setShowConfirmModal(true);
-                                                    }}
-                                                >
-                                                    ✔ Approve
-                                                </button>
 
-                                                <button
-                                                    className="reject"
-                                                    onClick={() => {
-                                                        setConfirmAction("REJECT");
-                                                        setConfirmCandidateId(c.id);
-                                                        setConfirmMessage("Are you sure you want to reject this candidate?");
-                                                        setShowConfirmModal(true);
-                                                    }}
-                                                >
-                                                    ✖ Reject
-                                                </button>
+                                                {viewMode === "PENDING" && (
+                                                    <>
+                                                        <button
+                                                            className="approve"
+                                                            onClick={() => {
+                                                                setConfirmAction("APPROVE");
+                                                                setConfirmCandidateId(c.id);
+                                                                setConfirmMessage("Are you sure you want to approve this candidate?");
+                                                                setShowConfirmModal(true);
+                                                            }}
+                                                        >
+                                                            ✔ Approve
+                                                        </button>
 
+                                                        <button
+                                                            className="reject"
+                                                            onClick={() => {
+                                                                setConfirmAction("REJECT");
+                                                                setConfirmCandidateId(c.id);
+                                                                setConfirmMessage("Are you sure you want to reject this candidate?");
+                                                                setShowConfirmModal(true);
+                                                            }}
+                                                        >
+                                                            ✖ Reject
+                                                        </button>
+                                                    </>
+                                                )}
                                             </td>
+
                                         </tr>
                                     ))
                                 )}
@@ -362,15 +417,8 @@ export default function CandidateValidation() {
                                                         <p>{selectedCandidate.numberOfProjects ?? "-"}</p>
                                                     </div>
 
-                                                    <div>
-                                                        <label>Referred</label>
-                                                        <p>{selectedCandidate.isRefered ? "Yes" : "No"}</p>
-                                                    </div>
-
-                                                    <div>
-                                                        <label>Approval Stage</label>
-                                                        <p>{selectedCandidate.approvalStage}</p>
-                                                    </div>
+                                                   
+                                                  
 
                                                     <div className="full-width">
                                                         <label>Employer Note</label>
@@ -400,27 +448,7 @@ export default function CandidateValidation() {
 
 
                                             {/* FOOTER */}
-                                            <div className="modal-footer">
-                                                <button
-                                                    className="approve"
-                                                    onClick={() => {
-                                                        handleApprove(selectedCandidate.id);
-                                                        setSelectedCandidate(null);
-                                                    }}
-                                                >
-                                                    ✔ Approve
-                                                </button>
 
-                                                <button
-                                                    className="reject"
-                                                    onClick={() => {
-                                                        handleReject(selectedCandidate.id);
-                                                        setSelectedCandidate(null);
-                                                    }}
-                                                >
-                                                    ✖ Reject
-                                                </button>
-                                            </div>
                                         </div>
                                     </div>
                                 )}

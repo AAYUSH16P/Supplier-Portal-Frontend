@@ -6,6 +6,12 @@
     box-sizing: border-box;
   }
   
+  .needhelp-option.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: auto;
+  }
+  
   .contact-top-strip {
     background: linear-gradient(90deg, #10b981, #06b6d4);
     color: white;

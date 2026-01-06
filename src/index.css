@@ -5,9 +5,23 @@
   color: rgb(95, 95, 198);
 }
 
+.header-logo-img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
+
 .brand-text{
   color: whitesmoke;
 }
+
+.header-content-img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
 
 .abc{
   color: #e9e9e9;

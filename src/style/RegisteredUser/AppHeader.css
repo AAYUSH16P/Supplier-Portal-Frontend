@@ -6,6 +6,14 @@
     border-bottom: 1px solid #e5e7eb;
     background: #ffffff;
   }
+
+  /* LOGO IMAGE */
+.header-logo-img {
+  height: 60px;        /* perfect for header */
+  width: auto;
+  object-fit: contain;
+}
+
   
   .header-back,
   .header-link {

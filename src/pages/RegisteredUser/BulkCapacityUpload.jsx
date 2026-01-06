@@ -4,6 +4,7 @@ import AppSidebar from "../../Components/RegisteredUser/AppSidebar";
 import { useRef } from "react";
 import { toast } from "react-toastify";
 import AppFooter from "../../Components/common/AppFooter"; 
+import {  useNavigate } from "react-router-dom";
 
 
 /* ================= HELPERS ================= */
@@ -72,15 +73,23 @@ const handleFileUpload = async (event) => {
       }
     );
 
-    const text = await response.text();
-    const data = text ? JSON.parse(text) : {};
+    let data = null;
+    const contentType = response.headers.get("content-type");
+
+    if (contentType && contentType.includes("application/json")) {
+      data = await response.json();
+    } else {
+      data = { message: await response.text() };
+    }
 
     if (!response.ok) {
-      toast.error(data.message || "Upload failed");
+      toast.error(data?.message || "Upload failed");
       return;
     }
 
-    toast.success("Upload successful. Processing started.");
+    toast.success(
+      data?.message || "Upload successful. Processing started."
+    );
   } catch (error) {
     console.error(error);
     toast.error("Something went wrong during upload");
@@ -89,9 +98,11 @@ const handleFileUpload = async (event) => {
   }
 };
 
+
 /* ================= COMPONENT ================= */
 
 export default function BulkCapacityUpload() {
+  const navigate = useNavigate();
   const fileInputRef = useRef(null);
 
   return (
@@ -108,7 +119,12 @@ export default function BulkCapacityUpload() {
           </div>
 
           {/* BACK LINK */}
-          <div className="bulk-back">← Back to Candidates</div>
+          <div
+  className="bulk-back"
+  onClick={() => navigate("/candidate")}
+>
+  ← Back to Candidates
+</div>
 
           {/* TITLE CARD */}
           <div className="bulk-card bulk-title-card">

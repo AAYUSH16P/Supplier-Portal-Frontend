@@ -15,12 +15,15 @@ export default function AppHeader() {
 
       {/* CENTER */}
       <div className="header-center">
-        <div className="header-logo">🏢</div>
-        <div>
-          <strong>TalentedStaff</strong>
-          <small>Supplier Portal</small>
-        </div>
-      </div>
+  <img
+    src="/TSlogoFinal.jpg"
+    alt="TalentedStaff"
+    className="header-logo-img"
+  />
+</div>
+
+
+
 
       {/* RIGHT: LOGOUT */}
       <button className="header-logout" onClick={handleLogout}>

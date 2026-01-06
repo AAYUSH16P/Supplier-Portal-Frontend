@@ -8,7 +8,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { jwtDecode } from "jwt-decode";
 import { submitManualCapacity } from "../../services/supplier";
-import AppFooter from "../../Components/common/AppFooter"; 
+import AppFooter from "../../Components/common/AppFooter";
 
 
 
@@ -294,88 +294,108 @@ export default function AddCapacityManually() {
 
     return (
         <>
-            <AppHeader />
+            {!isInvited && <AppHeader />}
             <ToastContainer />
 
             <div className="app-shell">
-                <AppSidebar unlocked active="Candidates" />
+                {!isInvited && <AppSidebar unlocked active="Candidates" />}
 
                 <main className="add-capacity-page">
-                    {/* TOP GRADIENT HEADER */}
-                    <div className="top-banner">
-                        📋 Manually Add Indicative Capacity – One Entry at a Time
-                    </div>
 
-                    {/* BACK LINK */}
-                    <div className="back-link" onClick={() => navigate(
-                        `/employeeInviteInfo?inviteId=${inviteId}&companyName=${companyName}`
-                    )}>
-                        ← Back to Candidates
-                    </div>
+                    {!isInvited && (
+                        <>
+                            {/* TOP GRADIENT HEADER */}
+                            <div className="top-banner">
+                                📋 Manually Add Indicative Capacity – One Entry at a Time
+                            </div>
 
-                    {/* TITLE CARD */}
-                    <section className="title-card">
-                        <div className="title-icon">👤</div>
-                        <h1>Add Capacity Manually (Individual Entry)</h1>
-                    </section>
+                            {/* BACK LINK */}
+                            <div
+                                className="back-link"
+                                onClick={() => {
+                                    if (inviteId && companyName) {
+                                        navigate(
+                                            `/employeeInviteInfo?inviteId=${inviteId}&companyName=${companyName}`
+                                        );
+                                    } else {
+                                        navigate("/candidate");
+                                    }
+                                }}
+                            >
+                                ← Back to Candidates
+                            </div>
 
-                    {/* INFO CARD */}
-                    <section className="info-card">
-                        <div className="info-icon">ℹ️</div>
-                        <div>
-                            <div className="info-bar" />
-                            <p>
-                                Use this option to manually add indicative capacity, one record at a
-                                time, directly managed by your organisation. This is intended for
-                                preparing a small or selective set of capacity where you already
-                                have clarity on skills, experience level, availability, and the
-                                working relationship, without involving employees directly. Only
-                                controlled, work-related information is captured for readiness and
-                                alignment purposes.
-                            </p>
-                        </div>
-                    </section>
+                            {/* TITLE CARD */}
+                            <section className="title-card">
+                                <div className="title-icon">👤</div>
+                                <h1>Add Capacity Manually (Individual Entry)</h1>
+                            </section>
 
-                    {/* SALARY NOTE */}
-                    <section className="info-card blue">
-                        <div className="info-icon">ℹ️</div>
-                        <div>
-                            <div className="info-bar" />
-                            <h3>Note on Salary Information:</h3>
-                            <p>
-                                Salary information is collected as part of this process solely for
-                                market benchmarking and rate alignment purposes to support client
-                                discussions and demand planning. Salary data is not used for
-                                individual evaluation, selection, or employment decisions, and is
-                                not shared externally unless required as part of a confirmed client
-                                demand and governed engagement.
-                            </p>
-                        </div>
-                    </section>
+                            {/* INFO CARD */}
+                            <section className="info-card">
+                                <div className="info-icon">ℹ️</div>
+                                <div>
+                                    <div className="info-bar" />
+                                    <p>
+                                        Use this option to manually add indicative capacity, one record at a
+                                        time, directly managed by your organisation.
+                                    </p>
+                                </div>
+                            </section>
 
-                    {/* STATUS NOTE */}
-                    <section className="warning-card">
-                        <div className="warning-icon">🛡️</div>
-                        <div>
-                            <div className="warning-bar" />
-                            <p>
-                                All records saved through this option are initially stored as{" "}
-                                <strong>Indicative (Not Active)</strong>. Capacity will turn{" "}
-                                <strong>Active / Landed</strong> only after the Supplier SLA has been
-                                signed and the capacity has been reviewed and explicitly approved
-                                through the governance process. Once approved, the capacity is
-                                considered ready for business engagement when relevant client
-                                demand arises.
-                            </p>
-                        </div>
-                    </section>
+                            {/* SALARY NOTE */}
+                            <section className="info-card blue">
+                                <div className="info-icon">ℹ️</div>
+                                <div>
+                                    <div className="info-bar" />
+                                    <h3>Note on Salary Information:</h3>
+                                    <p>
+                                        Salary information is collected solely for market benchmarking and
+                                        planning purposes.
+                                    </p>
+                                </div>
+                            </section>
+
+                            {/* STATUS NOTE */}
+                            <section className="warning-card">
+                                <div className="warning-icon">🛡️</div>
+                                <div>
+                                    <div className="warning-bar" />
+                                    <p>
+                                        All records saved through this option are initially stored as{" "}
+                                        <strong>Indicative (Not Active)</strong>.
+                                    </p>
+                                </div>
+                            </section>
+                        </>
+                    )}
+
 
 
                     <section className="capacity-form">
                         {/* FORM HEADER */}
                         <div className="form-header">
                             📄 Capacity Registration Form
+
+                            {isInvited && (<div className="invite-meta">
+                                <div className="invite-meta-item">
+                                    <strong>Company Name:</strong> {companyName}
+                                </div>
+                                <div className="invite-meta-item">
+                                    <strong>Company ID:</strong> {inviteId}
+                                </div>
+                            </div>
+                            )}
                         </div>
+
+                        {isInvited && (  <div className="invite-info-box">
+      Please confirm the following work-related details as requested by your
+      employer. These details are collected <strong>ONLY</strong> for internal
+      readiness and planning and <strong>NOT</strong> for recruitment or direct
+      engagement.
+    </div>)}
+
+
 
                         {/* COMPANY INFO */}
                         <div className="form-section">
@@ -612,7 +632,9 @@ export default function AddCapacityManually() {
                 </main>
 
             </div>
-            <AppFooter/>
+            {!isInvited && <AppFooter />}
+
+
         </>
     );
 }

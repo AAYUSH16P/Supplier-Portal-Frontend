@@ -113,8 +113,17 @@ export default function Contact() {
 
     {/* BOOK MEETING */}
     <div
-      className="needhelp-option blue clickable"
-    >
+  className={`needhelp-option blue clickable ${!isAuth ? "disabled" : ""}`}
+  onClick={() => {
+    if (isAuth) {
+      navigate("/meeting");
+    } else {
+      alert("Please login to book a meeting");
+    }
+  }}
+  
+>
+
       <div className="option-icon blue">📍</div>
       <div>
         <h4>Book a Meeting</h4>

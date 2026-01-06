@@ -12,14 +12,18 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 
+
 const normalizeCertifications = (certifications, technicalSkills) => {
   if (Array.isArray(certifications) && certifications.length > 0) {
     return certifications
-      .map(c => (typeof c === "string" ? c : c?.name || c?.title || ""))
+      .map(c =>
+        typeof c === "string"
+          ? c
+          : c?.certificationName || c?.name || c?.title || ""
+      )
       .filter(Boolean);
   }
 
-  // 🔁 fallback (matches earlier UI expectation)
   if (typeof technicalSkills === "string" && technicalSkills.trim()) {
     return technicalSkills
       .split(",")
@@ -29,6 +33,7 @@ const normalizeCertifications = (certifications, technicalSkills) => {
 
   return [];
 };
+
 
 
 
@@ -64,6 +69,10 @@ export default function Candidates() {
   const [rejectRemark, setRejectRemark] = useState("");
   const [selectedCandidate, setSelectedCandidate] = useState(null);
   const [rejectedApiList, setRejectedApiList] = useState([]); // rejected from API
+
+  const getRejectionRemark = (id) => {
+    return rejectedApiList.find(r => r.id === id)?.remark;
+  };
 
   const isSlaSigned = useMemo(() => {
     const token = localStorage.getItem("token");
@@ -393,6 +402,13 @@ export default function Candidates() {
                           Note: {c.employerNote}
                         </div>
                       )}
+                      {c.status === 2 && getRejectionRemark(c.id) && (
+                        <div className="system-note rejected-note">
+                          <strong>Rejection Remark:</strong> {getRejectionRemark(c.id)}
+                        </div>
+                      )}
+
+
                     </div>
 
                     <div>
@@ -401,8 +417,18 @@ export default function Candidates() {
                       </p>
                       <p>
                         <strong>Certifications:</strong>{" "}
-                        {c.certifications.length > 0 ? c.certifications.join(", ") : "—"}
+                        {Array.isArray(c.certifications) && c.certifications.length > 0
+                          ? c.certifications
+                            .map(cert =>
+                              typeof cert === "string"
+                                ? cert
+                                : cert?.certificationName
+                            )
+                            .filter(Boolean)
+                            .join(", ")
+                          : "—"}
                       </p>
+
 
                     </div>
                   </div>
@@ -437,7 +463,7 @@ export default function Candidates() {
                     Confirm Reject
                   </button>
 
-                  <button className="cancel"
+                  <button className="reject-btn" id="abce"
                     onClick={() => {
                       setRejectRemark("");
                       setShowRejectModal(false);
