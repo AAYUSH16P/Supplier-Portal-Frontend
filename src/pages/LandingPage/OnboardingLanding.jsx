@@ -10,10 +10,7 @@ export default function OnboardingLanding() {
 
       <div className="onboarding-container">
         {/* Top Navigation */}
-        <div className="top-bar">
-          <button className="back-btn" onClick={() => navigate("/")}>← Back to Landing</button>
-          <div className="brand">TalentedStaff</div>
-        </div>
+        
 
         {/* Hero */}
         <section className="hero">
