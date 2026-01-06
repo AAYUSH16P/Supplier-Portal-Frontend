@@ -1,12 +1,41 @@
 import "../../style/RegisteredUser/EmployerInitiatedInvite.css";
 import AppHeader from "../../Components/RegisteredUser/AppHeader";
 import AppSidebar from "../../Components/RegisteredUser/AppSidebar";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-import AppFooter from "../../Components/common/AppFooter"; 
+import AppFooter from "../../Components/common/AppFooter";
 import { toast } from "react-toastify";
 
+const copyToClipboard = async () => {
+    if (!generatedLink) {
+        toast.error("No link to copy");
+        return;
+    }
+
+    try {
+        // Modern clipboard API
+        if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(generatedLink);
+        } else {
+            // Fallback for Safari / non-HTTPS
+            const textArea = document.createElement("textarea");
+            textArea.value = generatedLink;
+            textArea.style.position = "fixed"; // avoid scrolling
+            textArea.style.left = "-9999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textArea);
+        }
+
+        toast.success("Link copied to clipboard!");
+    } catch (error) {
+        console.error("Copy failed:", error);
+        toast.error("Failed to copy link. Please copy manually.");
+    }
+};
 
 
 export default function EmployerInitiatedInvite() {
@@ -16,8 +45,8 @@ export default function EmployerInitiatedInvite() {
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
-      }, []);
-      
+    }, []);
+
 
     const handleGenerateLink = () => {
         const token = localStorage.getItem("token");
@@ -304,6 +333,7 @@ export default function EmployerInitiatedInvite() {
                                         <button className="copy-btn" onClick={copyToClipboard}>
                                             Copy Link
                                         </button>
+
                                     </div>
 
                                     {/* NOTE */}
@@ -322,7 +352,7 @@ export default function EmployerInitiatedInvite() {
 
                 </main>
             </div>
-            <AppFooter/>
+            <AppFooter />
         </>
     );
 }
