@@ -10,9 +10,6 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 
-
-
-
 const normalizeCertifications = (certifications, technicalSkills) => {
   if (Array.isArray(certifications) && certifications.length > 0) {
     return certifications
@@ -88,6 +85,7 @@ export default function Candidates() {
 
 
   const handleApprove = async (candidate) => {
+    debugger;
     try {
       await fetch(
         `https://sp-portal-backend-production.up.railway.app/api/supplier/capacities/${candidate.id}/approve`,
@@ -376,26 +374,30 @@ export default function Candidates() {
                       )}
 
 
-                      {c.status === 0 && (
-                        <div className="pending-actions">
-                          <button
-                            className="approve-btn"
-                            onClick={() => handleApprove(c)}
-                          >
-                            ✔ Approve
-                          </button>
+{c.status === 0 && c.isRefered && (
+  <div className="pending-actions">
+    <button
+      className="approve-btn"
+      onClick={() => handleApprove(c)}
+    >
+      ✔ Approve
+    </button>
 
-                          <button
-                            className="reject-btn"
-                            onClick={() => {
-                              setSelectedCandidate(c);
-                              setShowRejectModal(true);
-                            }}
-                          >
-                            ✖ Reject
-                          </button>
-                        </div>
-                      )}
+    <button
+      className="reject-btn"
+      onClick={() => {
+        setSelectedCandidate(c);
+        setShowRejectModal(true);
+      }}
+    >
+      ✖ Reject
+    </button>
+  </div>
+)}
+
+
+
+
 
                       {c.employerNote && (
                         <div className="system-note">
@@ -413,7 +415,7 @@ export default function Candidates() {
 
                     <div>
                       <p>
-                        <strong>Role:</strong> {c.role}
+                        <strong>I Can Be:</strong> {c.role}
                       </p>
                       <p>
                         <strong>Certifications:</strong>{" "}

@@ -121,18 +121,42 @@ export default function SupplierHome() {
             <div className="status-info">
               <h4>• What This Means</h4>
 
-              <div className="status-success">
-                <div className="success-header">
-                  <span className="success-icon">✔</span>
-                  <h5>✅ SLA Signed</h5>
-                </div>
+              {isSlaSigned ? (
+    /* ✅ SLA SIGNED */
+    <div className="status-success">
+      <div className="success-header">
+        <span className="success-icon">✔</span>
+        <h5>✅ SLA Signed</h5>
+      </div>
 
-                <p>
-                  We have received your signed SLA (Service Level Agreement).
-                  Candidates approved from your list are now ready for the UK Market
-                  and can be considered for demand-led opportunities.
-                </p>
-              </div>
+      <p>
+        We have received your signed SLA (Service Level Agreement).
+        Candidates approved from your list are now ready for the UK Market
+        and can be considered for demand-led opportunities.
+      </p>
+    </div>
+  ) : (
+    /* ❌ SLA NOT SIGNED */
+    <div className="sla-warning-card">
+      <div className="sla-warning-header">
+        <span className="sla-warning-icon">⚠️</span>
+        <h5>SLA Not Signed</h5>
+      </div>
+
+      <p className="sla-warning-text">
+        We haven't received your signed SLA (Service Level Agreement).
+        Approved candidates from your list will only be ready for the UK Market
+        once you send back the signed SLA to{" "}
+        <strong>onboarding@westgateithub.in</strong>.
+      </p>
+
+      <div className="sla-warning-note">
+        📄 Please review, sign, and return the SLA document as soon as possible
+        to activate your approved candidates.
+      </div>
+    </div>
+  )}
+
             </div>
 
 

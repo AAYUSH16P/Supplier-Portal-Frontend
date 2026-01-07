@@ -388,12 +388,12 @@ export default function AddCapacityManually() {
                             )}
                         </div>
 
-                        {isInvited && (  <div className="invite-info-box">
-      Please confirm the following work-related details as requested by your
-      employer. These details are collected <strong>ONLY</strong> for internal
-      readiness and planning and <strong>NOT</strong> for recruitment or direct
-      engagement.
-    </div>)}
+                        {isInvited && (<div className="invite-info-box">
+                            Please confirm the following work-related details as requested by your
+                            employer. These details are collected <strong>ONLY</strong> for internal
+                            readiness and planning and <strong>NOT</strong> for recruitment or direct
+                            engagement.
+                        </div>)}
 
 
 

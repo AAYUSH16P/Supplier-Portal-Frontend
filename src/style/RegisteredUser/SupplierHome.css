@@ -4,6 +4,50 @@
   background: #f8fafc;
   }
   
+
+  .sla-warning-card {
+    background: #ffffff;
+    border: 2px solid #f59e0b;
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-top: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  }
+  
+  .sla-warning-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #92400e;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  .sla-warning-icon {
+    font-size: 20px;
+  }
+  
+  .sla-warning-header h5 {
+    margin: 0;
+    font-size: 16px;
+  }
+  
+  .sla-warning-text {
+    color: #7c2d12;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+  
+  .sla-warning-note {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #92400e;
+    font-size: 14px;
+  }
+
+  
   .home-page {
     flex: 1;
   max-width: 1100px;

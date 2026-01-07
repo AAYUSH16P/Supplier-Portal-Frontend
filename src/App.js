@@ -31,8 +31,8 @@ import CompanyChangeRequests from "./pages/Admin/CompanyChangeRequests";
 import AdminLogin from "./pages/Admin/AdminLogin";
 import AdminProtectedRoute from "./routes/AdminProtectedRoute";
 import EmployeeInviteInfo from "./pages/RegisteredUser/EmployeeInviteInfo";
-
-
+import ResetPassword from "./style/RegisteredUser/ResetPassword";
+import ForgotPassword from "./style/RegisteredUser/ForgotPassword";
 
 
 function App() {
@@ -66,6 +66,8 @@ function App() {
         <Route path="/notification" element={<Notifications />} />
         
         <Route path="/employeeInviteInfo" element={<EmployeeInviteInfo />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+<Route path="/reset-password" element={<ResetPassword />} />
 
         
 

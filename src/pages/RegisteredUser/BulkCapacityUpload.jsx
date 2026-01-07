@@ -2,9 +2,10 @@ import "../../style/RegisteredUser/BulkCapacityUpload.css";
 import AppHeader from "../../Components/RegisteredUser/AppHeader";
 import AppSidebar from "../../Components/RegisteredUser/AppSidebar";
 import { useRef } from "react";
-import { toast } from "react-toastify";
 import AppFooter from "../../Components/common/AppFooter"; 
 import {  useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 /* ================= HELPERS ================= */
@@ -107,6 +108,8 @@ export default function BulkCapacityUpload() {
 
   return (
     <>
+          <ToastContainer position="top-right" autoClose={4000} />
+
       <AppHeader />
 
       <div className="app-shell">

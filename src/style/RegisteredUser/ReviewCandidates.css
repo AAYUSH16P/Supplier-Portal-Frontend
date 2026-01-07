@@ -5,6 +5,7 @@
     min-height: calc(100vh - 64px);
     /* margin-top: 64px; */
   }
+ 
   
   .app-content {
     flex: 1;
@@ -465,4 +466,94 @@
 
 .text-area{
   border-radius: 10px;
+}
+
+
+
+.cv-modal input,
+.cv-modal select,
+.cv-modal textarea {
+  width: 100%;
+  height: 40px;
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+.cv-modal input:focus,
+.cv-modal select:focus,
+.cv-modal textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 1px #2563eb;
+}
+.cv-modal input[type="date"] {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.cv-modal .cv-grid {
+  background: #f9fafb;
+  border-radius: 14px;
+  padding: 20px;
+  gap: 18px 22px;
+}
+.cv-modal .cv-grid {
+  background: #f9fafb;
+  border-radius: 14px;
+  padding: 20px;
+  gap: 18px 22px;
+}
+
+
+.cv-footer {
+  gap: 12px;
+}
+
+.cv-footer button {
+  height: 42px;
+  min-width: 160px;
+  font-size: 14px;
+  border-radius: 10px;
+}
+
+.cv-footer .approve {
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+  box-shadow: 0 6px 14px rgba(34, 197, 94, 0.35);
+}
+
+.cv-footer .approve:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(34, 197, 94, 0.45);
+}
+
+
+
+/* ===== NORMALIZE SELECT (Gender) TO MATCH INPUT ===== */
+.cv-modal select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%236b7280' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+
+  padding-right: 40px; /* space for arrow */
+  cursor: pointer;
+}
+.cv-modal label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #6b7280;
+}
+
+
+/* ===== POINTER CURSOR FOR MODAL ACTION BUTTONS ===== */
+.cv-footer button {
+  cursor: pointer;
 }

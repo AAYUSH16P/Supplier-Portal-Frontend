@@ -235,7 +235,7 @@ export default function ReviewCandidates() {
                     <tr key={c.id}>
                       <td>
                         <div className="candidate-ref">
-                          <strong>{c.role || "-"}</strong>
+                          <strong>{c.jobTitle || "-"}</strong>
                           <span>{c.companyEmployeeId}</span>
                         </div>
                       </td>
@@ -440,67 +440,130 @@ export default function ReviewCandidates() {
 
       {/* ================= EDIT MODAL ================= */}
       {showEditModal && editForm && (
-        <div className="cv-modal-backdrop">
-          <div className="cv-modal">
-            <div className="cv-header">
-              <h3>Edit Candidate Details</h3>
-              <button className="cv-close" onClick={() => setShowEditModal(false)}>
-                ✕
-              </button>
-            </div>
+  <div className="cv-modal-backdrop">
+    <div className="cv-modal">
+      <div className="cv-header">
+        <h3>Edit Candidate Details</h3>
+        <button className="cv-close" onClick={() => setShowEditModal(false)}>
+          ✕
+        </button>
+      </div>
 
-            <div className="cv-grid">
-              <EditField label="Company Employee ID" value={editForm.companyEmployeeId} onChange={(v) => handleEditChange("companyEmployeeId", v)} />
-              <EditField label="Job Title" value={editForm.jobTitle} onChange={(v) => handleEditChange("jobTitle", v)} />
-              <EditField label="Role" value={editForm.role} onChange={(v) => handleEditChange("role", v)} />
-              <EditField label="Gender" value={editForm.gender || ""} onChange={(v) => handleEditChange("gender", v)} />
-              <EditField label="Location" value={editForm.location || ""} onChange={(v) => handleEditChange("location", v)} />
-              <EditField label="Total Experience" type="number" value={editForm.totalExperience} onChange={(v) => handleEditChange("totalExperience", v)} />
-              <EditField label="CTC" type="number" value={editForm.ctc} onChange={(v) => handleEditChange("ctc", v)} />
-              <EditField label="Technical Skills" value={editForm.technicalSkills || ""} onChange={(v) => handleEditChange("technicalSkills", v)} />
-              <EditField label="Tools" value={editForm.tools || ""} onChange={(v) => handleEditChange("tools", v)} />
-              <EditField label="Number of Projects" type="number" value={editForm.numberOfProjects} onChange={(v) => handleEditChange("numberOfProjects", v)} />
-              <EditField
-                label="Certifications (comma separated)"
-                value={editForm.certifications}
-                onChange={(v) => handleEditChange("certifications", v)}
-              />
-              <EditField
-                label="Working Since"
-                type="date"
-                value={editForm.workingSince?.substring(0, 10) || ""}
-                onChange={(v) => {
-                  if (isFutureDate(v)) {
-                    setEditErrors((prev) => ({
-                      ...prev,
-                      workingSince: "Working Since date cannot be in the future",
-                    }));
-                  } else {
-                    setEditErrors((prev) => ({
-                      ...prev,
-                      workingSince: "",
-                    }));
-                  }
+      <div className="cv-grid">
+        <EditField
+          label="Company Employee ID"
+          value={editForm.companyEmployeeId}
+          onChange={(v) => handleEditChange("companyEmployeeId", v)}
+        />
 
-                  handleEditChange("workingSince", v);
-                }}
-              />
-              {editErrors.workingSince && (
-                <p className="form-error">{editErrors.workingSince}</p>
-              )}
+        <EditField
+          label="Job Title"
+          value={editForm.jobTitle}
+          onChange={(v) => handleEditChange("jobTitle", v)}
+        />
 
+        {/* 🔽 label aligned with form */}
+        <EditField
+          label="I Can Be"
+          value={editForm.role}
+          onChange={(v) => handleEditChange("role", v)}
+        />
 
-            </div>
-
-            <div className="cv-footer">
-              <button className="approve" onClick={handleEditSubmit}>
-                💾 Save Changes
-              </button>
-              <button onClick={() => setShowEditModal(false)}>Cancel</button>
-            </div>
-          </div>
+        {/* 🔽 ONLY real structural change (dropdown instead of text) */}
+        <div className="form-field" id="lo">
+          <label >Gender *</label>
+          <select
+            value={editForm.gender || ""}
+            onChange={(e) => handleEditChange("gender", e.target.value)}
+          >
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
         </div>
-      )}
+
+        <EditField
+          label="Location"
+          value={editForm.location || ""}
+          onChange={(v) => handleEditChange("location", v)}
+        />
+
+        <EditField
+          label="Total Years of Experience"
+          type="number"
+          step="0.1"
+          value={editForm.totalExperience}
+          onChange={(v) => handleEditChange("totalExperience", v)}
+        />
+
+        <EditField
+          label="CTC"
+          type="number"
+          value={editForm.ctc}
+          onChange={(v) => handleEditChange("ctc", v)}
+        />
+
+        <EditField
+          label="Technical Skills"
+          value={editForm.technicalSkills || ""}
+          onChange={(v) => handleEditChange("technicalSkills", v)}
+        />
+
+        <EditField
+          label="Tools"
+          value={editForm.tools || ""}
+          onChange={(v) => handleEditChange("tools", v)}
+        />
+
+        <EditField
+          label="Number of Projects"
+          type="number"
+          value={editForm.numberOfProjects}
+          onChange={(v) => handleEditChange("numberOfProjects", v)}
+        />
+
+        <EditField
+          label="Certifications (comma separated)"
+          value={editForm.certifications}
+          onChange={(v) => handleEditChange("certifications", v)}
+        />
+
+        <EditField
+          label="Working Since"
+          type="date"
+          value={editForm.workingSince?.substring(0, 10) || ""}
+          onChange={(v) => {
+            if (isFutureDate(v)) {
+              setEditErrors((prev) => ({
+                ...prev,
+                workingSince: "Working Since date cannot be in the future",
+              }));
+            } else {
+              setEditErrors((prev) => ({
+                ...prev,
+                workingSince: "",
+              }));
+            }
+
+            handleEditChange("workingSince", v);
+          }}
+        />
+
+        {editErrors.workingSince && (
+          <p className="form-error">{editErrors.workingSince}</p>
+        )}
+      </div>
+
+      <div className="cv-footer">
+        <button className="approve" onClick={handleEditSubmit}>
+          💾 Save Changes
+        </button>
+        <button onClick={() => setShowEditModal(false)}>Cancel</button>
+      </div>
+    </div>
+  </div>
+)}
+
       <AppFooter />
     </>
   );

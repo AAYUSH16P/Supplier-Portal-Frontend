@@ -9,7 +9,9 @@ import ChangePasswordModal from "./changePassword";
 import { toast } from "react-toastify";
 
 
+
 const FieldKeyMap = {
+  // ===== Company Information =====
   companyName: "CompanyName",
   companyWebsite: "CompanyWebsite",
   businessType: "BusinessType",
@@ -18,11 +20,30 @@ const FieldKeyMap = {
   companyOverview: "CompanyOverview",
   domainExpertise: "DomainExpertise",
   totalProjectsExecuted: "TotalProjectsExecuted",
+
+  // ===== Address =====
+  addressLine1: "AddressLine1",
+  addressLine2: "AddressLine2",
+  city: "City",
+  state: "State",
+  postalCode: "PostalCode",
+  country: "Country",
+
+  // ===== Primary Contact =====
+  primaryContactName: "PrimaryContactName",
+  primaryContactRole: "PrimaryContactRole",
+  primaryContactEmail: "PrimaryContactEmail",
+  primaryContactPhone: "PrimaryContactPhone",
+
+  // ===== Secondary Contact =====
+  secondaryContactName: "SecondaryContactName",
+  secondaryContactRole: "SecondaryContactRole",
+  secondaryContactEmail: "SecondaryContactEmail",
+  secondaryContactPhone: "SecondaryContactPhone",
+
+  // ===== Certifications =====
+  certifications: "Certifications"
 };
-
-
-
-
 
 
 
@@ -110,6 +131,54 @@ export default function MyCompanyDetails() {
     ? data.domainExpertise.split(",").map((d) => d.trim())
     : [];
 
+
+    const getCurrentValue = () => {
+      switch (selectedField) {
+        // ===== Primary Contact =====
+        case "primaryContactName":
+          return primaryContact?.contactName ?? "";
+        case "primaryContactRole":
+          return primaryContact?.roleDesignation ?? "";
+        case "primaryContactEmail":
+          return primaryContact?.email ?? "";
+        case "primaryContactPhone":
+          return primaryContact?.phone ?? "";
+    
+        // ===== Secondary Contact =====
+        case "secondaryContactName":
+          return secondaryContact?.contactName ?? "";
+        case "secondaryContactRole":
+          return secondaryContact?.roleDesignation ?? "";
+        case "secondaryContactEmail":
+          return secondaryContact?.email ?? "";
+        case "secondaryContactPhone":
+          return secondaryContact?.phone ?? "";
+    
+        // ===== Address =====
+        case "addressLine1":
+          return address?.addressLine1 ?? "";
+        case "addressLine2":
+          return address?.addressLine2 ?? "";
+        case "city":
+          return address?.city ?? "";
+        case "state":
+          return address?.state ?? "";
+        case "postalCode":
+          return address?.postalCode ?? "";
+        case "country":
+          return address?.country ?? "";
+    
+        // ===== Certifications =====
+        case "certifications":
+          return data.certifications?.map(c => c.certificationName).join(", ") ?? "";
+    
+        // ===== Default (Company fields) =====
+        default:
+          return data[selectedField] ?? "";
+      }
+    };
+    
+
   return (
     <>
       <AppHeader />
@@ -160,16 +229,34 @@ export default function MyCompanyDetails() {
                     value={selectedField}
                     onChange={(e) => setSelectedField(e.target.value)}
                   >
-                    <option value="">Select field...</option>
-                    <option value="companyName">Company Name</option>
-                    <option value="companyWebsite">Website</option>
-                    <option value="businessType">Business Type</option>
-                    <option value="companySize">Company Size</option>
-                    <option value="yearEstablished">Year Established</option>
-                    <option value="domainExpertise">Domain Expertise</option>
-                    <option value="totalProjectsExecuted">
-                      Total Projects Executed
-                    </option>
+                   <option value="companyName">Company Name</option>
+<option value="companyWebsite">Company Website</option>
+<option value="businessType">Business Type</option>
+<option value="companySize">Company Size</option>
+<option value="yearEstablished">Year Established</option>
+<option value="companyOverview">Company Overview</option>
+<option value="domainExpertise">Domain Expertise</option>
+<option value="totalProjectsExecuted">Total Projects Executed</option>
+
+<option value="addressLine1">Address Line 1</option>
+<option value="addressLine2">Address Line 2</option>
+<option value="city">City</option>
+<option value="state">State</option>
+<option value="postalCode">Postal Code</option>
+<option value="country">Country</option>
+
+<option value="primaryContactName">Primary Contact Name</option>
+<option value="primaryContactRole">Primary Contact Role</option>
+<option value="primaryContactEmail">Primary Contact Email</option>
+<option value="primaryContactPhone">Primary Contact Phone</option>
+
+<option value="secondaryContactName">Secondary Contact Name</option>
+<option value="secondaryContactRole">Secondary Contact Role</option>
+<option value="secondaryContactEmail">Secondary Contact Email</option>
+<option value="secondaryContactPhone">Secondary Contact Phone</option>
+
+<option value="certifications">Certifications</option>
+
                   </select>
                 </div>
 
@@ -177,9 +264,7 @@ export default function MyCompanyDetails() {
                   <label>Current Value</label>
                   <input
                     disabled
-                    value={
-                      selectedField ? data[selectedField] ?? "" : ""
-                    }
+                    value={getCurrentValue()}
                     placeholder="What is the current value?"
                   />
                 </div>
@@ -225,7 +310,7 @@ export default function MyCompanyDetails() {
                         body: JSON.stringify({
                           companyId: data.id,
                           fieldKey: FieldKeyMap[selectedField],
-                          oldValue: data[selectedField]?.toString() ?? "",
+                          oldValue: getCurrentValue().toString(),
                           newValue,
                           reason,
                         }),
@@ -278,7 +363,7 @@ export default function MyCompanyDetails() {
                     label="Total Projects Executed"
                     value={data.totalProjectsExecuted}
                   />
-                )}
+                )}  
               </div>
             </div>
 

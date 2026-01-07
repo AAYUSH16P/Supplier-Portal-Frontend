@@ -3,8 +3,37 @@ import AppSidebar from "../../Components/RegisteredUser/AppSidebar";
 import "../../style/RegisteredUser/SupplierAcknowledgement.css";
 import { useState } from "react";
 import AppFooter from "../../Components/common/AppFooter";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+
 
 import { useNavigate } from "react-router-dom";
+
+const acknowledgeCompany = (companyId) => {
+  return axios.patch(
+    `https://sp-portal-backend-production.up.railway.app/api/company/${companyId}/acknowledge`,
+    null, // ✅ no body
+    {
+      headers: {
+        accept: "*/*",
+        // Authorization: `Bearer ${localStorage.getItem("token")}`, // only if backend needs it
+      },
+    }
+  );
+};
+
+
+const getCompanyIdFromToken = () => {
+  const token = localStorage.getItem("token");
+  if (!token) return null;
+
+  try {
+    const decoded = jwtDecode(token);
+    return decoded.companyId; // must match claim name in JWT
+  } catch {
+    return null;
+  }
+};
 
 
 export default function SupplierAcknowledgement() {
@@ -124,13 +153,30 @@ export default function SupplierAcknowledgement() {
             )}
 
             <div className="ack-actions">
-              <button
-                className="ack-btn"
-                disabled={!allChecked}
-                onClick={() => navigate("/home")}
-              >
-                Proceed to Home Page →
-              </button>
+            <button
+  className="ack-btn"
+  disabled={!allChecked}
+  onClick={async () => {
+    const companyId = getCompanyIdFromToken();
+
+    if (!companyId) {
+      alert("Invalid session. Please login again.");
+      navigate("/login");
+      return;
+    }
+
+    try {
+      await acknowledgeCompany(companyId);
+      navigate("/home");
+    } catch (err) {
+      console.error(err);
+      alert("Failed to acknowledge. Please try again.");
+    }
+  }}
+>
+  Proceed to Home Page →
+</button>
+
             </div>
           </section>
 

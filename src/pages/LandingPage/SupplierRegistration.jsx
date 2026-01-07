@@ -315,9 +315,11 @@ export default function SupplierRegistration() {
         yearEstablished: parseInt(formData.yearEstablished, 10),
         companyOverview: formData.companyOverview.trim(),
         domainExpertise: formData.domainExpertise.trim(),
-        totalProjectsExecuted: formData.totalProjectsExecuted
-          ? parseInt(formData.totalProjectsExecuted, 10)
-          : null,
+        projectExecuted:
+        formData.totalProjectsExecuted !== ""
+          ? Number(formData.totalProjectsExecuted)
+          : 0,
+      
         address: {
           addressLine1: formData.addressLine1.trim(),
           addressLine2: formData.addressLine2.trim(), // Always include, even if empty

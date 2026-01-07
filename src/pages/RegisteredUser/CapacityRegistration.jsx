@@ -25,6 +25,19 @@ export default function CapacityRegistration() {
             </p>
           </section>
 
+          <div
+                                className="back-link"
+                                onClick={() => {
+                                    
+                                        navigate(
+                                            `/candidate`
+                                        );
+                                    
+                                }}
+                            >
+                                ← Back to Candidates
+                            </div>
+
           {/* CARD 1 */}
           <section className="capacity-card">
             <h2>Purpose of This Page</h2>

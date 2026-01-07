@@ -3,6 +3,13 @@
     background: #f7f9fc;
   }
   
+
+  #edf{
+    height: 35px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid #b2aaaa;
+  }
   /* Banner */
   .approval-banner {
     background: linear-gradient(90deg, #0b5ed7, #5a5cff);

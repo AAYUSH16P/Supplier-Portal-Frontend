@@ -9,16 +9,36 @@ import { jwtDecode } from "jwt-decode";
 
 import ChangePasswordModal from "./changePassword";
 
+
+
 export default function SupplierLogin() {
   const navigate = useNavigate();
+  const [decodedToken, setDecodedToken] = useState(null);
 
   const [showChangePassword, setShowChangePassword] = useState(false);
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     rememberMe: false,
   });
+
+  const navigateAfterLogin = (decoded) => {
+    const isAcknowledged =
+      decoded?.isacknowledge === true ||
+      decoded?.isacknowledge === "True";
+  
+    setTimeout(() => {
+      if (isAcknowledged) {
+        navigate("/home");
+      } else {
+        navigate("/acknowledge");
+      }
+    }, 500);
+  };
+  
 
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -97,6 +117,7 @@ export default function SupplierLogin() {
         let decoded;
         try {
           decoded = jwtDecode(token);
+          setDecodedToken(decoded);
         } catch {
           throw new Error("Invalid token received");
         }
@@ -110,16 +131,16 @@ export default function SupplierLogin() {
 
         toast.success("Login successful!", { autoClose: 1500 });
 
-        // 🔑 PASSWORD CHANGE CHECK
         if (decoded?.isPasswordChanged === "False") {
           setShowChangePassword(true);
           return; // ⛔ stop navigation
         }
 
+        navigateAfterLogin(decoded);
         // Normal flow
-        setTimeout(() => {
-          navigate("/acknowledge");
-        }, 800);
+       
+
+
       }
     } catch (error) {
       const msg =
@@ -144,7 +165,7 @@ export default function SupplierLogin() {
         open={showChangePassword}
         onClose={() => {
           setShowChangePassword(false);
-          navigate("/acknowledge"); // allow cancel + continue
+          navigateAfterLogin(decodedToken); // allow cancel + continue
         }}
       />
 
@@ -154,8 +175,11 @@ export default function SupplierLogin() {
         </button>
 
         <div className="brand-center">
-          <div className="brand-icon">🏢</div>
-          <span>WestGate</span>
+        <img
+    src="/TSlogoFinal.jpg"
+    alt="TalentedStaff"
+    className="header-logo-img"
+  />
         </div>
 
         <div className="header-spacer" />
@@ -184,17 +208,38 @@ export default function SupplierLogin() {
             {errors.email && <span className="error-message">{errors.email}</span>}
 
             <label>Password</label>
-            <div className={`input-box ${errors.password ? "error" : ""}`}>
-              <span>🔒</span>
-              <input
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                placeholder="••••••"
-              />
-            </div>
+<div className={`input-box ${errors.password ? "error" : ""}`}>
+  <span>🔒</span>
+
+  <input
+    type={showPassword ? "text" : "password"}
+    name="password"
+    value={formData.password}
+    onChange={handleChange}
+    onBlur={handleBlur}
+    placeholder="••••••"
+  />
+
+  <button
+    type="button"
+    className="eye-btn"
+    onClick={() => setShowPassword((prev) => !prev)}
+    aria-label={showPassword ? "Hide password" : "Show password"}
+  >
+    {showPassword ? "🔒" : "👁️"}
+  </button>
+</div>
+
+
+            <div className="forgot-row">
+  <button
+    type="button"
+    className="forgot-btn"
+    onClick={() => navigate("/forgot-password")}
+  >
+    Forgot Password?
+  </button>
+</div>
             {errors.password && (
               <span className="error-message">{errors.password}</span>
             )}

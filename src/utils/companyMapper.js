@@ -70,7 +70,7 @@ export const mapCompanyPayload = (nestedData) => {
     secondaryContactEmail: secondaryContact?.email || "",
     secondaryContactPhone: secondaryContact?.phone || "",
     domainExpertise: nestedData.domainExpertise,
-    totalProjectsExecuted: nestedData.totalProjectsExecuted,
+    projectExecuted: nestedData.projectExecuted,
     // Certifications (always included as array, even if empty)
     certifications: Array.isArray(certifications) 
       ? certifications.filter(cert => cert && cert.trim() !== "")

@@ -5,10 +5,38 @@
   color: rgb(95, 95, 198);
 }
 
-.header-logo-img {
+/* ===============================
+   TalentedStaff Centered Header
+   =============================== */
+
+   .ts-header-center {
+    width: 100%;
+    height: 100vh; /* full viewport height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .ts-header-logo {
+    max-width: 260px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+  
+
+.ab{
   height: 40px;
   width: auto;
   object-fit: contain;
+  margin-left: 670px;
+}
+
+#ab{
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  margin-left: 670px;
 }
 
 

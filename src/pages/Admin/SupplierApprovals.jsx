@@ -257,7 +257,7 @@ export default function SupplierApprovals() {
 
   const cancelSignSla = () => {
     setShowSlaConfirm(false);
-    
+
   };
 
 
@@ -621,11 +621,11 @@ export default function SupplierApprovals() {
                               {isEditMode ? (
                                 <>
                                   <input
+                                    type="url"
                                     value={editForm.companyWebsite}
                                     onChange={(e) =>
                                       setEditForm({ ...editForm, companyWebsite: e.target.value })
                                     }
-
                                   />
                                   <ErrorText message={errors.companyWebsite} />
                                 </>
@@ -636,32 +636,58 @@ export default function SupplierApprovals() {
                             </div>
 
                             <div className={isEditMode ? "form-group" : ""}>
-                              <label>Business Type</label>
+                              <label>
+                                Business Type {isEditMode && <span className="required-asterisk">*</span>}
+                              </label>
+
                               {isEditMode ? (
                                 <>
-                                  <input
+                                  <select
                                     value={editForm.businessType}
                                     onChange={(e) =>
                                       setEditForm({ ...editForm, businessType: e.target.value })
                                     }
-                                  />
+                                    className={errors.businessType ? "error" : ""}
+                                  >
+
+                                    <option value="">Select business type...</option>
+                                    <option value="Private Limited">Private Limited</option>
+                                    <option value="Public Limited">Public Limited</option>
+                                    <option value="Partnership">Partnership</option>
+                                    <option value="LLP">LLP (Limited Liability Partnership)</option>
+                                    <option value="Sole Proprietorship">Sole Proprietorship</option>
+                                    <option value="Other">Other</option>
+                                  </select>
+
                                   <ErrorText message={errors.businessType} />
                                 </>
                               ) : (
-                                <span>{selectedSupplier.businessType}</span>
+                                <span>{selectedSupplier.businessType || "-"}</span>
                               )}
                             </div>
+
 
                             <div className={isEditMode ? "form-group" : ""}>
                               <label>Company Size</label>
                               {isEditMode ? (
                                 <>
-                                  <input
+                                  <select
                                     value={editForm.companySize}
                                     onChange={(e) =>
                                       setEditForm({ ...editForm, companySize: e.target.value })
                                     }
-                                  />
+                                    className={errors.companySize ? "error" : ""}
+                                  >
+                                    <option value="">Select size...</option>
+                                    <option value="1-10">1-10 employees</option>
+                                    <option value="11-50">11-50 employees</option>
+                                    <option value="51-200">51-200 employees</option>
+                                    <option value="201-500">201-500 employees</option>
+                                    <option value="501-1000">501-1000 employees</option>
+                                    <option value="1000+">1000+ employees</option>
+                                  </select>
+                                  <ErrorText message={errors.companySize} />
+
                                   <ErrorText message={errors.companySize} />
                                 </>
                               ) : (
@@ -804,13 +830,14 @@ export default function SupplierApprovals() {
                                       <div className="field">
                                         <label>Email</label>
                                         <input
-                                          value={editForm.primaryContact.email}
+                                          type="tel"
+                                          value={editForm.primaryContact.phone}
                                           onChange={(e) =>
                                             setEditForm({
                                               ...editForm,
                                               primaryContact: {
                                                 ...editForm.primaryContact,
-                                                email: e.target.value,
+                                                phone: e.target.value,
                                               },
                                             })
                                           }
@@ -1030,7 +1057,8 @@ export default function SupplierApprovals() {
 
                               <div className="field">
                                 <label>Country</label>
-                                <input
+                                <select
+                                id="edf"
                                   value={editForm.address.country}
                                   onChange={(e) =>
                                     setEditForm({
@@ -1038,7 +1066,13 @@ export default function SupplierApprovals() {
                                       address: { ...editForm.address, country: e.target.value },
                                     })
                                   }
-                                />
+                                  className={errors.country ? "error" : ""}
+                                >
+                                  <option value="India">India</option>
+                                  <option value="Other">Other</option>
+                                </select>
+                                <ErrorText message={errors.country} />
+
                                 <ErrorText message={errors.country} />
 
                               </div>
@@ -1128,8 +1162,8 @@ export default function SupplierApprovals() {
                   <p className="confirm-text">{confirmMessage}</p>
 
                   <p className="confirm-subtext">
-  This action requires administrator confirmation.
-</p>
+                    This action requires administrator confirmation.
+                  </p>
                 </div>
 
                 {/* FOOTER */}
@@ -1139,8 +1173,8 @@ export default function SupplierApprovals() {
                   </button>
 
                   <button className="btn confirm" id="abc" onClick={handleConfirmAction}>
-                ✔ Confirm
-              </button>
+                    ✔ Confirm
+                  </button>
 
                 </div>
               </div>
