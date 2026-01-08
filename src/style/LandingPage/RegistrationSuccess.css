@@ -1,0 +1,123 @@
+/* Page wrapper – follows registration layout */
+.success-page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    padding: 40px 0;
+    background: transparent;
+  }
+  
+  /* Main card */
+  .success-card {
+    background: #ffffff;
+    max-width: 760px;
+    width: 100%;
+    border-radius: 16px;
+    padding: 40px 44px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+    text-align: center;
+  }
+  
+  /* Green check icon */
+  .success-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: #dcfce7;
+    color: #16a34a;
+    font-size: 34px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 18px;
+  }
+  
+  /* Main heading */
+  .success-card h2 {
+    margin-bottom: 16px;
+    color: #0f172a;
+    font-size: 24px;
+    font-weight: 600;
+  }
+  
+  /* Content area */
+  .success-content {
+    text-align: left;
+    margin-top: 20px;
+  }
+  
+  .success-content h4 {
+    margin-bottom: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #0f172a;
+  }
+  
+  .success-content p {
+    font-size: 14px;
+    color: #334155;
+    margin-bottom: 14px;
+    line-height: 1.6;
+  }
+  
+  .success-steps {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 20px 0;
+    list-style: none;
+    counter-reset: step;
+  }
+  
+  .success-steps li {
+    counter-increment: step;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+    font-size: 14px;
+    color: #1e293b;
+    line-height: 1.5;
+  }
+  
+  .success-steps li:last-child {
+    margin-bottom: 0;
+  }
+  
+  /* Blue numbered circle */
+  .success-steps li::before {
+    content: counter(step);
+    min-width: 24px;
+    height: 24px;
+    background: #1d4ed8;
+    color: #ffffff;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+  
+  .review-note {
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    padding: 14px 16px;
+    border-radius: 10px;
+    margin: 18px 0 24px;
+    font-size: 14px;
+    color: #7c2d12;
+    line-height: 1.5;
+  }
+  
+  .success-content button {
+    margin: 0 auto;
+    display: block;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+  }

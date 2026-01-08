@@ -33,6 +33,7 @@ import AdminProtectedRoute from "./routes/AdminProtectedRoute";
 import EmployeeInviteInfo from "./pages/RegisteredUser/EmployeeInviteInfo";
 import ResetPassword from "./style/RegisteredUser/ResetPassword";
 import ForgotPassword from "./style/RegisteredUser/ForgotPassword";
+import RegistrationSuccess from "./pages/LandingPage/RegistrationSuccess";
 
 
 function App() {
@@ -64,7 +65,7 @@ function App() {
         <Route path="/bulkCapacityUpload" element={<BulkCapacityUpload />} />
         <Route path="/employerInitiatedInvite" element={<EmployerInitiatedInvite />} />
         <Route path="/notification" element={<Notifications />} />
-        
+        <Route path="/registration-success" element={<RegistrationSuccess />} />
         <Route path="/employeeInviteInfo" element={<EmployeeInviteInfo />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
 <Route path="/reset-password" element={<ResetPassword />} />

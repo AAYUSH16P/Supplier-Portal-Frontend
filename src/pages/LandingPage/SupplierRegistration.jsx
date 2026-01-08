@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../Components/Header02";
 import Sidebar from "../../Components/Sidebar";
@@ -8,7 +8,7 @@ import "../../style/LandingPage/SupplierRegistration.css";
 import LandingFooter from "../../Components/LandingFooter";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import InfoTooltip from "../../Components/InfoTooltip";
 
 
 export default function SupplierRegistration() {
@@ -16,6 +16,31 @@ export default function SupplierRegistration() {
   const [certifications, setCertifications] = useState([""]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
+  const [countryList, setCountryList] = useState([]);
+
+  useEffect(() => {
+  const loadCountries = async () => {
+    try {
+      const res = await fetch("https://restcountries.com/v3.1/all?fields=name");
+      const data = await res.json();
+
+      const countryNames = data
+        .map((c) => c.name.common)
+        .sort((a, b) => a.localeCompare(b));
+
+      setFormData((prev) => ({
+        ...prev,
+        country: "India"
+      }));
+
+      setCountryList(countryNames);
+    } catch (err) {
+      console.error("Failed to load countries:", err);
+    }
+  };
+
+  loadCountries();
+}, []);
 
   // Form state
   const [formData, setFormData] = useState({
@@ -136,12 +161,28 @@ export default function SupplierRegistration() {
       case "primaryContactNumber":
         if (!value.trim()) {
           error = "Primary Contact Number is required";
-        } else if (!/^[\d\s+()-]{7,15}$/.test(value)) {
-          error = "Please enter a valid phone number";
+        } else {
+          const cleanedValue = value.replace(/\s+/g, "");
+
+          const phoneRegex = /^(\+\d{1,3})?\d{10}$/;
+
+          if (!phoneRegex.test(cleanedValue)) {
+            error = "Please enter a valid phone number with or without country code";
+          }
         }
         break;
 
+      case "secondaryContactPhone":
+        if (value.trim()) {
+          const cleanedValue = value.replace(/\s+/g, "");
 
+          const phoneRegex = /^(\+\d{1,3})?\d{10}$/;
+
+          if (!phoneRegex.test(cleanedValue)) {
+            error = "Please enter a valid phone number with or without country code";
+          }
+        }
+        break;
 
       case "companyOverview":
         if (!value.trim()) {
@@ -358,7 +399,7 @@ export default function SupplierRegistration() {
             autoClose: 4000,
           }
         );
-        navigate("/landingPage");
+        navigate("/registration-success");
       }
     } catch (error) {
       toast.error(
@@ -427,7 +468,10 @@ export default function SupplierRegistration() {
 
                 <div className="form-grid">
                   <div className="form-group full">
-                    <label>Company Name <span className="required-asterisk">*</span></label>
+                    <label>
+                      Company Name <span className="required-asterisk">*</span>
+                      <InfoTooltip field="companyName" />
+                    </label>
                     <input
                       name="companyName"
                       value={formData.companyName}
@@ -442,7 +486,10 @@ export default function SupplierRegistration() {
                   </div>
 
                   <div className="form-group full">
-                    <label>Company Website <span className="required-asterisk">*</span></label>
+                    <label>
+                      Company Website <span className="required-asterisk">*</span>
+                      <InfoTooltip field="companyWebsite" />
+                    </label>
                     <input
                       name="companyWebsite"
                       type="url"
@@ -458,7 +505,10 @@ export default function SupplierRegistration() {
                   </div>
 
                   <div className="form-group">
-                    <label>Business Type <span className="required-asterisk">*</span></label>
+                    <label>
+                      Business Type <span className="required-asterisk">*</span>
+                      <InfoTooltip field="businessType" />
+                    </label>
                     <select
                       name="businessType"
                       value={formData.businessType}
@@ -480,7 +530,10 @@ export default function SupplierRegistration() {
                   </div>
 
                   <div className="form-group">
-                    <label>Company Size <span className="required-asterisk">*</span></label>
+                    <label>
+                      Company Size <span className="required-asterisk">*</span>
+                      <InfoTooltip field="companySize" />
+                    </label>
                     <select
                       name="companySize"
                       value={formData.companySize}
@@ -502,7 +555,10 @@ export default function SupplierRegistration() {
                   </div>
 
                   <div className="form-group">
-                    <label>Year Established <span className="required-asterisk">*</span></label>
+                    <label>
+                      Year Established <span className="required-asterisk">*</span>
+                      <InfoTooltip field="yearEstablished" />
+                    </label>
                     <input
                       name="yearEstablished"
                       type="number"
@@ -524,7 +580,10 @@ export default function SupplierRegistration() {
 
                 <div className="form-grid">
                   <div className="form-group full">
-                    <label>Address Line 1 <span className="required-asterisk">*</span></label>
+                    <label>
+                      Address Line 1 <span className="required-asterisk">*</span>
+                      <InfoTooltip field="addressLine1" />
+                    </label>
                     <input
                       name="addressLine1"
                       value={formData.addressLine1}
@@ -539,7 +598,9 @@ export default function SupplierRegistration() {
                   </div>
 
                   <div className="form-group full">
-                    <label>Address Line 2</label>
+                    <label>Address Line 2
+                      <InfoTooltip field="addressLine2" />
+                    </label>
                     <input
                       name="addressLine2"
                       value={formData.addressLine2}
@@ -549,7 +610,9 @@ export default function SupplierRegistration() {
                   </div>
 
                   <div className="form-group">
-                    <label>City <span className="required-asterisk">*</span></label>
+                    <label>City <span className="required-asterisk">*</span>
+                      <InfoTooltip field="city" />
+                    </label>
                     <input
                       name="city"
                       value={formData.city}
@@ -564,7 +627,9 @@ export default function SupplierRegistration() {
                   </div>
 
                   <div className="form-group">
-                    <label>State <span className="required-asterisk">*</span></label>
+                    <label>State <span className="required-asterisk">*</span>
+                      <InfoTooltip field="state" />
+                    </label>
                     <input
                       name="state"
                       value={formData.state}
@@ -579,7 +644,9 @@ export default function SupplierRegistration() {
                   </div>
 
                   <div className="form-group">
-                    <label>Postal Code <span className="required-asterisk">*</span></label>
+                    <label>Postal Code <span className="required-asterisk">*</span>
+                      <InfoTooltip field="postalCode" />
+                    </label>
                     <input
                       name="postalCode"
                       value={formData.postalCode}
@@ -594,7 +661,9 @@ export default function SupplierRegistration() {
                   </div>
 
                   <div className="form-group">
-                    <label>Country <span className="required-asterisk">*</span></label>
+                    <label>Country <span className="required-asterisk">*</span>
+                      <InfoTooltip field="country" />
+                    </label>
                     <select
                       name="country"
                       value={formData.country}
@@ -602,8 +671,12 @@ export default function SupplierRegistration() {
                       onBlur={handleBlur}
                       className={errors.country ? "error" : ""}
                     >
-                      <option value="India">India</option>
-                      <option value="Other">Other</option>
+                      <option value="">Select country...</option>
+                      {countryList.map((c) => (
+                        <option key={c} value={c}>
+                          {c}
+                        </option>
+                      ))}
                     </select>
                     {errors.country && (
                       <span className="error-message">{errors.country}</span>
@@ -617,7 +690,9 @@ export default function SupplierRegistration() {
 
                 <div className="form-grid">
                   <div className="form-group">
-                    <label>Primary Contact Name <span className="required-asterisk">*</span></label>
+                    <label>Primary Contact Name <span className="required-asterisk">*</span>
+                      <InfoTooltip field="primaryContactName" />
+                    </label>
                     <input
                       name="primaryContactName"
                       value={formData.primaryContactName}
@@ -632,7 +707,9 @@ export default function SupplierRegistration() {
                   </div>
 
                   <div className="form-group">
-                    <label>Primary Contact Role / Designation <span className="required-asterisk">*</span></label>
+                    <label>Primary Contact Role / Designation <span className="required-asterisk">*</span>
+                      <InfoTooltip field="primaryContactRole" />
+                    </label>
                     <input
                       name="primaryContactRole"
                       value={formData.primaryContactRole}
@@ -647,7 +724,9 @@ export default function SupplierRegistration() {
                   </div>
 
                   <div className="form-group">
-                    <label>Primary Contact Email <span className="required-asterisk">*</span></label>
+                    <label>Primary Contact Email <span className="required-asterisk">*</span>
+                      <InfoTooltip field="primaryContactEmail" />
+                    </label>
                     <input
                       name="primaryContactEmail"
                       type="email"
@@ -663,7 +742,9 @@ export default function SupplierRegistration() {
                   </div>
 
                   <div className="form-group">
-                    <label>Primary Contact Number <span className="required-asterisk">*</span></label>
+                    <label>Primary Contact Number <span className="required-asterisk">*</span>
+                      <InfoTooltip field="primaryContactNumber" />
+                    </label>
                     <input
                       name="primaryContactNumber"
                       type="tel"
@@ -684,7 +765,9 @@ export default function SupplierRegistration() {
 
                 <div className="form-grid">
                   <div className="form-group">
-                    <label>Secondary Contact Name</label>
+                    <label>Secondary Contact Name
+                      <InfoTooltip field="secondaryContactName" />
+                    </label>
                     <input
                       name="secondaryContactName"
                       value={formData.secondaryContactName}
@@ -694,7 +777,9 @@ export default function SupplierRegistration() {
                   </div>
 
                   <div className="form-group">
-                    <label>Secondary Contact Role / Designation</label>
+                    <label>Secondary Contact Role / Designation
+                      <InfoTooltip field="secondaryContactRole" />
+                    </label>
                     <input
                       name="secondaryContactRole"
                       value={formData.secondaryContactRole}
@@ -704,7 +789,9 @@ export default function SupplierRegistration() {
                   </div>
 
                   <div className="form-group">
-                    <label>Secondary Contact Email</label>
+                    <label>Secondary Contact Email
+                      <InfoTooltip field="secondaryContactEmail" />
+                    </label>
                     <input
                       name="secondaryContactEmail"
                       type="email"
@@ -715,18 +802,27 @@ export default function SupplierRegistration() {
                   </div>
 
                   <div className="form-group">
-                    <label>Secondary Contact Phone</label>
+                    <label>Secondary Contact Phone
+                      <InfoTooltip field="secondaryContactPhone" />
+                    </label>
                     <input
                       name="secondaryContactPhone"
                       type="tel"
                       value={formData.secondaryContactPhone}
                       onChange={handleChange}
+                      onBlur={handleBlur}
                       placeholder="+91 98765 43210"
+                      className={errors.secondaryContactPhone ? "error" : ""}
                     />
+                    {errors.secondaryContactPhone && (
+                      <span className="error-message">{errors.secondaryContactPhone}</span>
+                    )}
                   </div>
 
                   <div className="form-group">
-                    <label>Domain Expertise</label>
+                    <label>Domain Expertise
+                      <InfoTooltip field="domainExpertise" />
+                    </label>
                     <input
                       name="domainExpertise"
                       value={formData.domainExpertise}
@@ -736,7 +832,9 @@ export default function SupplierRegistration() {
                   </div>
 
                   <div className="form-group">
-                    <label>Total Projects Executed</label>
+                    <label>Total Projects Executed
+                      <InfoTooltip field="totalProjectsExecuted" />
+                    </label>
                     <input
                       name="totalProjectsExecuted"
                       type="number"
@@ -755,7 +853,9 @@ export default function SupplierRegistration() {
 
                 <div className="form-grid">
                   <div className="form-group full">
-                    <label>Company Overview <span className="required-asterisk">*</span></label>
+                    <label>Company Overview <span className="required-asterisk">*</span>
+                      <InfoTooltip field="companyOverview" />
+                    </label>
                     <textarea
                       name="companyOverview"
                       value={formData.companyOverview}
@@ -776,7 +876,9 @@ export default function SupplierRegistration() {
                   </div>
 
                   <div className="form-group full">
-                    <label>Certifications</label>
+                    <label>Certifications
+                      <InfoTooltip field="certifications" />
+                    </label>
 
                     {certifications.map((cert, index) => (
                       <div className="certification-row" key={index}>
