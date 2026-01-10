@@ -4,6 +4,112 @@
     min-height: calc(100vh - 64px);
     background: #f8fafc;
   }
+
+  /* ===== Booking Confirmation Page ===== */
+
+.booking-page {
+  min-height: 100vh;
+  background: #f8fafc;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ===== Top Gradient Strip ===== */
+.booking-header {
+  width: 100%;
+  max-width: 1100px;
+  height: 64px;
+  background: linear-gradient(90deg, #4bbf8b, #3bb0d6);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 600;
+  gap: 10px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.calendar-icon {
+  font-size: 22px;
+}
+
+/* ===== Confirmation Card ===== */
+.booking-card {
+  width: 100%;
+  max-width: 900px;
+  background: #ffffff;
+  margin-top: 40px;
+  padding: 48px 32px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
+  border: 1px solid #e5e7eb;
+}
+
+/* ===== Success Icon ===== */
+.success-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 4px solid #3ba746;
+  color: #3ba746;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: bold;
+  margin: 0 auto 24px auto;
+}
+
+/* ===== Text Styles ===== */
+.booking-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 12px;
+}
+
+.booking-text {
+  font-size: 16px;
+  color: #334155;
+  margin-bottom: 10px;
+}
+
+.booking-subtext {
+  font-size: 15px;
+  color: #64748b;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .booking-header {
+    font-size: 16px;
+    padding: 0 12px;
+  }
+
+  .booking-card {
+    padding: 32px 20px;
+  }
+
+  .booking-title {
+    font-size: 22px;
+  }
+}
+.booking-datetime {
+  font-size: 16px;
+  color: #475569;
+  margin-bottom: 18px;
+}
+
+.booking-datetime strong {
+  color: #1e293b;
+  font-weight: 600;
+}
+
   
   .meeting-page {
     flex: 1;

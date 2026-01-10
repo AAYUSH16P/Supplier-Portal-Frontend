@@ -8,4 +8,7 @@ export const companyLogin = (email, password) =>
 
 export const logout = () => {
   localStorage.removeItem("token");
+  localStorage.removeItem("activeMeeting");
+
+
 };

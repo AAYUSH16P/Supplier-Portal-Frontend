@@ -402,16 +402,24 @@ export default function SupplierRegistration() {
         navigate("/registration-success");
       }
     } catch (error) {
-      toast.error(
-        error.response?.data?.message ||
-        "Failed to submit registration. Please try again.",
-        {
-          position: "top-right",
-          autoClose: 5000,
+      let message = "Failed to submit registration. Please try again.";
+    
+      if (error.response?.data) {
+        if (typeof error.response.data === "string") {
+          message = error.response.data;
+        } else if (error.response.data.message) {
+          message = error.response.data.message;
+        } else if (Array.isArray(error.response.data.errors)) {
+          message = error.response.data.errors.join(", ");
         }
-      );
-      
-    } finally {
+      }
+    
+      toast.error(message, {
+        position: "top-right",
+        autoClose: 5000,
+      });
+    }
+    finally {
       setIsSubmitting(false);
     }
   };
