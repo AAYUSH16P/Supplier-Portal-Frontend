@@ -2,11 +2,9 @@
 FROM node:18-alpine AS build
 WORKDIR /app
 
-# Install dependencies
 COPY package*.json ./
 RUN npm install --omit=dev
 
-# Copy source & build
 COPY . .
 RUN npm run build
 
@@ -14,14 +12,10 @@ RUN npm run build
 FROM node:18-alpine
 WORKDIR /app
 
-# Install static server
 RUN npm install -g serve
 
-# Copy build output
 COPY --from=build /app/build ./build
 
-# Expose port
 EXPOSE 8080
 
-# Start static server
-CMD ["serve", "-s", "build", "-l", "8080"]
+CMD sh -c "serve -s build -l ${PORT:-8080}"
