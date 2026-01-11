@@ -1,4 +1,3 @@
-# ---------- Build Stage ----------
 FROM node:18-alpine AS build
 WORKDIR /app
 
@@ -8,12 +7,10 @@ RUN npm install --omit=dev
 COPY . .
 RUN npm run build
 
-# ---------- Runtime Stage ----------
 FROM node:18-alpine
 WORKDIR /app
 
 RUN npm install -g serve
-
 COPY --from=build /app/build ./build
 
 EXPOSE 8080
