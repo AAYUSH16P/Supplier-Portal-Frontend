@@ -350,7 +350,7 @@ export default function CandidateValidation() {
                                             <td>{c.companyName}</td>
                                             <td>{c.id}</td>
                                             <td>{c.companyEmployeeId}</td>
-                                            <td>{c.role}</td>
+                                            <td>{c.jobTitle}</td>
                                             <td>{c.workingSince}</td>
                                             <td>
                                                 <span className="year-badge red">
@@ -454,7 +454,7 @@ export default function CandidateValidation() {
                                         </div>
 
                                         <div>
-                                            <label>Role</label>
+                                            <label>I Can be</label>
                                             <p>{selectedCandidate.role}</p>
                                         </div>
 
