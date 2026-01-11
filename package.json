@@ -1,4 +1,7 @@
 {
+  "engines": {
+  "node": "18.x"
+},
   "name": "supplier-portal",
   "version": "0.1.0",
   "private": true,
@@ -18,8 +21,8 @@
     "serve": "^14.2.5",
     "web-vitals": "^2.1.4"
   },
-  "scripts": {
-    "start": "react-scripts start",
+ "scripts": {
+    "start": "serve -s build -l $PORT",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -30,6 +33,7 @@
       "react-app/jest"
     ]
   },
+  "homepage": ".",
   "browserslist": {
     "production": [
       ">0.2%",
