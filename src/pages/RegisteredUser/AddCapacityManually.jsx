@@ -318,7 +318,7 @@ export default function AddCapacityManually() {
                                             `/employeeInviteInfo?inviteId=${inviteId}&companyName=${companyName}`
                                         );
                                     } else {
-                                        navigate("/candidate");
+                                        navigate("/capacityRegistration");
                                     }
                                 }}
                             >

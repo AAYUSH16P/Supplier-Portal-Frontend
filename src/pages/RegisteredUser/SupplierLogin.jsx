@@ -143,11 +143,11 @@ export default function SupplierLogin() {
 
       }
     } catch (error) {
-      const msg =
-        error.response?.data?.message ||
-        error.message ||
-        "Login failed. Please try again.";
-
+      let msg = "Invalid email or password. Please try again.";
+    
+      // Optional: handle non-auth errors differently
+      
+    
       toast.error(msg);
     } finally {
       setIsSubmitting(false);

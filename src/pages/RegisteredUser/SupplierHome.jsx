@@ -23,6 +23,53 @@ export default function SupplierHome() {
   }, []);
 
 
+  const handleRefreshToken = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+  
+      // Decode JWT payload
+      const payload = JSON.parse(atob(token.split(".")[1]));
+  
+      const email = payload.email;
+      const companyId = payload.companyId;
+  
+      const response = await fetch(
+        "https://sp-portal-backend-production.up.railway.app/api/company/refreshToken",
+        {
+          method: "POST",
+          headers: {
+            "accept": "*/*",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            email,
+            password: "string", // backend-required placeholder
+            companyId
+          })
+        }
+      );
+
+      debugger;
+  
+      if (!response.ok) {
+        throw new Error("Failed to refresh token");
+      }
+  
+      const data = await response.json();
+  
+      // 🔐 Replace token with new token from API
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        window.location.reload();
+      }
+    } catch (error) {
+      console.error("Refresh token error:", error);
+    }
+  };
+  
+
+
   return (
     <>
       <AppHeader />
@@ -90,10 +137,33 @@ export default function SupplierHome() {
               <div className="status-icon">
                 {isSlaSigned ? "✔" : "⏳"}
               </div>
-              <div>
+              <div style={{
+                display:"grid",
+                gridTemplateColumns:"1fr 1fr",
+                gap:"6rem"
+              }}>
+                <div>
                 <small>SLA Status</small>
                 <h3>{isSlaSigned ? "Signed" : "Pending"}</h3>
                 <div className={`status-bar ${isSlaSigned ? "green" : "orange"}`} />
+                </div>
+           
+
+                <button
+                  style={{
+                    marginTop: "8px",
+                    padding: "4px 10px",
+                    fontSize: "12px",
+                    borderRadius: "6px",
+                    border: "1px solid #ccc",
+                    background: "transparent",
+                    cursor: "pointer"
+                  }}
+                  onClick={handleRefreshToken}
+                  >
+                  🔄 Refresh
+                </button>
+
               </div>
             </div>
 
@@ -124,18 +194,18 @@ export default function SupplierHome() {
               {isSlaSigned ? (
                 /* ✅ SLA SIGNED */
                 <div className="status-success">
-                <div className="success-header">
-                  <span className="success-icon">✔</span>
-                  <h5>SLA Signed</h5>
+                  <div className="success-header">
+                    <span className="success-icon">✔</span>
+                    <h5>SLA Signed</h5>
+                  </div>
+
+                  <p>
+                    We have received your signed SLA (Service Level Agreement).
+                    Candidates approved from your list are now ready for the UK Market
+                    and can be considered for demand-led opportunities.
+                  </p>
                 </div>
-              
-                <p>
-                  We have received your signed SLA (Service Level Agreement).
-                  Candidates approved from your list are now ready for the UK Market
-                  and can be considered for demand-led opportunities.
-                </p>
-              </div>
-              
+
               ) : (
                 /* ❌ SLA NOT SIGNED */
                 <div className="sla-warning-card">

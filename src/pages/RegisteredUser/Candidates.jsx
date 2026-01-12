@@ -84,23 +84,7 @@ export default function Candidates() {
   }, []);
 
 
-  const handleApprove = async (candidate) => {
-    debugger;
-    try {
-      await fetch(
-        `https://sp-portal-backend-production.up.railway.app/api/supplier/capacities/${candidate.id}/approve`,
-        { method: "POST" }
-      );
-
-      setCapacities((prev) =>
-        prev.map((c) =>
-          c.id === candidate.id ? { ...c, status: 1 } : c
-        )
-      );
-    } catch {
-      toast.error("Failed to approve candidate");
-    }
-  };
+ 
 
   const handleRejectConfirm = async () => {
     if (!rejectRemark.trim()) {
@@ -374,26 +358,7 @@ export default function Candidates() {
                       )}
 
 
-{c.status === 0 && c.isRefered && (
-  <div className="pending-actions">
-    <button
-      className="approve-btn"
-      onClick={() => handleApprove(c)}
-    >
-      ✔ Approve
-    </button>
 
-    <button
-      className="reject-btn"
-      onClick={() => {
-        setSelectedCandidate(c);
-        setShowRejectModal(true);
-      }}
-    >
-      ✖ Reject
-    </button>
-  </div>
-)}
 
 
 

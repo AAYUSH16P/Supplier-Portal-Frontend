@@ -4,9 +4,10 @@ import AppHeader from "../../Components/RegisteredUser/AppHeader";
 import AppSidebar from "../../Components/RegisteredUser/AppSidebar";
 import "../../style/RegisteredUser/MyCompanyDetails.css";
 import GlobalLoader from "../../Components/common/GlobalLoader";
-import AppFooter from "../../Components/common/AppFooter"; 
+import AppFooter from "../../Components/common/AppFooter";
 import ChangePasswordModal from "./changePassword";
 import { toast } from "react-toastify";
+import { COMPANY_FIELDS } from "../../config/companyFields";
 
 
 
@@ -55,7 +56,22 @@ export default function MyCompanyDetails() {
   const [newValue, setNewValue] = useState("");
   const [reason, setReason] = useState("");
   const [showChangePassword, setShowChangePassword] = useState(false);
- 
+  const [countryList, setCountryList] = useState([]);
+
+
+  useEffect(() => {
+    fetch("https://restcountries.com/v3.1/all?fields=name")
+      .then(res => res.json())
+      .then(data => {
+        const countries = data
+          .map(c => c.name.common)
+          .sort((a, b) => a.localeCompare(b));
+        setCountryList(countries);
+      })
+      .catch(() => setCountryList([]));
+  }, []);
+
+
   const isFormValid =
     selectedField &&
     newValue.trim().length > 0 &&
@@ -132,52 +148,52 @@ export default function MyCompanyDetails() {
     : [];
 
 
-    const getCurrentValue = () => {
-      switch (selectedField) {
-        // ===== Primary Contact =====
-        case "primaryContactName":
-          return primaryContact?.contactName ?? "";
-        case "primaryContactRole":
-          return primaryContact?.roleDesignation ?? "";
-        case "primaryContactEmail":
-          return primaryContact?.email ?? "";
-        case "primaryContactPhone":
-          return primaryContact?.phone ?? "";
-    
-        // ===== Secondary Contact =====
-        case "secondaryContactName":
-          return secondaryContact?.contactName ?? "";
-        case "secondaryContactRole":
-          return secondaryContact?.roleDesignation ?? "";
-        case "secondaryContactEmail":
-          return secondaryContact?.email ?? "";
-        case "secondaryContactPhone":
-          return secondaryContact?.phone ?? "";
-    
-        // ===== Address =====
-        case "addressLine1":
-          return address?.addressLine1 ?? "";
-        case "addressLine2":
-          return address?.addressLine2 ?? "";
-        case "city":
-          return address?.city ?? "";
-        case "state":
-          return address?.state ?? "";
-        case "postalCode":
-          return address?.postalCode ?? "";
-        case "country":
-          return address?.country ?? "";
-    
-        // ===== Certifications =====
-        case "certifications":
-          return data.certifications?.map(c => c.certificationName).join(", ") ?? "";
-    
-        // ===== Default (Company fields) =====
-        default:
-          return data[selectedField] ?? "";
-      }
-    };
-    
+  const getCurrentValue = () => {
+    switch (selectedField) {
+      // ===== Primary Contact =====
+      case "primaryContactName":
+        return primaryContact?.contactName ?? "";
+      case "primaryContactRole":
+        return primaryContact?.roleDesignation ?? "";
+      case "primaryContactEmail":
+        return primaryContact?.email ?? "";
+      case "primaryContactPhone":
+        return primaryContact?.phone ?? "";
+
+      // ===== Secondary Contact =====
+      case "secondaryContactName":
+        return secondaryContact?.contactName ?? "";
+      case "secondaryContactRole":
+        return secondaryContact?.roleDesignation ?? "";
+      case "secondaryContactEmail":
+        return secondaryContact?.email ?? "";
+      case "secondaryContactPhone":
+        return secondaryContact?.phone ?? "";
+
+      // ===== Address =====
+      case "addressLine1":
+        return address?.addressLine1 ?? "";
+      case "addressLine2":
+        return address?.addressLine2 ?? "";
+      case "city":
+        return address?.city ?? "";
+      case "state":
+        return address?.state ?? "";
+      case "postalCode":
+        return address?.postalCode ?? "";
+      case "country":
+        return address?.country ?? "";
+
+      // ===== Certifications =====
+      case "certifications":
+        return data.certifications?.map(c => c.certificationName).join(", ") ?? "";
+
+      // ===== Default (Company fields) =====
+      default:
+        return data[selectedField] ?? "";
+    }
+  };
+
 
   return (
     <>
@@ -227,37 +243,19 @@ export default function MyCompanyDetails() {
                   </label>
                   <select
                     value={selectedField}
-                    onChange={(e) => setSelectedField(e.target.value)}
+                    onChange={(e) => {
+                      setSelectedField(e.target.value);
+                      setNewValue("");
+                    }}
                   >
-                   <option value="companyName">Company Name</option>
-<option value="companyWebsite">Company Website</option>
-<option value="businessType">Business Type</option>
-<option value="companySize">Company Size</option>
-<option value="yearEstablished">Year Established</option>
-<option value="companyOverview">Company Overview</option>
-<option value="domainExpertise">Domain Expertise</option>
-<option value="totalProjectsExecuted">Total Projects Executed</option>
-
-<option value="addressLine1">Address Line 1</option>
-<option value="addressLine2">Address Line 2</option>
-<option value="city">City</option>
-<option value="state">State</option>
-<option value="postalCode">Postal Code</option>
-<option value="country">Country</option>
-
-<option value="primaryContactName">Primary Contact Name</option>
-<option value="primaryContactRole">Primary Contact Role</option>
-<option value="primaryContactEmail">Primary Contact Email</option>
-<option value="primaryContactPhone">Primary Contact Phone</option>
-
-<option value="secondaryContactName">Secondary Contact Name</option>
-<option value="secondaryContactRole">Secondary Contact Role</option>
-<option value="secondaryContactEmail">Secondary Contact Email</option>
-<option value="secondaryContactPhone">Secondary Contact Phone</option>
-
-<option value="certifications">Certifications</option>
-
+                    <option value="">Select field</option>
+                    {Object.entries(COMPANY_FIELDS).map(([key, field]) => (
+                      <option key={key} value={key}>
+                        {field.label}
+                      </option>
+                    ))}
                   </select>
+
                 </div>
 
                 <div>
@@ -269,14 +267,61 @@ export default function MyCompanyDetails() {
                   />
                 </div>
 
-                <div>
-                  <label>Requested New Value <span className="required">*</span></label>
-                  <input
-                    value={newValue}
-                    onChange={(e) => setNewValue(e.target.value)}
-                    placeholder="What should it be changed to?"
-                  />
-                </div>
+                {selectedField && (
+  <div>
+    <label>
+      Requested New Value <span className="required">*</span>
+    </label>
+
+    {/* ✅ COUNTRY – dynamic dropdown */}
+    {selectedField === "country" ? (
+      <select
+        value={newValue}
+        onChange={(e) => setNewValue(e.target.value)}
+      >
+        <option value="">Select country</option>
+        {countryList.map((c) => (
+          <option key={c} value={c}>
+            {c}
+          </option>
+        ))}
+      </select>
+
+    ) : COMPANY_FIELDS[selectedField].type === "textarea" ? (
+
+      <textarea
+        value={newValue}
+        onChange={(e) => setNewValue(e.target.value)}
+        placeholder={`Enter new ${COMPANY_FIELDS[selectedField].label}`}
+      />
+
+    ) : COMPANY_FIELDS[selectedField].type === "select" ? (
+
+      <select
+        value={newValue}
+        onChange={(e) => setNewValue(e.target.value)}
+      >
+        <option value="">Select</option>
+        {COMPANY_FIELDS[selectedField].options.map((opt) => (
+          <option key={opt} value={opt}>
+            {opt}
+          </option>
+        ))}
+      </select>
+
+    ) : (
+
+      <input
+        type={COMPANY_FIELDS[selectedField].type}
+        value={newValue}
+        onChange={(e) => setNewValue(e.target.value)}
+        placeholder={`Enter new ${COMPANY_FIELDS[selectedField].label}`}
+      />
+    )}
+  </div>
+)}
+
+
 
                 <div>
                   <label>Reason for Change <span className="required">*</span></label>
@@ -363,7 +408,7 @@ export default function MyCompanyDetails() {
                     label="Total Projects Executed"
                     value={data.totalProjectsExecuted}
                   />
-                )}  
+                )}
               </div>
             </div>
 
@@ -474,14 +519,14 @@ export default function MyCompanyDetails() {
 
 
           <ChangePasswordModal
-        open={showChangePassword}
-        onClose={() => setShowChangePassword(false)}
-      />
+            open={showChangePassword}
+            onClose={() => setShowChangePassword(false)}
+          />
 
 
         </main>
       </div>
-      <AppFooter/>
+      <AppFooter />
     </>
   );
 }

@@ -124,7 +124,7 @@ export default function BulkCapacityUpload() {
           {/* BACK LINK */}
           <div
   className="bulk-back"
-  onClick={() => navigate("/candidate")}
+  onClick={() => navigate("/capacityRegistration")}
 >
   ← Back to Candidates
 </div>

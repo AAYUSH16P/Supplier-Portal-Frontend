@@ -220,8 +220,9 @@ export default function ReviewCandidates() {
               <table>
                 <thead>
                   <tr>
-                    <th>Candidate Reference</th>
-                    <th>Primary Role</th>
+                    <th>Employee ID</th>
+                    <th>Role</th>
+                  
                     <th>Experience</th>
                     <th>Location</th>
                     <th>Working Since</th>
@@ -235,12 +236,11 @@ export default function ReviewCandidates() {
                     <tr key={c.id}>
                       <td>
                         <div className="candidate-ref">
-                          <strong>{c.jobTitle || "-"}</strong>
                           <span>{c.companyEmployeeId}</span>
                         </div>
                       </td>
-
-                      <td>{c.role || "-"}</td>
+                      <td>{c.jobTitle || "-"}</td>
+                    
                       <td>{c.totalExperience ?? "-"} yrs</td>
                       <td>{c.location || "-"}</td>
                       <td>{c.workingSince || "-"}</td>

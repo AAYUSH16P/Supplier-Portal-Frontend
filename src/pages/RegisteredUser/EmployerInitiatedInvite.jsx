@@ -124,7 +124,7 @@ export default function EmployerInitiatedInvite() {
                     {/* BACK */}
                     <div
                         className="back-link"
-                        onClick={() => navigate("/candidate")}
+                        onClick={() => navigate("/capacityRegistration")}
                         style={{ cursor: "pointer" }}
                     >
                         ← Back to Candidates
