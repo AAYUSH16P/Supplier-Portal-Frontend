@@ -423,6 +423,7 @@ export default function AddCapacityManually() {
                                         type="date"
                                         value={form.workingSince}
                                         onChange={handleChange}
+                                        max={new Date().toISOString().split("T")[0]} 
                                     />
                                     {errors.workingSince && <small>{errors.workingSince}</small>}
                                 </div>
