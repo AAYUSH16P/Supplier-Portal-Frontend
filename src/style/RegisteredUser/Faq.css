@@ -1,5 +1,11 @@
+
+
+
 /* =========================
-   FAQ PAGE LAYOUT
+
+
+
+FAQ PAGE LAYOUT
 ========================= */
 .faq-layout {
   display: flex;
@@ -89,13 +95,15 @@
    FAQ CARD (CONTENT AREA)
 ========================= */
 .faq-card {
-  padding: 80px 40px; /* Increased padding for better empty-state look */
+  padding: 32px 40px;   /* reduced from 80px */
   border-radius: 18px;
   background: #ffffff;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-  text-align: center;
   border: 1px solid rgba(0, 0, 0, 0.02);
+
+  text-align: left;     /* FIX CENTER ALIGN ISSUE */
 }
+
 
 .faq-placeholder-icon {
   width: 72px;
@@ -143,4 +151,68 @@
   .faq-hero-icon {
     margin-bottom: 10px;
   }
+}
+
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-item {
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+  background: #fff;
+}
+
+.faq-question {
+  width: 100%;
+  padding: 16px 20px;
+  font-weight: 500;
+  background: #f9fafb;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+}
+
+.faq-question:hover {
+  background: #eef2ff;
+}
+
+.faq-answer {
+  padding: 14px 20px 18px;
+  background: #ffffff;
+  color: #374151;
+  line-height: 1.7;
+  font-size: 14px;
+
+  text-align: left;   /* FORCE LEFT */
+}
+
+
+.faq-answer p {
+  margin: 0 0 10px 0;
+  text-align: left;
+}
+
+
+.faq-answer ul,
+.faq-answer ol {
+  padding-left: 20px;
+  margin: 8px 0 12px;
+}
+
+.faq-answer li {
+  margin-bottom: 6px;
+  line-height: 1.6;
+}
+
+.faq-footer {
+  margin-top: 10px;
+  font-weight: 500;
 }
