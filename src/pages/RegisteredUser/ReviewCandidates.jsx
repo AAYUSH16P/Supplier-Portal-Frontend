@@ -59,7 +59,7 @@ export default function ReviewCandidates() {
           ? editForm.certifications.split(",").map((c) => c.trim())
           : [],
       };
-
+  
       await fetch(
         `https://sp-portal-backend-production.up.railway.app/api/Supplier/manual-upload/${editForm.id}`,
         {
@@ -68,17 +68,28 @@ export default function ReviewCandidates() {
           body: JSON.stringify(payload),
         }
       );
-
-      // Update UI list
+  
       setCandidates((prev) =>
-        prev.map((c) => (c.id === editForm.id ? editForm : c))
+        prev.map((c) =>
+          c.id === editForm.id
+            ? {
+                ...c,
+                ...payload, // certifications is ARRAY again
+              }
+            : c
+        )
       );
-
+  
+      // ✅ SUCCESS TOAST
+      toast.success("Candidate details updated successfully");
+  
+      // ✅ Close modal
       setShowEditModal(false);
     } catch {
       toast.error("Failed to update candidate");
     }
   };
+  
 
 
   const handleEditOpen = (candidate) => {

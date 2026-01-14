@@ -221,7 +221,16 @@ export default function BookMeeting() {
     }
   };
 
+
+  const getNowIST = () => {
+    const now = new Date();
+    return new Date(now.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
+  };
+
+  
   const generateAvailableSlotsFromEvents = (date, busyEvents) => {
+  
+  const nowIST = getNowIST();
     const slots = [];
     busyEvents.forEach((event, i) => {
 
@@ -243,6 +252,13 @@ export default function BookMeeting() {
           minute,
           0
         );
+
+        const isToday =
+        istDate.toDateString() === nowIST.toDateString();
+
+      if (isToday && istDate <= nowIST) {
+        continue;
+      }
 
         const utcDate = new Date(istDate.getTime() - 5.5 * 60 * 60 * 1000);
 

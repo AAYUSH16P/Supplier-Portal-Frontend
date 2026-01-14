@@ -1,12 +1,18 @@
 import { useState } from "react";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import AuthHeader from "../../Components/common/AuthHeader";
+import "../../style/RegisteredUser/forgotPassword.css";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!email.trim()) {
       toast.error("Email is required");
       return;
@@ -23,8 +29,15 @@ export default function ForgotPassword() {
         }
       );
 
-      // SECURITY: always show success
-      toast.success("If the email exists, a reset link has been sent.");
+      // ✅ Show toast
+      toast.success("If the email exists, a reset link has been sent.", {
+        autoClose: 2000,
+      });
+
+      // ✅ Redirect AFTER toast duration
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
     } catch {
       toast.error("Something went wrong");
     } finally {
@@ -34,6 +47,12 @@ export default function ForgotPassword() {
 
   return (
     <div className="login-page">
+      {/* ✅ Toast renderer */}
+      <ToastContainer />
+
+      {/* ✅ Reused Auth Header */}
+      <AuthHeader showBack backTo="/login" backLabel="Back" />
+
       <main className="login-container">
         <h1>Forgot Password</h1>
         <p className="subtitle">
@@ -43,6 +62,7 @@ export default function ForgotPassword() {
         <form onSubmit={handleSubmit}>
           <div className="login-card">
             <label>Email Address</label>
+
             <div className="input-box">
               <span>📧</span>
               <input
@@ -53,7 +73,11 @@ export default function ForgotPassword() {
               />
             </div>
 
-            <button type="submit" className="login-btn" disabled={loading}>
+            <button
+              type="submit"
+              className="login-btn"
+              disabled={loading}
+            >
               {loading ? "Sending..." : "Send Reset Link"}
             </button>
           </div>

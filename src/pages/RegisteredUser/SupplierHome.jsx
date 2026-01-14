@@ -1,9 +1,9 @@
 import AppHeader from "../../Components/RegisteredUser/AppHeader";
 import AppSidebar from "../../Components/RegisteredUser/AppSidebar";
 import "../../style/RegisteredUser/SupplierHome.css";
-import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import AppFooter from "../../Components/common/AppFooter";
+import { useMemo, useEffect } from "react";
 
 
 export default function SupplierHome() {
@@ -61,12 +61,16 @@ export default function SupplierHome() {
       // 🔐 Replace token with new token from API
       if (data.token) {
         localStorage.setItem("token", data.token);
-        window.location.reload();
       }
     } catch (error) {
       console.error("Refresh token error:", error);
     }
   };
+
+  useEffect(() => {
+    handleRefreshToken();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   
 
 
@@ -149,20 +153,7 @@ export default function SupplierHome() {
                 </div>
            
 
-                <button
-                  style={{
-                    marginTop: "8px",
-                    padding: "4px 10px",
-                    fontSize: "12px",
-                    borderRadius: "6px",
-                    border: "1px solid #ccc",
-                    background: "transparent",
-                    cursor: "pointer"
-                  }}
-                  onClick={handleRefreshToken}
-                  >
-                  🔄 Refresh
-                </button>
+             
 
               </div>
             </div>

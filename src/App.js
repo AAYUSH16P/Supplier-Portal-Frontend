@@ -32,7 +32,7 @@ import AdminLogin from "./pages/Admin/AdminLogin";
 import AdminProtectedRoute from "./routes/AdminProtectedRoute";
 import EmployeeInviteInfo from "./pages/RegisteredUser/EmployeeInviteInfo";
 import ResetPassword from "./style/RegisteredUser/ResetPassword";
-import ForgotPassword from "./style/RegisteredUser/ForgotPassword";
+import ForgotPassword from "./pages/RegisteredUser/ForgotPassword"
 import RegistrationSuccess from "./pages/LandingPage/RegistrationSuccess";
 
 
