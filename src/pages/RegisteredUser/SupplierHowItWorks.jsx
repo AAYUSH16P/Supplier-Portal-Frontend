@@ -170,15 +170,14 @@ export default function SupplierHowItWorks() {
             <div className="context-body">
               <div className="context-text">
                 <p>
-                  Access to this phase reflects readiness status, not a guarantee of engagement.
-                </p>
-                <p>Opportunities, when introduced, are always:</p>
+                Access to this phase reflects readiness status only and does not represent a guarantee of engagement.                </p>
+                <p>Any opportunities introduced are:</p>
               </div>
 
               <ul className="context-list">
-                <li>Driven by real client demand</li>
+                <li>Driven by confirmed client demand</li>
                 <li>Introduced progressively</li>
-                <li>Aligned based on preparedness, suitability, and governance criteria</li>
+                <li>Aligned based on preparedness, suitability, and defined governance criteria</li>
               </ul>
             </div>
           </section>

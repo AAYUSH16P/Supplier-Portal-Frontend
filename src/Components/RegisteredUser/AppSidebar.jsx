@@ -24,7 +24,7 @@ const ROUTE_MAP = {
   "Candidates": "/candidate",
   "Review Your Candidates": "/reviewCandidate",
   "Book a Meeting": "/meeting",
-  "FAQ": "/faq",
+  "FAQ": "/private-faq",
   "Contact": "/contact",
 
    "Notifications": "/notification", // Route to be added when page is created

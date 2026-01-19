@@ -29,14 +29,16 @@ export default function OperatingModel() {
               </div>
 
               <p>
-                <strong>Westgate India</strong> is a business registered in India.
+                <strong>Westgate India</strong> is a business registered in India and operates as the <strong> authorised operational and delivery partner </strong> for <strong> Spectrum IT Hub Ltd (UK)</strong> within the <strong>TalentedStaff.com ecosystem.</strong>
               </p>
 
+              <p>The onboarding this portal supports forms part of a <strong> UK-facing, demand-led IT engagement model</strong>, where supplier capacity is prepared and aligned <strong>in advance of engagement </strong>, against defined governance and operating expectations.</p>
+
               <p>
-                We operate as an authorised and licensed delivery partner for{" "}
-                <strong>Spectrum IT Hub Ltd (UK)</strong> and the{" "}
-                <strong>TalentedStaff.com</strong> ecosystem.
+              This model avoids open or speculative sourcing and instead focuses on <strong> readiness, continuity, and structured participation.</strong>
               </p>
+
+              <p>In this context, <strong> WestGate India acts as the single operational hub and primary point of contact </strong> for invite-only supplier onboarding and early readiness activities.</p>
 
               <div className="info-highlight">
                 <p>
@@ -72,26 +74,29 @@ export default function OperatingModel() {
               </div>
 
               <p className="section-intro">
-                At this stage, <strong>Westgate India</strong> acts as the{" "}
-                <strong className="blue">primary and single operational point of contact</strong> for
-                suppliers participating in the onboarding and readiness phase.
+              During the onboarding and readiness phase, <strong>WestGate India acts as the sole operational interface </strong> for participating suppliers.
               </p>
 
               <div className="mint-highlight">
                 <strong>This means:</strong>
                 <ul>
                   <li>
-                    <strong>Westgate India</strong> coordinates all onboarding interactions
+                  Coordinating all onboarding and readiness interactions                  </li>
+                  <li>
+                  Acting as the day-to-day engagement hub for queries, clarification, and operational alignment
                   </li>
                   <li>
-                    <strong>Westgate India</strong> acts as the day-to-day engagement hub for
-                    readiness activities, queries, and operational alignment
+                  Ensuring suppliers are not required to engage with multiple entities during onboarding
                   </li>
                   <li>
-                    Suppliers are not required to engage with multiple entities during
-                    onboarding
+                  Supporting supplier registration, readiness preparation, and alignment to the engagement model
+                  </li>
+                  <li>
+                  Helping suppliers understand operating expectations  <strong>before any client demand is introduced</strong>
                   </li>
                 </ul>
+
+                <p>The focus at this stage is preparation and alignment, not activation or commercial engagement.</p>
               </div>
 
               <p className="section-footer">

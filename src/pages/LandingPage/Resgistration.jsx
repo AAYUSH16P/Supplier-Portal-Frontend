@@ -41,15 +41,11 @@ export default function Registration() {
                             <h4>Important Note</h4>
 
                             <p>
-                                Acknowledgement of the below confirms understanding of onboarding
-                                expectations only and does not constitute a commercial agreement,
-                                delivery commitment, or guarantee of engagement.
+                            Acknowledgement of the statements below confirms <strong>understanding of onboarding expectations only.</strong> And it does not constitute a commercial agreement, delivery commitment, or guarantee of engagement.
                             </p>
 
                             <p>
-                                Detailed obligations, governance requirements, commercial terms,
-                                roles, responsibilities, and legal arrangements are formally
-                                defined in the <strong>Supplier SLA</strong>.
+                            All detailed <strong>commercial terms, governance requirements, roles, responsibilities, and legal arrangements </strong> are formally defined in the <strong>Supplier SLA</strong>, which is shared and discussed <strong>after registration</strong>, where relevant.
                             </p>
                         </section>
 
@@ -57,6 +53,7 @@ export default function Registration() {
                         <section className="ob-confirm">
                             <h4>Confirmation</h4>
 
+                        <p className="ob-text">To proceed with supplier registration, please confirm that you understand and accept the onboarding expectations outlined below.</p>
                             <label className="ob-checkbox">
                                 <input
                                     type="checkbox"
@@ -64,8 +61,7 @@ export default function Registration() {
                                     onChange={(e) => setIsAcknowledged(e.target.checked)}
                                 />
                                 <span>
-                                    I acknowledge and understand the below onboarding obligations
-                                </span>
+                                I acknowledge and understand the onboarding obligations listed below.                                </span>
                             </label>
 
                             <button
@@ -81,12 +77,11 @@ export default function Registration() {
 
                         {/* FOOTER TEXT */}
                         <p className="ob-text">
-                            Suppliers participating in this onboarding and readiness phase are expected to operate in good faith and in line with standard enterprise delivery practices.
+                        Suppliers participating in this onboarding and readiness phase are expected to operate <strong>in good faith</strong> and in line with <strong>standard enterprise delivery practices. </strong>
                         </p>
 
                         <p className="ob-text">
-                            These obligations apply only to the onboarding and readiness stage and are intended to set clear expectations around participation, conduct, and alignment.
-
+                        The listed expectations apply <strong>only to the onboarding and readiness stage </strong> and are intended to set clear boundaries around participation, conduct and alignment.
                         </p>
 
 
@@ -97,29 +92,23 @@ export default function Registration() {
                             <ul className="expectation-list">
                                 <li>
                                     <span>1</span>
-                                    Provide accurate and truthful information during registration and onboarding
-                                </li>
+                                   <strong> Respect the invite-only and governed nature</strong>of this engagement model                                </li>
                                 <li>
                                     <span>2</span>
-                                    Nominate capacity responsibly, with realistic availability and appropriate continuity planning
-                                </li>
+                                    Engage through <strong> WestGate India </strong> as the <strong> single operational point of contact</strong> during onboarding                                </li>
                                 <li>
                                     <span>3</span>
-                                    Engage through Westgate India as the single operational point of contact
-                                </li>
+                                    Follow the defined  <strong> onboarding and readiness process  </strong>                             </li>
                                 <li>
                                     <span>4</span>
-                                    Follow the agreed onboarding and readiness process
-                                </li>
+                                    Provide <strong>accurate and truthful information</strong> during registration and onboarding                                </li>
                                 <li>
                                     <span>5</span>
-                                    Respect the invite-only and governed nature of this engagement model
-                                </li>
+                                    Nominate capacity <strong>responsibly</strong>, with realistic availability and appropriate continuity planning                                </li>
                             </ul>
 
                             <div className="expectation-note">
-                                These obligations are intended to support clarity, continuity, and trust,
-                                rather than impose additional burden or create commercial commitment at this stage.
+                            These expectations are intended to support <strong> clarity, continuity, and trust, </strong>and do <strong>not </strong>impose commercial obligation or commitment at this stage.
                             </div>
                         </section>
 

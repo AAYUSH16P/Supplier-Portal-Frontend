@@ -49,25 +49,21 @@ export default function HowItWorks() {
           {/* WELCOME CARD */}
           <section className="content-card onboarding-welcome">
             <div className="welcome-title">
-              ✨ Welcome to Your Onboarding Journey!
+              ✨Welcome to the Onboarding Journey
             </div>
 
             <p>
-              This onboarding process supports early-phase supplier readiness
-              within a controlled, invite-only engagement model.
+              This onboarding journey supports early-phase supplier readiness within a controlled, invite-only engagement model.
             </p>
 
             <p>
-              It forms part of a UK-facing, demand-led IT engagement approach,
-              where suppliers are prepared and aligned in advance so that
-              participation can be structured, relevant, and governed when real
-              client demand is introduced.
+              It forms part of a UK-facing, demand-led IT engagement approach, where suppliers are onboarded and aligned in advance of engagement. This ensures that, when client demand is introduced, participation can be structured, relevant, and governed, rather than reactive or speculative.
             </p>
 
             {/* STEPS */}
             <div className="steps-box">
               <p className="steps-heading">
-                Follow these 4 simple steps to complete your onboarding:
+                The onboarding process consists of 3 structured steps
               </p>
 
               <div className="steps-row">
@@ -83,10 +79,13 @@ export default function HowItWorks() {
                   <span>3</span>
                   <small>Build Capacity</small>
                 </div>
-                <div className="step muted">
-                  <span>4</span>
-                  <small>Business Opportunities</small>
-                </div>
+                <div className="step active">
+  <span className="step-badge">
+    <img src="/25499.jpg" alt="Business" className="step-icon" />
+  </span>
+  <small>Business Opportunities</small>
+</div>
+
               </div>
             </div>
           </section>
@@ -136,9 +135,7 @@ export default function HowItWorks() {
 
               {/* PRIVACY */}
               <div className="privacy-note">
-                <strong>Privacy Note:</strong> Information collected at this stage is used
-                only for onboarding and readiness checks, to ensure suppliers are correctly
-                aligned before progressing further.
+                <strong>Privacy Note:</strong>  Information collected at this stage is used solely for onboarding and readiness verification, to confirm supplier alignment before any further progression
               </div>
 
               {/* CTA */}
@@ -273,10 +270,7 @@ export default function HowItWorks() {
 
               {/* NOTE */}
               <div className="info-note pink">
-                Any discussion relating to candidate personal details, documentation, or
-                detailed profiles is intentionally deferred and will be addressed
-                separately after supplier registration, when and if relevant demand
-                arises.
+                No individual candidate personal data is collected or processed at this stage. Candidate details, documentation, or profiles are addressed separately after supplier registration, and only where relevant client demand requires it
               </div>
             </div>
           </section>
@@ -334,8 +328,8 @@ export default function HowItWorks() {
 
               {/* LIST ITEMS */}
               <div className="include-list">
-                <div className="include-item">
-                  <span className="include-dot green"></span>
+                <div className="include-item" style={{ paddingTop: "10px" }}>
+                  <span className=""></span>
                   <div>
                     <strong>Opportunity Notifications</strong>
                     <p>
@@ -346,7 +340,7 @@ export default function HowItWorks() {
                 </div>
 
                 <div className="include-item">
-                  <span className="include-dot green"></span>
+                  <span className=""></span>
                   <div>
                     <strong>Structured Engagement</strong>
                     <p>
@@ -357,7 +351,7 @@ export default function HowItWorks() {
                 </div>
 
                 <div className="include-item">
-                  <span className="include-dot green"></span>
+                  <span className=""></span>
                   <div>
                     <strong>Long-Term Collaboration</strong>
                     <p>
@@ -371,11 +365,7 @@ export default function HowItWorks() {
               {/* PHILOSOPHY */}
               <div className="info-note green">
                 <strong>Key Philosophy:</strong> TalentedStaff operates on a
-                <strong> demand-led model</strong> where opportunities are introduced
-                progressively as real client needs emerge. This ensures all engagements
-                are relevant, structured, and aligned with both supplier capacity and
-                client requirements — supporting sustainable, long-term collaboration
-                over short-term speculation.
+                <strong> demand-led model</strong>TalentedStaff follows a demand-led engagement approach in which opportunities are introduced progressively in response to confirmed client requirements. Engagements are structured to align supplier capacity with client needs, supporting continuity and long-term collaboration over speculative activity.
               </div>
 
               {/* GETTING STARTED */}

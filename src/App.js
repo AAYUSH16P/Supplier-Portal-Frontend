@@ -34,6 +34,9 @@ import EmployeeInviteInfo from "./pages/RegisteredUser/EmployeeInviteInfo";
 import ResetPassword from "./style/RegisteredUser/ResetPassword";
 import ForgotPassword from "./pages/RegisteredUser/ForgotPassword"
 import RegistrationSuccess from "./pages/LandingPage/RegistrationSuccess";
+import PublicFAQ from "./pages/LandingPage/PublicFAQ";
+
+import PrivateFAQ from "./pages/LandingPage/PrivateFAQ";
 
 
 function App() {
@@ -69,6 +72,11 @@ function App() {
         <Route path="/employeeInviteInfo" element={<EmployeeInviteInfo />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
 <Route path="/reset-password" element={<ResetPassword />} />
+<Route path="/public-faq" element={<PublicFAQ />} />
+<Route path="/private-faq" element={<PrivateFAQ />} />
+
+
+
 
         
 

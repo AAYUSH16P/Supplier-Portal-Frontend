@@ -152,8 +152,8 @@ export default function Contact() {
     {/* FAQ */}
     <div
       className="needhelp-option purple clickable"
-      onClick={() => navigate("/faq")}
-    >
+      onClick={() => navigate(isAuthenticated() ? "/private-faq" : "/public-faq")}
+      >
       <div className="option-icon purple">❓</div>
       <div>
         <h4>Check FAQ</h4>

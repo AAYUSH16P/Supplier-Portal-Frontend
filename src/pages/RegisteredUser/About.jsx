@@ -16,7 +16,7 @@ export default function About() {
           {/* HERO */}
           <section className="about-hero">
             <h1>About TalentedStaff.com</h1>
-            <p>Understanding the Ecosystem Powering Your Success</p>
+            <p>Understanding the ecosystem behind structured engagement</p>
           </section>
 
           {/* GRID */}
@@ -27,17 +27,16 @@ export default function About() {
                 🌐 <span>What TalentedStaff.com Is</span>
               </div>
 
+
+              
+
               <div className="card-body">
                 <p>
-                  TalentedStaff.com is a UK-focused talent and capacity engagement
-                  ecosystem designed to connect organisations with prepared, governed
-                  technology capacity through a demand-led and continuity-focused model.
+                TalentedStaff.com is a UK-focused talent and capacity engagement ecosystem designed to work with prepared, governed technology capacity through a demand-led model.
                 </p>
 
                 <p>
-                  Unlike open recruitment marketplaces, it’s built on
-                  <strong> pre-alignment</strong> — ensuring suppliers and capacity are
-                  prepared before real client demand is introduced.
+                It is built on pre-alignment, ensuring suppliers and capacity are prepared before engagement, rather than sourced reactively.
                 </p>
 
                 <div className="info-box blue">
@@ -61,9 +60,9 @@ export default function About() {
                 <div className="alert-box orange">
                   <strong>Traditional recruitment models create:</strong>
                   <ul>
-                    <li>• Time pressure</li>
-                    <li>• Continuity risk</li>
-                    <li>• Inconsistent delivery outcomes</li>
+                    <li> Time pressure</li>
+                    <li> Continuity risk</li>
+                    <li> Inconsistent delivery outcomes</li>
                   </ul>
                 </div>
 
@@ -72,8 +71,7 @@ export default function About() {
                   <ul>
                     <li>✔ Faster response when demand emerges</li>
                     <li>✔ Better continuity through known capacity</li>
-                    <li>✔ Clear expectations across all parties</li>
-                    <li>✔ Structured, governed engagement</li>
+                    <li>✔ Clear, governed engagement</li>
                   </ul>
                 </div>
               </div>

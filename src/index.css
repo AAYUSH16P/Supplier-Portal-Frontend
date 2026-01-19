@@ -5,6 +5,34 @@
   color: rgb(95, 95, 198);
 }
 
+
+/* same badge size for all steps */
+.step-badge {
+  display: inline-flex;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+/* active circle */
+.step.active .step-badge {
+  background: #2563eb;
+  color: #fff;
+}
+
+/* make the image fit inside the circle */
+.step-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  display: block;
+}
+
+
 /* ===============================
    TalentedStaff Centered Header
    =============================== */

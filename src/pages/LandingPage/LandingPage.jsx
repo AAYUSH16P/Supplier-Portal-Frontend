@@ -31,19 +31,13 @@ export default function LandingPage() {
 
             <div className="portal-body">
               <p>
-                This portal is used to support early-stage supplier onboarding
-                and readiness activities as part of a controlled, invite-only
-                programme. The programme is designed to prepare selected
-                technology suppliers and employers to participate in a UK-facing
-                IT engagement model, where supplier capacity is aligned in
-                advance of real market demand.
+              This portal supports early-stage supplier onboarding and readiness activities as part of a controlled, invite-only programme within the TalentedStaff ecosystem.
               </p>
 
+              <p>At this stage (V0.1A), the focus is on onboarding, readiness confirmation, and alignment. Suppliers are guided to understand the operating principles, participation expectations, and information requirements that apply before any wider platform access or market participation is introduced.</p>
+
               <p>
-                The focus at this stage is readiness and alignment, ensuring
-                suppliers understand the business context, operating principles,
-                and onboarding expectations before wider platform access is
-                introduced.
+              This portal enables suppliers to align early to a structured capacity-readiness approach, ensuring governance, continuity, and operating expectations are understood before engagement.
               </p>
 
               <div className="info-highlight">
@@ -53,16 +47,11 @@ export default function LandingPage() {
                 </h3>
 
                 <p>
-                  UK employers and agencies increasingly require prepared,
-                  reliable supplier capacity rather than speculative or
-                  last-minute sourcing. This portal supports a structured talent
-                  and capacity engagement approach.
+                UK employers and agencies increasingly require prepared, reliable supplier capacity rather than speculative or last-minute sourcing. The TalentedStaff ecosystem supports UK-based clients and agencies that require supplier capacity to be prepared, dependable, and aligned in advance
                 </p>
 
                 <p>
-                  Rather than operating as an open recruitment or job
-                  marketplace, this model prioritises continuity, readiness, and
-                  long-term collaboration.
+                The model is not designed around open recruitment or job advertising, but around long-term capability alignment between UK demand and prepared supplier capacity.
                 </p>
               </div>
             </div>
@@ -80,39 +69,37 @@ export default function LandingPage() {
             {/* LEFT */}
             <div className="info-box success">
               <h3>What This Portal Is For</h3>
-              <p>This portal helps invited suppliers to:</p>
+              <p>This portal supports invited suppliers to:</p>
 
               <ul>
-                <li>Understand who we are and what we do</li>
-                <li>Understand the business context and engagement model</li>
-                <li>Understand how the onboarding process works</li>
-                <li>Review supplier expectations and participation principles</li>
-                <li>Request clarifications or onboarding support, where required</li>
-                <li>Complete supplier onboarding in a structured and governed manner</li>
+                <li>Understand how the TalentedStaff engagement model operates</li>
+                <li>Submit supplier and organisational information for review</li>
+                <li>Confirm capacity, continuity, and operating alignment</li>
+                <li>Progress through onboarding in a structured, governed manner</li>
+              
               </ul>
 
               <div className="info-note">
-                This space is designed to support pre-launch preparation, not open or
-                speculative engagement.
+              This environment supports pre-launch preparation only.
               </div>
             </div>
 
             {/* RIGHT */}
             <div className="info-box danger">
               <h3>What This Portal Is Not</h3>
-              <p>To avoid any confusion:</p>
+              <p>To avoid any misunderstanding:</p>
 
               <ul className="danger-list">
-                <li>This is not a job portal</li>
-                <li>This is not a recruitment marketplace</li>
-                <li>This portal does not allocate or advertise live roles</li>
+                <li>Not a job portal</li>
+                <li>Not a recruitment marketplace</li>
+                <li>No publication or allocation of live roles</li>
+                <li>Not an open client–supplier connection platform</li>
+
               </ul>
               <br />
 
               <p className="danger-text">
-                Participation at this stage forms part of an early-bird onboarding
-                programme, focused on readiness, alignment, and eligibility ahead
-                of wider engagement phases.
+              Participation at this stage does not imply activation or commercial engagement.
               </p>
             </div>
           </section>

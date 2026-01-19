@@ -22,23 +22,15 @@ export default function AboutTalentedStaff() {
           <section className="content-card">
             <div className="card-title">
               <span className="icon blue">◎</span>
-              <h3>In Brief — What This Is About</h3>
+              <h3>About the TalentedStaff Ecosystem (Prepared Capacity. Governed Engagement)</h3>
             </div>
 
             <p>
-              TalentedStaff.com is a UK-focused talent and capacity engagement
-              ecosystem designed to help organisations access prepared, governed
-              technology capacity through a demand-led model, rather than open
-              recruitment or speculative staffing.
+            TalentedStaff.com is a UK-focused talent and capacity engagement ecosystem designed to help organisations work with prepared and governed technology suppliers through a demand-led engagement model.
             </p>
 
             <p>
-              The ecosystem focuses on onboarding and aligning suppliers early,
-              so that when real client demand is introduced, engagement can be
-              structured, relevant, and governed. Access and platform
-              capabilities are introduced progressively by phase, ensuring
-              quality, continuity, and long-term collaboration for both
-              suppliers and clients.
+            Rather than relying on open recruitment or speculative staffing, the ecosystem is built around early supplier onboarding and alignment, so that capacity is already prepared when engagement is required. Platform access and capabilities are introduced progressively by phase, supporting quality, continuity, and controlled participation for both suppliers and UK clients.
             </p>
           </section>
 
@@ -47,21 +39,19 @@ export default function AboutTalentedStaff() {
             <div className="content-card">
               <div className="card-title">
                 <span className="icon light-blue">📘</span>
-                <h4>What Is TalentedStaff.com?</h4>
+                <h4>How TalentedStaff.com Operates</h4>
               </div>
 
               <p>
-                TalentedStaff.com operates as a UK-focused talent and capacity
-                engagement ecosystem, designed to help organisations access
-                prepared, governed technology capacity without relying on open
-                recruitment marketplaces or speculative staffing models.
+              TalentedStaff.com operates as a structured engagement ecosystem connecting UK businesses, agencies, and delivery partners with pre-aligned technology suppliers.
               </p>
 
               <p>
-                The ecosystem brings together UK businesses, agencies, and
-                delivery partners with pre-aligned technology suppliers, through
-                a structured and demand-led approach that prioritises
-                continuity, readiness, and governance.
+              Suppliers are onboarded and aligned in advance against defined operating principles, governance requirements, and continuity expectations. Engagement is demand-led and structured, prioritising direct, 1-to-1 resource relationships over project subcontracting or multi-layer delivery chains.
+              </p>
+
+              <p>
+              The model is designed to support relevant, governed engagement when demand arises, rather than reactive sourcing under time or delivery pressure.
               </p>
             </div>
 
@@ -72,23 +62,22 @@ export default function AboutTalentedStaff() {
               </div>
 
               <p>
-                Traditional recruitment and staffing models often operate
-                reactively — sourcing capacity after demand arises, leading to
-                delays, continuity risk, and inconsistent delivery.
+              Traditional recruitment and staffing models typically operate reactively, sourcing capacity only after demand is confirmed. This approach often introduces delays, continuity risk, and inconsistent delivery outcomes.
               </p>
 
               <div className="highlight-box">
                 <strong>
-                  Prepare capacity first. Engage when demand is real.
-                </strong>
+                TalentedStaff.com is designed to reverse this sequence by preparing and aligning supplier capacity before engagement. This enables:                </strong>
               </div>
 
               <ul className="benefits">
-                <li>✔ Faster response when client demand emerges</li>
-                <li>✔ Better continuity through prepared capacity</li>
-                <li>✔ Reduced last-minute sourcing</li>
-                <li>✔ Clear governance across all parties</li>
+                <li>✔ Faster response when client demand is introduced</li>
+                <li>✔ Improved continuity through pre-aligned supplier capacity</li>
+                <li>✔ Reduced reliance on last-minute sourcing</li>
+                <li>✔ Clear governance and accountability across all parties</li>
               </ul>
+
+              <p>The focus is not scale or volume, but preparedness, relevance, and controlled engagement.</p>
             </div>
           </section>
           {/* ================= ECOSYSTEM ================= */}

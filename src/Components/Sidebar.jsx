@@ -41,7 +41,7 @@ export default function Sidebar({ active }) {
         </Link>
 
         <Link
-          to="/faq"
+          to="/public-faq"
           className={active === "faq" ? "active" : ""}
         >
           ❓ FAQ
