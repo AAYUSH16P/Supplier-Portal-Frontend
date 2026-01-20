@@ -162,15 +162,7 @@ export default function SupplierHome() {
 
           <section className="current-status-card">
             {/* Header */}
-            <div className="current-status-header">
-              <div className="status-icon">
-                <span>◎</span>
-              </div>
-              <div>
-                <h3>Your Current Status</h3>
-                <p>Select the option that best describes your current situation</p>
-              </div>
-            </div>
+         
 
             {/* Status Options */}
             <div className="status-options">
@@ -180,7 +172,6 @@ export default function SupplierHome() {
 
             {/* What This Means */}
             <div className="status-info">
-              <h4>• What This Means</h4>
 
               {isSlaSigned ? (
                 /* ✅ SLA SIGNED */
