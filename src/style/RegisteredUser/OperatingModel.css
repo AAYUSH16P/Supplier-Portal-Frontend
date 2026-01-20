@@ -269,3 +269,112 @@
     font-weight: 600;
   }
   
+
+
+
+  /* ====== New: section layout like screenshot 2 ====== */
+
+.op-section {
+  background: #fff;
+  border: 1px solid #e9eef6;
+  border-radius: 16px;
+  padding: 20px 22px;
+  box-shadow: 0 6px 18px rgba(16, 24, 40, 0.06);
+  margin-bottom: 18px;
+}
+
+.op-section--intro {
+  padding: 18px 22px;
+}
+
+.op-section-head {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.op-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+}
+
+.op-badge--blue {
+  background: #eaf2ff;
+  color: #1d4ed8;
+}
+
+.op-badge--green {
+  background: #eafaf0;
+  color: #16a34a;
+}
+
+.op-section-head h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.op-underline {
+  height: 3px;
+  width: 44px;
+  border-radius: 999px;
+  margin-top: 6px;
+}
+
+.op-underline--blue {
+  background: #2563eb;
+}
+
+.op-underline--green {
+  background: #22c55e;
+}
+
+.op-subtitle {
+  margin: 10px 0 6px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.op-muted {
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.op-body h4 {
+  margin: 14px 0 6px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.op-body p {
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #334155;
+}
+
+.op-bullets {
+  margin: 6px 0 12px 18px;
+  padding: 0;
+}
+
+.op-bullets li {
+  margin: 6px 0;
+  color: #334155;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* IMPORTANT: stop using the old 2-column grid */
+.operating-grid {
+  display: block; /* overrides previous grid layout */
+}

@@ -80,13 +80,12 @@ export default function SupplierRegistration() {
         }
         break;
 
-      case "companyWebsite":
-        if (!value.trim()) {
-          error = "Company Website is required";
-        } else if (!/^https?:\/\/.+/.test(value)) {
-          error = "Please enter a valid website URL";
-        }
-        break;
+        case "companyWebsite":
+          if (!value.trim()) {
+            error = "Company Website is required";
+          }
+          break;
+        
 
       case "businessType":
         if (!value || value === "Select business type..." || value === "") {
@@ -187,8 +186,8 @@ export default function SupplierRegistration() {
       case "companyOverview":
         if (!value.trim()) {
           error = "Company Overview is required";
-        } else if (value.trim().length < 50) {
-          error = "Company Overview must be at least 50 characters";
+        } else if (value.trim().length < 2) {
+          error = "Company Overview must be at least 2 characters";
         }
         break;
 
@@ -238,9 +237,8 @@ export default function SupplierRegistration() {
 
     if (!formData.companyWebsite.trim()) {
       newErrors.companyWebsite = "Company Website is required";
-    } else if (!/^https?:\/\/.+/.test(formData.companyWebsite)) {
-      newErrors.companyWebsite = "Please enter a valid website URL";
     }
+    
 
     if (!formData.businessType || formData.businessType === "Select business type...") {
       newErrors.businessType = "Business Type is required";
@@ -299,8 +297,8 @@ export default function SupplierRegistration() {
 
     if (!formData.companyOverview.trim()) {
       newErrors.companyOverview = "Company Overview is required";
-    } else if (formData.companyOverview.trim().length < 50) {
-      newErrors.companyOverview = "Company Overview must be at least 50 characters";
+    } else if (formData.companyOverview.trim().length < 2) {
+      newErrors.companyOverview = "Company Overview must be at least 2 characters";
     }
 
     setErrors(newErrors);
@@ -328,8 +326,7 @@ export default function SupplierRegistration() {
       formData.primaryContactEmail.trim() &&
       formData.primaryContactNumber.trim() &&
       formData.companyOverview.trim() &&
-      formData.companyOverview.trim().length >= 50 &&
-      /^https?:\/\/.+/.test(formData.companyWebsite) &&
+      formData.companyOverview.trim().length >= 2 &&
       /^\d{4}$/.test(formData.yearEstablished) &&
       /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.primaryContactEmail) &&
       /^[\d\s+()-]{7,15}$/.test(formData.primaryContactNumber)
@@ -476,7 +473,7 @@ export default function SupplierRegistration() {
 
                 <div className="form-grid">
                   <div className="form-group full">
-                    <label>
+                    <label className="required-label">
                       Company Name <span className="required-asterisk">*</span>
                       <InfoTooltip field="companyName" />
                     </label>
@@ -494,7 +491,7 @@ export default function SupplierRegistration() {
                   </div>
 
                   <div className="form-group full">
-                    <label>
+                    <label className="required-label">
                       Company Website <span className="required-asterisk">*</span>
                       <InfoTooltip field="companyWebsite" />
                     </label>
@@ -504,7 +501,7 @@ export default function SupplierRegistration() {
                       value={formData.companyWebsite}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      placeholder="https://www.company.com"
+                      placeholder="www.company.com"
                       className={errors.companyWebsite ? "error" : ""}
                     />
                     {errors.companyWebsite && (
@@ -513,7 +510,7 @@ export default function SupplierRegistration() {
                   </div>
 
                   <div className="form-group">
-                    <label>
+                    <label className="required-label">
                       Business Type <span className="required-asterisk">*</span>
                       <InfoTooltip field="businessType" />
                     </label>
@@ -538,7 +535,7 @@ export default function SupplierRegistration() {
                   </div>
 
                   <div className="form-group">
-                    <label>
+                    <label className="required-label">
                       Company Size <span className="required-asterisk">*</span>
                       <InfoTooltip field="companySize" />
                     </label>
@@ -563,7 +560,7 @@ export default function SupplierRegistration() {
                   </div>
 
                   <div className="form-group">
-                    <label>
+                    <label className="required-label">
                       Year Established <span className="required-asterisk">*</span>
                       <InfoTooltip field="yearEstablished" />
                     </label>
@@ -588,7 +585,7 @@ export default function SupplierRegistration() {
 
                 <div className="form-grid">
                   <div className="form-group full">
-                    <label>
+                    <label className="required-label">
                       Address Line 1 <span className="required-asterisk">*</span>
                       <InfoTooltip field="addressLine1" />
                     </label>
@@ -618,7 +615,7 @@ export default function SupplierRegistration() {
                   </div>
 
                   <div className="form-group">
-                    <label>City <span className="required-asterisk">*</span>
+                    <label className="required-label">City <span className="required-asterisk">*</span>
                       <InfoTooltip field="city" />
                     </label>
                     <input
@@ -635,7 +632,7 @@ export default function SupplierRegistration() {
                   </div>
 
                   <div className="form-group">
-                    <label>State <span className="required-asterisk">*</span>
+                    <label className="required-label">State <span className="required-asterisk">*</span>
                       <InfoTooltip field="state" />
                     </label>
                     <input
@@ -652,7 +649,7 @@ export default function SupplierRegistration() {
                   </div>
 
                   <div className="form-group">
-                    <label>Postal Code <span className="required-asterisk">*</span>
+                    <label className="required-label">Postal Code <span className="required-asterisk">*</span>
                       <InfoTooltip field="postalCode" />
                     </label>
                     <input
@@ -669,7 +666,7 @@ export default function SupplierRegistration() {
                   </div>
 
                   <div className="form-group">
-                    <label>Country <span className="required-asterisk">*</span>
+                    <label className="required-label">Country <span className="required-asterisk">*</span>
                       <InfoTooltip field="country" />
                     </label>
                     <select
@@ -697,8 +694,8 @@ export default function SupplierRegistration() {
                 </h4>
 
                 <div className="form-grid">
-                  <div className="form-group">
-                    <label>Primary Contact Name <span className="required-asterisk">*</span>
+                  <div className="form-group" >
+                    <label className="required-label">Primary Contact Name <span className="required-asterisk">*</span>
                       <InfoTooltip field="primaryContactName" />
                     </label>
                     <input
@@ -715,7 +712,7 @@ export default function SupplierRegistration() {
                   </div>
 
                   <div className="form-group">
-                    <label>Primary Contact Role / Designation <span className="required-asterisk">*</span>
+                    <label className="required-label">Primary Contact Role / Designation <span className="required-asterisk">*</span>
                       <InfoTooltip field="primaryContactRole" />
                     </label>
                     <input
@@ -732,7 +729,7 @@ export default function SupplierRegistration() {
                   </div>
 
                   <div className="form-group">
-                    <label>Primary Contact Email <span className="required-asterisk">*</span>
+                    <label className="required-label">Primary Contact Email <span className="required-asterisk">*</span>
                       <InfoTooltip field="primaryContactEmail" />
                     </label>
                     <input
@@ -750,7 +747,7 @@ export default function SupplierRegistration() {
                   </div>
 
                   <div className="form-group">
-                    <label>Primary Contact Number <span className="required-asterisk">*</span>
+                    <label className="required-label">Primary Contact Number <span className="required-asterisk">*</span>
                       <InfoTooltip field="primaryContactNumber" />
                     </label>
                     <input
@@ -861,7 +858,7 @@ export default function SupplierRegistration() {
 
                 <div className="form-grid">
                   <div className="form-group full">
-                    <label>Company Overview <span className="required-asterisk">*</span>
+                    <label className="required-label">Company Overview <span className="required-asterisk">*</span>
                       <InfoTooltip field="companyOverview" />
                     </label>
                     <textarea
@@ -878,7 +875,7 @@ export default function SupplierRegistration() {
                     {formData.companyOverview && (
                       <small className="char-count">
                         {formData.companyOverview.length} characters
-                        {formData.companyOverview.length < 50 && ` (minimum 50 required)`}
+                        {formData.companyOverview.length < 2 && ` (minimum 2 required)`}
                       </small>
                     )}
                   </div>

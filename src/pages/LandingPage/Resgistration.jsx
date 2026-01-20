@@ -75,6 +75,8 @@ export default function Registration() {
                             <small>Please acknowledge the obligations to proceed</small>
                         </section>
 
+                        <h3>Onboarding Expectations </h3>
+
                         {/* FOOTER TEXT */}
                         <p className="ob-text">
                         Suppliers participating in this onboarding and readiness phase are expected to operate <strong>in good faith</strong> and in line with <strong>standard enterprise delivery practices. </strong>

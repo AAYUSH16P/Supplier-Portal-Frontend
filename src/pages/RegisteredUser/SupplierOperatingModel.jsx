@@ -20,53 +20,75 @@ export default function SupplierOperatingModel() {
           </section>
 
           {/* TOP GRID */}
-          <section className="operating-grid">
-            {/* WHO WE ARE */}
-            <div className="op-card">
-              <div className="op-card-header blue">
-                <span className="op-icon blue">🏢</span>
-                <h3>Who We Are</h3>
-              </div>
+         {/* OPERATING MODEL INTRO */}
+<section className="op-section op-section--intro">
+  <div className="op-section-head">
+    <div className="op-badge op-badge--blue">🏢</div>
+    <div>
+      <h2>Operating Model</h2>
+      <div className="op-underline op-underline--blue" />
+    </div>
+  </div>
 
-              <p>
-                Westgate India is a business registered in India and operates as an
-                <strong> authorised and licensed delivery partner</strong> for
-                Spectrum IT Hub Ltd (UK) and the TalentedStaff.com ecosystem.
-              </p>
+  <h3 className="op-subtitle">How the TalentedStaff ecosystem is structured and operated</h3>
+  <p className="op-muted">
+    The TalentedStaff.com ecosystem operates through clearly defined roles, ensuring separation between
+    ownership, governance, and day-to-day operations. This structure is designed to provide clarity,
+    accountability, and controlled engagement across regions.
+  </p>
+</section>
 
-              <p>
-                Within this ecosystem, Westgate India acts as the
-                <strong> single operational hub and primary point of contact</strong>
-                for supplier onboarding, readiness coordination, and operational
-                alignment.
-              </p>
+{/* ECOSYSTEM STRUCTURE */}
+<section className="op-section">
+  <div className="op-section-head">
+    <div className="op-badge op-badge--green">🎯</div>
+    <div>
+      <h2>Ecosystem Structure</h2>
+      <div className="op-underline op-underline--green" />
+    </div>
+  </div>
 
-              <div className="partner-box">
-                <span>Authorized Partner</span>
-                <strong>Spectrum IT Hub Ltd (UK)</strong>
-              </div>
-            </div>
+  <div className="op-body">
+    <h4>ITRF (Global) Ltd (UK)</h4>
+    <p>ITRF (Global) Ltd is the owner and governance authority of the TalentedStaff.com ecosystem.</p>
+    <p>
+      It defines the overall framework, operating model, and governance principles under which the ecosystem operates.
+    </p>
 
-            {/* WHAT WE DO */}
-            <div className="op-card">
-              <div className="op-card-header green">
-                <span className="op-icon green">✅</span>
-                <h3>What We Do</h3>
-              </div>
+    <h4>Spectrum IT Hub Ltd (UK)</h4>
+    <p>Spectrum IT Hub Ltd is the authorised UK partner, responsible for:</p>
+    <ul className="op-bullets">
+      <li>UK-side governance and commercial alignment</li>
+      <li>Client-side engagement within the ecosystem</li>
+      <li>Ensuring engagements operate within the defined operating model</li>
+    </ul>
+    <p>
+      Spectrum IT Hub does not act as a recruitment agency or delivery intermediary, but as the UK governance and
+      engagement authority.
+    </p>
 
-              <p>
-                At this stage, Westgate India supports registered suppliers through
-                structured onboarding and readiness activities, ahead of any wider platform access or client demand.
-              </p>
+    <h4>WestGate India</h4>
+    <p>WestGate India is the authorised delivery and operations partner (India).</p>
+    <p>
+      Within the ecosystem, WestGate India acts as the single operational hub and primary point of contact for
+      suppliers during onboarding and readiness phases.
+    </p>
 
-              <ul className="check-list">
-                <li>Coordinating all onboarding interactions</li>
-                <li>Acting as the day-to-day engagement point</li>
-                <li>Supporting indicative capacity preparation</li>
-                <li>Ensuring model clarity before demand introduction</li>
-              </ul>
-            </div>
-          </section>
+    <p>WestGate India is responsible for:</p>
+    <ul className="op-bullets">
+      <li>Supplier onboarding and registration</li>
+      <li>Readiness coordination and alignment</li>
+      <li>Day-to-day operational engagement with suppliers</li>
+      <li>Supporting indicative capacity preparation</li>
+      <li>Ensuring suppliers understand the engagement model before any client demand is introduced</li>
+    </ul>
+
+    <p className="op-muted">
+      Suppliers are not required to engage with multiple entities during onboarding or readiness activities.
+    </p>
+  </div>
+</section>
+
 
           {/* ENGAGEMENT STRUCTURE */}
           <section className="engagement-section">

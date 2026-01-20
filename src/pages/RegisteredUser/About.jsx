@@ -31,13 +31,19 @@ export default function About() {
               
 
               <div className="card-body">
-                <p>
-                TalentedStaff.com is a UK-focused talent and capacity engagement ecosystem designed to work with prepared, governed technology capacity through a demand-led model.
-                </p>
+              <p>
+  TalentedStaff.com is a{" "}
+  <strong>UK-focused talent and capacity engagement ecosystem</strong> designed to
+  work with <strong>prepared, governed technology capacity</strong> through a{" "}
+  <strong>demand-led model</strong>.
+</p>
 
-                <p>
-                It is built on pre-alignment, ensuring suppliers and capacity are prepared before engagement, rather than sourced reactively.
-                </p>
+<p>
+  It is built on <strong>pre-alignment</strong>, ensuring suppliers and capacity are
+  prepared <strong>before engagement</strong>, rather than sourced{" "}
+  <strong>reactively</strong>.
+</p>
+
 
                 <div className="info-box blue">
                   <strong>The ecosystem prioritises:</strong>

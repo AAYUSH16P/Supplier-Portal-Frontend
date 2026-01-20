@@ -2,6 +2,111 @@
    APP LAYOUT
 ======================= */
 
+/* Right-align the CTA (text + button) */
+/* put CTA on right and vertically centered */
+.action-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 8px 0 16px;
+}
+
+/* make the whole thing look like a part of UI (like pills) */
+.upload-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+/* bolder + same style family as other UI text */
+.upload-cta-text {
+  font-size: 13px;
+  font-weight: 700;     /* bold */
+  color: #0f172a;
+  white-space: nowrap;
+}
+
+/* make button compact like pills */
+.upload-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+
+  background: #16a34a;
+  color: #fff;
+
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+
+  box-shadow: none; /* remove big shadow to match your pills */
+  transition: background 0.12s ease, transform 0.12s ease;
+}
+
+.upload-btn:hover {
+  background: #15803d;
+  transform: translateY(-1px);
+}
+
+.upload-btn:active {
+  transform: translateY(0px);
+}
+
+.upload-btn-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.18);
+  font-size: 13px;
+}
+
+
+.action-bar.full-width {
+  width: 100%;
+  margin: 10px 0 18px;
+}
+
+/* full width row */
+.upload-cta.spread {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* key line */
+  gap: 12px;
+
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+/* keep text left */
+.upload-cta-text {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* keep button right */
+.upload-btn {
+  margin-left: auto; /* extra safety */
+}
+
+
+
+
 .rejected-note {
   background: #fef2f2;
   border-left: 4px solid #dc2626;

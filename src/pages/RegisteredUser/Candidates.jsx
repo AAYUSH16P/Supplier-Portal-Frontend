@@ -84,7 +84,7 @@ export default function Candidates() {
   }, []);
 
 
- 
+
 
   const handleRejectConfirm = async () => {
     if (!rejectRemark.trim()) {
@@ -310,14 +310,22 @@ export default function Candidates() {
           {/* ================= CANDIDATE LIST ================= */}
           {hasCandidates && (
             <>
-              <div className="action-bar">
-                <button
-                  className="primary-btn"
-                  onClick={() => navigate("/capacityRegistration")}
-                >
-                  ⬆ Upload More Candidates
-                </button>
-              </div>
+         <div className="action-bar full-width">
+  <div className="upload-cta spread">
+    <span className="upload-cta-text">Upload a new candidate</span>
+
+    <button
+      className="upload-btn"
+      onClick={() => navigate("/capacityRegistration")}
+    >
+      <span className="upload-btn-icon">⬆</span>
+      Upload More Candidates
+    </button>
+  </div>
+</div>
+
+
+
 
               <div className="list-card">
                 <h3>

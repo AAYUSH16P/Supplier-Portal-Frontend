@@ -29,7 +29,9 @@ export default function OperatingModel() {
               </div>
 
               <p>
-                <strong>Westgate India</strong> is a business registered in India and operates as the <strong> authorised operational and delivery partner </strong> for <strong> Spectrum IT Hub Ltd (UK)</strong> within the <strong>TalentedStaff.com ecosystem.</strong>
+                <strong>Westgate India</strong> is a business registered in India and operates as the
+                <strong>authorised operational and delivery partner</strong>
+                for <strong> Spectrum IT Hub Ltd (UK)</strong> within the <strong>TalentedStaff.com ecosystem.</strong>
               </p>
 
               <p>The onboarding this portal supports forms part of a <strong> UK-facing, demand-led IT engagement model</strong>, where supplier capacity is prepared and aligned <strong>in advance of engagement </strong>, against defined governance and operating expectations.</p>
@@ -57,13 +59,14 @@ export default function OperatingModel() {
 
             {/* PRIMARY ROLE BOX */}
             <section className="primary-outline-box">
-              <p>
-                Through this role, <strong>Westgate India</strong> acts as the{" "}
-                <strong className="blue">single operational hub</strong> and{" "}
-                <strong className="blue">primary point of contact</strong> for invite-only supplier
-                onboarding and early readiness activities.We work with selected technology employers to ensure suppliers are prepared and aligned before wider platform access is introduced, focusing on quality, continuity, and preparedness rather than open or speculative onboarding.
-              </p>
-            </section>
+  <p>
+    Through this role, <strong>Westgate India</strong> acts as the{" "}
+    <strong>single operational hub</strong> and{" "}
+    <strong>primary point of contact</strong> for invite-only supplier onboarding and
+    early readiness activities.
+  </p>
+</section>
+
 
             {/* ================= WHAT WE DO ================= */}
             <section className="content-card">

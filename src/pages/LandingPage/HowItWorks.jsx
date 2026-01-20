@@ -53,12 +53,17 @@ export default function HowItWorks() {
             </div>
 
             <p>
-              This onboarding journey supports early-phase supplier readiness within a controlled, invite-only engagement model.
-            </p>
+  This onboarding journey supports <strong>early-phase supplier readiness</strong>{" "}
+  within a <strong>controlled, invite-only engagement model</strong>.
+</p>
 
-            <p>
-              It forms part of a UK-facing, demand-led IT engagement approach, where suppliers are onboarded and aligned in advance of engagement. This ensures that, when client demand is introduced, participation can be structured, relevant, and governed, rather than reactive or speculative.
-            </p>
+<p>
+  It forms part of a <strong>UK-facing, demand-led IT engagement approach</strong>, where
+  suppliers are <strong>onboarded</strong> and aligned in <strong>advance of engagement</strong>.
+  This ensures that, when client demand is introduced, participation can be{" "}
+  <strong>structured, relevant, and governed</strong>, rather than reactive or speculative.
+</p>
+
 
             {/* STEPS */}
             <div className="steps-box">
@@ -270,8 +275,10 @@ export default function HowItWorks() {
 
               {/* NOTE */}
               <div className="info-note pink">
-                No individual candidate personal data is collected or processed at this stage. Candidate details, documentation, or profiles are addressed separately after supplier registration, and only where relevant client demand requires it
-              </div>
+              No individual candidate personal data is collected or processed at this stage.
+  Candidate details, documentation, or profiles are addressed separately{" "}
+  <strong>after supplier registration</strong>, and{" "}
+  <strong>only where relevant client demand requires it</strong>.              </div>
             </div>
           </section>
 
@@ -364,9 +371,13 @@ export default function HowItWorks() {
 
               {/* PHILOSOPHY */}
               <div className="info-note green">
-                <strong>Key Philosophy:</strong> TalentedStaff operates on a
-                <strong> demand-led model</strong>TalentedStaff follows a demand-led engagement approach in which opportunities are introduced progressively in response to confirmed client requirements. Engagements are structured to align supplier capacity with client needs, supporting continuity and long-term collaboration over speculative activity.
-              </div>
+  <strong>Key Philosophy:</strong> <strong>TalentedStaff</strong> follows a{" "}
+  <strong>demand-led engagement approach</strong> in which opportunities are introduced
+  progressively in response to confirmed client requirements. Engagements are structured
+  to align supplier capacity with client needs, supporting continuity and long-term
+  collaboration over speculative activity.
+</div>
+
 
               {/* GETTING STARTED */}
               <div className="info-note neutral">

@@ -25,20 +25,35 @@ export default function LandingPage() {
             <div className="portal-header">
               <h1>
                 Westgate Supplier Onboarding Portal
-                <span>V0.1A</span>
+                <span>Home - V0.1A</span>
               </h1>
             </div>
 
             <div className="portal-body">
-              <p>
-              This portal supports early-stage supplier onboarding and readiness activities as part of a controlled, invite-only programme within the TalentedStaff ecosystem.
-              </p>
+            <p>
+    This portal supports{" "}
+    <strong>early-stage supplier</strong>{" "}
+    onboarding and readiness activities as part of a{" "}
+    <strong>controlled, invite-only programme</strong>{" "}
+    within the <strong>TalentedStaff ecosystem</strong>.
+  </p>
 
-              <p>At this stage (V0.1A), the focus is on onboarding, readiness confirmation, and alignment. Suppliers are guided to understand the operating principles, participation expectations, and information requirements that apply before any wider platform access or market participation is introduced.</p>
-
-              <p>
-              This portal enables suppliers to align early to a structured capacity-readiness approach, ensuring governance, continuity, and operating expectations are understood before engagement.
-              </p>
+  <p>
+    At this stage <strong>(V0.1A)</strong>, the focus is on{" "}
+    <strong>onboarding</strong>,{" "}
+    <strong>readiness confirmation</strong>, and{" "}
+    <strong>alignment</strong>. Suppliers are guided to understand the{" "}
+    <strong>operating principles</strong>,{" "}
+    <strong>participation expectations</strong>, and{" "}
+    <strong>information requirements</strong>{" "}
+    that apply before any wider platform access or market participation is introduced.
+  </p>
+  <p>
+    This portal enables suppliers to align early to a{" "}
+    <strong>structured capacity-readiness approach</strong>, ensuring{" "}
+    <strong>governance</strong>, <strong>continuity</strong>, and{" "}
+    <strong>operating expectations</strong> are understood before engagement.
+  </p>
 
               <div className="info-highlight">
                 <h3>
@@ -47,12 +62,18 @@ export default function LandingPage() {
                 </h3>
 
                 <p>
-                UK employers and agencies increasingly require prepared, reliable supplier capacity rather than speculative or last-minute sourcing. The TalentedStaff ecosystem supports UK-based clients and agencies that require supplier capacity to be prepared, dependable, and aligned in advance
-                </p>
+      UK employers and agencies increasingly require prepared, reliable supplier capacity
+      rather than speculative or last-minute sourcing. The{" "}
+     <strong>TalentedStaff ecosystem</strong>{" "}
+      supports <strong>UK-based clients and agencies</strong> that require supplier capacity
+      to be <strong>prepared, dependable, and aligned in advance</strong>.
+    </p>
 
-                <p>
-                The model is not designed around open recruitment or job advertising, but around long-term capability alignment between UK demand and prepared supplier capacity.
-                </p>
+
+    <p>
+      The model is not designed around open recruitment or job advertising, but around{" "}
+      <strong>long-term capability alignment</strong> between UK demand and prepared supplier capacity.
+    </p>
               </div>
             </div>
 
@@ -72,15 +93,26 @@ export default function LandingPage() {
               <p>This portal supports invited suppliers to:</p>
 
               <ul>
-                <li>Understand how the TalentedStaff engagement model operates</li>
-                <li>Submit supplier and organisational information for review</li>
-                <li>Confirm capacity, continuity, and operating alignment</li>
-                <li>Progress through onboarding in a structured, governed manner</li>
-              
-              </ul>
+    <li>
+      Understand how the <strong>TalentedStaff engagement model</strong> operates
+    </li>
+
+    <li>
+      Submit supplier and <strong>organisational</strong> information for review
+    </li>
+
+    <li>
+      Confirm <strong>capacity, continuity, and operating alignment</strong>
+    </li>
+
+    <li>
+      Progress through <strong>onboarding</strong> in a{" "}
+      <strong>structured, governed manner</strong>
+    </li>
+  </ul>
 
               <div className="info-note">
-              This environment supports pre-launch preparation only.
+              This environment supports <strong>pre-launch preparation only.</strong>
               </div>
             </div>
 
