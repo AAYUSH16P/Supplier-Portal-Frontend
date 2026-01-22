@@ -53,16 +53,16 @@ export default function HowItWorks() {
             </div>
 
             <p>
-  This onboarding journey supports <strong>early-phase supplier readiness</strong>{" "}
-  within a <strong>controlled, invite-only engagement model</strong>.
-</p>
+              This onboarding journey supports <strong>early-phase supplier readiness</strong>{" "}
+              within a <strong>controlled, invite-only engagement model</strong>.
+            </p>
 
-<p>
-  It forms part of a <strong>UK-facing, demand-led IT engagement approach</strong>, where
-  suppliers are <strong>onboarded</strong> and aligned in <strong>advance of engagement</strong>.
-  This ensures that, when client demand is introduced, participation can be{" "}
-  <strong>structured, relevant, and governed</strong>, rather than reactive or speculative.
-</p>
+            <p>
+              It forms part of a <strong>UK-facing, demand-led IT engagement approach</strong>, where
+              suppliers are <strong>onboarded</strong> and aligned in <strong>advance of engagement</strong>.
+              This ensures that, when client demand is introduced, participation can be{" "}
+              <strong>structured, relevant, and governed</strong>, rather than reactive or speculative.
+            </p>
 
 
             {/* STEPS */}
@@ -85,11 +85,11 @@ export default function HowItWorks() {
                   <small>Build Capacity</small>
                 </div>
                 <div className="step active">
-  <span className="step-badge">
-    <img src="/25499.jpg" alt="Business" className="step-icon" />
-  </span>
-  <small>Business Opportunities</small>
-</div>
+                  <span className="step-badge">
+                    <img src="/25499.jpg" alt="Business" className="step-icon" />
+                  </span>
+                  <small>Business Opportunities</small>
+                </div>
 
               </div>
             </div>
@@ -107,8 +107,7 @@ export default function HowItWorks() {
                 <div>
                   <h3>Supplier Registration</h3>
                   <p className="step-subtitle">
-                    Submit organisational details required for onboarding, verification,
-                    and readiness assessment through our structured registration form.
+                    Submit organisational details required for onboarding, verification,and readiness assessment through our structured registration form.
                   </p>
                 </div>
               </div>
@@ -119,20 +118,27 @@ export default function HowItWorks() {
 
                 <div className="provide-grid">
                   <div className="provide-card">
-                    <span className="provide-icon">🏢</span>
-                    <h4>Organisation Info</h4>
+                    <h4>
+                      <span className="provide-icon " style={{marginRight:'10px'}}>🏢</span>
+
+                      Organisation Info
+                      </h4>
                     <p>Company details and registration information</p>
                   </div>
 
                   <div className="provide-card">
-                    <span className="provide-icon">👤</span>
-                    <h4>Contact Details</h4>
+                    <h4>
+                      <span className="provide-icon" style={{marginRight:'10px'}}>👤</span>
+                      Contact Details
+                    </h4>
                     <p>Primary points of contact and roles</p>
                   </div>
 
                   <div className="provide-card">
-                    <span className="provide-icon">🧩</span>
-                    <h4>Capability Info</h4>
+                    <h4>
+                      <span className="provide-icon" style={{marginRight:'10px'}}>🧩</span>
+                      Capability Info
+                      </h4>
                     <p>High-level delivery capability indicators</p>
                   </div>
                 </div>
@@ -183,13 +189,13 @@ export default function HowItWorks() {
               <div className="step-includes">
                 <strong>What this step includes:</strong>
 
-                <div className="include-item">
-                  <span className="include-dot"></span>
-                  <div>
-                    <strong>Governance Framework</strong>
-                    <p>Understanding operating principles and accountability structures</p>
+                  <div className="include-item">
+                    <span className="include-dot"></span>
+                    <div>
+                      <strong>Governance Framework</strong>
+                      <p>Understanding operating principles and accountability structures</p>
+                    </div>
                   </div>
-                </div>
 
                 <div className="include-item">
                   <span className="include-dot"></span>
@@ -254,20 +260,24 @@ export default function HowItWorks() {
 
                 <div className="method-grid">
                   <div className="method-card">
-                    <span className="method-icon">✍️</span>
-                    <h4>Manual Entry</h4>
+                    <h4>
+                    <span className="method-icon" style={{marginRight:'10px'}}>✍️</span>
+                    
+                    Manual Entry</h4>
                     <p>Enter capacity details directly through the portal</p>
                   </div>
 
                   <div className="method-card">
-                    <span className="method-icon">📊</span>
-                    <h4>Excel Upload</h4>
+                    <h4>
+                    <span className="method-icon" style={{marginRight:'10px'}}>📊</span>
+                    Excel Upload</h4>
                     <p>Use structured templates for bulk uploads</p>
                   </div>
 
                   <div className="method-card">
-                    <span className="method-icon">🔗</span>
-                    <h4>Secure Link Entry</h4>
+                    <h4>
+                    <span className="method-icon" style={{marginRight:'10px'}}>🔗</span>
+                    Secure Link Entry</h4>
                     <p>Enhanced options in later platform phases</p>
                   </div>
                 </div>
@@ -275,10 +285,10 @@ export default function HowItWorks() {
 
               {/* NOTE */}
               <div className="info-note pink">
-              No individual candidate personal data is collected or processed at this stage.
-  Candidate details, documentation, or profiles are addressed separately{" "}
-  <strong>after supplier registration</strong>, and{" "}
-  <strong>only where relevant client demand requires it</strong>.              </div>
+                No individual candidate personal data is collected or processed at this stage.
+                Candidate details, documentation, or profiles are addressed separately{" "}
+                <strong>after supplier registration</strong>, and{" "}
+                <strong>only where relevant client demand requires it</strong>.              </div>
             </div>
           </section>
 
@@ -314,20 +324,23 @@ export default function HowItWorks() {
 
                 <div className="method-grid">
                   <div className="method-card">
-                    <span className="method-icon">🎯</span>
-                    <h4>Demand-Driven</h4>
+                    <h4>
+                    <span className="method-icon" style={{marginRight:'10px'}}>🎯</span>
+                    Demand-Driven</h4>
                     <p>Based on actual client requirements, not speculative engagement</p>
                   </div>
 
                   <div className="method-card">
-                    <span className="method-icon">🧠</span>
-                    <h4>Readiness-Aligned</h4>
+                    <h4>
+                    <span className="method-icon" style={{marginRight:'10px'}}>🧠</span>
+                    Readiness-Aligned</h4>
                     <p>Matched based on your capacity, preparedness and capability</p>
                   </div>
 
                   <div className="method-card">
-                    <span className="method-icon">📈</span>
-                    <h4>Progressive</h4>
+                    <h4>
+                    <span className="method-icon" style={{marginRight:'10px'}}>📈</span>
+                    Progressive</h4>
                     <p>Introduced as platform capabilities and demand expand</p>
                   </div>
                 </div>
@@ -371,12 +384,12 @@ export default function HowItWorks() {
 
               {/* PHILOSOPHY */}
               <div className="info-note green">
-  <strong>Key Philosophy:</strong> <strong>TalentedStaff</strong> follows a{" "}
-  <strong>demand-led engagement approach</strong> in which opportunities are introduced
-  progressively in response to confirmed client requirements. Engagements are structured
-  to align supplier capacity with client needs, supporting continuity and long-term
-  collaboration over speculative activity.
-</div>
+                <strong>Key Philosophy:</strong> <strong>TalentedStaff</strong> follows a{" "}
+                <strong>demand-led engagement approach</strong> in which opportunities are introduced
+                progressively in response to confirmed client requirements. Engagements are structured
+                to align supplier capacity with client needs, supporting continuity and long-term
+                collaboration over speculative activity.
+              </div>
 
 
               {/* GETTING STARTED */}

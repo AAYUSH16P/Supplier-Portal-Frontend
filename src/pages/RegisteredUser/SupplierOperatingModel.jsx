@@ -67,14 +67,14 @@ export default function SupplierOperatingModel() {
       engagement authority.
     </p>
 
-    <h4>WestGate India</h4>
-    <p>WestGate India is the authorised delivery and operations partner (India).</p>
+    <h4>Westgate IT Hub Pvt. Ltd.</h4>
+    <p>Westgate IT Hub Pvt. Ltd. is the authorised delivery and operations partner (India).</p>
     <p>
-      Within the ecosystem, WestGate India acts as the single operational hub and primary point of contact for
+      Within the ecosystem, Westgate IT Hub Pvt. Ltd. acts as the single operational hub and primary point of contact for
       suppliers during onboarding and readiness phases.
     </p>
 
-    <p>WestGate India is responsible for:</p>
+    <p>Westgate IT Hub Pvt. Ltd. is responsible for:</p>
     <ul className="op-bullets">
       <li>Supplier onboarding and registration</li>
       <li>Readiness coordination and alignment</li>

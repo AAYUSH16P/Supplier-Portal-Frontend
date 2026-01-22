@@ -20,96 +20,95 @@ export default function AboutTalentedStaff() {
 
           {/* ================= IN BRIEF ================= */}
           <section className="content-card">
-            <div className="card-title">
+            <div className="final-card-title">
               <span className="icon blue">◎</span>
               <h3>About the TalentedStaff Ecosystem (Prepared Capacity. Governed Engagement)</h3>
             </div>
 
             <p>
-  TalentedStaff.com is a{" "}
-  <strong>UK-focused talent and capacity engagement ecosystem</strong>{" "}
-  designed to help <strong>organisations</strong> work with{" "}
-  <strong>prepared and governed technology suppliers</strong> through a{" "}
-  <strong>demand-led engagement model</strong>.
-</p>
+              TalentedStaff.com is a{" "}
+              <strong>UK-focused talent and capacity engagement ecosystem</strong>{" "}
+              designed to help <strong>organisations</strong> work with{" "}
+              <strong>prepared and governed technology suppliers</strong> through a{" "}
+              <strong>demand-led engagement model</strong>.
+            </p>
 
 
-<p>
-  Rather than relying on open recruitment or speculative staffing, the ecosystem
-  is built around <strong>early supplier onboarding and alignment</strong>, so
-  that capacity is already prepared when engagement is required. Platform access
-  and capabilities are introduced <strong>progressively by phase</strong>,
-  supporting quality, continuity, and controlled participation for both
-  suppliers and UK clients.
-</p>
+            <p>
+              Rather than relying on open recruitment or speculative staffing, the ecosystem
+              is built around <strong>early supplier onboarding and alignment</strong>, so
+              that capacity is already prepared when engagement is required. Platform access
+              and capabilities are introduced <strong>progressively by phase</strong>,
+              supporting quality, continuity, and controlled participation for both
+              suppliers and UK clients.
+            </p>
 
           </section>
 
           {/* ================= TWO COLUMN ================= */}
           <section className="two-col-grid">
-            <div className="content-card">
-              <div className="card-title">
-                <span className="icon light-blue">📘</span>
-                <h4>How TalentedStaff.com Operates</h4>
-              </div>
+            <div className="content-card left-side">              <div className="final-card-title">
+              <span className="icon light-blue">📘</span>
+              <h4>How TalentedStaff.com Operates</h4>
+            </div>
 
               <p>
-  TalentedStaff.com operates as a{" "}
-  <strong>structured engagement ecosystem</strong> connecting{" "}
-  <strong>UK businesses, agencies, and delivery partners</strong> with{" "}
-  <strong>pre-aligned technology suppliers</strong>.
-</p>
+                TalentedStaff.com operates as a{" "}
+                <strong>structured engagement ecosystem</strong> connecting{" "}
+                <strong>UK businesses, agencies, and delivery partners</strong> with{" "}
+                <strong>pre-aligned technology suppliers</strong>.
+              </p>
 
-<p>
-  Suppliers are onboarded and aligned in advance against defined{" "}
-  <strong>operating principles, governance requirements, and continuity expectations</strong>.
-  Engagement is demand-led and structured,{" "}
-  <strong>prioritising direct, 1-to-1 resource relationships</strong> over project
-  subcontracting or multi-layer delivery chains.
-</p>
+              <p>
+                Suppliers are onboarded and aligned in advance against defined{" "}
+                <strong>operating principles, governance requirements, and continuity expectations</strong>.
+                Engagement is demand-led and structured,{" "}
+                <strong>prioritising direct, 1-to-1 resource relationships</strong> over project
+                subcontracting or multi-layer delivery chains.
+              </p>
 
-<p>
-  The model is designed to support <strong>relevant, governed engagement</strong>{" "}
-  when demand arises, rather than reactive sourcing under time or delivery pressure.
-</p>
+              <p>
+                The model is designed to support <strong>relevant, governed engagement</strong>{" "}
+                when demand arises, rather than reactive sourcing under time or delivery pressure.
+              </p>
 
             </div>
 
-            <div className="content-card">
-              <div className="card-title">
+            <div className="content-card right-side" >
+              <div className="final-card-title">
                 <span className="icon light-blue">⚡</span>
                 <h4>Why This Model Exists</h4>
               </div>
 
               <p>
-  Traditional recruitment and staffing models typically operate <strong>reactively</strong>,
-  sourcing capacity only after demand is confirmed. This approach often{" "}
-  <strong>introduces delays, continuity risk, and inconsistent delivery outcomes</strong>.
-</p>
+                Traditional recruitment and staffing models typically operate <strong>reactively</strong>,
+                sourcing capacity only after demand is confirmed. This approach often{" "}
+                <strong>introduces delays, continuity risk, and inconsistent delivery outcomes</strong>.
+              </p>
 
-<div className="highlight-box">
-  <strong>
-    TalentedStaff.com is designed to <strong>reverse this sequence</strong> by preparing and aligning
-    supplier capacity <strong>before engagement</strong>. This enables:
-  </strong>
-</div>
+              <p>
 
-<ul className="benefits">
-  <li>✔ Faster response when client demand is introduced</li>
-  <li>✔ Improved continuity through <strong>pre-aligned</strong> supplier capacity</li>
-  <li>✔ Reduced reliance on last-minute sourcing</li>
-  <li>✔ Clear governance and accountability across all parties</li>
-</ul>
+                TalentedStaff.com is designed to <strong>reverse this sequence</strong> by preparing and aligning
+                supplier capacity <strong>before engagement</strong>. This enables:
+
+              </p>
+
+              <ul className="benefits">
+                <li>✔ Faster response when client demand is introduced</li>
+                <li>✔ Improved continuity through <strong>pre-aligned</strong> supplier capacity</li>
+                <li>✔ Reduced reliance on last-minute sourcing</li>
+                <li>✔ Clear governance and accountability across all parties</li>
+              </ul>
 
 
-<p>
-  The focus is not scale or volume, but <strong>preparedness, relevance, and controlled engagement</strong>.
-</p>
+              <p>
+                The focus is not scale or volume, but <strong>preparedness, relevance, and controlled engagement</strong>.
+              </p>
             </div>
           </section>
           {/* ================= ECOSYSTEM ================= */}
           <section className="content-card ecosystem-card">
-            <div className="card-title">
+            <div className="final-card-title">
               <span className="icon light-blue">🧩</span>
               <h3>How the Ecosystem Works</h3>
             </div>
@@ -134,7 +133,7 @@ export default function AboutTalentedStaff() {
               </div>
 
               {/* CENTER */}
-              <div className="ecosystem-col">
+              <div className="ecosystem-col active">
                 <h4>Governance & Engagement Layer</h4>
                 <p className="ecosystem-desc">
                   Demand-driven engagement through:
@@ -148,7 +147,7 @@ export default function AboutTalentedStaff() {
               </div>
 
               {/* RIGHT */}
-              <div className="ecosystem-col">
+              <div className="ecosystem-col active">
                 <h4>Platform Enablement Layer</h4>
                 <p className="ecosystem-desc">
                   Ecosystem framework supporting:
@@ -167,8 +166,8 @@ export default function AboutTalentedStaff() {
           {/* ================= WHO THIS IS FOR + PARTNERS ================= */}
           <section className="two-col-grid who-partner-section">
             {/* LEFT CARD */}
-            <div className="content-card who-card">
-              <div className="card-title">
+            <div className="content-card who-card left-side" >
+              <div className="final-card-title">
                 <span className="icon light-blue">👥</span>
                 <h4>Who This Is For</h4>
               </div>
@@ -194,8 +193,8 @@ export default function AboutTalentedStaff() {
             </div>
 
             {/* RIGHT CARD */}
-            <div className="content-card partner-card">
-              <div className="card-title">
+            <div className="content-card partner-card right-side" >
+              <div className="final-card-title">
                 <span className="icon light-blue">🛡️</span>
                 <h4>How Westgate India and Spectrum IT Hub Fit In</h4>
               </div>
@@ -230,7 +229,7 @@ export default function AboutTalentedStaff() {
 
           {/* ================= PHASED ACCESS ================= */}
           <section className="content-card phased-card">
-            <div className="card-title">
+            <div className="final-card-title">
               <span className="icon light-blue">📈</span>
               <h3>Phased Access & Platform Evolution</h3>
             </div>
@@ -297,7 +296,7 @@ export default function AboutTalentedStaff() {
 
 
         </main>
-        
+
       </div>
       <LandingFooter />
 

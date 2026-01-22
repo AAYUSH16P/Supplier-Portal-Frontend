@@ -22,7 +22,7 @@ export default function LandingPage() {
 
           {/* Main Card */}
           <section className="portal-card">
-            <div className="portal-header">
+            <div className="portal-header" id="abhic">
               <h1>
                 Westgate Supplier Onboarding Portal
                 <span>Home - V0.1A</span>
@@ -130,7 +130,7 @@ export default function LandingPage() {
               </ul>
               <br />
 
-              <p className="danger-text">
+              <p className="danger-text" id="abhi">
               Participation at this stage does not imply activation or commercial engagement.
               </p>
             </div>

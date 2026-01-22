@@ -113,11 +113,7 @@
   /* ======================================================
      FORM GRID
   ====================================================== */
-  .form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px 18px;
-  }
+
   
   .form-group {
     display: flex;
@@ -387,4 +383,39 @@
   display: flex;
   align-items: center;
   gap: 6px;
+}
+
+
+
+/* Default: all form-grids stay 2 columns (left/right) */
+
+
+/* Additional Information ONLY: force 1 column */
+.additional-section .form-grid {
+  grid-template-columns: 1fr !important;
+}
+
+/* Additional Information: keep full width items behaving normally */
+.additional-section .form-group.full {
+  grid-column: 1 / -1;
+}
+
+
+/* Default: all form-grids are 2 columns */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 18px;
+}
+
+/* Additional Information ONLY: force 1 column */
+.additional-section .form-grid {
+  grid-template-columns: 1fr !important;
+}
+
+/* Mobile: everything becomes 1 column */
+@media (max-width: 900px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
 }

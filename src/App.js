@@ -8,7 +8,6 @@ import HowItWorks from "./pages/LandingPage/HowItWorks";
 import FAQ from "./pages/LandingPage/Faq";
 import Registration from "./pages/LandingPage/Resgistration";
 import SupplierRegistration from "./pages/LandingPage/SupplierRegistration";
-import Contact from "./pages/LandingPage/Contact";
 import SupplierLogin from "./pages/RegisteredUser/SupplierLogin";
 import SupplierAcknowledgement from "./pages/RegisteredUser/SupplierAcknowledgement";
 import SupplierHome from "./pages/RegisteredUser/SupplierHome";
@@ -35,7 +34,8 @@ import ResetPassword from "./style/RegisteredUser/ResetPassword";
 import ForgotPassword from "./pages/RegisteredUser/ForgotPassword"
 import RegistrationSuccess from "./pages/LandingPage/RegistrationSuccess";
 import PublicFAQ from "./pages/LandingPage/PublicFAQ";
-
+import PublicContact from "./pages/LandingPage/PublicContact";
+import PrivateContact from "./pages/LandingPage/PrivateContact";
 import PrivateFAQ from "./pages/LandingPage/PrivateFAQ";
 
 
@@ -52,7 +52,6 @@ function App() {
         <Route path="/faq" element={<FAQ />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/supplier-registration" element={<SupplierRegistration />} />
-        <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<SupplierLogin />} />
         <Route path="/acknowledge" element={<SupplierAcknowledgement />} />
         <Route path="/home" element={<SupplierHome />} />
@@ -71,10 +70,17 @@ function App() {
         <Route path="/registration-success" element={<RegistrationSuccess />} />
         <Route path="/employeeInviteInfo" element={<EmployeeInviteInfo />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-<Route path="/reset-password" element={<ResetPassword />} />
-<Route path="/public-faq" element={<PublicFAQ />} />
-<Route path="/private-faq" element={<PrivateFAQ />} />
-
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/public-faq" element={<PublicFAQ />} />
+        <Route path="/private-faq" element={<PrivateFAQ />} />
+        <Route path="/contact" element={<PublicContact />} />
+        <Route
+          path="/app/contact"
+          element={
+            
+              <PrivateContact />
+          }
+          />
 
 
 

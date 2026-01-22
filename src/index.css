@@ -1,10 +1,50 @@
+
+
+
+
 /* =====================
    GLOBAL
 ===================== */
-.blue{
-  color: rgb(95, 95, 198);
+.text-blue{ color: rgb(95, 95, 198); }
+
+
+.portal-header {
+  background: linear-gradient(180deg, #0a4dbf, #083a94);
+  padding: 26px 30px;
+
+  /* add */
+  text-align: center;
 }
 
+.portal-header h1 {
+  color: white;
+  font-size: 30px;
+  margin: 0;
+  font-weight: 700;
+
+  /* optional: if you want perfect center on all widths */
+  width: 100%;
+}
+
+.portal-header span {
+  display: block;
+  font-size: 18px;
+  margin-top: 6px;
+  font-weight: 600;
+  opacity: 0.95;
+
+  /* optional */
+  text-align: center;
+}
+
+
+#abhic{
+  align-items: c;
+}
+
+#abhi{
+  background-color: white;
+}
 
 /* same badge size for all steps */
 .step-badge {
@@ -1130,18 +1170,7 @@ code {
 }
 
 /* CARD TITLE */
-.card-title {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
-}
 
-.card-title h3,
-.card-title h4 {
-  margin: 0;
-  font-size: 16px;
-}
 
 .icon {
   width: 32px;
@@ -1392,7 +1421,6 @@ code {
 
 /* ACTIVE (LEFT) COLUMN */
 .ecosystem-col.active {
-  border-left: 3px solid #2563eb;
   padding-left: 22px;
 }
 
@@ -1441,8 +1469,8 @@ code {
 
 /* BULLETS – ACTIVE (FILLED) */
 .ecosystem-col.active li::before {
-  background: #2563eb;
-  border-color: #2563eb;
+  background: #000000;
+  border-color: #000000;
 }
 
 /* FOOTNOTE */
@@ -1580,7 +1608,7 @@ code {
   background: #f0f6ff;
   border-radius: 12px;
   padding: 14px 16px;
-  margin-top: 10px;
+  margin-top: 55px;
 }
 
 .partner-highlight strong {
@@ -1732,7 +1760,7 @@ code {
 
 .phased-grid {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 22px;
   margin-top: 14px;
 }
@@ -1748,7 +1776,7 @@ code {
 .phased-active h4 {
   font-size: 14px;
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .phased-active ul {
@@ -1793,7 +1821,7 @@ code {
 
 .phased-muted li {
   font-size: 13.5px;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   color: #374151;
 }
 
@@ -2259,7 +2287,6 @@ code {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 10px;
 }
 
 .step-number {
@@ -2309,7 +2336,6 @@ code {
   display: flex;
   gap: 16px;
   align-items: flex-start;
-  margin-bottom: 18px;
 }
 
 /* STEP NUMBER */
@@ -2338,15 +2364,14 @@ code {
   margin-top: 4px;
   font-size: 13.5px;
   color: #475569;
-  max-width: 640px;
+  /* max-width: 640px; */
 }
 
 /* INNER BOX */
 .step-box {
   background: #f0fdfa;
   border-radius: 12px;
-  padding: 18px;
-  margin-top: 16px;
+ 
 }
 
 /* PROVIDE GRID */
@@ -2453,7 +2478,7 @@ code {
   margin-top: 14px;
   font-size: 13.5px;
   color: #475569;
-  max-width: 720px;
+ 
 }
 
 /* INCLUDES */
@@ -2484,6 +2509,7 @@ code {
   height: 14px;
   border-radius: 50%;
   border: 2px solid #a855f7;
+  background-color: #a855f7;
   margin-top: 4px;
 }
 
@@ -2656,14 +2682,7 @@ code {
   margin-top: 10px;
 }
 
-.card-title {
-  display: flex;
-  align-items: center;
-  font-weight: 600;
-  font-size: 15px;
-  color: #0f172a;
-  gap: 10px;
-}
+
 
 .title-bar {
   width: 4px;
@@ -2926,3 +2945,119 @@ code {
 
 
 
+
+
+
+
+
+
+.final-card-title{
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 15px;
+  color: #0f172a;
+  gap: 10px;
+}
+
+
+
+.card-title{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.card-title h3,
+.card-title h4{
+  margin: 0;
+  line-height: 1.2;
+}
+
+.card-title .icon{
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 32px;
+  
+}
+
+.left-side { background-color: #EBFDF5; }
+.right-side { background-color: #FFF7ED; }
+
+
+
+
+
+
+
+/* --- PHASED BOXES: force compact height --- */
+.phased-grid {
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+}
+
+/* reduce box padding */
+.boxed.phased-active,
+.boxed.phased-muted {
+  padding: 12px 14px !important;
+}
+
+/* remove default margins that add height */
+.boxed.phased-active h4,
+.boxed.phased-muted h4 {
+  margin: 0 0 6px 0 !important;
+}
+
+/* UL margin/padding is a big height culprit */
+.boxed.phased-active ul,
+.boxed.phased-muted ul {
+  margin: 0 !important;
+  padding-left: 0 !important;   /* for check-list (custom ✓) */
+}
+
+/* tighten LI spacing */
+.boxed.phased-active li,
+.boxed.phased-muted li {
+  margin-bottom: 4px !important;
+  line-height: 1.35 !important;
+}
+
+/* Right side uses dot-list, give it compact bullets */
+.boxed.phased-muted ul.dot-list {
+  padding-left: 18px !important; /* bring bullets back */
+}
+
+
+
+.include-item p {
+  display: inline;
+  margin: 0;
+}
+
+.include-item strong::after {
+  content: " : ";
+  font-weight: 400;
+  color: #475569;
+}
+
+
+/* FORCE inline title + description in one line */
+.step-includes .include-item p {
+  display: inline !important;
+  margin: 0 !important;
+}
+
+.step-includes .include-item strong {
+  display: inline !important;
+}
+
+.step-includes .include-item strong::after {
+  content: " : " !important;
+  font-weight: 400;
+  color: #475569;
+}

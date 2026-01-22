@@ -7,7 +7,7 @@ export default function LandingFooter() {
         <p>
           
 
-        <strong> Operating Model & Coordination:</strong>All onboarding and readiness activities within this portal are  <strong>coordinated by WestGate India,</strong> acting in support of <strong>Spectrum IT Hub Ltd (UK) </strong>and the wider <strong> TalentedStaff.com ecosystem.</strong>
+        <strong> Operating Model & Coordination:</strong>All onboarding and readiness activities within this portal are  <strong>coordinated by Westgate IT Hub Pvt. Ltd.,</strong> acting in support of <strong>Spectrum IT Hub Ltd (UK) </strong>and the wider <strong> TalentedStaff.com ecosystem.</strong>
         </p>
 
 

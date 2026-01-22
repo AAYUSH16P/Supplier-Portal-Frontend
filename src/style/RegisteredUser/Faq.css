@@ -216,3 +216,17 @@ FAQ PAGE LAYOUT
   margin-top: 10px;
   font-weight: 500;
 }
+
+
+/* This is the one causing narrow answers */
+.faq-card p {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* Override for answer area */
+.faq-answer p {
+  max-width: 100% !important;
+  margin: 0 0 10px 0 !important;
+  text-align: left;
+}

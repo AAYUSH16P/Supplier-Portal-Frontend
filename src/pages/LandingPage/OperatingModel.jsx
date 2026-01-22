@@ -30,7 +30,7 @@ export default function OperatingModel() {
 
               <p>
                 <strong>Westgate India</strong> is a business registered in India and operates as the
-                <strong>authorised operational and delivery partner</strong>
+                <strong> authorised operational and delivery partner </strong>
                 for <strong> Spectrum IT Hub Ltd (UK)</strong> within the <strong>TalentedStaff.com ecosystem.</strong>
               </p>
 
@@ -40,7 +40,7 @@ export default function OperatingModel() {
               This model avoids open or speculative sourcing and instead focuses on <strong> readiness, continuity, and structured participation.</strong>
               </p>
 
-              <p>In this context, <strong> WestGate India acts as the single operational hub and primary point of contact </strong> for invite-only supplier onboarding and early readiness activities.</p>
+              <p>In this context, <strong> Westgate IT Hub Pvt. Ltd. acts as the single operational hub and primary point of contact </strong> for invite-only supplier onboarding and early readiness activities.</p>
 
               <div className="info-highlight">
                 <p>
@@ -77,7 +77,7 @@ export default function OperatingModel() {
               </div>
 
               <p className="section-intro">
-              During the onboarding and readiness phase, <strong>WestGate India acts as the sole operational interface </strong> for participating suppliers.
+              During the onboarding and readiness phase, <strong>Westgate IT Hub Pvt. Ltd. acts as the sole operational interface </strong> for participating suppliers.
               </p>
 
               <div className="mint-highlight">

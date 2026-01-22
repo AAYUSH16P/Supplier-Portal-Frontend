@@ -472,8 +472,8 @@ export default function SupplierRegistration() {
                 <h3>🏢 Company Information</h3>
 
                 <div className="form-grid">
-                  <div className="form-group full">
-                    <label className="required-label">
+                <div className="form-group">
+                <label className="required-label">
                       Company Name <span className="required-asterisk">*</span>
                       <InfoTooltip field="companyName" />
                     </label>
@@ -490,7 +490,7 @@ export default function SupplierRegistration() {
                     )}
                   </div>
 
-                  <div className="form-group full">
+                  <div className="form-group ">
                     <label className="required-label">
                       Company Website <span className="required-asterisk">*</span>
                       <InfoTooltip field="companyWebsite" />
@@ -584,7 +584,7 @@ export default function SupplierRegistration() {
                 <h4 className="form-section-title">📍 Company Address</h4>
 
                 <div className="form-grid">
-                  <div className="form-group full">
+                  <div className="form-group ">
                     <label className="required-label">
                       Address Line 1 <span className="required-asterisk">*</span>
                       <InfoTooltip field="addressLine1" />
@@ -602,7 +602,7 @@ export default function SupplierRegistration() {
                     )}
                   </div>
 
-                  <div className="form-group full">
+                  <div className="form-group ">
                     <label>Address Line 2
                       <InfoTooltip field="addressLine2" />
                     </label>
@@ -690,7 +690,7 @@ export default function SupplierRegistration() {
                 </div>
 
                 <h4 className="form-section-title">
-                  👤 Primary Contact Information
+                  👤 Personal Information
                 </h4>
 
                 <div className="form-grid">
@@ -765,7 +765,6 @@ export default function SupplierRegistration() {
                 </div>
 
                 <h4 className="form-section-title">
-                  👥 Secondary Contact Information
                 </h4>
 
                 <div className="form-grid">
@@ -853,11 +852,12 @@ export default function SupplierRegistration() {
 
 
 
+                <div className="additional-section">
 
                 <h4 className="form-section-title">🧾 Additional Information</h4>
 
                 <div className="form-grid">
-                  <div className="form-group full">
+                  <div className="form-group ">
                     <label className="required-label">Company Overview <span className="required-asterisk">*</span>
                       <InfoTooltip field="companyOverview" />
                     </label>
@@ -880,7 +880,7 @@ export default function SupplierRegistration() {
                     )}
                   </div>
 
-                  <div className="form-group full">
+                  <div className="form-group ">
                     <label>Certifications
                       <InfoTooltip field="certifications" />
                     </label>
@@ -917,6 +917,8 @@ export default function SupplierRegistration() {
                       </div>
                     ))}
                   </div>
+                </div>
+
                 </div>
 
                 <div className="form-actions">

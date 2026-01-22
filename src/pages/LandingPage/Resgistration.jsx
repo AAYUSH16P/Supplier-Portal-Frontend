@@ -97,7 +97,7 @@ export default function Registration() {
                                    <strong> Respect the invite-only and governed nature</strong>of this engagement model                                </li>
                                 <li>
                                     <span>2</span>
-                                    Engage through <strong> WestGate India </strong> as the <strong> single operational point of contact</strong> during onboarding                                </li>
+                                    Engage through <strong> Westgate IT Hub Pvt. Ltd. </strong> as the <strong> single operational point of contact</strong> during onboarding                                </li>
                                 <li>
                                     <span>3</span>
                                     Follow the defined  <strong> onboarding and readiness process  </strong>                             </li>
