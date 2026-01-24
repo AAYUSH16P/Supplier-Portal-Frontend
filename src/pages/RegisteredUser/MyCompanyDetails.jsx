@@ -270,7 +270,7 @@ export default function MyCompanyDetails() {
                 {selectedField && (
   <div>
     <label>
-      Requested New Value <span className="required">*</span>
+       New Value <span className="required">*</span>
     </label>
 
     {/* ✅ COUNTRY – dynamic dropdown */}

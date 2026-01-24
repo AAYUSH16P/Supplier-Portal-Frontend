@@ -16,16 +16,16 @@ export default function EmployerInitiatedInvite() {
     const navigate = useNavigate();
     const [generatedLink, setGeneratedLink] = useState("");
     const [referenceCode, setReferenceCode] = useState("");
-    
 
-    
+
+
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     }, []);
 
 
-    
+
 
     const handleGenerateLink = () => {
         const token = localStorage.getItem("token");
@@ -68,7 +68,7 @@ export default function EmployerInitiatedInvite() {
             toast.error("No link to copy");
             return;
         }
-    
+
         try {
             // Modern browsers (Chrome, Edge, Firefox)
             if (navigator.clipboard && window.isSecureContext) {
@@ -85,7 +85,7 @@ export default function EmployerInitiatedInvite() {
                 document.execCommand("copy");
                 document.body.removeChild(textArea);
             }
-    
+
             toast.success("Link copied to clipboard!", {
                 position: "top-right",
                 autoClose: 2000,
@@ -96,22 +96,22 @@ export default function EmployerInitiatedInvite() {
             toast.error("Failed to copy link. Please copy manually.");
         }
     };
-    
+
 
 
     return (
 
-        
+
         <>
             <AppHeader />
             <ToastContainer
-      position="top-right"
-      autoClose={2000}
-      hideProgressBar
-      newestOnTop
-      closeOnClick
-      pauseOnHover={false}
-    />
+                position="top-right"
+                autoClose={2000}
+                hideProgressBar
+                newestOnTop
+                closeOnClick
+                pauseOnHover={false}
+            />
             <div className="company-layout">
                 <AppSidebar unlocked active="Candidates" />
 
@@ -137,38 +137,44 @@ export default function EmployerInitiatedInvite() {
                         <h1>Employer-Initiated Capacity Confirmation (Invite Link)</h1>
                     </section>
 
-                    {/* INFO CARD 1 */}
-                    <section className="info-card purple">
-                        <div className="info-icon purple">ℹ️</div>
-                        <div>
-                            <div className="info-bar purple" />
-                            <h3>Employer-Initiated Capacity Confirmation (Shared Link)</h3>
-                            <p>
-                                Use this option to share a single, secure confirmation link with
+                   {/* INFO CARD 1 */}
+<section className="info-card purple info-card-ref">
+  <div className="info-icon purple">ℹ️</div>
+
+  <div className="info-body">
+    <div className="info-topline purple"></div>
+
+    <h3 className="info-heading">
+      Employer-Initiated Capacity Confirmation (Shared Link)
+    </h3>
+
+    <p className="info-text">
+    Use this option to share a single, secure confirmation link with
                                 selected employees, allowing them to provide limited, non-personal
                                 capacity information under your organisation's direction. This
                                 option is designed for employers who manage a structured workforce
                                 and want employees to confirm or declare indicative skills and
                                 availability, without creating profiles, uploading CVs, or engaging
-                                directly with the platform.
-                            </p>
-                        </div>
-                    </section>
+                                directly with the platform.    </p>
+  </div>
+</section>
 
-                    {/* INFO CARD 2 */}
-                    <section className="info-card purple">
-                        <div className="info-icon purple">🛡️</div>
-                        <div>
-                            <div className="info-bar purple" />
-                            <p>
-                                The platform does not communicate with employees directly and does
+{/* INFO CARD 2 */}
+<section className="info-card purple info-card-ref">
+  <div className="info-icon purple">🛡️</div>
+
+  <div className="info-body">
+    <div className="info-topline purple"></div>
+
+    <p className="info-text">
+    The platform does not communicate with employees directly and does
                                 not collect personal identifiers. All communication, consent, and
                                 validation remain fully employer-controlled. Employee input is
                                 restricted strictly to readiness-level information and is subject
-                                to employer review before being recorded.
-                            </p>
-                        </div>
-                    </section>
+                                to employer review before being recorded.    </p>
+  </div>
+</section>
+
 
                     {/* WARNING */}
                     <section className="warning-card">
@@ -217,32 +223,36 @@ export default function EmployerInitiatedInvite() {
                                 <span className="hiw-line" />
                             </div>
 
-                            <div className="hiw-card">
+                            <div className="hiw-card hiw-row-content hiw-row-content-step2">
                                 <span className="hiw-step">Step 2</span>
 
-                                <h3 className="hiw-title">
+                                <div className="hiw-title">
                                     Employee Submits Indicative Information
-                                </h3>
-
-                                <p className="hiw-desc">
-                                    Employees access the link (no login required) and provide non-personal
-                                    readiness information only, such as:
-                                </p>
-
-                                <div className="hiw-bullets">
-                                    <div>Employer reference code (mandatory)</div>
-                                    <div>Primary role / skill category</div>
-                                    <div>Experience band</div>
-                                    <div>Availability band</div>
-                                    <div>etc (amend this)</div>
                                 </div>
 
-                                <p className="hiw-note">
-                                    Employees confirm that submission is made with employer awareness
-                                    and consent.
-                                </p>
+                                <div className="hiw-desc">
+                                    Employees access the link (no login required) and provide non-personal readiness
+                                    information only, such as: Employer reference code (mandatory), Primary role / skill category etc.
+                                </div>
+
+                                {/* ✅ Full-width section under the 3 columns */}
+                                <div className="hiw-step2-extra">
+                                    <div className="hiw-bullets">
+                                        <div>Employer reference code (mandatory)</div>
+                                        <div>Primary role / skill category</div>
+                                        <div>Experience band</div>
+                                        <div>Availability band</div>
+                                        <div>etc (amend this)</div>
+                                    </div>
+
+                                    <p className="hiw-note">
+                                        Employees confirm that submission is made with employer awareness and consent.
+                                    </p>
+                                </div>
                             </div>
                         </div>
+
+
 
                         {/* STEP 3 */}
                         <div className="hiw-row">
@@ -296,22 +306,19 @@ export default function EmployerInitiatedInvite() {
                                 Important Clarifications
                             </div>
 
-                            <div className="clarification-item">This is not a job application or recruitment process</div>
-                            <div className="clarification-item">Employees do not create accounts or profiles</div>
-                            <div className="clarification-item">
-                                No CVs, documents, personal contact details, or identifiers are collected
-                            </div>
-                            <div className="clarification-item">
-                                The platform does not establish a direct employer–employee–candidate relationship
-                            </div>
-                            <div className="clarification-item">
-                                Duplicate or speculative entries may be filtered or excluded during review
-                            </div>
+                            <ul className="clarifications-list">
+                                <li>This is not a job application or recruitment process</li>
+                                <li>Employees do not create accounts or profiles</li>
+                                <li>No CVs, documents, personal contact details, or identifiers are collected</li>
+                                <li>The platform does not establish a direct employer–employee–candidate relationship</li>
+                                <li>Duplicate or speculative entries may be filtered or excluded during review</li>
+                            </ul>
 
-                            <div className="clarification-note">
+                            <p className="clarifications-note">
                                 This approach ensures employer accountability, avoids personal data collection,
                                 and keeps capacity preparation measured, governed, and demand-led.
-                            </div>
+                            </p>
+
                         </div>
 
                         {/* ACTION */}

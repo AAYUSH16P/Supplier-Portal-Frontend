@@ -318,3 +318,17 @@
   margin-bottom: 12px;
   font-size: 14px;
 }
+
+
+/* allow long values (urls, long text) to wrap inside grid */
+.info-item strong{
+  overflow-wrap: anywhere;   /* best for long URLs */
+  word-break: break-word;    /* fallback */
+  white-space: normal;
+  max-width: 100%;
+}
+
+/* if label/value are in a 2-col grid, prevent overflow */
+.info-item{
+  min-width: 0;              /* important for grid items */
+}

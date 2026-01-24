@@ -1,7 +1,3 @@
-
-
-
-
 /* =====================
    GLOBAL
 ===================== */
@@ -1874,18 +1870,15 @@ code {
   margin-bottom: 10px;
 }
 
-.clarification-box li {
-  font-size: 13px;
-  color: #92400e;
-  position: relative;
-  padding-left: 16px;
+.clarification-box li{
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding-left: 0;       /* remove reserved padding */
 }
-
-.clarification-box li::before {
+.clarification-box li::before{
+  position: static;      /* no absolute */
   content: "✕";
-  position: absolute;
-  left: 0;
-  color: #f97316;
   font-weight: 700;
 }
 /* ======================================================
@@ -3060,4 +3053,74 @@ code {
   content: " : " !important;
   font-weight: 400;
   color: #475569;
+}
+
+
+
+
+
+
+/* =========================================================
+   STANDARD FONT SIZES ONLY (NO COLOR CHANGES)
+   Add at the END of index.css
+========================================================= */
+
+:root{
+  --fs-body: 14px;
+  --fs-small: 12.5px;
+
+  --fs-h1: 28px;
+  --fs-h2: 22px;
+  --fs-h3: 18px;
+  --fs-h4: 15px;
+}
+
+/* Base text */
+body{ font-size: var(--fs-body); line-height: 1.65; }
+
+/* Global headings (no color) */
+h1{ font-size: var(--fs-h1) !important; line-height: 1.2; }
+h2{ font-size: var(--fs-h2) !important; line-height: 1.25; }
+h3{ font-size: var(--fs-h3) !important; line-height: 1.25; }
+h4{ font-size: var(--fs-h4) !important; line-height: 1.3; }
+
+/* Common text blocks */
+p, li, label, input, select, textarea, button{
+  font-size: var(--fs-body);
+}
+
+/* Muted / secondary text sizing only */
+small,
+.portal-header span,
+.about-hero p,
+.hero-card p,
+.contact-hero p,
+.muted{
+  font-size: var(--fs-small) !important;
+}
+
+/* Card/body paragraphs sizing only */
+.content-card p,
+.portal-body p,
+.about-box p,
+.step-desc,
+.step-subtitle,
+.needhelp-option p,
+.faq-answer,
+.faq-answer p{
+  font-size: var(--fs-body) !important;
+}
+
+/* Section titles that you use a lot */
+.final-card-title h3,
+.final-card-title h4,
+.section-heading h3,
+.welcome-title,
+.how-title{
+  font-size: var(--fs-h3) !important;
+}
+
+/* FAQ: prevent narrow text rule messing with layout */
+.faq-card p{
+  max-width: 100% !important;
 }

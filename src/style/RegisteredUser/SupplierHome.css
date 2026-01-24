@@ -871,7 +871,7 @@
 .reminder-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px 22px;
+ 
 }
 
 .reminder-pill {
@@ -881,6 +881,7 @@
   font-size: 13.5px;
   color: #7c2d12;
   position: relative;
+  padding-top: 16px;
 }
 
 .reminder-pill::before {
@@ -1249,7 +1250,7 @@
 
   display: flex;
   flex-direction: column;
-  gap: 10px;
+ 
 }
 
 /* Header row */

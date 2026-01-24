@@ -68,18 +68,46 @@
     margin: 0;
   }
   
-  .ack-card li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: #f8fafc;
-    border: 1px solid #e5e7eb;
-    padding: 12px 14px;
-    border-radius: 10px;
-    font-size: 13.5px;
-    margin-bottom: 10px;
-    line-height: 1.5;
-  }
+ /* ===== LIST STYLES (NO BOXES, NO EXTRA SPACING) ===== */
+/* 1) Remove any highlight/background from the card headings */
+.ack-card h3 {
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 0 10px 0;
+  display: block !important;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* 2) Force normal bullets (no flex rows, no fake bullets) */
+.ack-card ul {
+  list-style: disc !important;
+  padding-left: 18px !important;
+  margin: 0 !important;
+}
+
+.ack-card li {
+  display: list-item !important; /* IMPORTANT: removes old flex effect */
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;         /* no spacing between lines */
+  border-radius: 0 !important;
+  color: #334155;
+  line-height: 1.35;
+}
+
+/* 3) Remove any previous custom bullet */
+.ack-card li::before {
+  content: none !important;
+}
+
+
+/* remove orange left border */
+.ack-card ul.orange li {
+  border-left: 0;
+}
+
   
   /* Blue dot (left card) */
   .ack-card li::before {

@@ -157,29 +157,39 @@
     border-radius: 2px;
   }
   
-  .guidelines-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .guidelines-list li {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 16px;
-    background: #ffffff;
-    border: 1px solid #c7dbff;
-    border-radius: 10px;
-    margin-bottom: 12px;
-    font-size: 14px;
-    color: #334155;
-  }
-  
-  .guidelines-list li::before {
-    content: "✓";
-    color: #2563eb;
-    font-weight: 700;
-  }
+/* GUIDELINES LIST (no boxes, normal lines) */
+.guidelines-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.guidelines-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+
+  /* remove box look */
+  background: transparent;
+  border: none;
+  border-radius: 0;
+
+  /* spacing */
+  padding: 6px 0;
+  margin: 0;
+
+  font-size: 14px;
+  color: #334155;
+  line-height: 1.7; /* ✅ better line spacing */
+}
+
+/* keep the tick */
+.guidelines-list li::before {
+  content: "✓";
+  font-weight: 700;
+  line-height: 1.7;
+}
+
   
   /* DOWNLOAD HEADER */
   .download-header {
@@ -309,3 +319,34 @@
     }
   }
   
+
+
+  
+
+
+
+
+
+
+/* INFO CARD: icon left, text immediately after (same row) */
+.bulk-card.info-card{
+  display: flex;
+  flex-direction: row;
+  align-items: center;          /* <-- key: keep text beside icon */
+  justify-content: flex-start;
+  gap: 14px;
+}
+
+/* icon fixed size */
+.bulk-card.info-card .bulk-icon{
+  flex: 0 0 36px;
+}
+
+/* text should start right after icon */
+.bulk-card.info-card p{
+  margin: 0;
+  flex: 1;
+  text-align: left;
+  display: block;
+}
+

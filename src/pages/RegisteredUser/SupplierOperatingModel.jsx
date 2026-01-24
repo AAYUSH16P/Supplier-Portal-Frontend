@@ -129,10 +129,12 @@ export default function SupplierOperatingModel() {
             <div className="notice-content">
               <h4>Important Notice</h4>
               <p>
-                All commercial terms, governance arrangements, roles, responsibilities,
-                and legal details are formally defined through the{" "}
-                <strong className="notice-link">Supplier SLA</strong>, which is discussed
-                and agreed separately before any capacity is approved or activated.
+              All terms, governance arrangements, roles, responsibilities, and legal details are formally defined through the Supplier SLA, which is discussed and agreed separately before any capacity is approved or activated.
+              </p>
+
+              <p>
+              Engagement-specific commercials, including applicable rate cards, are agreed on a case-by-case basis and formally recorded through a Filed SLA prior to the commencement of each & every engagement
+
               </p>
             </div>
           </section>

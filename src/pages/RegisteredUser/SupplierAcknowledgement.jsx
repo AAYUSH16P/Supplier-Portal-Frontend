@@ -88,7 +88,7 @@ export default function SupplierAcknowledgement() {
             <div className="ack-card">
               <h3>Important Clarification on Capacity Registration</h3>
 
-              <ul className="orange">
+              <ul className="">
                 <li>Preliminary and indicative only</li>
                 <li>Used for readiness and alignment</li>
                 <li>

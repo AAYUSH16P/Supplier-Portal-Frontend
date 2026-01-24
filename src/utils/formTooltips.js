@@ -20,4 +20,16 @@ export const FORM_TOOLTIPS = {
     secondaryContactPhone: "Secondary phone number for urgent communications. Include country code if applicable (e.g., +91).",
     companyOverview: "Brief description of your company, services, and expertise.",
     certifications: "Industry certifications the company holds (e.g., ISO 9001, CMMI Level 3). Add multiple by typing and clicking 'Add'.",
+
+    employeeId: "Your company’s internal employee ID for this person.",
+    workingSince: "The date the individual started working with your organisation.",
+    ctc: "Annual CTC used only for benchmarking and planning.",
+    jobTitle: "Current internal job title/designation.",
+    role: "Primary capacity role/category (e.g., Full Stack Developer).",
+    gender: "Used only for high-level reporting; no personal contact data is collected.",
+    location: "Work location band/city for readiness planning.",
+    experience: "Total years of professional experience.",
+    skills: "Core technical skills (comma-separated).",
+    tools: "Tools/platforms used (e.g., Git, Docker, Jira).",
+    projects: "Number of projects completed/handled (approximate).",
   };

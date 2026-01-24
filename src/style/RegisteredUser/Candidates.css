@@ -578,3 +578,233 @@
 
 
   
+  /* =========================
+   TABLE CARD (like screenshot)
+========================= */
+
+.table-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+}
+
+.table-card-header {
+  padding: 18px 20px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.table-card-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* scroll container (safe for smaller screens) */
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* base table */
+.c-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  min-width: 980px; /* keep structure like screenshot */
+  font-size: 14px;
+}
+
+/* header */
+.c-table thead th {
+  text-align: left;
+  font-weight: 700;
+  color: #334155;
+  background: #f8fafc;
+  padding: 14px 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* rows */
+.c-table tbody td {
+  padding: 16px 16px;
+  vertical-align: middle;
+  border-bottom: 1px solid #eef2f7;
+  color: #0f172a;
+}
+
+/* subtle hover */
+.c-table tbody tr:hover td {
+  background: #fafafa;
+}
+
+/* Employee ID block */
+.emp-id {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.emp-main {
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: 0.2px;
+}
+
+.emp-sub {
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* Certifications list */
+.cert-list {
+  margin: 0;
+  padding-left: 16px; /* bullets indent */
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cert-list li {
+  color: #334155;
+  line-height: 1.4;
+}
+
+/* empty certifications */
+.muted-italic {
+  color: #94a3b8;
+  font-style: italic;
+}
+
+/* status pills */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 13px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+/* Approved */
+.status-pill.approved {
+  background: #dcfce7;
+  color: #166534;
+  border-color: #86efac;
+}
+
+/* Pending */
+.status-pill.pending {
+  background: #dbeafe;
+  color: #1d4ed8;
+  border-color: #93c5fd;
+}
+
+/* Rejected */
+.status-pill.rejected {
+  background: #fee2e2;
+  color: #b91c1c;
+  border-color: #fca5a5;
+}
+
+/* Rejection remark */
+.reject-text {
+  color: #b91c1c;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.dash {
+  color: #94a3b8;
+}
+
+/* Responsive polish */
+@media (max-width: 900px) {
+  .c-table {
+    min-width: 900px;
+  }
+}
+
+/* Certifications: show 2 by default, expand on click */
+.cert-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cert-more-btn {
+  align-self: flex-start;
+  background: transparent;
+  border: 1px solid #cbd5e1;
+  color: #1d4ed8;
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cert-more-btn:hover {
+  background: #eff6ff;
+  border-color: #93c5fd;
+}
+
+
+/* ===== Make table typography lighter / cleaner ===== */
+
+.table-card-header h3 {
+  font-weight: 600;     /* was 700 */
+}
+
+.c-table thead th {
+  font-weight: 600;     /* was 700 */
+  color: #475569;       /* softer than #334155 */
+}
+
+.c-table tbody td {
+  color: #1f2937;       /* softer than #0f172a */
+}
+
+/* Employee id block */
+.emp-main {
+  font-weight: 600;     /* was 800 */
+  letter-spacing: 0;    /* remove extra heaviness */
+}
+
+.emp-sub {
+  font-weight: 400;
+}
+
+/* Status pills */
+.status-pill {
+  font-weight: 600;     /* was 700 */
+  font-size: 12.5px;    /* slightly smaller */
+}
+
+/* Certifications list */
+.cert-list li {
+  font-weight: 400;
+  color: #475569;
+}
+
+/* "+ more" button */
+.cert-more-btn {
+  font-weight: 600;     /* was 700 */
+  font-size: 12px;
+}
+
+
+/* keep table headers in a single row (no wrap) */
+.c-table thead th {
+  white-space: nowrap;     /* ✅ prevents "Working Since" splitting */
+}
+
+/* optional: keep the table from shrinking too much */
+.c-table {
+  table-layout: auto;
+}

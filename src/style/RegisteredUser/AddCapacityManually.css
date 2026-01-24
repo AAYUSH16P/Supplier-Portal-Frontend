@@ -1,3 +1,39 @@
+/* ✅ INFO + WARNING cards: keep icon and text in one line */
+.info-card,
+.warning-card,
+.title-card {
+  display: flex;
+  align-items: flex-start; /* top align so text starts right after icon */
+  gap: 12px;               /* control space between icon + text */
+}
+.form-field label .req {
+  color: #ef4444;
+  margin-left: 4px;
+  font-weight: 700;
+}
+
+/* ✅ Icon should not float/shift */
+.info-icon,
+.warning-icon,
+.title-icon {
+  flex: 0 0 36px;          /* fixed width */
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;         /* tiny tweak, optional */
+}
+
+/* ✅ Remove default p/h3 margins that push text down */
+.info-card p,
+.warning-card p {
+  margin: 0;
+}
+
+.info-card h3 {
+  margin: 0 0 6px 0;
+}
 
 
 .add-capacity-page {
@@ -476,4 +512,7 @@
     margin-top: 4px;
     display: block;
   }
+  
+
+
   

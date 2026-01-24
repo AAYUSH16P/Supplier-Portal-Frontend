@@ -635,6 +635,10 @@
   margin-bottom: 14px;
 }
 
+.clarification-box ul{
+  gap:0px;
+}
+
 /* Inner Box */
 .clarification-box {
   background: #ffffff;
@@ -645,10 +649,8 @@
 
 /* Grid */
 .clarification-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  
   gap: 16px;
-  margin: 14px 0 16px;
 }
 
 .clarification-item {
@@ -763,4 +765,192 @@
 
 .phase-list li::marker {
   color: #64748b;
+}
+
+
+
+
+
+
+
+.eco-head{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.eco-head h4{
+  margin: 0;           /* remove default margin */
+}
+
+.eco-icon{
+  margin-bottom: 0;    /* because heading is now beside it */
+}
+
+
+/* remove the boxed look and spacing */
+.clarification-list{
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 10px;   /* less spacing */
+  display: flex;
+  flex-direction: column;
+  gap: 6px;             /* tight spacing between lines */
+}
+
+.clarification-list li{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;           /* no inner box padding */
+  margin: 0;
+  border: 0;            /* no border */
+  background: transparent; /* no background */
+  line-height: 1.35;    /* tighter line spacing */
+}
+
+
+
+.alert-box ul,
+.info-box ul{
+  list-style: none;      /* removes bullet */
+  padding-left: 0;       /* removes left indent */
+  margin: 8px 0 0;
+}
+
+.alert-box li,
+.info-box li{
+  margin-bottom: 6px;
+}
+
+
+
+/* ===== Phase card like screenshot ===== */
+.phase-card{
+  background: #eef5ff;              /* light blue fill */
+  border: 2px solid #cbd5ff;        /* soft blue border */
+  border-radius: 16px;
+  padding: 18px 18px 16px;
+}
+
+.phase-row{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.phase-pill{
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
+.phase-pill.current{
+  background: #16a34a;
+  color: #fff;
+}
+
+.phase-pill.planned{
+  background: #334155;
+  color: #fff;
+}
+
+.phase-title{
+  font-size: 22px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.planned-title{
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.phase-text{
+  margin: 12px 0 0;
+  color: #475569;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.phase-divider{
+  height: 2px;
+  background: rgba(15, 23, 42, 0.18);
+  border-radius: 2px;
+  margin-top: 16px;
+}
+
+/* checklist with circle check icon */
+.phase-checks{
+  list-style: none;
+  padding: 0;
+  margin: 14px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.phase-checks li{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+  color: #334155;
+  font-weight: 600;
+}
+
+.phase-checks li::before{
+  content: "✓";
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 2px solid #2563eb;
+  color: #2563eb;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+
+/* match existing page typography */
+.phase-title{
+  font-size: 16px;     /* was 22px */
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.planned-title{
+  font-size: 15px;     /* was 20px */
+  font-weight: 800;
+}
+
+.phase-text{
+  font-size: 13.5px;   /* match your page p size */
+  line-height: 1.6;
+  margin: 10px 0 0;
+}
+
+.phase-pill{
+  font-size: 12px;     /* slightly smaller pill like screenshot */
+  padding: 6px 14px;   /* reduce height */
+}
+
+/* checklist text */
+.phase-checks li{
+  font-size: 13.5px;   /* match page */
+  font-weight: 600;
+}
+
+/* checklist icon size */
+.phase-checks li::before{
+  width: 22px;
+  height: 22px;
+  font-size: 12px;
 }

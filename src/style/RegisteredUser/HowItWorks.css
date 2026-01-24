@@ -813,3 +813,33 @@ label.active .radio-dot {
 .blue-ab{
   color:blue
 }
+
+
+
+/* Step 1: remove dropdown behavior + chevron */
+.accordion-row.no-toggle .chevron {
+  display: none;
+}
+
+.accordion-row.no-toggle .accordion-header.no-click {
+  cursor: default;
+}
+
+/* Make description inline nice */
+.inline-desc {
+  font-weight: 500;
+  color: #334155;
+}
+
+
+.context-right-title{
+  margin: 0 0 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.context-right .context-list{
+  margin: 0;
+  padding: 0;
+}

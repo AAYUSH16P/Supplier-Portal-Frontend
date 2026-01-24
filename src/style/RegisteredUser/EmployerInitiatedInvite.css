@@ -600,3 +600,194 @@
     font-weight: 600;
   }
   
+
+
+/* Title row: put sentence in front (same line) */
+.hiw-title-inline{
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap; /* responsive */
+}
+
+.hiw-title-sub{
+  font-size: 14px;
+  font-weight: 400;
+  color: #334155;
+  line-height: 1.6;
+}
+
+  
+
+/* Step 2: allow extra content to span full width under the grid */
+.hiw-row-content-step2{
+  align-items: start;
+}
+
+/* Make bullets + note span across all columns */
+.hiw-step2-extra{
+  grid-column: 1 / -1;
+  margin-top: 14px;
+}
+
+/* better spacing (optional) */
+.hiw-step2-extra .hiw-note{
+  margin: 10px 0 0;
+}
+
+
+/* remove the boxed look */
+.clarification-item,
+.clarification-note {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* bullet list with tight spacing */
+.clarifications-list{
+  margin: 0;
+  padding-left: 18px;     /* bullet indent */
+}
+
+.clarifications-list li{
+  margin: 4px 0;          /* tight line spacing */
+  font-size: 14px;
+  color: #334155;
+  line-height: 1.4;
+}
+
+/* note line below bullets (tight) */
+.clarifications-note{
+  margin: 8px 0 0;
+  font-size: 14px;
+  color: #334155;
+  line-height: 1.5;
+}
+
+
+/* INFO CARD: make content start after icon (top aligned) */
+.info-card{
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;   /* ✅ key: top align icon + content */
+}
+
+/* keep icon fixed, so text never goes under it */
+.info-card .info-icon{
+  flex: 0 0 36px;
+  margin-top: 2px;           /* optional: fine-tune vertical align */
+}
+
+/* make the right side take full width */
+.info-card > div{
+  flex: 1;
+  min-width: 0;
+}
+
+
+
+/* reference-style info cards (like screenshot) */
+.info-card-ref{
+  align-items: flex-start;
+  gap: 22px;
+  padding: 28px;
+  border-radius: 16px;
+}
+
+.info-card-ref .info-icon{
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  margin-top: 2px;
+}
+
+.info-body{
+  flex: 1;
+  min-width: 0;
+}
+
+.info-topline{
+  width: 120px;
+  height: 4px;
+  border-radius: 999px;
+  margin: 2px 0 14px;
+}
+
+/* purple line */
+.info-topline.purple{
+  background: #9333ea;
+}
+
+.info-heading{
+  margin: 0 0 12px 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.info-text{
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.8;
+  color: #334155;
+}
+
+
+/* ✅ Fix only for reference cards */
+.info-card.info-card-ref {
+  display: grid;
+  grid-template-columns: 40px 1fr; 
+  column-gap: 12px;  
+  align-items: start;
+  padding: 28px;
+}
+
+/* icon size + keep it top aligned */
+.info-card.info-card-ref .info-icon {
+  width: 34px;                      /* was 44px */
+  height: 34px;
+  margin-top: 2px; 
+}
+
+.info-card.info-card-ref{ grid-template-columns: 34px 1fr; column-gap: 10px; }
+
+
+
+
+/* remove the line in info cards */
+.info-topline,
+.info-bar {
+  display: none !important;
+}
+
+
+/* right content area */
+.info-card.info-card-ref .info-body {
+  min-width: 0;
+}
+
+/* purple line on top */
+.info-card.info-card-ref .info-topline {
+  width: 130px;
+  height: 4px;
+  border-radius: 999px;
+  margin: 4px 0 14px;
+}
+
+/* title + text like screenshot */
+.info-card.info-card-ref .info-heading {
+  margin: 0 0 12px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.info-card.info-card-ref .info-text {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.8;
+  color: #334155;
+}

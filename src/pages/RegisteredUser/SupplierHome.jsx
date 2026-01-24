@@ -177,14 +177,12 @@ export default function SupplierHome() {
                 /* ✅ SLA SIGNED */
                 <div className="status-success">
                   <div className="success-header">
-                    <span className="success-icon">✔</span>
+                    <span className="success-icon" style={{marginTop:'12px'}}>✔</span>
                     <h5>SLA Signed</h5>
                   </div>
 
                   <p>
-                    We have received your signed SLA (Service Level Agreement).
-                    Candidates approved from your list are now ready for the UK Market
-                    and can be considered for demand-led opportunities.
+                  We have received your signed SLA (Service Level Agreement). Candidates approved from your list are now ready for the UK Market and can be considered for demand-led opportunities.
                   </p>
                 </div>
 

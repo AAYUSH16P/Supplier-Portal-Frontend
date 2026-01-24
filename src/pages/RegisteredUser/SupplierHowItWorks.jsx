@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import AppHeader from "../../Components/RegisteredUser/AppHeader";
 import AppSidebar from "../../Components/RegisteredUser/AppSidebar";
 import "../../style/RegisteredUser/HowItWorks.css";
-import AppFooter from "../../Components/common/AppFooter"; 
+import AppFooter from "../../Components/common/AppFooter";
 
 
 export default function SupplierHowItWorks() {
@@ -170,15 +170,19 @@ export default function SupplierHowItWorks() {
             <div className="context-body">
               <div className="context-text">
                 <p>
-                Access to this phase reflects readiness status only and does not represent a guarantee of engagement.                </p>
-                <p>Any opportunities introduced are:</p>
+                  Access to this phase reflects readiness status only and does not represent a guarantee of engagement.
+                </p>
               </div>
 
-              <ul className="context-list">
-                <li>Driven by confirmed client demand</li>
-                <li>Introduced progressively</li>
-                <li>Aligned based on preparedness, suitability, and defined governance criteria</li>
-              </ul>
+              <div className="context-right">
+                <p className="context-right-title">Any opportunities introduced are:</p>
+
+                <ul className="context-list">
+                  <li>Driven by confirmed client demand</li>
+                  <li>Introduced progressively</li>
+                  <li>Aligned based on preparedness, suitability, and defined governance criteria</li>
+                </ul>
+              </div>
             </div>
           </section>
 
@@ -210,38 +214,54 @@ export default function SupplierHowItWorks() {
 
             {/* ACCORDIONS */}
             <div className="journey-accordion">
-              {JOURNEY_STEPS.map(step => (
-                <JourneyAccordion
-                  key={step.value}
-                  step={step.value}
-                  title={step.accordionTitle}
-                  color={step.color}
-                  current={step.current}
-                  isOpen={openStep === step.value}
-                  onToggle={() =>
-                    setOpenStep(openStep === step.value ? null : step.value)
-                  }
-                >
-                  <p>{step.description}</p>
+              {JOURNEY_STEPS.map((step) => {
 
-                  {/* ✅ SLA SIGNED SUCCESS */}
-                  {step.status && (
-                    <div className="sla-success-box">
-                      <strong>Status:</strong> Your SLA has been signed and your
-                      capacity is now active and ready for consideration in future
-                      opportunities.
-                    </div>
-                  )}
+                // ✅ STEP 1 = NO DROPDOWN (always open + no chevron)
+                if (step.value === 1) {
+                  return (
+                    <div key={step.value} className="accordion-row no-toggle">
+                      <div className="accordion-header no-click">
+                        <span className={`step-badge ${step.color}`}>{step.value}</span>
 
-                  {/* ❌ SLA NOT SIGNED WARNING */}
-                  {step.warning && (
-                    <div className="warning-box">
-                      <strong>Important:</strong> {step.warning}
+                        <strong>
+                          {step.accordionTitle} :{" "}
+                          <span className="inline-desc">{step.description}</span>
+                        </strong>
+                      </div>
                     </div>
-                  )}
-                </JourneyAccordion>
-              ))}
+                  );
+                }
+
+                // ✅ OTHER STEPS = NORMAL DROPDOWN
+                return (
+                  <JourneyAccordion
+                    key={step.value}
+                    step={step.value}
+                    title={step.accordionTitle}
+                    color={step.color}
+                    current={step.current}
+                    isOpen={openStep === step.value}
+                    onToggle={() => setOpenStep(openStep === step.value ? null : step.value)}
+                  >
+                    <p>{step.description}</p>
+
+                    {step.status && (
+                      <div className="sla-success-box">
+                        <strong>Status:</strong> Your SLA has been signed and your capacity is
+                        now active and ready for consideration in future opportunities.
+                      </div>
+                    )}
+
+                    {step.warning && (
+                      <div className="warning-box">
+                        <strong>Important:</strong> {step.warning}
+                      </div>
+                    )}
+                  </JourneyAccordion>
+                );
+              })}
             </div>
+
 
             {/* CTA */}
             <div className="journey-cta">
@@ -257,7 +277,7 @@ export default function SupplierHowItWorks() {
           </section>
         </main>
       </div>
-      <AppFooter/>
+      <AppFooter />
     </>
   );
 }

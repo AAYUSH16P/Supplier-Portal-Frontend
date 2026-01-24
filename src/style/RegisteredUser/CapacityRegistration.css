@@ -443,3 +443,25 @@
   color: #0f172a;
   border: 1px solid #cbd5e1;
 }
+
+
+
+.obligation-card{
+  position: relative;
+  padding-left: 42px;       /* space for bullet */
+  display: block;           /* no need flex now */
+}
+
+/* bullet point */
+.obligation-card::before{
+  content: "•";             /* you can change to "—" or "›" */
+  position: absolute;
+  left: 18px;
+  top: 22px;                /* aligns with h3 */
+  font-size: 22px;
+  line-height: 1;
+  color: #d97706;           /* same orange tone */
+}
+
+
+

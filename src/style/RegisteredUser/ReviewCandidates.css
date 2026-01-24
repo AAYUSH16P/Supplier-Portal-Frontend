@@ -557,3 +557,178 @@
 .cv-footer button {
   cursor: pointer;
 }
+
+
+/* ✅ VIEW POPUP: make all sections top-to-bottom (single column) */
+.cv-modal .cv-grid{
+  grid-template-columns: 1fr;  /* was repeat(2, 1fr) */
+}
+
+/* optional: make spacing feel smoother */
+.cv-modal .cv-grid{
+  gap: 12px;
+}
+
+/* optional: if any value becomes long, prevent overflow */
+.cv-grid-item{
+  min-width: 0;
+}
+.cv-value{
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+
+
+
+/* =========================
+   TABLE CARD (same as Candidates)
+========================= */
+
+.table-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+}
+
+.table-card-header {
+  padding: 18px 20px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.table-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 650;
+  color: #0f172a;
+}
+
+/* scroll container */
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* table */
+.c-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  min-width: 820px;
+  font-size: 14px;
+}
+
+/* header */
+.c-table thead th {
+  text-align: left;
+  font-weight: 600;         /* ✅ reduce boldness */
+  color: #475569;
+  background: #f8fafc;
+  padding: 14px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;      /* ✅ keep headers on one line */
+}
+
+/* rows */
+.c-table tbody td {
+  padding: 16px 16px;
+  vertical-align: middle;
+  border-bottom: 1px solid #eef2f7;
+  color: #0f172a;
+}
+
+.c-table tbody tr:hover td {
+  background: #fafafa;
+}
+
+/* Employee ID block */
+.emp-id {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.emp-main {
+  font-weight: 600; /* ✅ less bold */
+  color: #0f172a;
+}
+
+.emp-sub {
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* small pills */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 13px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.status-pill.pending {
+  background: #dbeafe;
+  color: #1d4ed8;
+  border-color: #93c5fd;
+}
+
+/* actions */
+.action-stack {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-pill {
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  color: #0f172a;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.12s ease, background 0.12s ease;
+}
+
+.btn-pill:hover {
+  background: #f8fafc;
+  transform: translateY(-1px);
+}
+
+.btn-approve {
+  background: #dcfce7;
+  border-color: #86efac;
+  color: #166534;
+}
+
+.btn-reject {
+  background: #fee2e2;
+  border-color: #fca5a5;
+  color: #b91c1c;
+}
+
+.btn-edit {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+  color: #1d4ed8;
+}
+
+.btn-view {
+  background: #f8fafc;
+  border-color: #e5e7eb;
+  color: #334155;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .c-table {
+    min-width: 760px;
+  }
+}

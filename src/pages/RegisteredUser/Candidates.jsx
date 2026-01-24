@@ -10,6 +10,34 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 
+function CertCell({ certs }) {
+  const [expanded, setExpanded] = useState(false);
+
+  const visible = expanded ? certs : certs.slice(0, 2);
+  const hasMore = certs.length > 2;
+
+  return (
+    <div className="cert-cell">
+      <ul className="cert-list">
+        {visible.map((x, idx) => (
+          <li key={idx}>{x}</li>
+        ))}
+      </ul>
+
+      {hasMore && (
+        <button
+          type="button"
+          className="cert-more-btn"
+          onClick={() => setExpanded((v) => !v)}
+        >
+          {expanded ? "Show less" : `+${certs.length - 2} more`}
+        </button>
+      )}
+    </div>
+  );
+}
+
+
 const normalizeCertifications = (certifications, technicalSkills) => {
   if (Array.isArray(certifications) && certifications.length > 0) {
     return certifications
@@ -309,108 +337,113 @@ export default function Candidates() {
 
           {/* ================= CANDIDATE LIST ================= */}
           {hasCandidates && (
-            <>
-         <div className="action-bar full-width">
-  <div className="upload-cta spread">
-    <span className="upload-cta-text">Upload a new candidate</span>
+  <>
+    <div className="action-bar full-width">
+      <div className="upload-cta spread">
+        <span className="upload-cta-text">Upload a new candidate</span>
 
-    <button
-      className="upload-btn"
-      onClick={() => navigate("/capacityRegistration")}
-    >
-      <span className="upload-btn-icon">⬆</span>
-      Upload More Candidates
-    </button>
-  </div>
-</div>
+        <button
+          className="upload-btn"
+          onClick={() => navigate("/capacityRegistration")}
+        >
+          <span className="upload-btn-icon">⬆</span>
+          Upload More Candidates
+        </button>
+      </div>
+    </div>
 
+    {/* ✅ TABLE CARD UI (paste here) */}
+    <div className="table-card">
+      <div className="table-card-header">
+        <h3>
+          {activeFilter === "all"
+            ? "All Candidates"
+            : activeFilter.charAt(0).toUpperCase() + activeFilter.slice(1)}{" "}
+          ({filteredCapacities.length})
+        </h3>
+      </div>
 
+      <div className="table-scroll">
+        <table className="c-table">
+          <thead>
+            <tr>
+              <th>Employee ID</th>
+              <th>Role</th>
+              <th>Working Since</th>
+              <th>Experience</th>
+              <th>Certifications</th>
+              <th>Status</th>
+              <th>Rejection Remark</th>
+            </tr>
+          </thead>
 
+          <tbody>
+            {filteredCapacities.map((c) => {
+              const remark = c.status === 2 ? getRejectionRemark(c.id) : null;
 
-              <div className="list-card">
-                <h3>
-                  {activeFilter === "all"
-                    ? "All Candidates"
-                    : activeFilter.charAt(0).toUpperCase() +
-                    activeFilter.slice(1)}{" "}
-                  ({filteredCapacities.length})
-                </h3>
+              const certs =
+                Array.isArray(c.certifications) && c.certifications.length > 0
+                  ? c.certifications
+                      .map((x) =>
+                        typeof x === "string" ? x : x?.certificationName
+                      )
+                      .filter(Boolean)
+                  : [];
 
-                {filteredCapacities.map((c) => (
-                  <div className="candidate-row" key={c.id}>
-                    <div>
-                      <strong>{c.companyEmployeeId}</strong>
-                      <span className="code">{c.jobTitle}</span>
-
-                      <p>Location: {c.location || "-"}</p>
-                      <p>Experience: {c.totalExperience} years</p>
-
-                      {c.status === 1 && (
-                        <span className="badge approved">✔ Approved</span>
-                      )}
-                      {c.status === 0 && (
-                        <span className="badge pending">
-                          ⏳ Pending Approval
-                        </span>
-                      )}
-                      {c.status === 2 && (
-                        <span className="badge rejected">✖ Rejected</span>
-                      )}
-
-                      {c.status === 1 && (
-                        <span
-                          className={`badge ${c.isRefered ? "employee" : "company"}`}
-                        >
-                          {c.isRefered ? "👤 Added by Employee" : "🏢 Added by Company"}
-                        </span>
-                      )}
-
-
-
-
-
-
-
-
-                      {c.employerNote && (
-                        <div className="system-note">
-                          Note: {c.employerNote}
-                        </div>
-                      )}
-                      {c.status === 2 && getRejectionRemark(c.id) && (
-                        <div className="system-note rejected-note">
-                          <strong>Rejection Remark:</strong> {getRejectionRemark(c.id)}
-                        </div>
-                      )}
-
-
+              return (
+                <tr key={c.id}>
+                  <td>
+                    <div className="emp-id">
+                      <div className="emp-main">{c.id || "-"}</div>
+                      <div className="emp-sub">({c.companyEmployeeId || "—"})</div>
                     </div>
+                  </td>
 
-                    <div>
-                      <p>
-                        <strong>I Can Be:</strong> {c.role}
-                      </p>
-                      <p>
-                        <strong>Certifications:</strong>{" "}
-                        {Array.isArray(c.certifications) && c.certifications.length > 0
-                          ? c.certifications
-                            .map(cert =>
-                              typeof cert === "string"
-                                ? cert
-                                : cert?.certificationName
-                            )
-                            .filter(Boolean)
-                            .join(", ")
-                          : "—"}
-                      </p>
+                  <td>{c.role || "—"}</td>
+
+                  {/* if you don't have workingSince, keep "—" */}
+                  <td>{c.workingSince || "—"}</td>
+
+                  <td>{c.totalExperience ? `${c.totalExperience} years` : "—"}</td>
+
+                  <td>
+  {certs.length > 0 ? (
+    <CertCell certs={certs} />
+  ) : (
+    <span className="muted-italic">No certifications</span>
+  )}
+</td>
 
 
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </>
-          )}
+                  <td>
+                    {c.status === 1 && (
+                      <span className="status-pill approved">Approved</span>
+                    )}
+                    {c.status === 0 && (
+                      <span className="status-pill pending">Pending</span>
+                    )}
+                    {c.status === 2 && (
+                      <span className="status-pill rejected">Rejected</span>
+                    )}
+                  </td>
+
+                  <td>
+                    {c.status === 2 ? (
+                      <span className="reject-text">{remark || "—"}</span>
+                    ) : (
+                      <span className="dash">-</span>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </>
+)}
+
 
 
 

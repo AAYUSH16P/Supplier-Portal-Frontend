@@ -5,7 +5,6 @@ import LandingPage from "./pages/LandingPage/LandingPage";
 import AboutTalentedStaff from "./pages/LandingPage/AboutTalentedStaff";
 import OperatingModel from "./pages/LandingPage/OperatingModel";
 import HowItWorks from "./pages/LandingPage/HowItWorks";
-import FAQ from "./pages/LandingPage/Faq";
 import Registration from "./pages/LandingPage/Resgistration";
 import SupplierRegistration from "./pages/LandingPage/SupplierRegistration";
 import SupplierLogin from "./pages/RegisteredUser/SupplierLogin";
@@ -49,7 +48,6 @@ function App() {
         <Route path="/about" element={<AboutTalentedStaff />} />
         <Route path="/operating" element={<OperatingModel />} />
         <Route path="/how-it-work" element={<HowItWorks />} />
-        <Route path="/faq" element={<FAQ />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/supplier-registration" element={<SupplierRegistration />} />
         <Route path="/login" element={<SupplierLogin />} />

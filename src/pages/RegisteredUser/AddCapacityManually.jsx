@@ -1,4 +1,5 @@
 import "../../style/RegisteredUser/AddCapacityManually.css";
+import InfoTooltip from "../../Components/InfoTooltip";
 import AppHeader from "../../Components/RegisteredUser/AppHeader";
 import AppSidebar from "../../Components/RegisteredUser/AppSidebar";
 import { useState, useEffect } from "react";
@@ -8,8 +9,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { jwtDecode } from "jwt-decode";
 import { submitManualCapacity } from "../../services/supplier";
-import AppFooter from "../../Components/common/AppFooter";
-
+import AppFooter from "../../Components/common/AppFooter";  
 
 
 export default function AddCapacityManually() {
@@ -38,6 +38,30 @@ export default function AddCapacityManually() {
     });
 
     const [errors, setErrors] = useState({});
+
+    const requiredFields = new Set([
+        "employeeId",
+        "workingSince",
+        "ctc",
+        "jobTitle",
+        "role",
+        "gender",
+        "location",
+        "experience",
+        "skills",
+        "tools",
+        "projects",
+      ]);
+      
+      const Label = ({ name, children }) => (
+        <label>
+          {children}
+          {requiredFields.has(name) && (
+            <InfoTooltip field={name} trigger="*" />
+          )}
+        </label>
+      );
+      
 
 
     useEffect(() => {
@@ -405,53 +429,55 @@ export default function AddCapacityManually() {
                             </div>
 
                             <div className="form-grid">
-                                <div className="form-field">
-                                    <label>Company Employee ID <span>*</span></label>
-                                    <input
-                                        name="employeeId"
-                                        value={form.employeeId}
-                                        placeholder="EMP001"
-                                        onChange={handleChange}
-                                    />
-                                    {errors.employeeId && <small>{errors.employeeId}</small>}
-                                </div>
+                            <div className="form-field">
+  <Label name="employeeId">Company Employee ID</Label>
+  <input
+    name="employeeId"
+    value={form.employeeId}
+    placeholder="EMP001"
+    onChange={handleChange}
+  />
+  {errors.employeeId && <small>{errors.employeeId}</small>}
+</div>
 
-                                <div className="form-field">
-                                    <label>Working Since <span>*</span></label>
-                                    <input
-                                        name="workingSince"
-                                        type="date"
-                                        value={form.workingSince}
-                                        onChange={handleChange}
-                                        max={new Date().toISOString().split("T")[0]} 
-                                    />
-                                    {errors.workingSince && <small>{errors.workingSince}</small>}
-                                </div>
 
-                                <div className="form-field">
-                                    <label>CTC (₹) <span>*</span></label>
-                                    <input
-                                        name="ctc"
-                                        type="number"
-                                        min="0"
-                                        step="0.01"
-                                        value={form.ctc}
-                                        placeholder="800000"
-                                        onChange={handleChange}
-                                    />
-                                    {errors.ctc && <small>{errors.ctc}</small>}
-                                </div>
+<div className="form-field">
+  <Label name="workingSince">Working Since</Label>
+  <input
+    name="workingSince"
+    type="date"
+    value={form.workingSince}
+    onChange={handleChange}
+    max={new Date().toISOString().split("T")[0]}
+  />
+  {errors.workingSince && <small>{errors.workingSince}</small>}
+</div>
 
-                                <div className="form-field">
-                                    <label>Job Title <span>*</span></label>
-                                    <input
-                                        name="jobTitle"
-                                        value={form.jobTitle}
-                                        placeholder="Senior Software Engineer"
-                                        onChange={handleChange}
-                                    />
-                                    {errors.jobTitle && <small>{errors.jobTitle}</small>}
-                                </div>
+                                
+<div className="form-field">
+  <Label name="ctc">CTC (₹)</Label>
+  <input
+    name="ctc"
+    type="number"
+    min="0"
+    step="0.01"
+    value={form.ctc}
+    placeholder="800000"
+    onChange={handleChange}
+  />
+  {errors.ctc && <small>{errors.ctc}</small>}
+</div>
+
+<div className="form-field">
+  <Label name="jobTitle">Job Title</Label>
+  <input
+    name="jobTitle"
+    value={form.jobTitle}
+    placeholder="Senior Software Engineer"
+    onChange={handleChange}
+  />
+  {errors.jobTitle && <small>{errors.jobTitle}</small>}
+</div>
                             </div>
                         </div>
 
@@ -463,88 +489,89 @@ export default function AddCapacityManually() {
                             </div>
 
                             <div className="form-grid">
-                                <div className="form-field">
-                                    <label>I Can Be <span>*</span></label>
-                                    <input
-                                        name="role"
-                                        value={form.role}
-                                        placeholder="Full Stack Developer"
-                                        onChange={handleChange}
-                                    />
-                                    {errors.role && <small>{errors.role}</small>}
-                                </div>
+                            <div className="form-field">
+  <Label name="role">I Can Be</Label>
+  <input
+    name="role"
+    value={form.role}
+    placeholder="Full Stack Developer"
+    onChange={handleChange}
+  />
+  {errors.role && <small>{errors.role}</small>}
+</div>
 
-                                <div className="form-field">
-                                    <label>Gender *</label>
-                                    <select name="gender" value={form.gender} onChange={handleChange}>
-                                        <option value="">Select Gender</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                    </select>
-                                    {errors.gender && <small>{errors.gender}</small>}
-                                </div>
+<div className="form-field">
+  <Label name="gender">Gender</Label>
+  <select name="gender" value={form.gender} onChange={handleChange}>
+    <option value="">Select Gender</option>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+  </select>
+  {errors.gender && <small>{errors.gender}</small>}
+</div>
 
-                                <div className="form-field">
-                                    <label>Location <span>*</span></label>
-                                    <input
-                                        name="location"
-                                        value={form.location}
-                                        placeholder="Bangalore, India"
-                                        onChange={handleChange}
-                                    />
-                                    {errors.location && <small>{errors.location}</small>}
-                                </div>
+<div className="form-field">
+  <Label name="location">Location</Label>
+  <input
+    name="location"
+    value={form.location}
+    placeholder="Bangalore, India"
+    onChange={handleChange}
+  />
+  {errors.location && <small>{errors.location}</small>}
+</div>
 
-                                <div className="form-field">
-                                    <label>Total Years of Experience <span>*</span></label>
-                                    <input
-                                        name="experience"
-                                        type="number"
-                                        min="0"
-                                        step="0.1"
-                                        value={form.experience}
-                                        placeholder="5.5"
-                                        onChange={handleChange}
-                                    />
-                                    {errors.experience && <small>{errors.experience}</small>}
-                                </div>
+<div className="form-field">
+  <Label name="experience">Total Years of Experience</Label>
+  <input
+    name="experience"
+    type="number"
+    min="0"
+    step="0.1"
+    value={form.experience}
+    placeholder="5.5"
+    onChange={handleChange}
+  />
+  {errors.experience && <small>{errors.experience}</small>}
+</div>
 
-                                <div className="form-field full">
-                                    <label>Technical Skills <span>*</span></label>
-                                    <input
-                                        name="skills"
-                                        value={form.skills}
-                                        placeholder="React, Node.js, TypeScript, MongoDB, AWS"
-                                        onChange={handleChange}
-                                    />
-                                    {errors.skills && <small>{errors.skills}</small>}
-                                </div>
+<div className="form-field full">
+  <Label name="skills">Technical Skills</Label>
+  <input
+    name="skills"
+    value={form.skills}
+    placeholder="React, Node.js, TypeScript, MongoDB, AWS"
+    onChange={handleChange}
+  />
+  {errors.skills && <small>{errors.skills}</small>}
+</div>
 
 
-                                <div className="form-field">
-                                    <label>Tools <span>*</span></label>
-                                    <input
-                                        name="tools"
-                                        value={form.tools}
-                                        placeholder="VS Code, Git, Docker, Jira"
-                                        onChange={handleChange}
-                                    />
-                                    {errors.tools && <small>{errors.tools}</small>}
-                                </div>
+<div className="form-field">
+  <Label name="tools">Tools</Label>
+  <input
+    name="tools"
+    value={form.tools}
+    placeholder="VS Code, Git, Docker, Jira"
+    onChange={handleChange}
+  />
+  {errors.tools && <small>{errors.tools}</small>}
+</div>
 
-                                <div className="form-field">
-                                    <label>Number of Projects <span>*</span></label>
-                                    <input
-                                        name="projects"
-                                        type="number"
-                                        min="0"
-                                        step="1"
-                                        value={form.projects}
-                                        placeholder="12"
-                                        onChange={handleChange}
-                                    />
-                                    {errors.projects && <small>{errors.projects}</small>}
-                                </div>
+                                
+<div className="form-field">
+  <Label name="projects">Number of Projects</Label>
+  <input
+    name="projects"
+    type="number"
+    min="0"
+    step="1"
+    value={form.projects}
+    placeholder="12"
+    onChange={handleChange}
+  />
+  {errors.projects && <small>{errors.projects}</small>}
+</div>
                             </div>
                         </div>
 

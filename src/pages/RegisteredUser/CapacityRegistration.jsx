@@ -78,18 +78,7 @@ export default function CapacityRegistration() {
           </section>
 
           {/* CARD 3 */}
-          <section className="capacity-card">
-            <h2>Minimum Readiness Expectations</h2>
-            <p>
-              To maintain quality, continuity, and governance, all capacity
-              declared at this stage is expected to meet basic readiness
-              principles.
-            </p>
-
-            <p>
-              In general, this means:
-            </p>
-          </section>
+          
 
 
 
@@ -246,8 +235,7 @@ export default function CapacityRegistration() {
                 <span className="option-tag">◆ Option 3</span>
                 <h3 className="purple-text">Employer-Initiated Candidate Invite</h3>
                 <p className="subtitle">
-                  Invite employees to confirm non-personal skill and availability details via a secure link.
-                </p>
+                Invite employees to confirm non-personal skill and availability details via a secure link.                </p>
                 <p className="note">No login. No CVs. Employer-controlled.</p>
 
                 <button className="primary-btn purple-btn" onClick={() => navigate("/employerInitiatedInvite")}>
@@ -256,8 +244,8 @@ export default function CapacityRegistration() {
 
                 <div className="steps">
                   <p><strong>Step 1:</strong> Generate a unique invitation link for your employees</p>
-                  <p><strong>Step 2:</strong> Share the link with employees to self-register their details</p>
-                  <p className="success-text"><strong>Step 3:</strong> Review and approve employee-submitted data</p>
+                  <p><strong>Step 2:</strong> Share the link with employees to key-in their details, for you to approve</p>
+                  <p className="success-text"><strong>Step 3:</strong> Admin reviews and approves the capacity</p>
                 </div>
               </div>
             </div>
@@ -278,7 +266,6 @@ export default function CapacityRegistration() {
             {/* OBLIGATION GRID */}
             <div className="obligation-grid">
               <div className="obligation-card">
-                <div className="check-icon">✓</div>
                 <div>
                   <h3>Accurate & Realistic Capacity</h3>
                   <p>Declared capacity is accurate, realistic, and consented</p>
@@ -286,7 +273,6 @@ export default function CapacityRegistration() {
               </div>
 
               <div className="obligation-card">
-                <div className="check-icon">✓</div>
                 <div>
                   <h3>Genuine Working Relationships</h3>
                   <p>Entries represent genuine, maintainable working relationships</p>
@@ -294,7 +280,6 @@ export default function CapacityRegistration() {
               </div>
 
               <div className="obligation-card">
-                <div className="check-icon">✓</div>
                 <div>
                   <h3>Data Privacy Protection</h3>
                   <p>No restricted, personal, or sensitive data is uploaded</p>
@@ -302,7 +287,6 @@ export default function CapacityRegistration() {
               </div>
 
               <div className="obligation-card">
-                <div className="check-icon">✓</div>
                 <div>
                   <h3>Coordinated Engagement</h3>
                   <p>

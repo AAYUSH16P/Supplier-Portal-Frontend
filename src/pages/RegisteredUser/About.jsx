@@ -1,7 +1,7 @@
 import AppHeader from "../../Components/RegisteredUser/AppHeader";
 import AppSidebar from "../../Components/RegisteredUser/AppSidebar";
 import "../../style/RegisteredUser/About.css";
-import AppFooter from "../../Components/common/AppFooter"; 
+import AppFooter from "../../Components/common/AppFooter";
 
 
 export default function About() {
@@ -28,21 +28,21 @@ export default function About() {
               </div>
 
 
-              
+
 
               <div className="card-body">
-              <p>
-  TalentedStaff.com is a{" "}
-  <strong>UK-focused talent and capacity engagement ecosystem</strong> designed to
-  work with <strong>prepared, governed technology capacity</strong> through a{" "}
-  <strong>demand-led model</strong>.
-</p>
+                <p>
+                  TalentedStaff.com is a{" "}
+                  <strong>UK-focused talent and capacity engagement ecosystem</strong> designed to
+                  work with <strong>prepared, governed technology capacity</strong> through a{" "}
+                  <strong>demand-led model</strong>.
+                </p>
 
-<p>
-  It is built on <strong>pre-alignment</strong>, ensuring suppliers and capacity are
-  prepared <strong>before engagement</strong>, rather than sourced{" "}
-  <strong>reactively</strong>.
-</p>
+                <p>
+                  It is built on <strong>pre-alignment</strong>, ensuring suppliers and capacity are
+                  prepared <strong>before engagement</strong>, rather than sourced{" "}
+                  <strong>reactively</strong>.
+                </p>
 
 
                 <div className="info-box blue">
@@ -105,8 +105,10 @@ export default function About() {
             <div className="ecosystem-grid">
               {/* Card 1 */}
               <div className="ecosystem-card blue">
-                <div className="eco-icon blue">🏢</div>
-                <h4>ITRF (Global) Ltd (UK)</h4>
+                <div className="eco-head">
+                  <div className="eco-icon blue">🏢</div>
+                  <h4>ITRF (Global) Ltd (UK)</h4>
+                </div>
                 <p>
                   Owner and governance authority of the TalentedStaff.com ecosystem,
                   defining the overarching framework and operating model.
@@ -115,8 +117,10 @@ export default function About() {
 
               {/* Card 2 */}
               <div className="ecosystem-card green">
-                <div className="eco-icon green">🛡</div>
-                <h4>Spectrum IT Hub Ltd (UK)</h4>
+                <div className="eco-head">
+                  <div className="eco-icon green">🛡</div>
+                  <h4>Spectrum IT Hub Ltd (UK)</h4>
+                </div>
                 <p>
                   Authorised UK partner, responsible for UK-side governance, commercial
                   alignment, and client-side engagement within the ecosystem.
@@ -125,8 +129,10 @@ export default function About() {
 
               {/* Card 3 */}
               <div className="ecosystem-card purple">
-                <div className="eco-icon purple">👥</div>
-                <h4>Westgate India</h4>
+                <div className="eco-head">
+                  <div className="eco-icon purple">👥</div>
+                  <h4>Westgate India</h4>
+                </div>
                 <p>
                   Authorised delivery partner (India), responsible for supplier
                   onboarding, readiness coordination, and operational alignment.
@@ -172,11 +178,11 @@ export default function About() {
                     Complete structured onboarding
                   </li>
                   <li>                    <span className="check">✔</span>
-                  Prepare indicative capacity information</li>
+                    Prepare indicative capacity information</li>
                   <li>                    <span className="check">✔</span>
-                  Align with governance principles</li>
+                    Align with governance principles</li>
                   <li>                    <span className="check">✔</span>
-                  Be positioned for future demand-led opportunities</li>
+                    Be positioned for future demand-led opportunities</li>
                 </ul>
               </div>
 
@@ -200,34 +206,37 @@ export default function About() {
                 TalentedStaff.com is introduced progressively by version.
               </p>
 
-              {/* CURRENT PHASE */}
-              <div className="phase-box green">
-                <div className="phase-header">
-                  <span className="phase-badge current">Current Phase</span>
-                  <strong>V0.1A</strong>
-                </div>
+              {/* PHASED ACCESS BOX (like image) */}
+<div className="phase-card">
+  {/* CURRENT */}
+  <div className="phase-row">
+    <span className="phase-pill current">Current Phase</span>
+    <span className="phase-title">V0.1A</span>
+  </div>
 
-                <p>
-                  Focuses on supplier onboarding, readiness, and alignment through
-                  controlled access.
-                </p>
-              </div>
+  <p className="phase-text">
+    Focuses on supplier onboarding, readiness, and alignment through controlled access.
+  </p>
 
-              {/* PLANNED PHASE */}
-              <div className="phase-box gray">
-                <div className="phase-header">
-                  <span className="phase-badge planned">Planned</span>
-                  <strong>Later phases (V0.3, 2026+)</strong>
-                </div>
+  <div className="phase-divider" />
 
-                <p>Enhanced capabilities such as:</p>
-                <ul className="phase-list">
-                  <li>Dynamic reporting</li>
-                  <li>Industry-level insights</li>
-                  <li>Trend-based intelligence</li>
-                </ul>
+  {/* PLANNED */}
+  <div className="phase-row" style={{ marginTop: 14 }}>
+    <span className="phase-pill planned">Planned</span>
+    <span className="phase-title planned-title">Later phases (V0.3, 2026+)</span>
+  </div>
 
-              </div>
+  <p className="phase-text" style={{ marginTop: 10 }}>
+    Enhanced capabilities such as:
+  </p>
+
+  <ul className="phase-checks">
+    <li>Dynamic reporting</li>
+    <li>Industry-level insights</li>
+    <li>Trend-based intelligence</li>
+  </ul>
+</div>
+
 
               <div className="phase-footer">
                 This phased approach ensures quality, stability, and responsible
@@ -255,22 +264,11 @@ export default function About() {
             <div className="clarification-box">
               <strong>It does not:</strong>
 
-              <div className="clarification-grid">
-                <div className="clarification-item">
-                  <span className="x-icon">×</span>
-                  Represent an offer of engagement
-                </div>
-
-                <div className="clarification-item">
-                  <span className="x-icon">×</span>
-                  Guarantee opportunities or volume
-                </div>
-
-                <div className="clarification-item">
-                  <span className="x-icon">×</span>
-                  Replace formal agreements or SLAs
-                </div>
-              </div>
+              <ul className="clarification-list">
+  <li><span className="x-icon"></span> Represent an offer of engagement</li>
+  <li><span className="x-icon"></span> Guarantee opportunities or volume</li>
+  <li><span className="x-icon"></span> Replace formal agreements or SLAs</li>
+</ul>
 
               <div className="clarification-footer">
                 All commercial terms, governance requirements, roles,
@@ -282,7 +280,7 @@ export default function About() {
 
 
 
-       
+
 
 
         </main>
@@ -293,7 +291,7 @@ export default function About() {
 
 
       </div>
-      <AppFooter/>
+      <AppFooter />
 
     </>
   );

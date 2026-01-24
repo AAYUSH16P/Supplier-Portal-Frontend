@@ -223,84 +223,79 @@ export default function ReviewCandidates() {
 
           {/* ================= TABLE ================= */}
           {hasPending && (
-            <div className="table-card">
-              <h3 className="table-title">
-                Pending Review ({pendingCandidates.length})
-              </h3>
+  <div className="table-card">
+    <div className="table-card-header">
+      <h3 className="table-title">
+        Pending Review ({pendingCandidates.length})
+      </h3>
+    </div>
 
-              <table>
-                <thead>
-                  <tr>
-                    <th>Employee ID</th>
-                    <th>Role</th>
-                  
-                    <th>Experience</th>
-                    <th>Location</th>
-                    <th>Working Since</th>
-                    <th>Submitted By</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
+    <div className="table-scroll">
+      <table className="c-table">
+        <thead>
+          <tr>
+            <th>Employee ID</th>
+            <th>Role</th>
+            <th>Submitted By</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
 
-                <tbody>
-                  {pendingCandidates.map((c) => (
-                    <tr key={c.id}>
-                      <td>
-                        <div className="candidate-ref">
-                          <span>{c.companyEmployeeId}</span>
-                        </div>
-                      </td>
-                      <td>{c.jobTitle || "-"}</td>
-                    
-                      <td>{c.totalExperience ?? "-"} yrs</td>
-                      <td>{c.location || "-"}</td>
-                      <td>{c.workingSince || "-"}</td>
+        <tbody>
+          {pendingCandidates.map((c) => (
+            <tr key={c.id}>
+              <td>
+                <div className="emp-id">
+                  <div className="emp-main">{c.id || "-"}</div>
+                  <div className="emp-sub">({c.companyEmployeeId || "—"})</div>
+                </div>
+              </td>
 
-                      <td>
-                        <span className="pill">Employee</span>
-                      </td>
+              <td>{c.role || c.jobTitle || "-"}</td>
 
-                      <td className="actions">
-                        <button
-                          className="approve"
-                          onClick={() => handleApprove(c)}
-                        >
-                          ✔ Approve
-                        </button>
+              <td>
+                <span className="status-pill pending">Employee</span>
+              </td>
 
-                        <button
-                          className="reject"
-                          onClick={() => {
-                            setSelectedCandidate(c);
-                            setShowRejectModal(true);
-                          }}
-                        >
-                          ✖ Reject
-                        </button>
+              <td>
+                <div className="action-stack">
+                  <button className="btn-pill btn-approve" onClick={() => handleApprove(c)}>
+                    ✔ Approve
+                  </button>
 
-                        <button
-                          className="edit"
-                          onClick={() => handleEditOpen(c)}
-                        >
-                          ✎ Edit
-                        </button>
+                  <button
+                    className="btn-pill btn-reject"
+                    onClick={() => {
+                      setSelectedCandidate(c);
+                      setShowRejectModal(true);
+                    }}
+                  >
+                    ✖ Reject
+                  </button>
 
-                        <button
-                          className="view"
-                          onClick={() => {
-                            setSelectedCandidate(c);
-                            setShowModal(true);
-                          }}
-                        >
-                          👁 View
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
+                  <button className="btn-pill btn-edit" onClick={() => handleEditOpen(c)}>
+                    ✎ Edit
+                  </button>
+
+                  <button
+                    className="btn-pill btn-view"
+                    onClick={() => {
+                      setSelectedCandidate(c);
+                      setShowModal(true);
+                    }}
+                  >
+                    👁 View
+                  </button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+)}
+
         </main>
       </div>
 

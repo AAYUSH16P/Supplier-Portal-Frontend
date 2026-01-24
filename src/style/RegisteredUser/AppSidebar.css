@@ -3,6 +3,12 @@
   background: #ffffff;
   padding: 16px;
   border-right: 1px solid #e5e7eb;
+
+  position: sticky;
+  top: 0;              /* sticks at top while scrolling */
+  height: 100vh;       /* full height */
+  overflow-y: auto;    /* scroll menu if it’s long */
+  align-self: flex-start; 
 }
 
 .nav-warning {
