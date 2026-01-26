@@ -1,0 +1,868 @@
+// AddSupplier.jsx
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
+import AppHeader from "../../Components/RegisteredUser/AppHeader";
+import InfoTooltip from "../../Components/InfoTooltip";
+
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import "../../style/RegisteredUser/AddEmployee.css"; // ✅ take reference/template styling
+import "../../style/LandingPage/SupplierRegistration.css"; // ✅ your supplier form styling
+
+import { registerCompany } from "../../services/company";
+import { mapCompanyPayload } from "../../utils/companyMapper";
+
+export default function AddSupplier() {
+  const navigate = useNavigate();
+
+  // ===== Supplier Registration States =====
+  const [certifications, setCertifications] = useState([""]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [countryList, setCountryList] = useState([]);
+
+  const [formData, setFormData] = useState({
+    companyName: "",
+    companyWebsite: "",
+    businessType: "",
+    companySize: "",
+    yearEstablished: "",
+    addressLine1: "",
+    addressLine2: "",
+    city: "",
+    state: "",
+    postalCode: "",
+    country: "India",
+    primaryContactName: "",
+    primaryContactRole: "",
+    primaryContactEmail: "",
+    primaryContactNumber: "",
+    secondaryContactName: "",
+    secondaryContactRole: "",
+    secondaryContactEmail: "",
+    secondaryContactPhone: "",
+    companyOverview: "",
+    domainExpertise: "",
+    totalProjectsExecuted: "",
+  });
+
+  // ===== Load countries =====
+  useEffect(() => {
+    const loadCountries = async () => {
+      try {
+        const res = await fetch("https://restcountries.com/v3.1/all?fields=name");
+        const data = await res.json();
+
+        const countryNames = data
+          .map((c) => c.name.common)
+          .sort((a, b) => a.localeCompare(b));
+
+        setFormData((prev) => ({
+          ...prev,
+          country: "India",
+        }));
+
+        setCountryList(countryNames);
+      } catch (err) {
+        console.error("Failed to load countries:", err);
+      }
+    };
+
+    loadCountries();
+  }, []);
+
+  // ===== Validate single field =====
+  const validateField = (name, value) => {
+    let error = "";
+
+    switch (name) {
+      case "companyName":
+        if (!value.trim()) error = "Company Name is required";
+        break;
+
+      case "companyWebsite":
+        if (!value.trim()) error = "Company Website is required";
+        break;
+
+      case "businessType":
+        if (!value || value === "Select business type..." || value === "") {
+          error = "Business Type is required";
+        }
+        break;
+
+      case "companySize":
+        if (!value || value === "Select size..." || value === "") {
+          error = "Company Size is required";
+        }
+        break;
+
+      case "yearEstablished":
+        if (!value.trim()) error = "Year Established is required";
+        else if (!/^\d{4}$/.test(value)) error = "Please enter a valid year (YYYY)";
+        break;
+
+      case "addressLine1":
+        if (!value.trim()) error = "Address Line 1 is required";
+        break;
+
+      case "city":
+        if (!value.trim()) error = "City is required";
+        break;
+
+      case "state":
+        if (!value.trim()) error = "State is required";
+        break;
+
+      case "postalCode":
+        if (!value.trim()) error = "Postal Code is required";
+        break;
+
+      case "country":
+        if (!value || value === "Select country..." || value === "") {
+          error = "Country is required";
+        }
+        break;
+
+      case "primaryContactName":
+        if (!value.trim()) error = "Primary Contact Name is required";
+        break;
+
+      case "primaryContactRole":
+        if (!value.trim()) error = "Primary Contact Role is required";
+        break;
+
+      case "primaryContactEmail":
+        if (!value.trim()) error = "Primary Contact Email is required";
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          error = "Please enter a valid email address";
+        }
+        break;
+
+      case "primaryContactNumber":
+        if (!value.trim()) {
+          error = "Primary Contact Number is required";
+        } else {
+          const cleanedValue = value.replace(/\s+/g, "");
+          const phoneRegex = /^(\+\d{1,3})?\d{10}$/;
+          if (!phoneRegex.test(cleanedValue)) {
+            error = "Please enter a valid phone number with or without country code";
+          }
+        }
+        break;
+
+      case "secondaryContactPhone":
+        if (value.trim()) {
+          const cleanedValue = value.replace(/\s+/g, "");
+          const phoneRegex = /^(\+\d{1,3})?\d{10}$/;
+          if (!phoneRegex.test(cleanedValue)) {
+            error = "Please enter a valid phone number with or without country code";
+          }
+        }
+        break;
+
+      case "companyOverview":
+        if (!value.trim()) error = "Company Overview is required";
+        else if (value.trim().length < 2) error = "Company Overview must be at least 2 characters";
+        break;
+
+      default:
+        break;
+    }
+
+    return error;
+  };
+
+  // ===== Handlers =====
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    if (errors[name] || value.trim() !== "") {
+      const err = validateField(name, value);
+      setErrors((prev) => ({
+        ...prev,
+        [name]: err,
+      }));
+    }
+  };
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    const err = validateField(name, value);
+    setErrors((prev) => ({
+      ...prev,
+      [name]: err,
+    }));
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    const requiredKeys = [
+      "companyName",
+      "companyWebsite",
+      "businessType",
+      "companySize",
+      "yearEstablished",
+      "addressLine1",
+      "city",
+      "state",
+      "postalCode",
+      "country",
+      "primaryContactName",
+      "primaryContactRole",
+      "primaryContactEmail",
+      "primaryContactNumber",
+      "companyOverview",
+    ];
+
+    requiredKeys.forEach((k) => {
+      const err = validateField(k, formData[k] || "");
+      if (err) newErrors[k] = err;
+    });
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const isFormValid = () => {
+    return (
+      formData.companyName.trim() &&
+      formData.companyWebsite.trim() &&
+      formData.businessType &&
+      formData.companySize &&
+      /^\d{4}$/.test(formData.yearEstablished) &&
+      formData.addressLine1.trim() &&
+      formData.city.trim() &&
+      formData.state.trim() &&
+      formData.postalCode.trim() &&
+      formData.country &&
+      formData.primaryContactName.trim() &&
+      formData.primaryContactRole.trim() &&
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.primaryContactEmail) &&
+      formData.primaryContactNumber.trim() &&
+      formData.companyOverview.trim().length >= 2
+    );
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      toast.error("Please fix all validation errors before submitting");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const nestedPayload = {
+        companyName: formData.companyName.trim(),
+        companyWebsite: formData.companyWebsite.trim(),
+        businessType: formData.businessType,
+        companySize: formData.companySize,
+        yearEstablished: parseInt(formData.yearEstablished, 10),
+        companyOverview: formData.companyOverview.trim(),
+        domainExpertise: formData.domainExpertise.trim(),
+        projectExecuted:
+          formData.totalProjectsExecuted !== ""
+            ? Number(formData.totalProjectsExecuted)
+            : 0,
+
+        address: {
+          addressLine1: formData.addressLine1.trim(),
+          addressLine2: formData.addressLine2.trim(),
+          city: formData.city.trim(),
+          state: formData.state.trim(),
+          postalCode: formData.postalCode.trim(),
+          country: formData.country,
+        },
+
+        primaryContact: {
+          name: formData.primaryContactName.trim(),
+          role: formData.primaryContactRole.trim(),
+          email: formData.primaryContactEmail.trim(),
+          phone: formData.primaryContactNumber.trim(),
+        },
+
+        secondaryContact: {
+          name: formData.secondaryContactName.trim(),
+          role: formData.secondaryContactRole.trim(),
+          email: formData.secondaryContactEmail.trim(),
+          phone: formData.secondaryContactPhone.trim(),
+        },
+
+        certifications: certifications.filter((c) => c && c.trim() !== ""),
+      };
+
+      const flatPayload = mapCompanyPayload(nestedPayload);
+
+      const response = await registerCompany(flatPayload);
+
+      if (response?.data) {
+        toast.success("Registration submitted successfully! We will review your application.", {
+          position: "top-right",
+          autoClose: 3000,
+        });
+        navigate("/supplierApprovals"); // ✅ change to your preferred page
+      }
+    } catch (error) {
+      let message = "Failed to submit registration. Please try again.";
+
+      if (error.response?.data) {
+        if (typeof error.response.data === "string") message = error.response.data;
+        else if (error.response.data.message) message = error.response.data.message;
+        else if (Array.isArray(error.response.data.errors)) message = error.response.data.errors.join(", ");
+      }
+
+      toast.error(message, {
+        position: "top-right",
+        autoClose: 5000,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const addCertification = () => setCertifications([...certifications, ""]);
+  const removeCertification = (index) => {
+    const updated = certifications.filter((_, i) => i !== index);
+    setCertifications(updated.length > 0 ? updated : [""]);
+  };
+  const updateCertification = (index, value) => {
+    const updated = [...certifications];
+    updated[index] = value;
+    setCertifications(updated);
+  };
+
+  return (
+    <>
+      <AppHeader />
+
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar
+        newestOnTop
+        closeOnClick
+        pauseOnHover={false}
+      />
+
+      <div className="admin-page">
+        {/* ✅ reference from AddEmployee (banner + tabs) */}
+        <div className="approval-banner">🏢 Add Supplier</div>
+
+        <div className="approval-tabs">
+          <button className="tab" onClick={() => navigate("/supplierApprovals")}>
+            Supplier Approvals
+          </button>
+
+          <button className="tab" onClick={() => navigate("/candidate-validation")}>
+            Candidate Validation
+          </button>
+
+          <button className="tab" onClick={() => navigate("/request-for-change")}>
+            Request for Change
+          </button>
+
+          <button className="tab active" onClick={() => navigate("/add-supplier")}>
+            Add Supplier
+          </button>
+
+          <button className="tab" onClick={() => navigate("/add-employee")}>
+            Add Employee
+          </button>
+        </div>
+
+        <h2 className="page-title">Supplier Registration</h2>
+        <p className="page-subtitle">
+          Complete the supplier registration form below to add a new supplier.
+        </p>
+
+        {/* ✅ Supplier Registration Content */}
+        <section className="reg-info-card" style={{ marginTop: 12 }}>
+          <h4>ℹ️ Welcome to Westgate IT Hub Supplier Registration</h4>
+          <p>
+            Complete this registration form to become a registered supplier with Westgate IT Hub.
+            We connect IT suppliers with UK opportunities for resource augmentation and project staffing.
+          </p>
+          <p>
+            Once approved, you'll be able to upload candidate profiles and manage your resource pool through our portal.
+          </p>
+        </section>
+
+        <section className="reg-form-card">
+          <form onSubmit={handleSubmit}>
+            <h3>🏢 Company Information</h3>
+
+            <div className="form-grid">
+              <div className="form-group">
+                <label className="required-label">
+                  Company Name <span className="required-asterisk">*</span>
+                  <InfoTooltip field="companyName" />
+                </label>
+                <input
+                  name="companyName"
+                  value={formData.companyName}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder="TechCorp Solutions Pvt Ltd"
+                  className={errors.companyName ? "error" : ""}
+                />
+                {errors.companyName && <span className="error-message">{errors.companyName}</span>}
+              </div>
+
+              <div className="form-group">
+                <label className="required-label">
+                  Company Website <span className="required-asterisk">*</span>
+                  <InfoTooltip field="companyWebsite" />
+                </label>
+                <input
+                  name="companyWebsite"
+                  type="url"
+                  value={formData.companyWebsite}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder="www.company.com"
+                  className={errors.companyWebsite ? "error" : ""}
+                />
+                {errors.companyWebsite && (
+                  <span className="error-message">{errors.companyWebsite}</span>
+                )}
+              </div>
+
+              <div className="form-group">
+                <label className="required-label">
+                  Business Type <span className="required-asterisk">*</span>
+                  <InfoTooltip field="businessType" />
+                </label>
+                <select
+                  name="businessType"
+                  value={formData.businessType}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={errors.businessType ? "error" : ""}
+                >
+                  <option value="">Select business type...</option>
+                  <option value="Private Limited">Private Limited</option>
+                  <option value="Public Limited">Public Limited</option>
+                  <option value="Partnership">Partnership</option>
+                  <option value="LLP">LLP (Limited Liability Partnership)</option>
+                  <option value="Sole Proprietorship">Sole Proprietorship</option>
+                  <option value="Other">Other</option>
+                </select>
+                {errors.businessType && <span className="error-message">{errors.businessType}</span>}
+              </div>
+
+              <div className="form-group">
+                <label className="required-label">
+                  Company Size <span className="required-asterisk">*</span>
+                  <InfoTooltip field="companySize" />
+                </label>
+                <select
+                  name="companySize"
+                  value={formData.companySize}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={errors.companySize ? "error" : ""}
+                >
+                  <option value="">Select size...</option>
+                  <option value="1-10">1-10 employees</option>
+                  <option value="11-50">11-50 employees</option>
+                  <option value="51-200">51-200 employees</option>
+                  <option value="201-500">201-500 employees</option>
+                  <option value="501-1000">501-1000 employees</option>
+                  <option value="1000+">1000+ employees</option>
+                </select>
+                {errors.companySize && <span className="error-message">{errors.companySize}</span>}
+              </div>
+
+              <div className="form-group">
+                <label className="required-label">
+                  Year Established <span className="required-asterisk">*</span>
+                  <InfoTooltip field="yearEstablished" />
+                </label>
+                <input
+                  name="yearEstablished"
+                  type="number"
+                  min="1900"
+                  max={new Date().getFullYear()}
+                  value={formData.yearEstablished}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder="2010"
+                  className={errors.yearEstablished ? "error" : ""}
+                />
+                {errors.yearEstablished && (
+                  <span className="error-message">{errors.yearEstablished}</span>
+                )}
+              </div>
+            </div>
+
+            <h4 className="form-section-title">📍 Company Address</h4>
+
+            <div className="form-grid">
+              <div className="form-group">
+                <label className="required-label">
+                  Address Line 1 <span className="required-asterisk">*</span>
+                  <InfoTooltip field="addressLine1" />
+                </label>
+                <input
+                  name="addressLine1"
+                  value={formData.addressLine1}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder="Building / Street name"
+                  className={errors.addressLine1 ? "error" : ""}
+                />
+                {errors.addressLine1 && (
+                  <span className="error-message">{errors.addressLine1}</span>
+                )}
+              </div>
+
+              <div className="form-group">
+                <label>
+                  Address Line 2 <InfoTooltip field="addressLine2" />
+                </label>
+                <input
+                  name="addressLine2"
+                  value={formData.addressLine2}
+                  onChange={handleChange}
+                  placeholder="Suite / Floor (optional)"
+                />
+              </div>
+
+              <div className="form-group">
+                <label className="required-label">
+                  City <span className="required-asterisk">*</span>
+                  <InfoTooltip field="city" />
+                </label>
+                <input
+                  name="city"
+                  value={formData.city}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder="Bangalore"
+                  className={errors.city ? "error" : ""}
+                />
+                {errors.city && <span className="error-message">{errors.city}</span>}
+              </div>
+
+              <div className="form-group">
+                <label className="required-label">
+                  State <span className="required-asterisk">*</span>
+                  <InfoTooltip field="state" />
+                </label>
+                <input
+                  name="state"
+                  value={formData.state}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder="Karnataka"
+                  className={errors.state ? "error" : ""}
+                />
+                {errors.state && <span className="error-message">{errors.state}</span>}
+              </div>
+
+              <div className="form-group">
+                <label className="required-label">
+                  Postal Code <span className="required-asterisk">*</span>
+                  <InfoTooltip field="postalCode" />
+                </label>
+                <input
+                  name="postalCode"
+                  value={formData.postalCode}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder="560001"
+                  className={errors.postalCode ? "error" : ""}
+                />
+                {errors.postalCode && (
+                  <span className="error-message">{errors.postalCode}</span>
+                )}
+              </div>
+
+              <div className="form-group">
+                <label className="required-label">
+                  Country <span className="required-asterisk">*</span>
+                  <InfoTooltip field="country" />
+                </label>
+                <select
+                  name="country"
+                  value={formData.country}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={errors.country ? "error" : ""}
+                >
+                  <option value="">Select country...</option>
+                  {countryList.map((c) => (
+                    <option key={c} value={c}>
+                      {c}
+                    </option>
+                  ))}
+                </select>
+                {errors.country && <span className="error-message">{errors.country}</span>}
+              </div>
+            </div>
+
+            <h4 className="form-section-title">👤 Personal Information</h4>
+
+            <div className="form-grid">
+              <div className="form-group">
+                <label className="required-label">
+                  Primary Contact Name <span className="required-asterisk">*</span>
+                  <InfoTooltip field="primaryContactName" />
+                </label>
+                <input
+                  name="primaryContactName"
+                  value={formData.primaryContactName}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder="Jane Smith"
+                  className={errors.primaryContactName ? "error" : ""}
+                />
+                {errors.primaryContactName && (
+                  <span className="error-message">{errors.primaryContactName}</span>
+                )}
+              </div>
+
+              <div className="form-group">
+                <label className="required-label">
+                  Primary Contact Role / Designation <span className="required-asterisk">*</span>
+                  <InfoTooltip field="primaryContactRole" />
+                </label>
+                <input
+                  name="primaryContactRole"
+                  value={formData.primaryContactRole}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder="Operations Manager"
+                  className={errors.primaryContactRole ? "error" : ""}
+                />
+                {errors.primaryContactRole && (
+                  <span className="error-message">{errors.primaryContactRole}</span>
+                )}
+              </div>
+
+              <div className="form-group">
+                <label className="required-label">
+                  Primary Contact Email <span className="required-asterisk">*</span>
+                  <InfoTooltip field="primaryContactEmail" />
+                </label>
+                <input
+                  name="primaryContactEmail"
+                  type="email"
+                  value={formData.primaryContactEmail}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder="contact@company.com"
+                  className={errors.primaryContactEmail ? "error" : ""}
+                />
+                {errors.primaryContactEmail && (
+                  <span className="error-message">{errors.primaryContactEmail}</span>
+                )}
+              </div>
+
+              <div className="form-group">
+                <label className="required-label">
+                  Primary Contact Number <span className="required-asterisk">*</span>
+                  <InfoTooltip field="primaryContactNumber" />
+                </label>
+                <input
+                  name="primaryContactNumber"
+                  type="tel"
+                  value={formData.primaryContactNumber}
+                  onChange={handleChange}
+                  placeholder="+91 98765 43210"
+                  className={errors.primaryContactNumber ? "error" : ""}
+                />
+                {errors.primaryContactNumber && (
+                  <span className="error-message">{errors.primaryContactNumber}</span>
+                )}
+              </div>
+            </div>
+
+            <div className="form-grid">
+              <div className="form-group">
+                <label>
+                  Secondary Contact Name <InfoTooltip field="secondaryContactName" />
+                </label>
+                <input
+                  name="secondaryContactName"
+                  value={formData.secondaryContactName}
+                  onChange={handleChange}
+                  placeholder="John Doe"
+                />
+              </div>
+
+              <div className="form-group">
+                <label>
+                  Secondary Contact Role / Designation <InfoTooltip field="secondaryContactRole" />
+                </label>
+                <input
+                  name="secondaryContactRole"
+                  value={formData.secondaryContactRole}
+                  onChange={handleChange}
+                  placeholder="Business Development Manager"
+                />
+              </div>
+
+              <div className="form-group">
+                <label>
+                  Secondary Contact Email <InfoTooltip field="secondaryContactEmail" />
+                </label>
+                <input
+                  name="secondaryContactEmail"
+                  type="email"
+                  value={formData.secondaryContactEmail}
+                  onChange={handleChange}
+                  placeholder="john.doe@company.com"
+                />
+              </div>
+
+              <div className="form-group">
+                <label>
+                  Secondary Contact Phone <InfoTooltip field="secondaryContactPhone" />
+                </label>
+                <input
+                  name="secondaryContactPhone"
+                  type="tel"
+                  value={formData.secondaryContactPhone}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder="+91 98765 43210"
+                  className={errors.secondaryContactPhone ? "error" : ""}
+                />
+                {errors.secondaryContactPhone && (
+                  <span className="error-message">{errors.secondaryContactPhone}</span>
+                )}
+              </div>
+
+              <div className="form-group">
+                <label>
+                  Domain Expertise <InfoTooltip field="domainExpertise" />
+                </label>
+                <input
+                  name="domainExpertise"
+                  value={formData.domainExpertise}
+                  onChange={handleChange}
+                  placeholder="e.g. Cloud, AI, FinTech, Healthcare"
+                />
+              </div>
+
+              <div className="form-group">
+                <label>
+                  Total Projects Executed <InfoTooltip field="totalProjectsExecuted" />
+                </label>
+                <input
+                  name="totalProjectsExecuted"
+                  type="number"
+                  min="0"
+                  value={formData.totalProjectsExecuted}
+                  onChange={handleChange}
+                  placeholder="e.g. 25"
+                />
+              </div>
+            </div>
+
+            <div className="additional-section">
+              <h4 className="form-section-title">🧾 Additional Information</h4>
+
+              <div className="form-grid">
+                <div className="form-group">
+                  <label className="required-label">
+                    Company Overview <span className="required-asterisk">*</span>
+                    <InfoTooltip field="companyOverview" />
+                  </label>
+
+                  <textarea
+                    name="companyOverview"
+                    value={formData.companyOverview}
+                    onChange={handleChange}
+                    className={`textarea ${errors.companyOverview ? "error" : ""}`}
+                    placeholder="Describe the company's services, areas of expertise, and what makes you a valuable supplier partner..."
+                    rows="5"
+                  />
+
+                  {errors.companyOverview && (
+                    <span className="error-message">{errors.companyOverview}</span>
+                  )}
+
+                  {formData.companyOverview && (
+                    <small className="char-count">
+                      {formData.companyOverview.length} characters
+                      {formData.companyOverview.length < 2 && " (minimum 2 required)"}
+                    </small>
+                  )}
+                </div>
+
+                <div className="form-group">
+                  <label>
+                    Certifications <InfoTooltip field="certifications" />
+                  </label>
+
+                  {certifications.map((cert, index) => (
+                    <div className="certification-row" key={index}>
+                      <input
+                        type="text"
+                        value={cert}
+                        placeholder="e.g., ISO 9001:2015"
+                        onChange={(e) => updateCertification(index, e.target.value)}
+                      />
+
+                      {index === certifications.length - 1 && (
+                        <button
+                          type="button"
+                          className="cert-add-btn"
+                          onClick={addCertification}
+                        >
+                          Add
+                        </button>
+                      )}
+
+                      {certifications.length > 1 && (
+                        <button
+                          type="button"
+                          className="cert-remove-btn"
+                          onClick={() => removeCertification(index)}
+                          title="Remove certification"
+                        >
+                          ×
+                        </button>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="form-actions">
+              <button
+                type="button"
+                className="btn-outline"
+                onClick={() => navigate("/supplierApprovals")}
+                disabled={isSubmitting}
+              >
+                Cancel
+              </button>
+
+              <button
+                type="submit"
+                className="btn-primary"
+                disabled={!isFormValid() || isSubmitting}
+              >
+                {isSubmitting ? "Submitting..." : "Submit Registration"}
+              </button>
+            </div>
+          </form>
+        </section>
+      </div>
+    </>
+  );
+}
