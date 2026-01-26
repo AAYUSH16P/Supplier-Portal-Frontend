@@ -136,6 +136,20 @@ const [confirmMessage, setConfirmMessage] = useState("");
           >
             Request for Change
           </button>
+
+          <button
+              className="tab"
+              onClick={() => navigate("/add-supplier")}
+            >
+              Add Supplier
+            </button>
+
+          <button
+              className="tab"
+              onClick={() => navigate("/add-employee")}
+            >
+              Add Employee
+            </button>
         </div>
 
         <h2 className="page-title">Supplier Approvals</h2>

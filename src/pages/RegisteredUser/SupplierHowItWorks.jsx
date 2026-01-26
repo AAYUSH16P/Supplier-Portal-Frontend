@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import AppHeader from "../../Components/RegisteredUser/AppHeader";
 import AppSidebar from "../../Components/RegisteredUser/AppSidebar";
 import "../../style/RegisteredUser/HowItWorks.css";
@@ -9,7 +9,6 @@ export default function SupplierHowItWorks() {
   // Step 2 open by default
 
 
-  const [openStep, setOpenStep] = useState(2);
 
   // ✅ Read SLA status from token
   const isSlaSigned = useMemo(() => {
@@ -213,54 +212,24 @@ export default function SupplierHowItWorks() {
             </div>
 
             {/* ACCORDIONS */}
-            <div className="journey-accordion">
-              {JOURNEY_STEPS.map((step) => {
+         {/* ACCORDIONS (ALL STEPS LIKE STEP 1) */}
+<div className="journey-accordion">
+  {JOURNEY_STEPS.map((step) => (
+    <div key={step.value} className="accordion-row no-toggle">
+      <div className="accordion-header no-click">
+        <span className={`step-badge ${step.color}`}>{step.value}</span>
 
-                // ✅ STEP 1 = NO DROPDOWN (always open + no chevron)
-                if (step.value === 1) {
-                  return (
-                    <div key={step.value} className="accordion-row no-toggle">
-                      <div className="accordion-header no-click">
-                        <span className={`step-badge ${step.color}`}>{step.value}</span>
+        <strong>
+          {step.accordionTitle} :{" "}
+          <span className="inline-desc">{step.description}</span>
+        </strong>
 
-                        <strong>
-                          {step.accordionTitle} :{" "}
-                          <span className="inline-desc">{step.description}</span>
-                        </strong>
-                      </div>
-                    </div>
-                  );
-                }
+        {step.current && <span className="current-pill">CURRENT</span>}
+      </div>
+    </div>
+  ))}
+</div>
 
-                // ✅ OTHER STEPS = NORMAL DROPDOWN
-                return (
-                  <JourneyAccordion
-                    key={step.value}
-                    step={step.value}
-                    title={step.accordionTitle}
-                    color={step.color}
-                    current={step.current}
-                    isOpen={openStep === step.value}
-                    onToggle={() => setOpenStep(openStep === step.value ? null : step.value)}
-                  >
-                    <p>{step.description}</p>
-
-                    {step.status && (
-                      <div className="sla-success-box">
-                        <strong>Status:</strong> Your SLA has been signed and your capacity is
-                        now active and ready for consideration in future opportunities.
-                      </div>
-                    )}
-
-                    {step.warning && (
-                      <div className="warning-box">
-                        <strong>Important:</strong> {step.warning}
-                      </div>
-                    )}
-                  </JourneyAccordion>
-                );
-              })}
-            </div>
 
 
             {/* CTA */}
@@ -296,28 +265,6 @@ function JourneyStep({ step, title, color, icon, current }) {
   );
 }
 
-function JourneyAccordion({
-  step,
-  title,
-  color,
-  current,
-  isOpen,
-  onToggle,
-  children
-}) {
-  return (
-    <div className={`accordion-row ${current ? "current" : ""}`}>
-      <div className="accordion-header" onClick={onToggle}>
-        <span className={`step-badge ${color}`}>{step}</span>
-        <strong>{title}</strong>
-        {current && <span className="current-pill">CURRENT</span>}
-        <span className={`chevron ${isOpen ? "open" : ""}`}>⌄</span>
-      </div>
-
-      {isOpen && <div className="accordion-body">{children}</div>}
-    </div>
-  );
-}
 
 /* ================= DATA ================= */
 

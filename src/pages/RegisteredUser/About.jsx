@@ -23,9 +23,11 @@ export default function About() {
           <section className="about-grid">
             {/* LEFT CARD */}
             <div className="about-card">
-              <div className="card-header blue">
-                🌐 <span>What TalentedStaff.com Is</span>
-              </div>
+            <div className="card-header blue center-title">
+  <span className="card-logo">🌐</span>
+  <span className="card-title">What TalentedStaff.com Is</span>
+</div>
+
 
 
 
@@ -58,9 +60,11 @@ export default function About() {
 
             {/* RIGHT CARD */}
             <div className="about-card">
-              <div className="card-header green">
-                ⚡ <span>Why This Ecosystem Exists</span>
-              </div>
+            <div className="card-header green center-title">
+  <span className="card-logo">⚡</span>
+  <span className="card-title">Why This Ecosystem Exists</span>
+</div>
+
 
               <div className="card-body">
                 <div className="alert-box orange">

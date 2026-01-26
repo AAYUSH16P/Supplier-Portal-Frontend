@@ -401,6 +401,20 @@ export default function SupplierApprovals() {
             >
               Request for Change
             </button>
+
+            <button
+              className="tab"
+              onClick={() => navigate("/add-supplier")}
+            >
+              Add Supplier
+            </button>
+
+            <button
+              className="tab"
+              onClick={() => navigate("/add-employee")}
+            >
+              Add Employee
+            </button>
           </div>
 
           {/* TITLE */}

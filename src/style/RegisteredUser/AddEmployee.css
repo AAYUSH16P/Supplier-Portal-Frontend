@@ -1,0 +1,343 @@
+.admin-page {
+    padding: 24px;
+    background: #f8fafc;
+  }
+
+
+  .Toastify__toast-container {
+    z-index: 20000 !important;
+  }
+
+  .modal-card-lg {
+    width: 900px;
+    max-width: 95vw;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+/* Backdrop stays same */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;              /* space on small screens */
+    z-index: 9999;
+  }
+  
+  /* Make modal fit screen and scroll inside */
+  .modal-card.modal-card-lg {
+    width: min(980px, 96vw);
+    max-height: 88vh;           /* ✅ fit to viewport */
+    height: auto;
+    overflow: hidden;           /* ✅ prevent whole card scrolling weirdly */
+    border-radius: 16px;
+  }
+  
+  /* Keep header fixed, content scrolls */
+  .modal-header {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 2;
+  }
+  
+  /* Add a scroll container inside the modal */
+  .modal-scroll {
+    max-height: calc(88vh - 72px); /* ✅ subtract header height (adjust if needed) */
+    overflow-y: auto;              /* ✅ scrollbar */
+    padding-right: 6px;            /* space for scrollbar */
+  }
+  
+  /* Nice scrollbar (optional) */
+  .modal-scroll::-webkit-scrollbar {
+    width: 10px;
+  }
+  .modal-scroll::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 999px;
+  }
+  .modal-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+    
+  
+  .approval-banner {
+    background: linear-gradient(90deg, #0b5ed7, #5a5cff);
+    color: white;
+    padding: 18px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  
+  .approval-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  
+  .tab {
+    padding: 8px 14px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    background: white;
+    cursor: pointer;
+  }
+  
+  .tab.active {
+    background: #2563eb;
+    color: white;
+  }
+  
+  .page-title {
+    margin-top: 6px;
+  }
+  
+  .page-subtitle {
+    color: #64748b;
+    margin-bottom: 16px;
+  }
+  
+  /* Card */
+  .card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 18px;
+  }
+  
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 12px;
+  }
+  
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  
+  .field label {
+    display: block;
+    font-size: 12px;
+    color: #64748b;
+    margin-bottom: 6px;
+  }
+  
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 10px 12px;
+    outline: none;
+  }
+  
+  .field textarea {
+    resize: vertical;
+  }
+  
+  .col-span-2 {
+    grid-column: span 2;
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 6px;
+  }
+  
+  /* Buttons */
+  .btn {
+    border: 1px solid #e5e7eb;
+    background: white;
+    padding: 10px 14px;
+    border-radius: 12px;
+    cursor: pointer;
+  }
+  
+  .btn.primary {
+    background: #2563eb;
+    color: white;
+    border: none;
+  }
+  
+  .btn.ghost {
+    background: transparent;
+  }
+  
+  /* Search */
+  .filter-bar input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 16px;
+  }
+  
+  /* Table */
+  .cr-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+  }
+  
+  .cr-table th,
+  .cr-table td {
+    padding: 14px;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 14px;
+  }
+  
+  .cr-table th {
+    background: #f1f5f9;
+  }
+  
+  .company-name {
+    font-weight: 500;
+  }
+  
+  .mono {
+    font-family: monospace;
+    font-size: 13px;
+  }
+  
+  /* Actions */
+  .actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  
+  .view {
+    background: white;
+    border: 1px solid #e5e7eb;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  /* Empty state */
+  .empty-state {
+    text-align: center;
+  }
+  
+  .empty-icon {
+    font-size: 32px;
+    margin-bottom: 8px;
+  }
+  
+  /* Modal */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+  }
+  
+  .modal-card {
+    background: white;
+    width: 560px;
+    max-width: 95vw;
+    border-radius: 16px;
+    padding: 20px;
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 10px;
+  }
+  
+  .modal-header button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  .modal-section {
+    margin-top: 14px;
+  }
+  
+  .modal-section label {
+    font-size: 12px;
+    color: #64748b;
+  }
+  
+  .modal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 14px;
+  }
+  
+  .reason-box {
+    background: #f8fafc;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  .modal-footer {
+    margin-top: 18px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+
+
+  .option-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 14px;
+  }
+  
+  .option-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 16px;
+    cursor: pointer;
+    text-align: left;
+    transition: transform 0.08s ease;
+  }
+  
+  .option-card:hover {
+    transform: translateY(-2px);
+  }
+  
+  .option-title {
+    font-weight: 700;
+    font-size: 16px;
+  }
+  
+  .option-sub {
+    margin-top: 6px;
+    color: #64748b;
+    font-size: 13px;
+  }
+  
+  .supplier-select {
+    width: 100%;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 10px 12px;
+    margin-top: 8px;
+    outline: none;
+  }
+  

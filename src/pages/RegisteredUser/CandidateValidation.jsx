@@ -110,8 +110,8 @@ export default function CandidateValidation() {
             "https://sp-portal-backend-production.up.railway.app/api/supplier/capacities/eligible"
         );
 
-// eslint-disable-next-line
-    useEffect(() => {fetchCandidates();}, []);
+    // eslint-disable-next-line
+    useEffect(() => { fetchCandidates(); }, []);
 
     /* =========================
        APPROVE / REJECT
@@ -309,6 +309,20 @@ export default function CandidateValidation() {
                             onClick={() => navigate("/request-for-change")}
                         >
                             Request for Change
+                        </button>
+
+                        <button
+                            className="tab"
+                            onClick={() => navigate("/add-supplier")}
+                        >
+                            Add Supplier
+                        </button>
+
+                        <button
+                            className="tab"
+                            onClick={() => navigate("/add-employee")}
+                        >
+                            Add Employee
                         </button>
                     </div>
 
@@ -516,10 +530,10 @@ export default function CandidateValidation() {
                                             <label>Status</label>
                                             <p
                                                 className={`status ${viewMode === "PENDING"
-                                                        ? "pending"
-                                                        : adminFilter === "REJECTED"
-                                                            ? "rejected"
-                                                            : "approved"
+                                                    ? "pending"
+                                                    : adminFilter === "REJECTED"
+                                                        ? "rejected"
+                                                        : "approved"
                                                     }`}
                                             >
                                                 {viewMode === "PENDING"

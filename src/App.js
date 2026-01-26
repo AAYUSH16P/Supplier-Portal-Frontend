@@ -36,6 +36,8 @@ import PublicFAQ from "./pages/LandingPage/PublicFAQ";
 import PublicContact from "./pages/LandingPage/PublicContact";
 import PrivateContact from "./pages/LandingPage/PrivateContact";
 import PrivateFAQ from "./pages/LandingPage/PrivateFAQ";
+import AddEmployee from "./pages/Admin/AddEmployee";
+import AddSupplier from "./pages/Admin/AddSupplier";
 
 
 function App() {
@@ -75,14 +77,15 @@ function App() {
         <Route
           path="/app/contact"
           element={
-            
-              <PrivateContact />
+
+            <PrivateContact />
           }
-          />
+        />
+        <Route path="/add-supplier" element={<AddSupplier />} />
 
 
 
-        
+
 
         <Route path="/admin/login" element={<AdminLogin />} />
 
@@ -114,6 +117,16 @@ function App() {
           }
         />
 
+        <Route
+          path="/add-employee"
+          element={
+            <AdminProtectedRoute>
+              <AddEmployee />
+            </AdminProtectedRoute>
+          }
+        />
+
+
       </Routes>
 
       <ToastContainer
@@ -124,6 +137,8 @@ function App() {
         pauseOnHover
         draggable
       />
+
+
     </>
   );
 }

@@ -2,6 +2,18 @@
    LAYOUT FIX (IMPORTANT)
 ========================= */
 
+
+.accordion-row.no-toggle .accordion-header.no-click {
+  cursor: default;
+  pointer-events: none; /* disables click */
+}
+
+.accordion-row.no-toggle .chevron {
+  display: none; /* hide dropdown icon */
+}
+
+
+
 .how-layout {
   display: flex;
   min-height: calc(100vh - 72px); /* header height */
