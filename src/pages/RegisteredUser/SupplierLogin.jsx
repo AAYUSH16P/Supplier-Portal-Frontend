@@ -6,6 +6,7 @@ import { companyLogin } from "../../services/auth";
 import "../../style/RegisteredUser/SupplierLogin.css";
 import "../../style/RegisteredUser/sidebar.css";
 import { jwtDecode } from "jwt-decode";
+import { useAuth } from "../../context/AuthContext";
 
 import ChangePasswordModal from "./changePassword";
 
@@ -14,7 +15,7 @@ import ChangePasswordModal from "./changePassword";
 export default function SupplierLogin() {
   const navigate = useNavigate();
   const [decodedToken, setDecodedToken] = useState(null);
-
+  const { loginUser } = useAuth();
   const [showChangePassword, setShowChangePassword] = useState(false);
 
   const [showPassword, setShowPassword] = useState(false);
@@ -107,7 +108,7 @@ export default function SupplierLogin() {
 
       if (response.status === 200 && response.data?.token) {
         const token = response.data.token;
-        localStorage.setItem("token", token);
+        loginUser(token);
 
         if (formData.rememberMe) {
           localStorage.setItem("rememberMe", "true");
@@ -159,13 +160,11 @@ export default function SupplierLogin() {
   return (
     <div className="login-page">
       <ToastContainer />
-
-      {/* 🔐 CHANGE PASSWORD MODAL */}
       <ChangePasswordModal
         open={showChangePassword}
         onClose={() => {
           setShowChangePassword(false);
-          navigateAfterLogin(decodedToken); // allow cancel + continue
+          navigateAfterLogin(decodedToken);
         }}
       />
 
@@ -208,38 +207,39 @@ export default function SupplierLogin() {
             {errors.email && <span className="error-message">{errors.email}</span>}
 
             <label>Password</label>
-<div className={`input-box ${errors.password ? "error" : ""}`}>
-  <span>🔒</span>
+              <div className={`input-box ${errors.password ? "error" : ""}`}>
+                <span>🔒</span>
 
-  <input
-    type={showPassword ? "text" : "password"}
-    name="password"
-    value={formData.password}
-    onChange={handleChange}
-    onBlur={handleBlur}
-    placeholder="••••••"
-  />
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  placeholder="••••••"
+                />
 
-  <button
-    type="button"
-    className="eye-btn"
-    onClick={() => setShowPassword((prev) => !prev)}
-    aria-label={showPassword ? "Hide password" : "Show password"}
-  >
-    {showPassword ? "🔒" : "👁️"}
-  </button>
-</div>
+                <button
+                  type="button"
+                  className="eye-btn"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? "🔒" : "👁️"}
+                </button>
+              </div>
 
 
             <div className="forgot-row">
-  <button
-    type="button"
-    className="forgot-btn"
-    onClick={() => navigate("/forgot-password")}
-  >
-    Forgot Password?
-  </button>
-</div>
+            <button
+              type="button"
+              className="forgot-btn"
+              onClick={() => navigate("/forgot-password")}
+            >
+              Forgot Password?
+            </button>
+          </div>
+
             {errors.password && (
               <span className="error-message">{errors.password}</span>
             )}

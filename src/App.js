@@ -38,6 +38,7 @@ import PrivateContact from "./pages/LandingPage/PrivateContact";
 import PrivateFAQ from "./pages/LandingPage/PrivateFAQ";
 import AddEmployee from "./pages/Admin/AddEmployee";
 import AddSupplier from "./pages/Admin/AddSupplier";
+import SupplierProtectedRoute from "./routes/SupplierProtectedRoute";
 
 
 function App() {
@@ -53,27 +54,38 @@ function App() {
         <Route path="/registration" element={<Registration />} />
         <Route path="/supplier-registration" element={<SupplierRegistration />} />
         <Route path="/login" element={<SupplierLogin />} />
-        <Route path="/acknowledge" element={<SupplierAcknowledgement />} />
-        <Route path="/home" element={<SupplierHome />} />
-        <Route path="/about-ts" element={<About />} />
-        <Route path="/operatingModel" element={<SupplierOperatingModel />} />
-        <Route path="/howItWork" element={<SupplierHowItWorks />} />
-        <Route path="/detail" element={<MyCompanyDetails />} />
-        <Route path="/meeting" element={<BookMeeting />} />
-        <Route path="/reviewCandidate" element={<ReviewCandidates />} />
-        <Route path="/candidate" element={<Candidates />} />
-        <Route path="/capacityRegistration" element={<CapacityRegistration />} />
-        <Route path="/addCapacityManually" element={<AddCapacityManually />} />
-        <Route path="/bulkCapacityUpload" element={<BulkCapacityUpload />} />
-        <Route path="/employerInitiatedInvite" element={<EmployerInitiatedInvite />} />
-        <Route path="/notification" element={<Notifications />} />
-        <Route path="/registration-success" element={<RegistrationSuccess />} />
-        <Route path="/employeeInviteInfo" element={<EmployeeInviteInfo />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/public-faq" element={<PublicFAQ />} />
-        <Route path="/private-faq" element={<PrivateFAQ />} />
-        <Route path="/contact" element={<PublicContact />} />
+
+        <Route path="/acknowledge" element={
+          <SupplierProtectedRoute>
+            <SupplierAcknowledgement/>
+          </SupplierProtectedRoute>
+        } />
+        <Route path="/home" element={ 
+          <SupplierProtectedRoute> 
+            <SupplierHome /> 
+          </SupplierProtectedRoute>
+        } />
+        <Route path="/about-ts" element={<SupplierProtectedRoute> <About /> </SupplierProtectedRoute>} />
+        <Route path="/operatingModel" element={<SupplierProtectedRoute> <SupplierOperatingModel /> </SupplierProtectedRoute>} />
+        <Route path="/howItWork" element={<SupplierProtectedRoute> <SupplierHowItWorks /> </SupplierProtectedRoute>} />
+        <Route path="/detail" element={<SupplierProtectedRoute> <MyCompanyDetails /> </SupplierProtectedRoute>} />
+        <Route path="/meeting" element={<SupplierProtectedRoute> <BookMeeting /> </SupplierProtectedRoute>} />
+        <Route path="/reviewCandidate" element={<SupplierProtectedRoute> <ReviewCandidates /> </SupplierProtectedRoute>} />
+        <Route path="/candidate" element={<SupplierProtectedRoute> <Candidates /> </SupplierProtectedRoute>} />
+        <Route path="/capacityRegistration" element={<SupplierProtectedRoute> <CapacityRegistration /> </SupplierProtectedRoute>} />
+        <Route path="/addCapacityManually" element={<SupplierProtectedRoute> <AddCapacityManually /> </SupplierProtectedRoute>} />
+        <Route path="/bulkCapacityUpload" element={<SupplierProtectedRoute> <BulkCapacityUpload /> </SupplierProtectedRoute>} />
+        <Route path="/employerInitiatedInvite" element={<SupplierProtectedRoute> <EmployerInitiatedInvite /> </SupplierProtectedRoute>} />
+        <Route path="/notification" element={<SupplierProtectedRoute> <Notifications /> </SupplierProtectedRoute>} />
+        <Route path="/registration-success" element={<SupplierProtectedRoute> <RegistrationSuccess /> </SupplierProtectedRoute>} />
+        <Route path="/employeeInviteInfo" element={<SupplierProtectedRoute> <EmployeeInviteInfo /> </SupplierProtectedRoute>} />
+        <Route path="/forgot-password" element={<SupplierProtectedRoute> <ForgotPassword /> </SupplierProtectedRoute>} />
+        <Route path="/reset-password" element={<SupplierProtectedRoute> <ResetPassword /> </SupplierProtectedRoute>} />
+        <Route path="/public-faq" element={<SupplierProtectedRoute> <PublicFAQ /> </SupplierProtectedRoute>} />
+        <Route path="/private-faq" element={<SupplierProtectedRoute> <PrivateFAQ /> </SupplierProtectedRoute>} />
+        <Route path="/contact" element={<SupplierProtectedRoute> <PublicContact /> </SupplierProtectedRoute>} />
+        <Route path="/add-supplier" element={<SupplierProtectedRoute> <AddSupplier /> </SupplierProtectedRoute>} />
+
         <Route
           path="/app/contact"
           element={
@@ -81,7 +93,6 @@ function App() {
             <PrivateContact />
           }
         />
-        <Route path="/add-supplier" element={<AddSupplier />} />
 
 
 

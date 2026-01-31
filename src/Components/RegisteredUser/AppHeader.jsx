@@ -1,8 +1,11 @@
 import "../../style/RegisteredUser/AppHeader.css";
+import { useAuth } from "../../context/AuthContext";
 
 export default function AppHeader() {
+  const { logout } = useAuth();
+
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    logout();
     window.location.href = "/login"; // or your login route
   };
 
@@ -21,8 +24,6 @@ export default function AppHeader() {
     className="header-logo-img"
   />
 </div>
-
-
 
 
       {/* RIGHT: LOGOUT */}
